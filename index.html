@@ -670,7 +670,17 @@ async function pie3d(){
   const load=new T.Mesh(new T.BoxGeometry(2.2,.9,1.2),M(0x9c9488));trol.add(load);
   crane.traverse(o=>{if(o.isMesh)o.castShadow=true});
   const crx=Math.max(-F+5,hx0-6),crz=pcz-pd*.15;crane.position.set(crx,0,crz);scene.add(crane);EXT.push([crane,0,9]);
-  ANIM.push((t,st)=>{if(!crane.visible)return;top.rotation.y=-.6+Math.sin(t*.00012)*1.1;const r=12+Math.sin(t*.0003)*9;trol.position.x=r;const drop=8+Math.sin(t*.0005)*6;cab2.scale.y=drop;cab2.position.y=-drop/2;load.position.y=-drop-.5});
+  const crAng=(x,z)=>Math.atan2(-(z-crz),x-crx),crR=(x,z)=>Math.hypot(x-crx,z-crz);
+  const pickA=crAng(hx1+4,hz0+2),pickR=Math.min(JL-2,crR(hx1+4,hz0+2)),putA=crAng(pcx,pcz),putR=Math.min(JL-2,Math.max(6,crR(pcx,pcz)));
+  const ease=x=>x<.5?2*x*x:1-Math.pow(-2*x+2,2)/2,lerp=(a,b,f)=>a+(b-a)*f;
+  ANIM.push((t,st)=>{if(!crane.visible)return;const P=22000,q=(t%P)/P,lvl=st<=1?-1:st<=5?4:st<=8?8:9,H=CH,downPick=H-1.2,downPut=H-Math.max(1.5,lvl+2.2);
+   let ang,r,drop,has;
+   if(q<.18){const f=ease(q/.18);ang=lerp(putA,pickA,f);r=lerp(putR,pickR,f);drop=4;has=0}
+   else if(q<.3){const f=ease((q-.18)/.12);ang=pickA;r=pickR;drop=lerp(4,downPick,Math.sin(f*Math.PI));has=f>.5?1:0}
+   else if(q<.55){const f=ease((q-.3)/.25);ang=lerp(pickA,putA,f);r=lerp(pickR,putR,f);drop=4;has=1}
+   else if(q<.72){const f=ease((q-.55)/.17);ang=putA;r=putR;drop=lerp(4,downPut,Math.min(1,f*2));has=f<.6?1:0;if(f>.6)drop=lerp(downPut,4,(f-.6)/.4)}
+   else{ang=putA;r=putR;drop=4;has=0}
+   top.rotation.y=ang;trol.position.x=r;cab2.scale.y=drop;cab2.position.y=-drop/2;load.position.y=-drop-.5;load.visible=!!has})
   // scaffolding around the walls (steps 2-8)
   const sc=new T.Group(),scM=M(0x9aa1a8,{metalness:.6,roughness:.4}),plM=M(0x8a6a3e,{roughness:.9}),so=1.4;
   const sx0=bx0-so,sx1=bx1+so,sz0=bz0-so,sz1=bz1+so;
@@ -685,12 +695,12 @@ async function pie3d(){
    const ch=new T.Mesh(new T.BoxGeometry(7.4,.5,2.3),M(0x2a2a2a));ch.position.set(.4,.95,0);dump.add(ch);
    const bed=new T.Group();bed.position.set(-3.2,1.2,0);const bd=new T.Mesh(new T.BoxGeometry(5,1.6,2.5),M(0x9b9b96,{metalness:.5,roughness:.5}));bd.position.set(2.5,.8,0);bed.add(bd);const sl=new T.Mesh(new T.BoxGeometry(4.6,.9,2.2),MT(soilT));sl.position.set(2.5,1.4,0);bed.add(sl);dump.add(bed);dump.userData.bed=bed;
    [[-2.4,1],[-2.4,-1],[-.8,1],[-.8,-1],[3.2,1],[3.2,-1]].forEach(([x,z])=>wheel(dump,x,z*1.15));}
-  dump.traverse(o=>{if(o.isMesh)o.castShadow=true});dump.rotation.y=Math.PI/2;dump.position.set(SI.path[0]+8,0,SI.front-5);scene.add(dump);EXT.push([dump,0,9]);
-  ANIM.push((t,st)=>{if(!dump.visible)return;dump.userData.bed.rotation.z=st===0||st===9?.35+Math.sin(t*.0008)*.15:0});
+  dump.traverse(o=>{if(o.isMesh)o.castShadow=true});dump.rotation.y=-Math.PI/2;dump.position.set(pcx+pw*.18,0,hz1+5.6);scene.add(dump);EXT.push([dump,0,9]);
+  ANIM.push((t,st)=>{if(!dump.visible)return;dump.userData.bed.rotation.z=st===0?.25+(Math.sin(t*.0006)*.5+.5)*.45:0});
   const mix=new T.Group();{const c=new T.Mesh(new T.BoxGeometry(2.2,2.1,2.4),M(0xf0eee8));c.position.set(3.3,1.6,0);mix.add(c);const ch=new T.Mesh(new T.BoxGeometry(7.6,.5,2.2),M(0x2a2a2a));ch.position.set(.4,.95,0);mix.add(ch);
    const dr=new T.Mesh(new T.CylinderGeometry(1.1,1.5,4.6,14),MT(ctex(x=>{x.fillStyle="#e9e6df";x.fillRect(0,0,256,256);x.fillStyle="#d8542a";for(let i=0;i<6;i++){x.save();x.translate(i*48,0);x.rotate(.5);x.fillRect(0,-50,16,400);x.restore()}},1)));dr.rotation.z=Math.PI/2-.2;dr.position.set(-.6,2.6,0);mix.add(dr);mix.userData.dr=dr;
    [[-2.4,1],[-2.4,-1],[-.8,1],[-.8,-1],[3.2,1],[3.2,-1]].forEach(([x,z])=>wheel(mix,x,z*1.15));}
-  mix.traverse(o=>{if(o.isMesh)o.castShadow=true});mix.rotation.y=Math.PI/2;mix.position.set(SI.path[0]+16,0,SI.front-6);scene.add(mix);EXT.push([mix,1,2]);
+  mix.traverse(o=>{if(o.isMesh)o.castShadow=true});{const ch=new T.Mesh(new T.BoxGeometry(3.4,.12,.7),M(0x9b9b96,{metalness:.5}));ch.position.set(-3.9,1.8,0);ch.rotation.z=.45;mix.add(ch)}mix.rotation.y=-Math.PI/2;mix.position.set(pcx-pw*.22,0,hz1+5.4);scene.add(mix);EXT.push([mix,1,2]);
   ANIM.push(t=>{if(mix.visible)mix.userData.dr.rotation.y=t*.003});
   // little people
   const skin=M(0xd9a27c,{roughness:.8});
@@ -701,23 +711,42 @@ async function pie3d(){
    if(helmet){const hm=new T.Mesh(new T.SphereGeometry(.25,12,8,0,Math.PI*2,0,Math.PI/2),M(helmet,{roughness:.4}));hm.position.y=h*.92;g.add(hm)}
    g.traverse(o=>{if(o.isMesh)o.castShadow=true});g.userData.legs=lg;return g};
   const walkers=[];
-  const addW=(g,path,speed,from,to,yf)=>{scene.add(g);EXT.push([g,from,to]);walkers.push({g,path,speed,ph:Math.random(),yf})};
-  const ring=[[sx0-1,sz0-1],[sx1+1,sz0-1],[sx1+1,sz1+1],[sx0-1,sz1+1]];
+  const addW=(g,path,speed,from,to,yf,opt={})=>{scene.add(g);EXT.push([g,from,to]);const segs=[];let tot=0;for(let i=0;i<path.length-1;i++){const L=Math.hypot(path[i+1][0]-path[i][0],path[i+1][1]-path[i][1]);segs.push(L);tot+=L}walkers.push(Object.assign({g,path,segs,tot,speed,ph:Math.random()*tot,yf},opt))};
   const lvl=st=>st<=1?(st===0?-PD+.3:.3):st<=5?.3:4.05;
-  for(let i=0;i<7;i++){const a=ring[i%4],b=ring[(i+1)%4];addW(person(0xf07a1a,0x2d3440,i%2?0xf4f1ea:0xf2c518),[a,b],.0018+Math.random()*.001,0,9,st=>i<3&&st<=1?lvl(st):(i>=5&&st>=6&&st<=9?lvl(st):0))}
-  for(let i=0;i<3;i++){const x=bx0+(bx1-bx0)*(.25+i*.25);addW(person(0xf07a1a,0x2d3440,0xf4f1ea),[[x,bz0+3],[x,bz1-3]],.0012,1,8,st=>lvl(st))}
-  // residents on the last step: by the pool, on the lawn, on the terrace
-  const RES=[[0xe8e2d6,0x3b4a5c],[0x1f2d3d,0xd8cfc0],[0xc39a62,0x2b2b2b],[0x7d1f2b,0x23262b],[0xf2f2f2,0x6b7d8c]];
-  const pz=G.pool&&G.pool.length?[(G.pool[0]+G.pool[2]/2-CX)*u,(G.pool[1]+G.pool[3]/2-CZ)*u]:[bx1-6,bz0+6];
-  [[[pz[0]-4,pz[1]-6],[pz[0]-4,pz[1]+6]],[[bx0-4,bz0-8],[bx1-10,bz0-8]],[[SI.path[0],SI.path[1]+2],[SI.path[0],SI.front-3]],[[bx0+6,bz0-3],[bx0+18,bz0-3]],[[(bx0+bx1)/2,bz0-12],[(bx0+bx1)/2+12,bz0-14]]].forEach((p,i)=>addW(person(...RES[i%RES.length]),p,.0009+i*.0002,10,10,()=>0));
-  ANIM.push((t,st)=>{walkers.forEach(w=>{if(!w.g.visible)return;const [a,b]=w.path,L=Math.hypot(b[0]-a[0],b[1]-a[1])||1,q=(t*w.speed/L*8+w.ph)%2,f=q<1?q:2-q,dir=q<1?1:-1;
-   w.g.position.set(a[0]+(b[0]-a[0])*f,w.yf(st),a[1]+(b[1]-a[1])*f);w.g.rotation.y=Math.atan2((b[0]-a[0])*dir,(b[1]-a[1])*dir);const sw=Math.sin(t*.008+w.ph*9)*.5;w.g.userData.legs[0].rotation.x=sw;w.g.userData.legs[1].rotation.x=-sw})});
+  const ring=[[sx0-1.2,sz0-1.2],[sx1+1.2,sz0-1.2],[sx1+1.2,sz1+1.2],[sx0-1.2,sz1+1.2],[sx0-1.2,sz0-1.2]];
+  const VEST=[0xf07a1a,0xf2c518,0xf07a1a],HAT=[0xf4f1ea,0xf2c518,0xd23a2a];
+  for(let i=0;i<6;i++)addW(person(VEST[i%3],0x2d3440,HAT[i%3]),ring,.0035+Math.random()*.002,0,9,()=>0,{ph:i*40});
+  for(let i=0;i<4;i++){const x=bx0+(bx1-bx0)*(.2+i*.2),z0=bz0+3,z1=bz1-3;addW(person(VEST[i%3],0x2d3440,HAT[(i+1)%3]),[[x,z0],[x+6,(z0+z1)/2],[x,z1],[x-5,(z0+z1)/2],[x,z0]],.0025,0,9,st=>lvl(st),{ph:i*25})}
+  // residents: loop around the house, go in and out of the front door, walk the terrace, sit with a dog
+  const RES=[[0xe8e2d6,0x3b4a5c],[0x1f2d3d,0xd8cfc0],[0xc39a62,0x2b2b2b],[0x7d1f2b,0x23262b],[0xf2f2f2,0x6b7d8c],[0x3c5a46,0xe8e2d6]];
+  const lp=[[bx0-5,bz0-6],[bx1+5,bz0-6],[bx1+5,bz1+4],[bx0-5,bz1+4],[bx0-5,bz0-6]];
+  addW(person(...RES[0]),lp,.0016,10,10,()=>0);addW(person(...RES[1]),lp.slice().reverse(),.0014,10,10,()=>0,{ph:60});
+  const ex=G.entry?(G.entry[0]+G.entry[2]/2-CX)*u:SI.path[0],ez=G.entry?(G.entry[1]-CZ)*u:bz1;
+  addW(person(...RES[2]),[[SI.path[0],SI.front-2],[SI.path[0],SI.path[1]+1],[ex,ez+1.5],[ex,ez-1.2]],.0018,10,10,()=>0,{door:1});
+  const tr=G.terrace&&G.terrace.length?(()=>{let a=G.terrace,best=0;for(let i=0;i<a.length;i+=4)if(a[i+2]*a[i+3]>a[best+2]*a[best+3])best=i;return [(a[best]-CX)*u+1,(a[best+1]-CZ)*u+1,(a[best]+a[best+2]-CX)*u-1,(a[best+1]+a[best+3]-CZ)*u-1]})():null;
+  if(tr)addW(person(...RES[3]),[[tr[0],tr[1]],[tr[2],tr[1]],[tr[2],tr[3]],[tr[0],tr[3]],[tr[0],tr[1]]],.001,10,10,()=>4.05);
+  const pz=G.pool&&G.pool.length?[(G.pool[0]+G.pool[2]/2-CX)*u,(G.pool[1]+G.pool[3]/2-CZ)*u]:null;
+  if(pz)addW(person(...RES[4]),[[pz[0]-3,pz[1]-5],[pz[0]-3,pz[1]+5],[pz[0]-3,pz[1]-5]],.0008,10,10,()=>.3);
+  // sitting resident with a dog on the lawn behind the house
+  {const sx=(bx0+bx1)/2+4,sz=bz0-10,g=new T.Group();const p=person(...RES[5]);p.userData.legs.forEach(l=>l.rotation.x=-1.4);p.position.y=-.55;g.add(p);
+   const bench=new T.Mesh(new T.BoxGeometry(2.6,.12,.9),M(0x8a6440));bench.position.set(0,.85,.05);g.add(bench);[-1.1,1.1].forEach(x=>{const l=new T.Mesh(new T.BoxGeometry(.12,.85,.8),M(0x2b2b2b));l.position.set(x,.42,.05);g.add(l)});
+   g.position.set(sx,0,sz);g.rotation.y=Math.PI;scene.add(g);EXT.push([g,10,10]);
+   const dog=new T.Group(),fur=M(0xc8a273,{roughness:1});const db=new T.Mesh(new T.BoxGeometry(.38,.36,.9),fur);db.position.y=.55;dog.add(db);const dh=new T.Mesh(new T.BoxGeometry(.32,.32,.36),fur);dh.position.set(0,.8,.55);dog.add(dh);
+   const tail=new T.Mesh(new T.BoxGeometry(.08,.08,.4),fur);tail.position.set(0,.75,-.55);tail.rotation.x=-.6;dog.add(tail);const dl=[[-.12,.3],[.12,.3],[-.12,-.3],[.12,-.3]].map(([x,z])=>{const l=new T.Mesh(new T.BoxGeometry(.09,.38,.09),fur);l.position.set(x,.19,z);dog.add(l);return l});
+   dog.traverse(o=>{if(o.isMesh)o.castShadow=true});scene.add(dog);EXT.push([dog,10,10]);
+   ANIM.push(t=>{if(!dog.visible)return;const a=t*.0011,R=3.2+Math.sin(t*.0007)*1.2;dog.position.set(sx+Math.cos(a)*R,Math.abs(Math.sin(t*.012))*.12,sz-3+Math.sin(a)*R*.8);dog.rotation.y=-a;tail.rotation.y=Math.sin(t*.03)*.6;dl.forEach((l,i)=>l.rotation.x=Math.sin(t*.02+i*Math.PI/2)*.5)})}
+  ANIM.push((t,st)=>{walkers.forEach(w=>{if(!w.g.visible)return;let d=(t*w.speed*.06+w.ph)%(w.door?w.tot*2+40:w.tot);let hide=false;
+    if(w.door){if(d<w.tot){}else if(d<w.tot+40){d=w.tot;hide=true}else d=w.tot*2+40-d}
+    let i=0;while(i<w.segs.length-1&&d>w.segs[i]){d-=w.segs[i];i++}const a=w.path[i],b=w.path[i+1],f=Math.min(1,d/(w.segs[i]||1));let dir=1;
+    if(w.door){const tt=(t*w.speed*.06+w.ph)%(w.tot*2+40);dir=tt>w.tot+40?-1:1}
+    w.g.position.set(a[0]+(b[0]-a[0])*f,w.yf(st),a[1]+(b[1]-a[1])*f);w.g.rotation.y=Math.atan2((b[0]-a[0])*dir,(b[1]-a[1])*dir);w.g.children.forEach(c=>c.visible=!hide);
+    const sw=hide?0:Math.sin(t*.009+w.ph)*.55;w.g.userData.legs[0].rotation.x=sw;w.g.userData.legs[1].rotation.x=-sw})});
   // a car drives in and parks in the garage on the last step
-  if(G.gdoors){const g0=G.gdoors[Math.min(1,G.gdoors.length-1)],gx=(g0[0]+g0[2]/2-CX)*u,gz=(g0[1]-CZ)*u;
-   const mv=mkCar(0x2a2f36);scene.add(mv);EXT.push([mv,10,10]);let t0=0,was=0;
-   const P=[[-140,SI.road+1.6],[gx,SI.road+1.6],[gx,SI.front+1],[gx,gz-4]];const segL=P.slice(1).map((p,i)=>Math.hypot(p[0]-P[i][0],p[1]-P[i][1])),tot=segL.reduce((a,b)=>a+b,0);
-   ANIM.push((t,st)=>{if(st<10){was=0;return}if(!was){was=1;t0=t}const d=Math.min(tot,(t-t0)*.022*(1-Math.min(1,(t-t0)/9000)*.4));let s=d,i=0;while(i<segL.length-1&&s>segL[i]){s-=segL[i];i++}const a=P[i],b=P[i+1],f=Math.min(1,s/segL[i]);
-    mv.position.set(a[0]+(b[0]-a[0])*f,0,a[1]+(b[1]-a[1])*f);mv.rotation.y=Math.atan2(-(b[1]-a[1]),b[0]-a[0])})}
+  if(G.gdoors){const g0=G.gdoors[Math.min(1,G.gdoors.length-1)],gx=(g0[0]+g0[2]/2-CX)*u,gz=(g0[1]+1-CZ)*u;
+   const mv=mkCar(0x2a2f36);scene.add(mv);EXT.push([mv,10,10]);
+   const P=[[-120,SI.road+1.8],[gx-6,SI.road+1.8],[gx,SI.road-2],[gx,SI.front+1],[gx,gz+4]];const segL=P.slice(1).map((p,i)=>Math.hypot(p[0]-P[i][0],p[1]-P[i][1])),tot=segL.reduce((a,b)=>a+b,0);
+   ANIM.push((t,st)=>{if(!mv.visible)return;const C=24000,q=(t%C)/C,dr=q<.55?q/.55:1,d=tot*(1-Math.pow(1-dr,2.2));let s=d,i=0;while(i<segL.length-1&&s>segL[i]){s-=segL[i];i++}const a=P[i],b=P[i+1],f=Math.min(1,s/segL[i]);
+    mv.position.set(a[0]+(b[0]-a[0])*f,.04,a[1]+(b[1]-a[1])*f);mv.rotation.y=Math.atan2(-(b[1]-a[1]),b[0]-a[0])+Math.PI;mv.visible=q<.97})}
   // pool water moves
   if(water.map==null){const wt=ctex(x=>{x.fillStyle="#3f9ac0";x.fillRect(0,0,256,256);for(let i=0;i<220;i++){x.strokeStyle=`rgba(255,255,255,${.06+Math.random()*.12})`;x.lineWidth=1+Math.random()*2;x.beginPath();const cx=Math.random()*256,cy=Math.random()*256;x.ellipse(cx,cy,8+Math.random()*22,3+Math.random()*6,Math.random()*.4,0,Math.PI*2);x.stroke()}},3);water.map=wt;water.color.set(0xffffff);water.needsUpdate=true;
    ANIM.push(t=>{wt.offset.set(t*.00003,Math.sin(t*.0004)*.03)})}
@@ -732,7 +761,7 @@ async function pie3d(){
  S.syncUI=()=>{if(performance.now()-uiHold<600)return;const d=cam.position.clone().sub(ctl.target),sp=new T.Spherical().setFromVector3(d);rR.value=Math.round(((sp.theta*180/Math.PI)%360+360)%360);zR.value=Math.round(d2z(d.length()))};
  if(matchMedia("(pointer:coarse)").matches){let tx=null,ty=null,lock=0;cv.style.touchAction="pan-y";
   cv.addEventListener("touchstart",e=>{if(e.touches.length===1){tx=e.touches[0].clientX;ty=e.touches[0].clientY;lock=0}},{passive:true});
-  cv.addEventListener("touchmove",e=>{if(tx===null||e.touches.length!==1)return;const x=e.touches[0].clientX,y=e.touches[0].clientY,dx=x-tx,dy=y-ty;if(!lock)lock=Math.abs(dx)>Math.abs(dy)+4?1:(Math.abs(dy)>8?2:0);if(lock===1){e.preventDefault();const d=cam.position.clone().sub(ctl.target),sp=new T.Spherical().setFromVector3(d);sp.theta-=dx*.012;cam.position.copy(ctl.target).add(new T.Vector3().setFromSpherical(sp));tx=x;ty=y;S.back=0;uiHold=performance.now()-400}},{passive:false});
+  cv.addEventListener("touchmove",e=>{if(tx===null||e.touches.length!==1)return;const x=e.touches[0].clientX,y=e.touches[0].clientY,dx=x-tx,dy=y-ty;if(!lock)lock=Math.abs(dx)>=Math.abs(dy)&&Math.abs(dx)>2?1:(Math.abs(dy)>10?2:0);if(lock===1){e.preventDefault();const d=cam.position.clone().sub(ctl.target),sp=new T.Spherical().setFromVector3(d);sp.theta-=dx*.012;cam.position.copy(ctl.target).add(new T.Vector3().setFromSpherical(sp));tx=x;ty=y;S.back=0;uiHold=performance.now()-400}},{passive:false});
   cv.addEventListener("touchend",()=>{tx=null},{passive:true})}
  function size(){const w=stage.clientWidth,h=stage.clientHeight;renderer.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix()}
  size();addEventListener("resize",size);
@@ -910,7 +939,7 @@ function route(){
 }
 addEventListener("hashchange",route);route();
 const lb=document.getElementById("lb");
-document.addEventListener("click",e=>{const rx=e.target.closest("#roomx");if(rx){document.getElementById("room").classList.remove("on");if(P3)P3.fly=null;return}const pn=e.target.closest(".pin");if(pn&&!pn.dataset.src)return;if(pn&&P3){const p=P3.pp[+pn.dataset.i],rm=document.getElementById("room");rm.querySelector("img").src=pn.dataset.src;rm.querySelector("b").textContent=p[0];P3.fly=p;setTimeout(()=>rm.classList.add("on"),900);return}const b=e.target.closest(".gal button,.plans button,.draw button");const ga=e.target.closest(".ga");if(ga){const g=ga.parentElement.querySelector(".gal"),w=g.firstElementChild.getBoundingClientRect().width+14;g.scrollBy({left:ga.classList.contains("gn")?w:-w});return}if(b){lb.querySelector("img").src=b.dataset.src;lb.showModal()}else if(e.target.closest("#lb"))lb.close()});
+document.addEventListener("click",e=>{const rx=e.target.closest("#roomx");if(rx){document.getElementById("room").classList.remove("on");if(P3)P3.fly=null;return}const pn=e.target.closest(".pin");if(pn&&!pn.dataset.src)return;if(pn&&P3){const p=P3.pp[+pn.dataset.i],rm=document.getElementById("room");rm.querySelector("img").src=pn.dataset.src;rm.querySelector("b").textContent=p[0];P3.fly=p;if(typeof pieStop==="function")pieStop();setTimeout(()=>rm.classList.add("on"),900);return}const b=e.target.closest(".gal button,.plans button,.draw button");const ga=e.target.closest(".ga");if(ga){const g=ga.parentElement.querySelector(".gal"),w=g.firstElementChild.getBoundingClientRect().width+14;g.scrollBy({left:ga.classList.contains("gn")?w:-w});return}if(b){lb.querySelector("img").src=b.dataset.src;lb.showModal()}else if(e.target.closest("#lb"))lb.close()});
 ;(()=>{const sync=g=>{const W=g.closest(".galw");if(!W)return;const max=g.scrollWidth-g.clientWidth,r=max>0?g.scrollLeft/max:0,n=g.children.length,w=g.firstElementChild.getBoundingClientRect().width+14,idx=Math.min(n,Math.round(g.scrollLeft/w)+1);W.querySelector(".gscr").value=Math.round(r*1000);W.querySelector(".gcnt").textContent=String(idx).padStart(2,"0")+" / "+String(n).padStart(2,"0");W.querySelector(".ga.gp").disabled=g.scrollLeft<4;W.querySelector(".ga.gn").disabled=g.scrollLeft>max-4};
  document.addEventListener("scroll",e=>{const g=e.target;if(g&&g.classList&&g.classList.contains("gal"))sync(g)},true);
  document.addEventListener("input",e=>{const r=e.target;if(r.classList&&r.classList.contains("gscr")){const g=r.closest(".galw").querySelector(".gal");g.style.scrollBehavior="auto";g.style.scrollSnapType="none";g.scrollLeft=r.value/1000*(g.scrollWidth-g.clientWidth)}});
