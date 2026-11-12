@@ -113,11 +113,11 @@ a.co:hover b{color:var(--bronze)}
 .card .meta{font-size:13px;color:var(--mute);letter-spacing:.04em;font-variant-numeric:tabular-nums}
 
 /* pie: 3D scene */
-.pie{position:relative;height:620vh;padding:0}
-.pie-in{position:sticky;top:calc(var(--head) + env(safe-area-inset-top,0px));height:calc(100vh - var(--head));height:calc(100dvh - var(--head));max-height:960px;display:grid;grid-template-columns:minmax(0,1.9fr) minmax(0,1fr);grid-template-rows:minmax(0,1fr) auto;gap:14px 32px;align-items:stretch;padding-block:20px}.pie-in .stage{grid-column:1;grid-row:1}.pie-in .pbar{grid-column:1;grid-row:2}.pie-in .pie-txt{grid-column:2;grid-row:1/3;align-self:center}
+.pie{position:relative;padding:0}
+.pie-in{position:relative;height:calc(100vh - var(--head) - 40px);height:calc(100dvh - var(--head) - 40px);min-height:520px;max-height:900px;display:grid;grid-template-columns:minmax(0,1.9fr) minmax(0,1fr);grid-template-rows:minmax(0,1fr) auto;gap:14px 32px;align-items:stretch;padding-block:20px}.pie-in .stage{grid-column:1;grid-row:1}.pie-in .pbar{grid-column:1;grid-row:2}.pie-in .pie-txt{grid-column:2;grid-row:1/3;align-self:center}
 .pbar{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:12px 28px;align-items:center}.pst{display:grid;grid-template-columns:44px minmax(0,1fr) 44px;gap:12px;align-items:center}.pstx{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 12px;align-items:baseline;min-width:0}.pcnt{font-size:12px;letter-spacing:.1em;color:var(--bronze);font-variant-numeric:tabular-nums}.pnm{font-family:var(--display);font-weight:500;font-size:19px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--stone)}.pstx .prng{grid-column:1/3}
 .pb{width:44px;height:44px;border:1px solid var(--line);background:var(--oak-2);color:var(--stone);font-size:20px;cursor:pointer;touch-action:manipulation}.pb:hover{background:var(--bronze);color:var(--ink)}
-.pvw{display:grid;gap:8px}.pvw label{display:grid;grid-template-columns:minmax(0,120px) minmax(0,1fr);gap:12px;align-items:center;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute)}
+.pvw{display:grid;gap:8px}.pplay{justify-self:start;border:1px solid var(--bronze);background:transparent;color:var(--bronze);font:600 11px var(--body);letter-spacing:.12em;text-transform:uppercase;padding:9px 14px;cursor:pointer}.pplay:hover{background:var(--bronze);color:var(--ink)}.steps-l li{cursor:pointer}.pvw label{display:grid;grid-template-columns:minmax(0,120px) minmax(0,1fr);gap:12px;align-items:center;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute)}
 .prng{-webkit-appearance:none;appearance:none;width:100%;height:28px;background:transparent;margin:0;cursor:pointer;touch-action:pan-x}.prng::-webkit-slider-runnable-track{height:2px;background:var(--line)}.prng::-moz-range-track{height:2px;background:var(--line)}.prng::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:var(--bronze);margin-top:-10px;border:0}.prng::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:var(--bronze);border:0}
 button,a,input{touch-action:manipulation}
 .stage{position:relative;height:100%;min-height:0;overflow:hidden;background:linear-gradient(#c4d9e6,#dbe6ea)}
@@ -252,7 +252,7 @@ footer a:hover{color:var(--stone)}
 </div></header>
 <main id="app"></main>
 <footer><div class="w">
-  <div><span class="logo" style="color:var(--stone)"><svg class="lgsvg" viewBox="0 0 210 60" role="img" aria-label="Treyvas Development"><text x="105" y="29" text-anchor="middle" textLength="204" lengthAdjust="spacing" style="font-family:var(--display);font-size:31px;font-weight:500;fill:currentColor">TREYVAS</text><rect x="3" y="35" width="204" height="1.2" style="fill:var(--bronze)"/><text x="105" y="56" text-anchor="middle" textLength="204" lengthAdjust="spacing" style="font-family:var(--body);font-size:14px;font-weight:600;fill:var(--bronze)">DEVELOPMENT</text></svg></span><p style="margin-top:10px;max-width:36ch">Частные дома в Подмосковье. Входит в Point Group. Это прототип сайта, изображения — визуализации проектов.</p></div>
+  <div><a class="logo" href="#home" aria-label="На главную" style="color:var(--stone)"><svg class="lgsvg" viewBox="0 0 210 60" role="img" aria-label="Treyvas Development"><text x="105" y="29" text-anchor="middle" textLength="204" lengthAdjust="spacing" style="font-family:var(--display);font-size:31px;font-weight:500;fill:currentColor">TREYVAS</text><rect x="3" y="35" width="204" height="1.2" style="fill:var(--bronze)"/><text x="105" y="56" text-anchor="middle" textLength="204" lengthAdjust="spacing" style="font-family:var(--body);font-size:14px;font-weight:600;fill:var(--bronze)">DEVELOPMENT</text></svg></a><p style="margin-top:10px;max-width:36ch">Частные дома в Подмосковье. Входит в Point Group. Это прототип сайта, изображения — визуализации проектов.</p></div>
   <div><b>Дома</b><a href="#dom-l191">Лазурная 19.1</a><a href="#dom-r2">Речная 2</a><a href="#dom-z36">Заречная 36</a><a href="#doma">Все дома</a></div>
   <div><b>Компания</b><a href="#o-nas">История</a><a href="#lyudi">Люди</a><a href="#kak-stroim">Как мы строим</a><a href="#zhurnal">Журнал</a></div>
   <div><b>Группа</b><a href="#point-estate">Point Estate</a><a href="#point-design">Point Design</a><a href="#point-woodcraft">Point WoodCraft</a><a href="#kontakty">Контакты</a></div>
@@ -391,28 +391,27 @@ function pie(k="l191"){
    <div class="room" id="room"><img alt=""><div><b></b><button type="button" class="btn" id="roomx">Назад к дому</button></div></div><p class="hint">Потяните, чтобы повернуть дом</p></div>
   <div class="pbar" id="pbar">
    <div class="pst"><button type="button" class="pb" data-st="-1" aria-label="Предыдущий этап">←</button><div class="pstx"><span class="pcnt">01 / ${String(PIE.length).padStart(2,"0")}</span><b class="pnm">${PIE[0][0]}</b><input class="prng" id="pstep" type="range" min="0" max="${PIE.length-1}" step="1" value="0" aria-label="Этап сборки"></div><button type="button" class="pb" data-st="1" aria-label="Следующий этап">→</button></div>
-   <div class="pvw"><label><span>Повернуть</span><input class="prng" id="prot" type="range" min="0" max="360" step="1" value="0" aria-label="Повернуть дом"></label><label><span>Масштаб</span><input class="prng" id="pzm" type="range" min="0" max="100" step="1" value="50" aria-label="Приблизить или отдалить"></label></div>
+   <div class="pvw"><button type="button" id="pplay" class="pplay">▶ Собрать дом</button><label><span>Повернуть</span><input class="prng" id="prot" type="range" min="0" max="360" step="1" value="0" aria-label="Повернуть дом"></label><label><span>Масштаб</span><input class="prng" id="pzm" type="range" min="0" max="100" step="1" value="50" aria-label="Приблизить или отдалить"></label></div>
   </div>
   <div class="pie-txt"><span class="eyebrow">Как строится дом · ${H[k==="l192"&&location.hash==="#dom-r2"?"r2":k].name}</span><h2>Дом собирается на ваших глазах</h2>
-   <p class="lead" style="font-size:15px">Листайте вниз. Модель построена по настоящим планам дома${k==="l191"?"":": стены, бассейн, мебель и кровли распознаны автоматически, детали уточняем по АР"}.</p>
+   <p class="lead" style="font-size:15px">Стрелками или ползунком под моделью — по этапам, кнопка «Собрать дом» проиграет всю стройку. Модель построена по настоящим планам дома${k==="l191"?"":": стены, бассейн, мебель и кровли распознаны автоматически, детали уточняем по АР"}.</p>
    <ol class="steps-l">${PIE.map((s,i)=>`<li data-s="${i}"><i>${String(i+1).padStart(2,"0")}</i><b>${s[0]}</b><span>${s[1]}</span></li>`).join("")}</ol></div>
  </div></section>`;
 }
 let P3=null;
-function pieStep(){
- const s=document.getElementById("pie"); if(!s) return 0;
- const r=s.getBoundingClientRect(), p=Math.min(1,Math.max(0,-r.top/(r.height-innerHeight)));
- return Math.min(PIE.length-1,Math.floor(p*PIE.length*1.02));
-}
+let PST=0,PPLAY=0;
+function pieStep(){return PST}
 function pieTick(){
  const s=document.getElementById("pie"); if(!s) return; const st=pieStep();
  s.querySelectorAll("li[data-s]").forEach(e=>{const n=+e.dataset.s;e.classList.toggle("on",n<=st);e.classList.toggle("cur",n===st)});
  if(P3) P3.st=st;
  const r=document.getElementById("pstep");if(r&&document.activeElement!==r){r.value=st}const pb=document.getElementById("pbar");if(pb){pb.querySelector(".pcnt").textContent=String(st+1).padStart(2,"0")+" / "+String(PIE.length).padStart(2,"0");pb.querySelector(".pnm").textContent=PIE[st][0]}
 }
-function pieGo(n){const s=document.getElementById("pie");if(!s)return;n=Math.max(0,Math.min(PIE.length-1,n));const top=s.getBoundingClientRect().top+scrollY,span=s.offsetHeight-innerHeight;scrollTo({top:top+span*(n+.5)/(PIE.length*1.02),behavior:"smooth"})}
-document.addEventListener("click",e=>{const b=e.target.closest(".pb[data-st]");if(b)pieGo(pieStep()+ +b.dataset.st)});
-document.addEventListener("input",e=>{if(e.target.id==="pstep"){const s=document.getElementById("pie"),top=s.getBoundingClientRect().top+scrollY,span=s.offsetHeight-innerHeight;scrollTo({top:top+span*(+e.target.value+.5)/(PIE.length*1.02)})}});
+function pieGo(n,keep){PST=Math.max(0,Math.min(PIE.length-1,n));if(!keep)pieStop();pieTick()}
+function pieStop(){clearInterval(PPLAY);PPLAY=0;const b=document.getElementById("pplay");if(b)b.textContent="▶ Собрать дом"}
+function piePlay(){if(PPLAY){pieStop();return}PST=0;pieTick();const b=document.getElementById("pplay");if(b)b.textContent="❚❚ Пауза";PPLAY=setInterval(()=>{if(PST>=PIE.length-1){pieStop();return}pieGo(PST+1,1)},2600)}
+document.addEventListener("click",e=>{const b=e.target.closest(".pb[data-st]");if(b)pieGo(pieStep()+ +b.dataset.st);if(e.target.closest("#pplay"))piePlay();const li=e.target.closest(".steps-l li[data-s]");if(li)pieGo(+li.dataset.s)});
+document.addEventListener("input",e=>{if(e.target.id==="pstep")pieGo(+e.target.value)});
 addEventListener("scroll",pieTick,{passive:true});addEventListener("resize",pieTick);
 
 async function pie3d(){
@@ -520,7 +519,7 @@ async function pie3d(){
  const earth=new T.Mesh(new T.PlaneGeometry(900,900),M(0x6f5d49,{roughness:1}));earth.rotation.x=-Math.PI/2;earth.position.y=-.08;earth.receiveShadow=true;scene.add(earth);
  const gt=lawnT;gt.repeat.set(150,150);
  const grass=new T.Mesh(new T.PlaneGeometry(900,900),new T.MeshStandardMaterial({map:gt,roughness:1,transparent:true,opacity:0}));grass.rotation.x=-Math.PI/2;grass.position.y=-.05;grass.receiveShadow=true;scene.add(grass);
- const site=grp[10];
+ const SB=new T.Group();scene.add(SB);let site=G.site?SB:grp[10];
  const flat=(w,d,mat,x,z,y=-.02,h=.04)=>{const m=new T.Mesh(new T.BoxGeometry(w,h,d),mat);m.position.set(x,y,z);m.receiveShadow=true;const uv=m.geometry.attributes.uv,t=mat.userData.t||2;for(let i=0;i<uv.count;i++)uv.setXY(i,uv.getX(i)*w/t,uv.getY(i)*d/t);site.add(m);return m};
  const asph=MT(asT,{roughness:.92}),pave=MT(paveT),curbM=M(0xcfcac0,{roughness:.8});
  const EX=L191?(95-CX)*u:0,EZ=L191?(132-CZ)*u:HZ+2;
@@ -543,6 +542,7 @@ async function pie3d(){
  
  if(L191)flat(11,5,pave,EX,EZ+3,0,.06);
  const hedgeM=MT(ctex(x=>{x.fillStyle="#3f5f2c";x.fillRect(0,0,256,256);for(let i=0;i<3000;i++){x.fillStyle=`hsl(${95+Math.random()*25},${35+Math.random()*20}%,${18+Math.random()*18}%)`;x.beginPath();x.arc(Math.random()*256,Math.random()*256,1+Math.random()*2.5,0,7);x.fill()}},1.2),{roughness:1});
+ site=grp[10];
  let seed=7;const rnd=()=>(seed=(seed*16807)%2147483647)/2147483647;
  const PF=[],PB=[];
  if(G.site){const SI=G.site,F=SI.fx;
@@ -617,7 +617,7 @@ async function pie3d(){
   [-18,-15,-12].forEach(x=>{const b=new T.Mesh(new T.BoxGeometry(.75,.3,2),wm);b.position.set(x,.2,PZ);const c=new T.Mesh(new T.BoxGeometry(.7,.12,1.9),lm);c.position.set(x,.41,PZ-.05);const back=new T.Mesh(new T.BoxGeometry(.7,.1,.7),lm);back.position.set(x,.62,PZ-.85);back.rotation.x=-.7;[b,c,back].forEach(o=>{o.castShadow=true;site.add(o)})});
   const up=new T.Mesh(new T.CylinderGeometry(.04,.04,2.4,6),M(0x666666));up.position.set(-7,1.2,PZ);const can=new T.Mesh(new T.ConeGeometry(1.6,.5,8,1,true),new T.MeshStandardMaterial({color:0xefe9dd,side:T.DoubleSide,roughness:.9}));can.position.set(-7,2.4,PZ);[up,can].forEach(o=>{o.castShadow=true;site.add(o)})}
  if(SIT&&SIT.neighbor){const NB=SIT.neighbor;fetch(`pie/${NB.k}/geo.json`).then(r=>r.json()).then(N=>{const nw=N.W*u/2,nh=N.H*u/2,g=new T.Group(),bx=(r,y0,y1,m)=>{for(let i=0;i<r.length;i+=4){const b=new T.Mesh(unit,m);b.scale.set(r[i+2]*u,y1-y0,r[i+3]*u);b.position.set((r[i]+r[i+2]/2)*u-nw,(y0+y1)/2,(r[i+1]+r[i+3]/2)*u-nh);b.castShadow=b.receiveShadow=true;g.add(b)}};
-   const nwood=MT(lamT,{roughness:.7});bx(N.house1,0,3.4,N.dark?(travM||M(0xe3dccd)):M(0xe8e3da,{roughness:.8}));if(N.dark)bx(N.fascia||N.house1,3.3,3.99,graphM);else bx(N.house1,3.4,3.7,M(0xefece6));bx(N.house2||N.roof2||[],3.95,7.2,nwood);if(N.roofw){if(N.dark){bx(N.roofw,7.2,7.3,nwood);bx(N.roofw,7.3,7.9,graphM)}else bx(N.roofw,7.2,8.3,M(0xefece6))}else bx(N.roof2||[],7.2,7.6,M(0xefece6));g.position.set(NB.dx,0,0);g.rotation.y=NB.rot||0;site.add(g);P3&&(P3.nb=[NB,new T.Vector3(NB.dx,11,0)])}).catch(()=>{})}
+   const nwood=MT(lamT,{roughness:.7});bx(N.house1,0,3.4,N.dark?(travM||M(0xe3dccd)):M(0xe8e3da,{roughness:.8}));if(N.dark)bx(N.fascia||N.house1,3.3,3.99,graphM);else bx(N.house1,3.4,3.7,M(0xefece6));bx(N.house2||N.roof2||[],3.95,7.2,nwood);if(N.roofw){if(N.dark){bx(N.roofw,7.2,7.3,nwood);bx(N.roofw,7.3,7.9,graphM)}else bx(N.roofw,7.2,8.3,M(0xefece6))}else bx(N.roof2||[],7.2,7.6,M(0xefece6));g.position.set(NB.dx,0,0);g.rotation.y=NB.rot||0;SB.add(g);P3&&(P3.nb=[NB,new T.Vector3(NB.dx,11,0)])}).catch(()=>{})}
  const car={position:{x:0}};
  // controls
  const ctl=new T.OrbitControls(cam,cv);ctl.target.set(0,2.5,0);ctl.enableZoom=false;ctl.enablePan=false;ctl.maxPolarAngle=1.45;ctl.minPolarAngle=.25;ctl.enableDamping=true;ctl.autoRotateSpeed=.55;
@@ -628,6 +628,101 @@ async function pie3d(){
  document.getElementById("pins").innerHTML=PP.map((p,i)=>`<button class="pin${p[4]?"":" np"}" type="button" data-i="${i}" ${p[4]?`data-src="${p[4]}"`:""}><span>${p[0]}</span></button>`).join("");
  const pinEls=[...document.querySelectorAll("#pins .pin")],v=new T.Vector3();
  const S=P3={pp:PP,renderer,st:pieStep(),raf:0,dist:1,carZ:-90,lawn:0};
+ // ---- construction site: pit, crane, rebar, scaffold, trucks, workers, residents, arriving car
+ const EXT=[],ANIM=[];S.ext=EXT;S.anims=ANIM;
+ if(G.site){const SI=G.site,F=SI.fx;
+  // footprint bbox
+  let bx0=1e9,bz0=1e9,bx1=-1e9,bz1=-1e9;for(let i=0;i<G.slab.length;i+=4){bx0=Math.min(bx0,(G.slab[i]-CX)*u);bz0=Math.min(bz0,(G.slab[i+1]-CZ)*u);bx1=Math.max(bx1,(G.slab[i]+G.slab[i+2]-CX)*u);bz1=Math.max(bz1,(G.slab[i+1]+G.slab[i+3]-CZ)*u)}
+  const mg=1.6,PD=3.2,hx0=bx0-mg,hx1=bx1+mg,hz0=bz0-mg,hz1=bz1+mg,pw=hx1-hx0,pd=hz1-hz0,pcx=(hx0+hx1)/2,pcz=(hz0+hz1)/2;
+  // earth with a hole for the pit
+  const sh=new T.Shape();sh.moveTo(-450,-450);sh.lineTo(450,-450);sh.lineTo(450,450);sh.lineTo(-450,450);sh.lineTo(-450,-450);
+  const hole=new T.Path();hole.moveTo(hx0,-hz1);hole.lineTo(hx1,-hz1);hole.lineTo(hx1,-hz0);hole.lineTo(hx0,-hz0);hole.lineTo(hx0,-hz1);sh.holes.push(hole);
+  earth.geometry.dispose();earth.geometry=new T.ShapeGeometry(sh);
+  const soilT=ctex(x=>{x.fillStyle="#6b5843";x.fillRect(0,0,256,256);for(let i=0;i<2500;i++){x.fillStyle=`rgba(${60+Math.random()*50},${45+Math.random()*35},${30+Math.random()*25},.5)`;x.fillRect(Math.random()*256,Math.random()*256,2+Math.random()*3,2+Math.random()*3)}},3);
+  earth.material=MT(soilT,{roughness:1});
+  const pitM=new T.MeshStandardMaterial({map:soilT,color:0x9a8268,roughness:1,side:T.BackSide});
+  const pit=new T.Mesh(new T.BoxGeometry(pw,PD,pd),pitM);pit.position.set(pcx,-PD/2-.08,pcz);pit.receiveShadow=true;scene.add(pit);EXT.push([pit,0,1]);
+  const fill=new T.Mesh(new T.PlaneGeometry(pw,pd),MT(soilT,{roughness:1}));fill.rotation.x=-Math.PI/2;fill.position.set(pcx,-.075,pcz);fill.receiveShadow=true;scene.add(fill);EXT.push([fill,2,99]);
+  grp[0].visible=false;S.noPit0=1;
+  // spoil heap
+  const heap=new T.Mesh(new T.ConeGeometry(7,4,9),MT(soilT,{roughness:1}));heap.scale.set(1,1,.7);heap.position.set(hx1+7,1.9,hz0+6);heap.castShadow=true;scene.add(heap);EXT.push([heap,0,1]);
+  // rebar mesh on the pit floor (step 0) and starter bars (step 1)
+  const rebM=M(0x6b3b26,{roughness:.6,metalness:.6}),rg=new T.Group();
+  for(let x=bx0+.6;x<bx1;x+=1.4){const b=new T.Mesh(new T.BoxGeometry(.07,.07,bz1-bz0),rebM);b.position.set(x,-PD+.35,(bz0+bz1)/2);rg.add(b)}
+  for(let z=bz0+.6;z<bz1;z+=1.4){const b=new T.Mesh(new T.BoxGeometry(bx1-bx0,.07,.07),rebM);b.position.set((bx0+bx1)/2,-PD+.42,z);rg.add(b)}
+  scene.add(rg);EXT.push([rg,0,0]);
+  {const pts=[];for(let i=0;i<G.walls1.length;i+=4){const [x,y,w,h]=G.walls1.slice(i,i+4);const L=Math.max(w,h);for(let k=0;k<L;k+=6){pts.push([(x+(w>h?k:w/2)-CX)*u,(y+(w>h?h/2:k)-CZ)*u])}}
+   const st=new T.InstancedMesh(new T.CylinderGeometry(.05,.05,1.6,5),rebM,pts.length);pts.forEach(([x,z],i)=>{dummy.rotation.set(0,0,0);dummy.scale.set(1,1,1);dummy.position.set(x,.3+.8,z);dummy.updateMatrix();st.setMatrixAt(i,dummy.matrix)});scene.add(st);EXT.push([st,1,1])}
+  // tower crane
+  const crane=new T.Group(),yel=M(0xe2a91f,{roughness:.55,metalness:.3});
+  const latT=ctex(x=>{x.clearRect(0,0,256,256);x.strokeStyle="#e2a91f";x.lineWidth=14;x.strokeRect(7,7,242,242);x.beginPath();x.moveTo(0,0);x.lineTo(256,256);x.moveTo(256,0);x.lineTo(0,256);x.stroke()},1);
+  latT.wrapT=T.RepeatWrapping;const latM=new T.MeshStandardMaterial({map:latT,transparent:true,alphaTest:.5,side:T.DoubleSide,roughness:.6});
+  const CH=26,mast=new T.Mesh(new T.BoxGeometry(1.4,CH,1.4),latM);mast.position.y=CH/2;{const uv=mast.geometry.attributes.uv;for(let i=0;i<uv.count;i++)uv.setY(i,uv.getY(i)*CH/1.4)}crane.add(mast);
+  const base=new T.Mesh(new T.BoxGeometry(4,1,4),M(0x9a978f));base.position.y=.5;crane.add(base);
+  const top=new T.Group();top.position.y=CH;crane.add(top);
+  const JL=30,jib=new T.Mesh(new T.BoxGeometry(JL,1.1,1.1),latM);jib.position.x=JL/2;{const uv=jib.geometry.attributes.uv;for(let i=0;i<uv.count;i++)uv.setX(i,uv.getX(i)*JL/1.1)}top.add(jib);
+  const cj=new T.Mesh(new T.BoxGeometry(9,1,1.1),yel);cj.position.x=-4.5;top.add(cj);
+  const cw=new T.Mesh(new T.BoxGeometry(2.4,2.2,1.8),M(0x8f8c86));cw.position.set(-8,-1.2,0);top.add(cw);
+  const cab=new T.Mesh(new T.BoxGeometry(1.6,1.6,1.6),M(0xf2f0ea));cab.position.set(.9,-1.1,1.4);top.add(cab);
+  const peak=new T.Mesh(new T.ConeGeometry(.9,4,4),latM);peak.position.y=2.6;top.add(peak);
+  [[-8,0],[JL*.75,0]].forEach(([x])=>{const L=Math.hypot(x,4),t=new T.Mesh(new T.CylinderGeometry(.04,.04,L,4),M(0x333333));t.position.set(x/2,2.4,0);t.rotation.z=Math.atan2(-4,x)+Math.PI/2;top.add(t)});
+  const trol=new T.Group();top.add(trol);const cab2=new T.Mesh(new T.CylinderGeometry(.03,.03,1,4),M(0x222222));trol.add(cab2);
+  const load=new T.Mesh(new T.BoxGeometry(2.2,.9,1.2),M(0x9c9488));trol.add(load);
+  crane.traverse(o=>{if(o.isMesh)o.castShadow=true});
+  const crx=Math.max(-F+5,hx0-6),crz=pcz-pd*.15;crane.position.set(crx,0,crz);scene.add(crane);EXT.push([crane,0,9]);
+  ANIM.push((t,st)=>{if(!crane.visible)return;top.rotation.y=-.6+Math.sin(t*.00012)*1.1;const r=12+Math.sin(t*.0003)*9;trol.position.x=r;const drop=8+Math.sin(t*.0005)*6;cab2.scale.y=drop;cab2.position.y=-drop/2;load.position.y=-drop-.5});
+  // scaffolding around the walls (steps 2-8)
+  const sc=new T.Group(),scM=M(0x9aa1a8,{metalness:.6,roughness:.4}),plM=M(0x8a6a3e,{roughness:.9}),so=1.4;
+  const sx0=bx0-so,sx1=bx1+so,sz0=bz0-so,sz1=bz1+so;
+  [[sx0,sz0,sx1,sz0],[sx1,sz0,sx1,sz1],[sx1,sz1,sx0,sz1],[sx0,sz1,sx0,sz0]].forEach(([ax,az,bx,bz])=>{const L=Math.hypot(bx-ax,bz-az),n=Math.round(L/3.5),ang=Math.atan2(bz-az,bx-ax);
+   for(let i=0;i<=n;i++){const p=new T.Mesh(new T.BoxGeometry(.12,8.6,.12),scM);p.position.set(ax+(bx-ax)*i/n,4.3,az+(bz-az)*i/n);sc.add(p)}
+   for(const h of [2.1,4.2,6.3,8.4]){const r=new T.Mesh(new T.BoxGeometry(L,.1,.1),scM);r.position.set((ax+bx)/2,h,(az+bz)/2);r.rotation.y=-ang;sc.add(r);const pl=new T.Mesh(new T.BoxGeometry(L,.08,.9),plM);pl.position.set((ax+bx)/2,h-.08,(az+bz)/2);pl.rotation.y=-ang;sc.add(pl)}});
+  sc.traverse(o=>{if(o.isMesh)o.castShadow=true});scene.add(sc);const scLv=[...sc.children];EXT.push([sc,2,8]);
+  ANIM.push((t,st)=>{if(!sc.visible)return;const lim=st<=4?4.4:st<=6?6.6:9;scLv.forEach(o=>{o.visible=o.position.y<lim})});
+  // trucks
+  const wheel=(g,x,z)=>{const w=new T.Mesh(new T.CylinderGeometry(.55,.55,.4,14),M(0x111111));w.rotation.x=Math.PI/2;w.position.set(x,.55,z);g.add(w)};
+  const dump=new T.Group();{const c=new T.Mesh(new T.BoxGeometry(2.4,2.2,2.5),M(0xd8542a,{roughness:.5}));c.position.set(3.2,1.7,0);dump.add(c);const gl=new T.Mesh(new T.BoxGeometry(.06,.9,2.2),M(0x1d2a33,{roughness:.1}));gl.position.set(4.42,2.1,0);dump.add(gl);
+   const ch=new T.Mesh(new T.BoxGeometry(7.4,.5,2.3),M(0x2a2a2a));ch.position.set(.4,.95,0);dump.add(ch);
+   const bed=new T.Group();bed.position.set(-3.2,1.2,0);const bd=new T.Mesh(new T.BoxGeometry(5,1.6,2.5),M(0x9b9b96,{metalness:.5,roughness:.5}));bd.position.set(2.5,.8,0);bed.add(bd);const sl=new T.Mesh(new T.BoxGeometry(4.6,.9,2.2),MT(soilT));sl.position.set(2.5,1.4,0);bed.add(sl);dump.add(bed);dump.userData.bed=bed;
+   [[-2.4,1],[-2.4,-1],[-.8,1],[-.8,-1],[3.2,1],[3.2,-1]].forEach(([x,z])=>wheel(dump,x,z*1.15));}
+  dump.traverse(o=>{if(o.isMesh)o.castShadow=true});dump.rotation.y=Math.PI/2;dump.position.set(SI.path[0]+8,0,SI.front-5);scene.add(dump);EXT.push([dump,0,9]);
+  ANIM.push((t,st)=>{if(!dump.visible)return;dump.userData.bed.rotation.z=st===0||st===9?.35+Math.sin(t*.0008)*.15:0});
+  const mix=new T.Group();{const c=new T.Mesh(new T.BoxGeometry(2.2,2.1,2.4),M(0xf0eee8));c.position.set(3.3,1.6,0);mix.add(c);const ch=new T.Mesh(new T.BoxGeometry(7.6,.5,2.2),M(0x2a2a2a));ch.position.set(.4,.95,0);mix.add(ch);
+   const dr=new T.Mesh(new T.CylinderGeometry(1.1,1.5,4.6,14),MT(ctex(x=>{x.fillStyle="#e9e6df";x.fillRect(0,0,256,256);x.fillStyle="#d8542a";for(let i=0;i<6;i++){x.save();x.translate(i*48,0);x.rotate(.5);x.fillRect(0,-50,16,400);x.restore()}},1)));dr.rotation.z=Math.PI/2-.2;dr.position.set(-.6,2.6,0);mix.add(dr);mix.userData.dr=dr;
+   [[-2.4,1],[-2.4,-1],[-.8,1],[-.8,-1],[3.2,1],[3.2,-1]].forEach(([x,z])=>wheel(mix,x,z*1.15));}
+  mix.traverse(o=>{if(o.isMesh)o.castShadow=true});mix.rotation.y=Math.PI/2;mix.position.set(SI.path[0]+16,0,SI.front-6);scene.add(mix);EXT.push([mix,1,2]);
+  ANIM.push(t=>{if(mix.visible)mix.userData.dr.rotation.y=t*.003});
+  // little people
+  const skin=M(0xd9a27c,{roughness:.8});
+  const person=(shirt,pants,helmet)=>{const g=new T.Group(),h=2.9;
+   const lg=[-.17,.17].map(x=>{const l=new T.Group();l.position.set(x,h*.47,0);const m=new T.Mesh(new T.BoxGeometry(.24,h*.47,.26),M(pants));m.position.y=-h*.235;l.add(m);g.add(l);return l});
+   const b=new T.Mesh(new T.BoxGeometry(.62,h*.36,.36),M(shirt,{roughness:.8}));b.position.y=h*.65;g.add(b);
+   const hd=new T.Mesh(new T.SphereGeometry(.21,12,10),skin);hd.position.y=h*.9;g.add(hd);
+   if(helmet){const hm=new T.Mesh(new T.SphereGeometry(.25,12,8,0,Math.PI*2,0,Math.PI/2),M(helmet,{roughness:.4}));hm.position.y=h*.92;g.add(hm)}
+   g.traverse(o=>{if(o.isMesh)o.castShadow=true});g.userData.legs=lg;return g};
+  const walkers=[];
+  const addW=(g,path,speed,from,to,yf)=>{scene.add(g);EXT.push([g,from,to]);walkers.push({g,path,speed,ph:Math.random(),yf})};
+  const ring=[[sx0-1,sz0-1],[sx1+1,sz0-1],[sx1+1,sz1+1],[sx0-1,sz1+1]];
+  const lvl=st=>st<=1?(st===0?-PD+.3:.3):st<=5?.3:4.05;
+  for(let i=0;i<7;i++){const a=ring[i%4],b=ring[(i+1)%4];addW(person(0xf07a1a,0x2d3440,i%2?0xf4f1ea:0xf2c518),[a,b],.0018+Math.random()*.001,0,9,st=>i<3&&st<=1?lvl(st):(i>=5&&st>=6&&st<=9?lvl(st):0))}
+  for(let i=0;i<3;i++){const x=bx0+(bx1-bx0)*(.25+i*.25);addW(person(0xf07a1a,0x2d3440,0xf4f1ea),[[x,bz0+3],[x,bz1-3]],.0012,1,8,st=>lvl(st))}
+  // residents on the last step: by the pool, on the lawn, on the terrace
+  const RES=[[0xe8e2d6,0x3b4a5c],[0x1f2d3d,0xd8cfc0],[0xc39a62,0x2b2b2b],[0x7d1f2b,0x23262b],[0xf2f2f2,0x6b7d8c]];
+  const pz=G.pool&&G.pool.length?[(G.pool[0]+G.pool[2]/2-CX)*u,(G.pool[1]+G.pool[3]/2-CZ)*u]:[bx1-6,bz0+6];
+  [[[pz[0]-4,pz[1]-6],[pz[0]-4,pz[1]+6]],[[bx0-4,bz0-8],[bx1-10,bz0-8]],[[SI.path[0],SI.path[1]+2],[SI.path[0],SI.front-3]],[[bx0+6,bz0-3],[bx0+18,bz0-3]],[[(bx0+bx1)/2,bz0-12],[(bx0+bx1)/2+12,bz0-14]]].forEach((p,i)=>addW(person(...RES[i%RES.length]),p,.0009+i*.0002,10,10,()=>0));
+  ANIM.push((t,st)=>{walkers.forEach(w=>{if(!w.g.visible)return;const [a,b]=w.path,L=Math.hypot(b[0]-a[0],b[1]-a[1])||1,q=(t*w.speed/L*8+w.ph)%2,f=q<1?q:2-q,dir=q<1?1:-1;
+   w.g.position.set(a[0]+(b[0]-a[0])*f,w.yf(st),a[1]+(b[1]-a[1])*f);w.g.rotation.y=Math.atan2((b[0]-a[0])*dir,(b[1]-a[1])*dir);const sw=Math.sin(t*.008+w.ph*9)*.5;w.g.userData.legs[0].rotation.x=sw;w.g.userData.legs[1].rotation.x=-sw})});
+  // a car drives in and parks in the garage on the last step
+  if(G.gdoors){const g0=G.gdoors[Math.min(1,G.gdoors.length-1)],gx=(g0[0]+g0[2]/2-CX)*u,gz=(g0[1]-CZ)*u;
+   const mv=mkCar(0x2a2f36);scene.add(mv);EXT.push([mv,10,10]);let t0=0,was=0;
+   const P=[[-140,SI.road+1.6],[gx,SI.road+1.6],[gx,SI.front+1],[gx,gz-4]];const segL=P.slice(1).map((p,i)=>Math.hypot(p[0]-P[i][0],p[1]-P[i][1])),tot=segL.reduce((a,b)=>a+b,0);
+   ANIM.push((t,st)=>{if(st<10){was=0;return}if(!was){was=1;t0=t}const d=Math.min(tot,(t-t0)*.022*(1-Math.min(1,(t-t0)/9000)*.4));let s=d,i=0;while(i<segL.length-1&&s>segL[i]){s-=segL[i];i++}const a=P[i],b=P[i+1],f=Math.min(1,s/segL[i]);
+    mv.position.set(a[0]+(b[0]-a[0])*f,0,a[1]+(b[1]-a[1])*f);mv.rotation.y=Math.atan2(-(b[1]-a[1]),b[0]-a[0])})}
+  // pool water moves
+  if(water.map==null){const wt=ctex(x=>{x.fillStyle="#3f9ac0";x.fillRect(0,0,256,256);for(let i=0;i<220;i++){x.strokeStyle=`rgba(255,255,255,${.06+Math.random()*.12})`;x.lineWidth=1+Math.random()*2;x.beginPath();const cx=Math.random()*256,cy=Math.random()*256;x.ellipse(cx,cy,8+Math.random()*22,3+Math.random()*6,Math.random()*.4,0,Math.PI*2);x.stroke()}},3);water.map=wt;water.color.set(0xffffff);water.needsUpdate=true;
+   ANIM.push(t=>{wt.offset.set(t*.00003,Math.sin(t*.0004)*.03)})}
+ }
+
  const zR=document.getElementById("pzm"),rR=document.getElementById("prot"),D0=C0.length(),dMin=Math.max(30,D0*.38),dMax=Math.max(190,D0*1.7),z2d=v=>dMin*Math.pow(dMax/dMin,v/100),d2z=d=>100*Math.log(d/dMin)/Math.log(dMax/dMin);
  const setDist=len=>{const d=cam.position.clone().sub(ctl.target);cam.position.copy(ctl.target).add(d.setLength(Math.min(dMax,Math.max(dMin,len))))};
  const setAz=a=>{const d=cam.position.clone().sub(ctl.target),sp=new T.Spherical().setFromVector3(d);sp.theta=a;cam.position.copy(ctl.target).add(new T.Vector3().setFromSpherical(sp))};
@@ -646,7 +741,8 @@ async function pie3d(){
   const r=stage.getBoundingClientRect();if(r.bottom<0||r.top>innerHeight) return;
   if(cv.width!==Math.round(stage.clientWidth*renderer.getPixelRatio())) size();
   const st=S.st;
-  grp.forEach((g,i)=>{const t=i<=st?1:0;g.userData.k+=(t-g.userData.k)*.07;const k=g.userData.k;g.visible=k>.004;if(i<10){g.position.y=(1-k)*(1-k)*26}else{g.scale.setScalar(Math.max(.001,k))}});
+  if(S.noPit0)grp[0].visible=false;const NOW=performance.now();if(S.ext)S.ext.forEach(e=>e[0].visible=st>=e[1]&&st<=e[2]);if(S.anims)S.anims.forEach(f=>f(NOW,st));
+  grp.forEach((g,i)=>{const t=i<=st?1:0;g.userData.k+=(t-g.userData.k)*.07;const k=g.userData.k;g.visible=k>.004&&!(i===0&&S.noPit0);if(i<10){g.position.y=(1-k)*(1-k)*26}else{g.scale.setScalar(Math.max(.001,k))}});
   S.lawn+=((st>=10?1:0)-S.lawn)*.04;grass.material.opacity=S.lawn;
   
   if(S.fly){const p=S.fly,tx=(p[1]-CX)*u,tz=(p[2]-CZ)*u,ty=p[3]===1?1.5:5.2;ctl.target.lerp(v.set(tx,ty,tz),.08);cam.position.lerp(v.set(tx-6,ty+9,tz+10),.06);S.back=1}
@@ -733,7 +829,7 @@ const V={
    <div class="mfstory"><img src="img/team.jpg" alt="Команда Point Group" loading="lazy"><div><span class="eyebrow">Притча, с которой всё начинается</span><p>Пассажир корабля заметил под водой множество рифов и скал и спросил рулевого, как тот проходит среди них — наверное, знает каждый камешек?</p><p class="mfans">— Каждый подводный камень я не знаю. Но знаю самые глубокие места, где безопасно пройдёт мой корабль.</p><p>Так и Point Group с первого шага ведёт клиента по безопасному фарватеру — от покупки до последней мелочи в доме.</p></div></div>
   </div></section>`,
 
- lyudi:()=>`<div class="w phead"><div class="sec-head"><span class="eyebrow">Люди</span><h1>Те, кто строит</h1><p class="lead">У каждого руководителя своя страница: чем занимается, за что отвечает в доме и что об этом думает.</p></div></div>
+ lyudi:()=>`<div class="w phead"><div class="sec-head"><span class="eyebrow">Люди</span><h1>Те, кто строит</h1><p class="lead">Три человека отвечают за каждый дом. Под их руководством на объектах Treyvas Development одновременно работают 100–150 специалистов: прорабы, монолитчики, фасадчики, инженеры, столяры и дизайнеры. У каждого руководителя своя страница.</p></div></div>
   <section style="padding-top:24px"><div class="w">${people()}</div></section>`,
 
  zhurnal:()=>`<div class="w phead"><div class="sec-head"><span class="eyebrow">Журнал</span><h1>Заметки со стройки и пресса</h1><p class="lead">Репортажи с объектов, разборы «как это устроено» и публикации о проектах группы.</p></div></div>
@@ -810,7 +906,7 @@ function route(){
  const sec=h.startsWith("dom-")?"doma":P[h]?"lyudi":C[h]?"gruppa":h;
  document.querySelectorAll("#nav a").forEach(a=>a.getAttribute("href")==="#"+sec?a.setAttribute("aria-current","page"):a.removeAttribute("aria-current"));
  document.documentElement.style.setProperty("--head",document.querySelector("header").offsetHeight+"px");
- scrollTo(0,0);pieTick();pie3d();
+ scrollTo(0,0);PST=PIE.length-1;if(typeof pieStop==="function")pieStop();pieTick();pie3d();
 }
 addEventListener("hashchange",route);route();
 const lb=document.getElementById("lb");
