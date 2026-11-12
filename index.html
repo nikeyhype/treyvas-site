@@ -177,6 +177,13 @@ button,a,input{touch-action:manipulation}
 @media(max-width:760px){header .w{flex-wrap:nowrap;flex-direction:column;align-items:flex-start;gap:8px;padding-block:10px}.logo .lgsvg{height:36px}nav{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;max-width:100%;gap:18px;font-size:14px;-webkit-mask-image:linear-gradient(90deg,#000 85%,transparent);mask-image:linear-gradient(90deg,#000 85%,transparent);padding-right:24px}nav::-webkit-scrollbar{display:none}nav a{white-space:nowrap}}
 @media(max-width:760px){.pin span{font-size:10.5px;padding:4px 7px}.pin.np{display:none}}
 @media(max-width:760px){.hero::after{background:linear-gradient(180deg,rgba(23,19,15,.45) 0%,rgba(23,19,15,.62) 40%,rgba(23,19,15,.95) 100%)}.nums{display:grid;grid-template-columns:1fr 1fr;gap:22px 20px}.nums b{font-size:38px}}
+.qzs{background:var(--oak-2);border-block:1px solid var(--line)}.qz{display:grid;gap:30px;border:1px solid var(--line);padding:clamp(22px,4vw,48px);background:var(--oak-2)}.qzh{display:grid;gap:10px}.qzh h2{font-size:clamp(28px,3.6vw,46px);text-wrap:balance;max-width:20ch}
+.qzb{display:grid;gap:22px}.qzp{display:flex;gap:6px}.qzp i{flex:1;height:2px;background:var(--line)}.qzp i.on{background:var(--bronze)}.qzp i.cur{background:var(--stone)}
+.qzq{margin:0;font-family:var(--display);font-size:clamp(24px,2.6vw,32px);display:grid;gap:6px}.qzq span{font-family:var(--body);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--bronze)}
+.qzo{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:10px}.qzo button{padding:18px 20px;border:1px solid var(--line);background:var(--oak);color:var(--stone);font:500 15px var(--body);text-align:left;cursor:pointer;transition:border-color .2s,background .2s}.qzo button:hover{border-color:var(--bronze);background:#251e17}
+.qzback{justify-self:start;border:0;background:none;color:var(--mute);font:500 13px var(--body);cursor:pointer;padding:4px 0}.qzback:hover{color:var(--stone)}
+.qzr{display:grid;gap:14px}.qzc{display:grid;grid-template-columns:minmax(0,220px) 1fr;gap:20px;align-items:center;border:1px solid var(--line);padding:12px;background:var(--oak);transition:border-color .2s}.qzc:hover{border-color:var(--bronze)}.qzc.best{border-color:var(--bronze)}.qzc .ph{aspect-ratio:16/10;overflow:hidden}.qzc img{width:100%;height:100%;object-fit:cover;display:block}.qzc>div{display:grid;gap:6px;min-width:0}.qzc h3{font-size:26px}.qzc p{margin:0;color:var(--stone);font-size:14px}.qzc .meta{font-size:13px;color:var(--mute)}
+@media(max-width:620px){.qzc{grid-template-columns:1fr}}
 .bio h1{font-size:clamp(40px,6vw,76px)}
 .quote{font-family:var(--display);font-style:italic;font-size:clamp(24px,3vw,36px);line-height:1.25;border-left:1px solid var(--bronze);padding-left:22px;max-width:28ch}
 
@@ -271,6 +278,22 @@ footer a:hover{color:var(--stone)}
 
 <script>
 const img=n=>`img/${n}.jpg`;
+const HM={l11:{price:null,area:null,lot:null,view:"park",ready:4,water:0},l191:{price:24,area:2200,lot:50,view:"park",ready:12},l192:{price:20,area:2000,lot:37,view:"park",ready:12},l193:{price:18,area:1900,lot:33,view:"park",ready:12},z35:{price:14.9,area:1400,lot:30,view:"golf",ready:0},z36:{price:14.9,area:1400,lot:30,view:"golf",ready:0},r1:{price:20,area:1900,lot:50,view:"river",ready:8},r2:{price:20,area:2000,lot:50,view:"river",ready:8}};
+const QZ=[["budget","Бюджет",[["до $15 млн",15],["до $20 млн",20],["до $25 млн",25],["Не важно",99]]],["area","Площадь дома",[["Около 1 400 м²",1400],["Около 2 000 м²",2000],["Чем больше, тем лучше",9999]]],["view","Что за окном",[["Гольф-поле","golf"],["Река и свой пирс","river"],["Парк и тишина","park"],["Не важно","any"]]],["when","Когда въезжать",[["Сразу",0],["В течение года",12],["Не спешу",99]]]];
+function qzScore(a){return Object.keys(HM).map(k=>{const m=HM[k];let s=0,why=[];
+ if(m.price!=null){if(m.price<=a.budget){s+=3;why.push("в бюджете")}else s-=(m.price-a.budget)*.6}else s+=1;
+ if(m.area){if(a.area>=9999)s+=m.area/1000;else{const d=Math.abs(m.area-a.area);s+=2-d/400;if(d<=200)why.push("нужная площадь")}}
+ if(a.view==="any"||a.view===m.view){s+=a.view==="any"?1:3;if(a.view!=="any")why.push(m.view==="golf"?"вид на гольф-поле":m.view==="river"?"выход к реке":"тихая улица у парка")}else s-=1;
+ if(m.ready<=a.when){s+=2;why.push(m.ready===0?"можно въезжать":"успеет к сроку")}else s-=(m.ready-a.when)/6;
+ return {k,s,why}}).sort((x,y)=>y.s-x.s)}
+const quiz=()=>`<div class="qz" id="qz"><div class="qzh"><span class="eyebrow">Подбор дома</span><h2>Четыре вопроса — и мы покажем, какой дом ваш</h2></div><div class="qzb"></div></div>`;
+function qzRender(st){const el=document.querySelector("#qz .qzb");if(!el)return;const i=Object.keys(st).length;
+ if(i<QZ.length){const [key,title,opts]=QZ[i];el.innerHTML=`<div class="qzp">${QZ.map((_,j)=>`<i class="${j<i?"on":j===i?"cur":""}"></i>`).join("")}</div><p class="qzq"><span>${String(i+1).padStart(2,"0")} / 04</span>${title}</p><div class="qzo">${opts.map(o=>`<button type="button" data-k="${key}" data-v="${o[1]}">${o[0]}</button>`).join("")}</div>${i?`<button type="button" class="qzback">← Назад</button>`:""}`;return}
+ const r=qzScore(st).slice(0,3);el.innerHTML=`<p class="qzq"><span>Подходят лучше всего</span>Ваши дома</p><div class="qzr">${r.map((x,j)=>{const h=H[x.k];return `<a class="qzc${j?"":" best"}" href="#dom-${x.k}"><div class="ph"><img src="${img(h.hero)}" alt="${h.name}" loading="lazy"></div><div><span class="tag">${j?"Тоже подходит":"Лучшее совпадение"}</span><h3>${h.name}</h3><p>${x.why.length?x.why.join(" · "):"близко к вашим параметрам"}</p><span class="meta">${HM[x.k].price?"$"+String(HM[x.k].price).replace(".",",")+" млн · ":""}${HM[x.k].area?HM[x.k].area.toLocaleString("ru")+" м² · ":""}${h.ready}</span></div></a>`}).join("")}</div><div class="row"><button type="button" class="btn qzre">Пройти заново</button><a class="btn" href="#kontakty">Обсудить с нами</a></div>`}
+let QS={};
+document.addEventListener("click",e=>{const b=e.target.closest("#qz .qzo button");if(b){const v=b.dataset.v;QS[b.dataset.k]=isNaN(+v)?v:+v;qzRender(QS);return}
+ if(e.target.closest("#qz .qzback")){const ks=Object.keys(QS);delete QS[ks[ks.length-1]];qzRender(QS);return}
+ if(e.target.closest("#qz .qzre")){QS={};qzRender(QS)}});
 const H={
  l11:{name:"Лазурная 11",ready:"Сдача примерно через 4 месяца",plan:"l11b",st:"Лазурная",area:null,hero:"l11_ext",imgs:["v/l11/01","v/l11/02","v/l11/03","v/l11/04","v/l11/05","v/l11/06"],
   nums:[],
@@ -854,11 +877,13 @@ const V={
    ${streets()}
    <div class="row" style="margin-top:36px"><a class="btn" href="#doma">Все дома</a></div>
   </div></section>
+  <section class="qzs"><div class="w">${quiz()}</div></section>
   ${pie("z36")}
   <section><div class="w"><div class="sec-head"><span class="eyebrow">Кто строит</span><h2>Люди за каждым домом</h2><a class="more" href="#lyudi">Подробнее о каждом</a></div>${people()}</div></section>
   <section style="padding-top:0"><div class="w"><div class="sec-head"><span class="eyebrow">Контроль</span><h2>Контроль на каждом этапе</h2><a class="more" href="#kak-stroim">Как мы строим</a></div>${control()}</div></section>`,
 
  doma:()=>`<div class="w phead"><div class="sec-head"><span class="eyebrow">Дома</span><h1>Все дома</h1><p class="lead">У каждого дома своя страница: цифры, история, планировка, галерея и дневник стройки.</p></div></div>
+  <section style="padding-top:24px"><div class="w">${quiz()}</div></section>
   <section style="padding-top:24px"><div class="w">${streets()}</div></section>`,
 
  "kak-stroim":()=>`<div class="w phead"><div class="sec-head"><span class="eyebrow">Как мы строим</span><h1>Сначала то, чего не видно</h1><p class="lead">Отделку можно переделать. Монолит, гидроизоляцию и инженерию — почти никогда. Поэтому основное внимание уходит туда, куда потом никто не заглянет.</p></div></div>
@@ -969,7 +994,7 @@ function route(){
  const sec=h.startsWith("dom-")?"doma":P[h]?"lyudi":C[h]?"gruppa":h;
  document.querySelectorAll("#nav a").forEach(a=>a.getAttribute("href")==="#"+sec?a.setAttribute("aria-current","page"):a.removeAttribute("aria-current"));
  document.documentElement.style.setProperty("--head",document.querySelector("header").offsetHeight+"px");
- scrollTo(0,0);PST=PIE.length-1;if(typeof pieStop==="function")pieStop();pieTick();if(P3){cancelAnimationFrame(P3.raf);P3.renderer.dispose();P3=null}{const pe=document.getElementById("pie");if(pe){if(window.IntersectionObserver){const io=new IntersectionObserver(es=>{if(es.some(e=>e.isIntersecting)){io.disconnect();pie3d()}},{rootMargin:"600px 0px"});io.observe(pe)}else pie3d()}}
+ scrollTo(0,0);PST=PIE.length-1;if(typeof pieStop==="function")pieStop();QS={};qzRender(QS);pieTick();if(P3){cancelAnimationFrame(P3.raf);P3.renderer.dispose();P3=null}{const pe=document.getElementById("pie");if(pe){if(window.IntersectionObserver){const io=new IntersectionObserver(es=>{if(es.some(e=>e.isIntersecting)){io.disconnect();pie3d()}},{rootMargin:"600px 0px"});io.observe(pe)}else pie3d()}}
 }
 addEventListener("hashchange",route);route();
 const lb=document.getElementById("lb");
