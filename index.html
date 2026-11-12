@@ -1004,6 +1004,7 @@ function route(){
  const h=(location.hash||"#home").slice(1),app=document.getElementById("app");
  app.innerHTML=h.startsWith("dom-")&&H[h.slice(4)]?house(h.slice(4)):P[h]?bio(h):C[h]?company(h):(V[h]||V.home)();
  const sec=h.startsWith("dom-")?"doma":P[h]?"lyudi":C[h]?"gruppa":h;
+ {const T0="Treyvas Development",nm={doma:"Дома","kak-stroim":"Как мы строим","o-nas":"О нас",gruppa:"Point Group",lyudi:"Люди",zhurnal:"Журнал",kontakty:"Контакты"};document.title=h.startsWith("dom-")&&H[h.slice(4)]?H[h.slice(4)].name+" — "+T0:P[h]?P[h].name+" — "+T0:C[h]?C[h].name+" — "+T0:nm[h]?nm[h]+" — "+T0:T0}
  document.querySelectorAll("#nav a").forEach(a=>a.getAttribute("href")==="#"+sec?a.setAttribute("aria-current","page"):a.removeAttribute("aria-current"));
  document.documentElement.style.setProperty("--head",document.querySelector("header").offsetHeight+"px");
  scrollTo(0,0);PST=PIE.length-1;if(typeof pieStop==="function")pieStop();QS={};qzRender(QS);pieTick();if(P3){cancelAnimationFrame(P3.raf);P3.renderer.dispose();P3=null}{const pe=document.getElementById("pie");if(pe){if(window.IntersectionObserver){const io=new IntersectionObserver(es=>{if(es.some(e=>e.isIntersecting)){io.disconnect();pie3d()}},{rootMargin:"600px 0px"});io.observe(pe)}else pie3d()}}
