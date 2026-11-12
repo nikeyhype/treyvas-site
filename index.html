@@ -1,0 +1,659 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Treyvas Development — частные дома в Agalarov Estate. Проект, стройка, столярка и продажа внутри одной семьи и группы Point Group.">
+<title>Treyvas Development</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Manrope:wght@400;500;600&display=swap">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<style>
+/* Layout: full-bleed renders carry the page; text sits in a left-aligned column over smoked-oak ground; travertine-light bands for "paper" content (drawings, history). Single dark look by choice. */
+:root{
+  color-scheme:dark;
+  --oak:#17130f; --oak-2:#211b15; --line:#3a3027;
+  --stone:#e9e2d6; --mute:#a89b89; --bronze:#c39a62; --ink:#1b1611; --ink-2:#5d5246;
+  --display:"Cormorant Garamond","Times New Roman",serif;
+  --body:"Manrope","Helvetica Neue",Arial,sans-serif;
+  --gut:max(20px,env(safe-area-inset-left,0px)); --gutr:max(20px,env(safe-area-inset-right,0px));
+  --head:58px;
+}
+*{box-sizing:border-box}
+body{background:var(--oak);color:var(--stone);font:400 16px/1.6 var(--body);-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--oak)}
+a{color:inherit;text-decoration:none}
+a:focus-visible,button:focus-visible{outline:2px solid var(--bronze);outline-offset:3px}
+h1,h2,h3{font-family:var(--display);font-weight:400;line-height:1.05;margin:0;text-wrap:balance}
+p{margin:0}
+.w{max-width:1240px;margin:0 auto;padding-left:var(--gut);padding-right:var(--gutr)}
+.eyebrow{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--bronze)}
+.lead{font-size:18px;color:var(--mute);max-width:58ch}
+.prose{display:grid;gap:18px;font-size:17px;max-width:60ch;color:var(--mute)}
+.stone .prose,.stone .lead{color:var(--ink-2)}
+.todo{font-size:12px;color:var(--bronze);border:1px dashed var(--line);padding:3px 8px;display:inline-block;letter-spacing:.04em}
+
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:color-mix(in srgb,var(--oak) 90%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+header .w{display:flex;align-items:center;justify-content:space-between;gap:8px 16px;padding-block:14px;flex-wrap:wrap}
+.logo{font-family:var(--display);font-size:22px;letter-spacing:.14em;text-transform:uppercase;white-space:nowrap}
+.logo small{font-family:var(--body);font-size:10px;letter-spacing:.3em;color:var(--mute);margin-left:8px}
+nav{display:flex;gap:6px 20px;flex-wrap:wrap;font-size:13px;letter-spacing:.05em}
+nav a{color:var(--mute);padding-block:4px;border-bottom:1px solid transparent}
+nav a:hover,nav a[aria-current]{color:var(--stone);border-color:var(--bronze)}
+
+.ahero{position:relative;display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:end;background:linear-gradient(90deg,#857660 0%,#8d7e66 100%);color:#1d1711;overflow:hidden;min-height:min(80vh,720px)}
+.ahero img{display:block;height:min(80vh,720px);width:auto;max-width:56vw;object-fit:cover;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 26%);mask-image:linear-gradient(90deg,transparent 0,#000 26%)}
+.ah-txt{align-self:center;display:grid;gap:22px;padding-block:56px;padding-left:max(20px,env(safe-area-inset-left,0px),calc((100vw - 1240px)/2 + 20px));padding-right:16px}
+.ah-txt .eyebrow{color:#3d2f1f}
+.ah-txt h1{font-size:clamp(40px,5.6vw,78px);max-width:11ch;color:#1d1711}
+.ah-cap{display:grid;gap:2px;padding-left:14px;border-left:1px solid #3d2f1f;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#3d2f1f}
+.ah-cap b{font-family:var(--display);font-weight:400;font-size:24px;letter-spacing:0;text-transform:none;color:#1d1711}
+@media (max-width:900px){.ahero{grid-template-columns:1fr;min-height:0}.ahero img{max-width:100%;width:100%;height:auto;-webkit-mask-image:linear-gradient(180deg,transparent 0,#000 12%);mask-image:linear-gradient(180deg,transparent 0,#000 12%)}.ah-txt{padding-right:max(20px,env(safe-area-inset-right,0px))}}
+.hero{position:relative;min-height:min(78vh,720px);display:flex;align-items:flex-end;background:#000 center/cover no-repeat}
+.hero.sm{min-height:min(56vh,480px)}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(23,19,15,.2) 30%,rgba(23,19,15,.93))}
+.hero .w{position:relative;z-index:1;width:100%;padding-block:56px 48px;display:grid;gap:18px}
+.hero h1{font-size:clamp(40px,7vw,92px);max-width:14ch}
+.hero h1 em{font-style:italic;color:var(--bronze)}
+.hero .lead{color:var(--stone)}
+.hero .eyebrow{color:#e6c692;text-shadow:0 1px 8px rgba(0,0,0,.6)}
+.phead{padding-block:72px 0}
+.phead h1{font-size:clamp(40px,6vw,80px);max-width:16ch}
+.btn{display:inline-block;border:1px solid var(--bronze);color:inherit;padding:13px 26px;font-size:13px;letter-spacing:.12em;text-transform:uppercase;background:none;cursor:pointer;font-family:var(--body);transition:background .25s,color .25s}
+.btn:hover{background:var(--bronze);color:var(--ink)}
+.row{display:flex;gap:14px;flex-wrap:wrap}
+.more{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--bronze);border-bottom:1px solid currentColor;padding-bottom:3px;justify-self:start}
+
+section{padding-block:88px}
+.sec-head{display:grid;gap:14px;margin-bottom:44px}
+.sec-head h2{font-size:clamp(32px,4.4vw,56px)}
+.stone{background:var(--stone);color:var(--ink)}
+.stone .eyebrow,.stone .more{color:#8a6a3c}
+.split{display:grid;grid-template-columns:1fr 1.15fr;gap:56px;align-items:start}
+.split h2{font-size:clamp(30px,3.8vw,50px)}
+.split .lft{display:grid;gap:16px;align-content:start}
+
+.cols4{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line)}
+.stone .cols4{border-color:#cfc5b4}
+.cols4>*{padding:22px 20px 0 0;display:grid;gap:8px;align-content:start;min-width:0}
+.cols4 b{font-family:var(--display);font-weight:500;font-size:24px;line-height:1.15}
+.cols4 span{font-size:14px;color:var(--mute)}
+.stone .cols4 span{color:var(--ink-2)}
+.cols4 i{font-style:normal;font-size:12px;letter-spacing:.14em;color:var(--bronze)}
+.stone .cols4 i{color:#8a6a3c}
+a.co:hover b{color:var(--bronze)}
+.stone a.co:hover b{color:#8a6a3c}
+
+.nums{display:flex;gap:28px 48px;flex-wrap:wrap;border-block:1px solid var(--line);padding-block:26px}
+.stone .nums{border-color:#cfc5b4}
+.nums div{display:grid;gap:2px}
+.nums b{font-family:var(--display);font-weight:400;font-size:46px;line-height:1;font-variant-numeric:tabular-nums}
+.nums span{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
+.stone .nums span{color:var(--ink-2)}
+
+.houses{display:grid;grid-template-columns:repeat(12,1fr);gap:20px}
+.card{grid-column:span 6;display:grid;gap:12px;min-width:0;align-content:start}
+.street{display:grid;gap:22px;margin-bottom:56px}.st-h{font-size:34px;display:flex;align-items:baseline;gap:16px;border-bottom:1px solid var(--line);padding-bottom:12px}.st-h span{font-family:var(--body);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+.card .ph{overflow:hidden;aspect-ratio:16/10;background:var(--oak-2)}
+
+.card img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 1.2s cubic-bezier(.2,.7,.2,1)}
+.card:hover img{transform:scale(1.05)}
+.card h3{font-size:30px}
+.card .meta{font-size:13px;color:var(--mute);letter-spacing:.04em;font-variant-numeric:tabular-nums}
+
+/* pie: 3D scene */
+.pie{position:relative;height:620vh;padding:0}
+.pie-in{position:sticky;top:calc(var(--head) + env(safe-area-inset-top,0px));height:calc(100vh - var(--head));max-height:960px;display:grid;grid-template-columns:minmax(0,1.9fr) minmax(0,1fr);gap:32px;align-items:center;padding-block:20px}
+.stage{position:relative;height:100%;min-height:0;overflow:hidden;background:linear-gradient(#c4d9e6,#dbe6ea)}
+.stage canvas{position:absolute;inset:0;width:100%;height:100%;display:block;cursor:grab}
+#pins{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.pin{position:absolute;padding:0;border:0;background:none;opacity:0;pointer-events:none;transition:opacity .4s;cursor:pointer;transform:translate(-50%,-100%)}
+.pin.in{opacity:1;pointer-events:auto}
+.pin span{display:block;white-space:nowrap;background:rgba(23,19,15,.86);color:#f1e9dc;font:600 12px/1 var(--body);letter-spacing:.05em;padding:8px 12px;border-left:2px solid var(--bronze);box-shadow:0 6px 16px rgba(0,0,0,.35)}
+.pin span::after{content:"";position:absolute;left:50%;top:100%;width:1px;height:22px;background:rgba(23,19,15,.8)}
+.pin:hover span{background:var(--bronze);color:var(--ink)}
+.room{position:absolute;inset:0;z-index:4;opacity:0;pointer-events:none;transition:opacity .7s;background:#000}.room.on{opacity:1;pointer-events:auto}.room img{width:100%;height:100%;object-fit:cover;display:block}.room div{position:absolute;inset:auto 0 0;padding:22px;display:flex;justify-content:space-between;align-items:end;gap:12px;flex-wrap:wrap;background:linear-gradient(transparent,rgba(23,19,15,.85))}.room b{font-family:var(--display);font-weight:400;font-size:clamp(28px,4vw,48px);line-height:1}
+.zm{position:absolute;left:16px;bottom:16px;display:flex;gap:8px;z-index:3}
+.zm button{width:44px;height:44px;border:0;background:rgba(23,19,15,.86);color:#f1e9dc;font-size:22px;cursor:pointer}
+.zm button:hover{background:var(--bronze);color:var(--ink)}
+.hint{position:absolute;right:16px;bottom:18px;font-size:12px;letter-spacing:.06em;color:#2c3a42;background:rgba(255,255,255,.55);padding:6px 10px}
+@media (pointer:coarse){.hint{display:none}}
+.pie-txt{display:grid;gap:18px;align-content:center}
+.pie-txt h2{font-size:clamp(30px,3.6vw,48px)}
+.steps-l{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.steps-l li{display:grid;grid-template-columns:30px 1fr;gap:2px 8px;padding:6px 0;border-bottom:1px solid var(--line);opacity:.35;transition:opacity .4s}
+.steps-l li.on{opacity:1}
+.steps-l i{font-style:normal;font-size:11px;color:var(--bronze);letter-spacing:.1em;padding-top:5px}
+.steps-l b{font-family:var(--display);font-weight:500;font-size:19px;line-height:1.15}
+.steps-l span{grid-column:2;font-size:13px;color:var(--mute);display:none}
+.steps-l li.cur span{display:block}
+.steps-l li.cur b{color:var(--bronze)}
+.note{font-size:12px;color:var(--mute)}
+
+.people{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.person{display:grid;gap:10px;align-content:start;min-width:0}
+.person .ph,.portrait{aspect-ratio:3/4;background:var(--oak-2);border:1px solid var(--line);display:grid;place-items:center;overflow:hidden}
+.person img,.portrait img{width:100%;height:100%;object-fit:cover;object-position:top;filter:grayscale(1);transition:transform 1s}
+.person:hover img{transform:scale(1.04)}
+.mono{font-family:var(--display);font-size:72px;color:var(--line)}
+.person h3{font-size:26px}
+.person p{font-size:13px;color:var(--mute)}
+.tag{color:var(--bronze);letter-spacing:.1em;text-transform:uppercase;font-size:11px}
+.bio{display:grid;grid-template-columns:minmax(0,380px) 1fr;gap:56px;align-items:start}
+.bio h1{font-size:clamp(40px,6vw,76px)}
+.quote{font-family:var(--display);font-style:italic;font-size:clamp(24px,3vw,36px);line-height:1.25;border-left:1px solid var(--bronze);padding-left:22px;max-width:28ch}
+
+.tl{display:grid;gap:0;border-left:1px solid #cfc5b4;margin-left:6px}
+.tl div{display:grid;grid-template-columns:70px 1fr;gap:6px 24px;padding:0 0 34px 28px;position:relative}
+.tl div::before{content:"";position:absolute;left:-5px;top:12px;width:9px;height:9px;background:#8a6a3c;border-radius:50%}
+.tl b{font-family:var(--display);font-weight:400;font-size:36px;line-height:1}
+.tl h3{font-size:26px;font-weight:500}
+.tl p{grid-column:2;color:var(--ink-2);max-width:56ch}
+
+.draw{display:grid;grid-template-columns:repeat(3,1fr);gap:32px 20px}
+.draw figure{margin:0;display:grid;gap:10px}
+.draw img{width:100%;mix-blend-mode:multiply;display:block}
+.draw figcaption{font-size:13px;color:var(--ink-2)}
+.draw figcaption b{display:block;font-family:var(--display);font-weight:500;font-size:22px;color:var(--ink)}
+
+.story{display:grid;grid-template-columns:1fr 1.2fr;gap:48px;align-items:start}
+.story h2{font-size:clamp(28px,3.4vw,44px)}
+.rooms{columns:2;column-gap:40px;margin:0;padding:0;list-style:none;font-size:15px}
+.rooms li{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid var(--line);break-inside:avoid;font-variant-numeric:tabular-nums}
+.rooms li span{color:var(--mute)}
+.gal{columns:2;column-gap:16px}
+.gal button{display:block;width:100%;padding:0;border:0;background:none;margin:0 0 16px;cursor:zoom-in;break-inside:avoid}
+.gal img{width:100%;display:block}
+.rdy{display:inline-block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;border:1px solid var(--line);padding:5px 9px;color:var(--stone)}.rdy.ok{border-color:var(--bronze);color:var(--bronze)}
+.plans{display:grid;grid-template-columns:1fr 1fr;gap:16px}.plans button{padding:10px;border:0;background:#f4f1ea;cursor:zoom-in;display:grid;gap:8px;color:var(--ink);font:500 12px var(--body);letter-spacing:.1em;text-transform:uppercase}.plans img{width:100%;display:block}
+.draw button{padding:0;border:0;background:none;cursor:zoom-in;display:block;width:100%}
+@media (max-width:900px){.plans{grid-template-columns:1fr}}
+.soon{border:1px dashed var(--line);padding:26px;color:var(--mute);font-size:14px;display:grid;gap:6px;align-content:start}
+.soon b{color:var(--stone);font-weight:500}
+.next{position:relative;display:block;min-height:320px;background:#000 center/cover}
+.next::after{content:"";position:absolute;inset:0;background:rgba(23,19,15,.6);transition:background .4s}
+.next:hover::after{background:rgba(23,19,15,.35)}
+.next .w{position:relative;z-index:1;padding-block:90px;display:grid;gap:10px}
+.next h2{font-size:clamp(36px,5vw,64px)}
+.jr{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.jr article{border-top:1px solid var(--line);padding-top:20px;display:grid;gap:10px;align-content:start}
+.jr{row-gap:44px}.jr h3{font-size:26px}
+.jr p{color:var(--mute);font-size:14px}
+
+dialog{border:0;padding:0;background:transparent;max-width:96vw;max-height:94vh}
+dialog::backdrop{background:rgba(10,8,6,.92)}
+dialog img{max-width:96vw;max-height:94vh;display:block}
+footer{border-top:1px solid var(--line);padding-block:48px;color:var(--mute);font-size:13px}
+footer .w{display:grid;grid-template-columns:1.4fr repeat(3,1fr);gap:32px}
+footer b{color:var(--stone);font-weight:500;display:block;margin-bottom:8px;letter-spacing:.08em;text-transform:uppercase;font-size:11px}
+footer a{display:block;padding:3px 0}
+footer a:hover{color:var(--stone)}
+.contact dl{margin:0;display:grid;gap:22px}
+.contact dt{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--bronze)}
+.contact dd a{border-bottom:1px solid rgba(195,154,98,.45);transition:color .2s,border-color .2s}.contact dd a:hover{color:var(--bronze);border-color:var(--bronze)}
+.contact dd{margin:4px 0 0;font-family:var(--display);font-size:24px;line-height:1.2;user-select:all}
+
+@media (max-width:900px){
+  section{padding-block:60px}
+  .split,.story,.bio{grid-template-columns:1fr;gap:28px}
+  .cols4{grid-template-columns:1fr 1fr}
+  .card,.card.big{grid-column:span 12}
+  .people{grid-template-columns:1fr 1fr}
+  .gal,.rooms{columns:1}
+  .draw,.jr{grid-template-columns:1fr}
+  .tl div{grid-template-columns:1fr}.tl p{grid-column:1}
+  footer .w{grid-template-columns:1fr 1fr}
+  .pie-in{grid-template-columns:1fr;grid-template-rows:minmax(0,1fr) auto;gap:0;padding-bottom:16px}
+  .pie-txt h2,.pie-txt .lead,.pie-txt .note,.steps-l li:not(.cur){display:none}
+  .steps-l,.steps-l li{border:0}
+  .steps-l li.cur span{display:block}
+  .bio .portrait{max-width:300px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+
+<style>:root{padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<header><div class="w">
+  <a class="logo" href="#home">Treyvas<small>Development</small></a>
+  <nav id="nav">
+    <a href="#doma">Дома</a><a href="#kak-stroim">Как мы строим</a><a href="#o-nas">О нас</a><a href="#gruppa">Группа</a><a href="#lyudi">Люди</a><a href="#zhurnal">Журнал</a><a href="#kontakty">Контакты</a>
+  </nav>
+</div></header>
+<main id="app"></main>
+<footer><div class="w">
+  <div><span class="logo" style="color:var(--stone)">Treyvas</span><p style="margin-top:10px;max-width:36ch">Частные дома в Подмосковье. Входит в Point Group. Это прототип сайта, изображения — визуализации проектов.</p></div>
+  <div><b>Дома</b><a href="#dom-l191">Лазурная 19.1</a><a href="#dom-l192">Лазурная 19.2</a><a href="#dom-z36">Заречная 36</a><a href="#doma">Все дома</a></div>
+  <div><b>Компания</b><a href="#o-nas">История</a><a href="#lyudi">Люди</a><a href="#kak-stroim">Как мы строим</a><a href="#zhurnal">Журнал</a></div>
+  <div><b>Группа</b><a href="#point-estate">Point Estate</a><a href="#point-design">Point Design</a><a href="#point-woodcraft">Point WoodCraft</a><a href="#kontakty">Контакты</a></div>
+</div></footer>
+<dialog id="lb"><img alt=""></dialog>
+
+<script>
+const img=n=>`img/${n}.jpg`;
+const H={
+ l11:{name:"Лазурная 11",ready:"Сдача примерно через 4 месяца",plan:"l11",st:"Лазурная",area:null,hero:"l11_ext",imgs:[],
+  nums:[["96,6","м² бассейн"],["2","этажа"]],
+  title:"Фасад в глубине сада",
+  story:["Широкий фасад развёрнут к саду, вход отмечен козырьком.","Дом в стройке: здесь первым появится дневник строительства и видео."]},
+ l191:{name:"Лазурная 19.1",ready:"Сдача примерно через год",plan:"l191",st:"Лазурная",area:"1 200",hero:"l191_pool",imgs:["l191_living","l191_kitchen","l191_dining","l191_stairs","l191_pool2","l191_bath"],
+  nums:[["5","спален"],["173,3","м² бассейн"],["3","машины в гараже"]],
+  title:"Тёплый шпон и второй свет",
+  story:["Дом в два этажа: внизу общая жизнь, наверху пять спален, каждая со своей гардеробной и ванной.","Интерьер построен на одном материале — светлом шпоне, который переходит со стен на кухню и лестницу. Столовая стоит у панорамного окна, ванные целиком в мраморе.","Бассейн вынесен в отдельное крыло вместе с сауной и спортзалом, чтобы влажная зона не мешала жилой."],
+  rooms:[["Гостиная","68,4"],["Кухня-столовая","68,9"],["Холл с главной лестницей","69,3"],["Входной холл со вторым светом","31,5"],["Бассейн","173,3"],["Спортзал","28,7"],["Сауна","15,1"],["Кабинет","23,5"],["Мастер-спальня","41,1"],["Мастер-ванная","22,5"],["Гараж","77,9"],["Котельная","21,8"]],
+  team:[["Архитектура","Д. Шибанов"],["Интерьер","Олеся Голова · Point Design"],["Столярные изделия","Point WoodCraft"],["Строительство","Treyvas Development"]],pie:1},
+ l192:{name:"Лазурная 19.2",ready:"Сдача примерно через год",plan:"l192",st:"Лазурная",area:"1 029,9",hero:"hero",imgs:["l192_ext","l192_eve","l192_dining","l192_bed"],
+  nums:[["179,9","м² зал бассейна"],["80,2","м² гараж"],["36,1","м² мастер-спальня"]],
+  title:"Дом, который смотрит в сосны",
+  story:["Длинный горизонтальный объём, каменный портал камина на всю высоту и сплошное остекление первого этажа.","Столовая открыта в лес, спальни второго этажа спрятаны за деревянными ламелями. Под одной крышей с домом — бассейн почти на 180 квадратных метров."]},
+ l193:{name:"Лазурная 19.3",ready:"Сдача примерно через год",plan:"l193",st:"Лазурная",area:"610,2",hero:"l193_ext",imgs:["l193_living"],
+  nums:[["129,3","м² бассейн"],["92,7","м² гараж"]],
+  title:"Гостиная под кольцами света",
+  story:["Единое пространство гостиной, кухни и столовой собрано вокруг крупных кольцевых светильников.","Гараж и бассейн спланированы в одном объёме с домом."]},
+ z35:{name:"Заречная 35",ready:"Дом готов",plan:"z35",st:"Заречная",area:"730,7",hero:"z35_ring",imgs:["z35_fire"],
+  nums:[["136,9","м² бассейн"]],
+  title:"Терраса с живым огнём",
+  story:["Крытая терраса с очагом работает как ещё одна комната дома.","Во дворе — кольцевая скульптура, внутри — гостиная с двусветным пространством и мраморные ванные."]},
+ z36:{name:"Заречная 36",ready:"Дом готов",plan:"z36",st:"Заречная",area:"835,3",hero:"z36_ext",imgs:["z36_pool","z36_car"],
+  nums:[["160,5","м² бассейн"],["75,2","м² гараж"]],
+  title:"Белая консоль над садом",
+  story:["Второй этаж вынесен над террасой широкой консолью, под ней — летняя гостиная и вода.","Внутри атриум с лестницей, столовая с видом на лес и бассейн, отделанный камнем."]},
+ r1:{name:"Речная 1",ready:"Сдача примерно через 8 месяцев",plan:"r1",st:"Речная",area:"569,0",hero:"l193_ext",imgs:["r1_bed"],
+  nums:[["108,7","м² бассейн"]],
+  title:"Спокойный дом у реки",
+  story:["Компактный по меркам посёлка дом с тем же набором: бассейн, мастер-блок, общая гостиная с выходом в сад."]},
+ r2:{name:"Речная 2",ready:"Сдача примерно через 8 месяцев",plan:"l192",st:"Речная",area:"1 029,9",hero:"l192_ext",imgs:["l192_dining","l192_bed"],
+  nums:[["179,9","м² зал бассейна"],["80,2","м² гараж"]],
+  title:"Тот же проект, другой участок",
+  story:["Дом построен по проекту Лазурной 19.2: каменный портал камина, остекление первого этажа, бассейн под одной крышей с домом.","Участок другой, поэтому посадка дома и виды из окон свои."]}
+};
+const STREETS=[["Лазурная",["l11","l191","l192","l193"]],["Заречная",["z35","z36"]],["Речная",["r1","r2"]]];
+const order=STREETS.flatMap(s=>s[1]);
+
+const P={
+ pavel:{name:"Павел Трейвас",co:"Point Group",role:"Основатель",photo:"pavel",mono:"ПТ",
+  short:"Основатель. Стоит за каждым домом: от выбора участка до сдачи ключей.",
+  text:["Вместе с Ириной основал Point Estate, а затем собрал вокруг агентства проектное бюро, столярное производство и строительство.","Лично утверждает участок, концепцию и подрядчиков каждого дома и приезжает на стройку."],quote:null},
+ irina:{name:"Ирина Трейвас",co:"Point Estate",role:"Генеральный директор Point Estate",photo:"irina",mono:"ИТ",
+  short:"Генеральный директор Point Estate. Знает, какой дом будут хотеть через пять лет.",
+  text:["Руководит агентством элитной недвижимости, через которое прошло больше четырёх тысяч сделок.","Этот опыт возвращается в проекты: планировки и состав помещений каждого дома сверяются с тем, что на самом деле ищут покупатели."],quote:null},
+ natalia:{name:"Наталия Гринфельд",co:"Point Design",role:"Руководитель Point Design",photo:"natalia",
+  short:"Руководитель Point Design. Архитектура и интерьеры всех домов.",
+  text:["Пятнадцать лет ведёт студию архитектуры и дизайна интерьера: 105 проектов и 100 000 м² объектов.","За каждым домом закреплён свой автор, который ведёт его от первой встречи до развески штор."],quote:"Дизайн — это эволюция, и наша студия развивается благодаря вам"},
+ marina:{name:"Марина",co:"Point WoodCraft",role:"Директор Point WoodCraft",mono:"М",
+  short:"Директор Point WoodCraft. Шпон, двери, кухни и вся столярка собственного производства.",
+  text:["Руководит мастерской, где делают стеновые панели, двери, кухни и встроенную мебель для домов группы.","Столяры видят проект задолго до монтажа, поэтому рисунок шпона сходится на стыках, а мебель встаёт в размер."],quote:null}
+};
+const C={
+ "point-estate":{name:"Point Estate",kind:"Недвижимость",who:"irina",img:"l192_eve",site:"pointestate.ru",
+  lead:"Агентство элитной недвижимости Москвы и Подмосковья. С него началась группа.",
+  text:["Point Estate основала семейная пара Павел и Ирина Трейвас. За плечами у них большой опыт работы с российской и зарубежной недвижимостью.","Больше тринадцати лет агентство работает по принципу «всё в одном месте»: продажа и аренда жилой и коммерческой недвижимости, юридическое сопровождение, консалтинг и продвижение объектов.","Для девелопмента это главный источник знания о рынке: какие участки ценятся, какие планировки покупают, а какие стоят годами."],
+  nums:[["13","лет на рынке"],["4000+","завершённых сделок"],["300+","сделок за 2024 год"],["80+","человек в команде"]],
+  facts:[["Загородная","Дома, посёлки и участки Подмосковья"],["Городская","Квартиры, новостройки и жилые комплексы Москвы"],["Коммерческая","Офисы, особняки, торговые помещения"],["Услуги","Юридическое сопровождение и консалтинг"]],
+  contacts:[["Телефон","+7 499 288-88-67"],["Почта","info@pointestate.ru"],["Центральный офис","Москва, Кутузовский проспект, 1/7"],["Загородный офис","д. Захарово, Заречная ул., 45А, стр. 10, Estate Mall"],["Часы работы","Пн–Вс, 9:00–21:00"],["Telegram","t.me/Point_Estate"]]},
+ "point-design":{name:"Point Design",kind:"Архитектура и интерьер",who:"natalia",img:"l191_living",site:"point-design.ru",
+  lead:"Студия архитектуры и дизайна интерьера. Проектирует каждый дом Treyvas Development.",
+  text:["Студия создаёт интерьеры и архитектуру вне времени: начинает с того, как живёт семья, и только потом переходит к стилю. Поэтому дом остаётся удобным и актуальным через годы.","На стройке команда ведёт авторский надзор от первого кирпича до развески штор.","Проекты студии публиковали Interior+Design, House & Garden, Nuevo Estilo и Amazing Architecture."],
+  nums:[["15","лет студии"],["105","проектов"],["100 000","м² объектов"],["12","человек в команде"]],
+  facts:[["Наталия Гринфельд","Руководитель студии"],["Олеся Голова","Ведущий дизайнер-архитектор"],["Сергей Корн","Ведущий архитектор"],["Елизавета Куварзина","Ведущий дизайнер-архитектор"]],
+  contacts:[["Телефон","+7 495 141 57 77"],["Почта","info@point-design.ru"],["Офис","Москва, Кутузовский проспект, 1/7"]]},
+ "point-woodcraft":{name:"Point WoodCraft",kind:"Столярное производство",who:"marina",img:"l191_kitchen",site:"pointwood.ru",
+  lead:"Собственное производство мебели и столярных изделий из дерева на Новорижском шоссе.",
+  text:["Цех площадью больше 3000 м² оснащён современными станками и традиционной деревообрабатывающей техникой. В нём работают 29 человек: конструкторы, столяры, маляры, монтажники.","Стеновые панели, двери, кухни, гардеробные, лестницы. Всё, что в интерьере сделано из дерева, приходит из одного цеха. Поэтому оттенок и рисунок шпона совпадают по всему дому, а сроки не зависят от сторонних фабрик.","Для Agalarov Estate мастерская уже делала гардеробные из шпона эвкалипта, стойку гольф-клуба и полную столярку двухэтажного дома с бассейном."],
+  nums:[["3000+","м² производство"],["29","человек в цехе"],["6","этапов от проекта до монтажа"]],
+  facts:[["Шпон","Американский орех, эвкалипт, эбен, палисандр, беленый дуб"],["Покрытия","Лаки и эмали Renner и Sayerlack, патина, глянец"],["Фурнитура","Blum и Häfele"],["Детали","Латунь, стекло, кожа, ткани"]],
+  contacts:[["Телефон","+7 905 777-73-67"],["Почта","info@pointwood.ru"],["Производство","МО, д. Гольёво, Центральная ул., 7, стр. 1"]]},
+ "treyvas":{name:"Treyvas Development",kind:"Строительство",who:"pavel",img:"hero",
+  lead:"Строительная компания группы. Возводит дома от котлована до сдачи.",
+  text:["Монолит, кровля, фасады, инженерные сети и отделка под управлением одной команды.","Сейчас в работе восемь домов в Agalarov Estate."],
+  nums:[["8","домов в работе"]],facts:[],
+  contacts:[["Центральный офис","Москва, Кутузовский проспект, 1/7"],["Загородный офис","д. Захарово, Заречная ул., 45А, стр. 10, Estate Mall"]]}
+};
+
+const GEO={"Кутузовский":"55.749831,37.570824","Захарово":"55.789173,37.011749"};
+const cval=v=>{const t=v.trim();
+ if(/^\+?[78][\d ()-]{9,}$/.test(t))return `<a href="tel:${t.replace(/[^\d+]/g,"").replace(/^8/,"+7")}">${t}</a>`;
+ if(/^[\w.-]+@[\w.-]+\.[a-z]+$/i.test(t))return `<a href="mailto:${t}">${t}</a>`;
+ if(/^t\.me\//.test(t))return `<a href="https://${t}" target="_blank" rel="noopener">${t}</a>`;
+ const g=Object.keys(GEO).find(k=>t.includes(k));
+ if(g||/проспект|ул\.|д\. /.test(t))return `<a href="https://yandex.ru/maps/?rtext=~${g?GEO[g]:encodeURIComponent(t)}&rtt=auto" target="_blank" rel="noopener">${t}</a>`;
+ return t};
+const card=k=>{const h=H[k];return `<a class="card" href="#dom-${k}"><div class="ph"><img src="${img(h.hero)}" alt="${h.name}" loading="lazy"></div><h3>${h.name}</h3><div class="meta"><span class="rdy${h.ready==="Дом готов"?" ok":""}">${h.ready}</span></div></a>`};
+const streets=()=>STREETS.map(([n,ks])=>`<div class="street"><h3 class="st-h">Улица ${n}<span>${ks.length} ${ks.length>1&&ks.length<5?"дома":"домов"}</span></h3><div class="houses">${ks.map(card).join("")}</div></div>`).join("");
+const person=k=>{const p=P[k];return `<a class="person" href="#${k}"><div class="ph">${p.photo?`<img src="${img(p.photo)}" alt="${p.name}">`:`<span class="mono">${p.mono}</span>`}</div><span class="tag">${p.co}</span><h3>${p.name}</h3><p>${p.short}</p></a>`};
+const people=()=>`<div class="people">${Object.keys(P).map(person).join("")}</div>`;
+const numsB=a=>a.length?`<div class="nums">${a.map(n=>`<div><b>${n[0]}</b><span>${n[1]}</span></div>`).join("")}</div>`:"";
+const group=()=>`<div class="cols4">
+ <a class="co" href="#point-estate"><i>Участки и продажа</i><b>Point Estate</b><span>Знает рынок: 4000+ сделок за 13 лет.</span></a>
+ <a class="co" href="#point-design"><i>Архитектура и интерьер</i><b>Point Design</b><span>Проектирует дом и ведёт авторский надзор.</span></a>
+ <a class="co" href="#treyvas"><i>Строительство</i><b>Treyvas Development</b><span>Строит от котлована до сдачи.</span></a>
+ <a class="co" href="#point-woodcraft"><i>Столярное производство</i><b>Point WoodCraft</b><span>Шпон, двери, кухни, мебель.</span></a></div>`;
+const control=()=>`<div class="cols4">
+ <div><i>01</i><b>Проект</b><span>Архитектура, конструктив и инженерия согласуются между собой до выхода на площадку.</span></div>
+ <div><i>02</i><b>Стройка</b><span>Каждый этап принимается отдельно: монолит, кровля, инженерные сети, черновая отделка.</span></div>
+ <div><i>03</i><b>Авторский надзор</b><span>Архитекторы и дизайнеры Point Design приезжают на объект каждую неделю.</span></div>
+ <div><i>04</i><b>Сдача</b><span>Финальная приёмка в несколько шагов. Дом передаётся готовым к жизни.</span></div></div>`;
+
+/* ---- pie: real 3D scene built from the plans of Лазурная 19.1 ---- */
+const PIE=[
+ ["Котлован","Разметка по осям и выемка грунта под плиту."],
+ ["Монолитная плита","Основание дома. То, что потом уже не поменять."],
+ ["Стены первого этажа","Несущие стены и перегородки по кладочному плану."],
+ ["Полы и бассейн","Тёплые полы, стяжка, чистовое покрытие и чаша бассейна 173 м²."],
+ ["Столярка и мебель","Лестница, кухня, шкафы, столы, диваны, машины в гараже. Нажмите на табличку, чтобы зайти в комнату."],
+ ["Перекрытие","Первый этаж закрыт. Сверху плита второго и кровли террас."],
+ ["Стены второго этажа","Пять спален, у каждой своя гардеробная и ванная."],
+ ["Отделка второго этажа","Полы, встроенная мебель, спальни."],
+ ["Фасады и вход","Панорамные окна в пол, входная группа с козырьком и дверью в светлом шпоне."],
+ ["Кровля","Дом закрыт."],
+ ["Участок","Газон, деревья и асфальтовый подъезд к гаражу. Дом можно крутить и открывать комнаты."]
+];
+const PINS=[["Гостиная",27.9,33.6,1,"l191_living"],["Камин",21,30,1,"l191_living2"],["Кухня",45.4,30,1,"l191_kitchen"],["Столовая",60.8,35.2,1,"l191_dining"],["Лестница",42.6,54.3,1,"l191_stairs"],["Бассейн",88,22,1,"l191_pool"],["Зона отдыха у бассейна",80,12,1,"l191_pool2"],["Ванная",4.8,59.9,1,"l191_bath"],
+ ["Мастер-спальня",20.9,33.6,2,"l191_bed1"],["Спальня",73.4,43.9,2,"l191_bed2"],["Спальня",36,30,2,"l191_bed3"]];
+function pie(){
+ return `<section class="pie" id="pie"><div class="pie-in w">
+  <div class="stage" id="stage"><canvas id="cv"></canvas><div id="pins">${PINS.map((p,i)=>`<button class="pin" type="button" data-i="${i}" data-src="${img(p[4])}"><span>${p[0]}</span></button>`).join("")}</div>
+   <div class="room" id="room"><img alt=""><div><b></b><button type="button" class="btn" id="roomx">Назад к дому</button></div></div><div class="zm"><button type="button" data-z="0.8" aria-label="Приблизить">+</button><button type="button" data-z="1.25" aria-label="Отдалить">−</button></div><p class="hint">Потяните, чтобы повернуть дом</p></div>
+  <div class="pie-txt"><span class="eyebrow">Как строится дом · Лазурная 19.1</span><h2>Дом собирается на ваших глазах</h2>
+   <p class="lead" style="font-size:15px">Листайте вниз. Модель построена по настоящим планам дома.</p>
+   <ol class="steps-l">${PIE.map((s,i)=>`<li data-s="${i}"><i>${String(i+1).padStart(2,"0")}</i><b>${s[0]}</b><span>${s[1]}</span></li>`).join("")}</ol></div>
+ </div></section>`;
+}
+let P3=null;
+function pieStep(){
+ const s=document.getElementById("pie"); if(!s) return 0;
+ const r=s.getBoundingClientRect(), p=Math.min(1,Math.max(0,-r.top/(r.height-innerHeight)));
+ return Math.min(PIE.length-1,Math.floor(p*PIE.length*1.02));
+}
+function pieTick(){
+ const s=document.getElementById("pie"); if(!s) return; const st=pieStep();
+ s.querySelectorAll("li[data-s]").forEach(e=>{const n=+e.dataset.s;e.classList.toggle("on",n<=st);e.classList.toggle("cur",n===st)});
+ if(P3) P3.st=st;
+}
+addEventListener("scroll",pieTick,{passive:true});addEventListener("resize",pieTick);
+
+async function pie3d(){
+ if(P3){cancelAnimationFrame(P3.raf);P3.renderer.dispose();P3=null}
+ const cv=document.getElementById("cv"); if(!cv||!window.THREE) return;
+ const T=THREE,stage=document.getElementById("stage");
+ let G; try{G=await fetch("pie/geo.json").then(r=>r.json())}catch(e){return}
+ if(!document.body.contains(cv)) return;
+ const renderer=new T.WebGLRenderer({canvas:cv,antialias:true,logarithmicDepthBuffer:true,preserveDrawingBuffer:true});
+ renderer.setPixelRatio(Math.min(2,devicePixelRatio));renderer.shadowMap.enabled=true;renderer.shadowMap.type=T.PCFSoftShadowMap;
+ renderer.toneMapping=T.ACESFilmicToneMapping;renderer.toneMappingExposure=.62;renderer.outputEncoding=T.sRGBEncoding;
+ const scene=new T.Scene();scene.background=new T.Color(0xc4d9e6);scene.fog=new T.Fog(0xc9dbe4,110,300);
+ const cam=new T.PerspectiveCamera(32,1,2,700);
+ scene.add(new T.HemisphereLight(0xdfefff,0x6a5a44,.3));
+ const sun=new T.DirectionalLight(0xfff1d6,1.25);sun.position.set(55,70,35);sun.castShadow=true;sun.shadow.mapSize.set(2048,2048);
+ Object.assign(sun.shadow.camera,{left:-75,right:75,top:75,bottom:-75,near:10,far:220});sun.shadow.bias=-.0006;sun.shadow.normalBias=.05;scene.add(sun);
+ const u=.3,CX=110,CZ=96.5,M=(c,o={})=>new T.MeshStandardMaterial(Object.assign({color:c,roughness:.85},o));
+ const dummy=new T.Object3D(),unit=new T.BoxGeometry(1,1,1);
+ function boxes(r,y0,y1,mat,grow=0,shadow=true){const P=[],Nn=[],U=[],I=[],t=mat.userData.t||2;
+  const q=(p,n,uv)=>{const o=P.length/3;P.push(...p);for(let i=0;i<4;i++)Nn.push(...n);for(let i=0;i<8;i++)U.push(uv[i]/t);I.push(o,o+1,o+2,o,o+2,o+3)};
+  for(let i=0;i<r.length;i+=4){const cx=(r[i]+r[i+2]/2-CX)*u,cz=(r[i+1]+r[i+3]/2-CZ)*u,sx=r[i+2]*u+grow,sz=r[i+3]*u+grow,x0=cx-sx/2,x1=cx+sx/2,z0=cz-sz/2,z1=cz+sz/2;
+   q([x0,y1,z1,x1,y1,z1,x1,y1,z0,x0,y1,z0],[0,1,0],[x0,z1,x1,z1,x1,z0,x0,z0]);
+   q([x0,y0,z1,x1,y0,z1,x1,y1,z1,x0,y1,z1],[0,0,1],[x0,y0,x1,y0,x1,y1,x0,y1]);
+   q([x1,y0,z0,x0,y0,z0,x0,y1,z0,x1,y1,z0],[0,0,-1],[x1,y0,x0,y0,x0,y1,x1,y1]);
+   q([x1,y0,z1,x1,y0,z0,x1,y1,z0,x1,y1,z1],[1,0,0],[z1,y0,z0,y0,z0,y1,z1,y1]);
+   q([x0,y0,z0,x0,y0,z1,x0,y1,z1,x0,y1,z0],[-1,0,0],[z0,y0,z1,y0,z1,y1,z0,y1])}
+  const g=new T.BufferGeometry();g.setAttribute("position",new T.Float32BufferAttribute(P,3));g.setAttribute("normal",new T.Float32BufferAttribute(Nn,3));g.setAttribute("uv",new T.Float32BufferAttribute(U,2));g.setIndex(I);
+  const m=new T.Mesh(g,mat);m.castShadow=shadow;m.receiveShadow=true;return m}
+ const ctex=(draw,t)=>{const c=document.createElement("canvas");c.width=c.height=256;const x=c.getContext("2d");draw(x);const tx=new T.CanvasTexture(c);tx.wrapS=tx.wrapT=T.RepeatWrapping;tx.encoding=T.sRGBEncoding;tx.anisotropy=8;tx.userData={t};return tx};
+ const noise=(x,a,n=2600)=>{for(let i=0;i<n;i++){x.fillStyle=`rgba(${Math.random()<.5?0:255},${Math.random()<.5?0:255},${Math.random()<.5?0:255},${Math.random()*a})`;x.fillRect(Math.random()*256,Math.random()*256,2,2)}};
+ const MT=(tx,o={})=>{const m=new T.MeshStandardMaterial(Object.assign({map:tx,roughness:.88},o));m.userData.t=tx.userData.t;return m};
+ const stoneT=ctex(x=>{x.fillStyle="#c9b99c";x.fillRect(0,0,256,256);for(let r=0;r<4;r++)for(let c=0;c<2;c++){x.fillStyle=`hsl(36,${24+Math.random()*10}%,${66+Math.random()*7}%)`;x.fillRect(c*128+(r%2)*64-64,r*64,128,64);x.fillRect(c*128+(r%2)*64+192,r*64,128,64)}noise(x,.05);x.strokeStyle="rgba(90,78,60,.55)";x.lineWidth=1.5;for(let r=0;r<4;r++){x.beginPath();x.moveTo(0,r*64);x.lineTo(256,r*64);x.stroke();for(let c=0;c<3;c++){const vx=c*128+(r%2)*64;x.beginPath();x.moveTo(vx,r*64);x.lineTo(vx,r*64+64);x.stroke()}}},2.4);
+ const lamT=ctex(x=>{for(let i=0;i<16;i++){x.fillStyle=`hsl(${26+Math.random()*5},${42+Math.random()*10}%,${34+Math.random()*12}%)`;x.fillRect(i*16,0,13,256);x.fillStyle="#2a1d12";x.fillRect(i*16+13,0,3,256)}noise(x,.04)},1.9);
+ const concT=ctex(x=>{x.fillStyle="#a39e96";x.fillRect(0,0,256,256);noise(x,.07,5000)},3);
+ const roofT=ctex(x=>{x.fillStyle="#45423f";x.fillRect(0,0,256,256);noise(x,.1,7000)},2.5);
+ const fabT=ctex(x=>{x.fillStyle="#cfc2ac";x.fillRect(0,0,256,256);noise(x,.06,6000)},1);
+ const veT=ctex(x=>{x.fillStyle="#c9a473";x.fillRect(0,0,256,256);for(let i=0;i<70;i++){x.strokeStyle=`rgba(120,84,48,${.08+Math.random()*.14})`;x.beginPath();const px=Math.random()*256;x.moveTo(px,0);x.bezierCurveTo(px+8,80,px-8,170,px+4,256);x.stroke()}},1.4);
+ const pm=new T.PMREMGenerator(renderer),sk=document.createElement("canvas");sk.width=8;sk.height=256;{const x=sk.getContext("2d"),g=x.createLinearGradient(0,0,0,256);g.addColorStop(0,"#5e97c9");g.addColorStop(.42,"#b9d6ea");g.addColorStop(.5,"#e4eef2");g.addColorStop(.52,"#8fa56e");g.addColorStop(1,"#5f7347");x.fillStyle=g;x.fillRect(0,0,8,256)}
+ const skyT=new T.CanvasTexture(sk);skyT.mapping=T.EquirectangularReflectionMapping;skyT.encoding=T.sRGBEncoding;scene.background=skyT;scene.environment=pm.fromEquirectangular(skyT).texture;scene.fog=new T.Fog(0xdfeaf0,120,330);
+ const tl=new T.TextureLoader(),tex=n=>{const t=tl.load("pie/"+n);t.encoding=T.sRGBEncoding;t.anisotropy=8;return t};
+ const floorPlane=(n,y)=>{const m=new T.Mesh(new T.PlaneGeometry(220*u,193.2*u),new T.MeshStandardMaterial({map:tex(n),transparent:true,alphaTest:.4,roughness:.6}));m.rotation.x=-Math.PI/2;m.position.set(0,y,.03);m.receiveShadow=true;return m};
+ const wall=MT(stoneT),conc=MT(concT),sofa=MT(fabT,{roughness:1}),roofM=MT(roofT),ceil=MT(concT,{color:0xf2efe8});
+ const glass=new T.MeshPhysicalMaterial({color:0x7fa3b5,roughness:.03,metalness:.6,transparent:true,opacity:.55,envMapIntensity:1.6,envMapIntensity:1});
+ const water=new T.MeshPhysicalMaterial({color:0x3f9ac0,roughness:.08,metalness:.1,transparent:true,opacity:.88});
+ const grp=PIE.map(()=>{const g=new T.Group();g.userData.k=0;scene.add(g);return g});
+ grp[0].add(boxes(G.slab,-.05,.02,M(0x3a2f25),.8,false));
+ grp[1].add(boxes(G.slab,.03,.29,conc,0));
+ grp[2].add(boxes(G.walls1,.3,3.7,wall));
+ grp[3].add(floorPlane("tex1.png",.32),boxes(G.pool,.12,.33,water,0,false));
+ const veneer=MT(veT,{roughness:.5}),walnut=M(0x4a3526,{roughness:.5}),chairM=M(0x8f7f6a,{roughness:.9}),stepM=M(0xb98d5c,{roughness:.5});
+ const furn=(fl,y)=>[boxes(G["low"+fl],y,y+.5,sofa,-.06),boxes(G["low"+fl],y+.5,y+.62,M(0xe7dfd0,{roughness:1}),-.3,false),boxes(G["tall"+fl],y,y+2.6,veneer,-.04),boxes(G["table"+fl],y+.68,y+.78,walnut,-.04),boxes(G["table"+fl],y,y+.68,walnut,-.5,false),boxes(G["chair"+fl],y,y+.48,chairM,-.08),boxes(G["chair"+fl],y+.48,y+.95,chairM,-.34,false)];
+ grp[4].add(...furn("1",.32));
+ // staircase: two flights with a landing
+ for(let i=0;i<20;i++){const up=i<10,k=up?i:i-10,sx=(up?86.8+k*1.6:101.2-k*1.6),h=.3+(i+1)*.185,st=new T.Mesh(unit,stepM);st.scale.set(1.6*u,h-.3,6.5*u);st.position.set((sx+.8-CX)*u,.3+(h-.3)/2,((up?97:105)+3.25-CZ)*u);st.castShadow=st.receiveShadow=true;grp[4].add(st)}
+ const land=new T.Mesh(unit,stepM);land.scale.set(3*u,2.15,14.5*u);land.position.set((104.5-CX)*u,.3+1.075,(104.25-CZ)*u);land.castShadow=true;grp[4].add(land);
+ // cars in the garage
+ const shp=pts=>{const sh=new T.Shape();pts.forEach((p,i)=>i?sh.lineTo(p[0],p[1]):sh.moveTo(p[0],p[1]));return sh};
+ const bodyG=new T.ExtrudeGeometry(shp([[-2.42,.38],[-2.46,.82],[-2.3,.98],[-1.35,1.06],[-.62,1.62],[1.25,1.66],[2.05,1.2],[2.42,1.12],[2.46,.38]]),{depth:1.86,bevelEnabled:true,bevelSize:.07,bevelThickness:.07,bevelSegments:3});bodyG.translate(0,0,-.93);
+ const winG=new T.ExtrudeGeometry(shp([[-1.22,1.1],[-.6,1.56],[1.2,1.6],[1.86,1.22]]),{depth:2.02,bevelEnabled:false});winG.translate(0,0,-1.01);
+ const mkCar=col=>{const car=new T.Group(),add=(g,m,x,y,z)=>{const o=new T.Mesh(g,m);o.position.set(x,y,z);o.castShadow=true;car.add(o);return o};
+  add(bodyG,new T.MeshPhysicalMaterial({color:col,roughness:.25,metalness:.8,clearcoat:1,clearcoatRoughness:.08,envMapIntensity:1.4}),0,0,0);
+  add(winG,new T.MeshStandardMaterial({color:0x0a0d10,roughness:.05,metalness:.9,envMapIntensity:1.8}),0,0,0);
+  [[-1.55,.95],[1.5,.95],[-1.55,-.95],[1.5,-.95]].forEach(([x,z])=>{const w=add(new T.CylinderGeometry(.42,.42,.3,24),M(0x0c0c0c,{roughness:.9}),x,.42,z);w.rotation.x=Math.PI/2;const r=add(new T.CylinderGeometry(.25,.25,.32,14),M(0xb5b5b5,{metalness:.95,roughness:.25}),x,.42,z);r.rotation.x=Math.PI/2});
+  [-.62,.62].forEach(z=>{add(new T.BoxGeometry(.06,.12,.42),new T.MeshBasicMaterial({color:0xfff6d8}),-2.5,.86,z);add(new T.BoxGeometry(.06,.1,.46),new T.MeshBasicMaterial({color:0xc01a1a}),2.5,.98,z)});
+  return car};
+ for(let i=0,cl=[0x121316,0xe6e2da,0x26303a];i<G.cars.length;i+=3){const g=mkCar(cl[i/3%3]);g.position.set((G.cars[i]-CX)*u,.3,(G.cars[i+1]-CZ)*u);if(!G.cars[i+2])g.rotation.y=Math.PI/2;grp[4].add(g)}
+ grp[5].add(boxes(G.slab2,3.71,3.98,ceil,0));
+ grp[6].add(boxes(G.walls2,4,7.2,MT(lamT,{roughness:.7})));
+ grp[7].add(floorPlane("tex2.png",4.02),...furn("2",4.02));
+ grp[8].add(boxes(G.glass1,.31,3.38,glass,-.14,false),boxes(G.glass2,4.01,7.19,glass,-.14,false),boxes(G.house1,3.4,3.69,roofM,0));
+ {const cx=(95-CX)*u,cz=(134-CZ)*u,can=new T.Mesh(unit,M(0xe9e3d7));can.scale.set(10,.26,5);can.position.set(cx,3.25,cz+.6);can.castShadow=true;grp[8].add(can);
+  [-4.4,4.4].forEach(dx=>{const c=new T.Mesh(new T.CylinderGeometry(.22,.22,2.9,16),M(0xe9e3d7));c.position.set(cx+dx,1.6,cz+2.6);c.castShadow=true;grp[8].add(c)});
+  const door=new T.Mesh(unit,veneer);door.scale.set(2.2,3,.16);door.position.set(cx,1.8,(128.4-CZ)*u);grp[8].add(door);
+  const hnd=new T.Mesh(unit,M(0x2a2a2a,{metalness:.8,roughness:.3}));hnd.scale.set(.06,1.4,.08);hnd.position.set(cx+.7,1.8,(128.4-CZ)*u+.13);grp[8].add(hnd);
+  const porch=new T.Mesh(unit,M(0xbdb5a6));porch.scale.set(10,.18,5.2);porch.position.set(cx,.2,cz+.7);porch.receiveShadow=true;grp[8].add(porch);}
+ grp[9].add(boxes(G.roof2,7.21,7.5,roofM,0));
+ // site
+ const lawnT=ctex(x=>{x.fillStyle="#5b7a3c";x.fillRect(0,0,256,256);noise(x,.09,9000);for(let i=0;i<1400;i++){x.strokeStyle=`rgba(${30+Math.random()*40},${70+Math.random()*50},${20+Math.random()*30},.5)`;const px=Math.random()*256,py=Math.random()*256;x.beginPath();x.moveTo(px,py);x.lineTo(px+(Math.random()-.5)*2,py-2-Math.random()*3);x.stroke()}},6);
+ const asT=ctex(x=>{x.fillStyle="#232427";x.fillRect(0,0,256,256);noise(x,.12,9000)},2);
+ const paveT=ctex(x=>{x.fillStyle="#b9b3a7";x.fillRect(0,0,256,256);x.strokeStyle="rgba(70,64,55,.5)";for(let i=0;i<=256;i+=32){x.beginPath();x.moveTo(i,0);x.lineTo(i,256);x.stroke();x.beginPath();x.moveTo(0,i);x.lineTo(256,i);x.stroke()}noise(x,.05)},1.6);
+ const earth=new T.Mesh(new T.PlaneGeometry(900,900),M(0x6f5d49,{roughness:1}));earth.rotation.x=-Math.PI/2;earth.position.y=-.08;earth.receiveShadow=true;scene.add(earth);
+ const gt=lawnT;gt.repeat.set(150,150);
+ const grass=new T.Mesh(new T.PlaneGeometry(900,900),new T.MeshStandardMaterial({map:gt,roughness:1,transparent:true,opacity:0}));grass.rotation.x=-Math.PI/2;grass.position.y=-.05;grass.receiveShadow=true;scene.add(grass);
+ const site=grp[10];
+ const flat=(w,d,mat,x,z,y=-.02,h=.04)=>{const m=new T.Mesh(new T.BoxGeometry(w,h,d),mat);m.position.set(x,y,z);m.receiveShadow=true;const uv=m.geometry.attributes.uv,t=mat.userData.t||2;for(let i=0;i<uv.count;i++)uv.setXY(i,uv.getX(i)*w/t,uv.getY(i)*d/t);site.add(m);return m};
+ const asph=MT(asT,{roughness:.92}),pave=MT(paveT),curbM=M(0xcfcac0,{roughness:.8});
+ const EX=(95-CX)*u,EZ=(132-CZ)*u;
+ flat(10,15,asph,5.8,20.5);flat(52,7,asph,-21,24.5);
+ const curb=(x,z,w,d)=>{const c=new T.Mesh(new T.BoxGeometry(w,.16,d),curbM);c.position.set(x,.06,z);c.castShadow=true;site.add(c)};
+ 
+ flat(11,5,pave,EX,EZ+3,0,.06);
+ const hedgeM=MT(ctex(x=>{x.fillStyle="#3f5f2c";x.fillRect(0,0,256,256);for(let i=0;i<3000;i++){x.fillStyle=`hsl(${95+Math.random()*25},${35+Math.random()*20}%,${18+Math.random()*18}%)`;x.beginPath();x.arc(Math.random()*256,Math.random()*256,1+Math.random()*2.5,0,7);x.fill()}},1.2),{roughness:1});
+ let seed=7;const rnd=()=>(seed=(seed*16807)%2147483647)/2147483647;
+ const free=(x,z)=>!(x<14&&x>-50&&z>14&&z<34)&&!(Math.abs(x-EX)<8&&z>EZ-2&&z<EZ+22)&&Math.hypot(x,z*1.15)>40;
+ const firs=[];for(let k=0;k<1200&&firs.length<95;k++){const a=rnd()*6.283,r=55+Math.pow(rnd(),.7)*120,x=Math.cos(a)*r,z=Math.sin(a)*r*.9;if(!free(x,z))continue;firs.push([x,z,9+rnd()*11])}
+ const TIERS=7,cone=new T.ConeGeometry(1,1,12,1,true),leaf=new T.MeshStandardMaterial({color:0xffffff,roughness:.95,side:T.DoubleSide});
+ const cones=new T.InstancedMesh(cone,leaf,firs.length*TIERS),trunks=new T.InstancedMesh(new T.CylinderGeometry(.14,.3,1,7),M(0x4b3a2c,{roughness:1}),firs.length);
+ firs.forEach(([x,z,h],i)=>{dummy.rotation.set(0,0,0);dummy.position.set(x,h*.18,z);dummy.scale.set(1,h*.36,1);dummy.updateMatrix();trunks.setMatrixAt(i,dummy.matrix);
+  const base=new T.Color().setHSL(.36+rnd()*.05,.28+rnd()*.1,.09+rnd()*.05);
+  for(let c=0;c<TIERS;c++){const f=c/TIERS,w=h*.27*(1-f*.86)*(.9+rnd()*.2);dummy.position.set(x+(rnd()-.5)*.25,h*(.16+f*.78)+h*.07,z+(rnd()-.5)*.25);dummy.rotation.set((rnd()-.5)*.08,rnd()*3,(rnd()-.5)*.08);dummy.scale.set(w,h*.22,w);dummy.updateMatrix();cones.setMatrixAt(i*TIERS+c,dummy.matrix);cones.setColorAt(i*TIERS+c,base.clone().offsetHSL(0,0,f*.06))}});
+ cones.castShadow=trunks.castShadow=cones.receiveShadow=true;site.add(cones,trunks);
+ const nb=34,CL=7,crown=new T.InstancedMesh(new T.IcosahedronGeometry(1,2),new T.MeshStandardMaterial({color:0xffffff,roughness:1}),nb*CL),tr2=new T.InstancedMesh(new T.CylinderGeometry(.14,.26,1,7),M(0x5d4a39,{roughness:1}),nb);
+ for(let n=0,k=0;n<nb&&k<1200;k++){const a=rnd()*6.283,r=46+rnd()*60,x=Math.cos(a)*r,z=Math.sin(a)*r*.9;if(!free(x,z))continue;const h=6+rnd()*5,col=new T.Color().setHSL(.22+rnd()*.06,.3+rnd()*.12,.17+rnd()*.07);
+  dummy.rotation.set(0,0,0);dummy.position.set(x,h*.3,z);dummy.scale.set(1,h*.6,1);dummy.updateMatrix();tr2.setMatrixAt(n,dummy.matrix);
+  for(let c=0;c<CL;c++){const s2=h*(.18+rnd()*.12);dummy.position.set(x+(rnd()-.5)*h*.42,h*(.6+rnd()*.32),z+(rnd()-.5)*h*.42);dummy.scale.set(s2,s2*.82,s2);dummy.rotation.set(rnd()*3,rnd()*3,0);dummy.updateMatrix();crown.setMatrixAt(n*CL+c,dummy.matrix);crown.setColorAt(n*CL+c,col.clone().offsetHSL(0,0,(rnd()-.5)*.06))}n++}
+ crown.castShadow=tr2.castShadow=crown.receiveShadow=true;site.add(crown,tr2);
+ const ballG=new T.IcosahedronGeometry(1,2);[[-7,4],[7,4],[-7,9],[7,9]].forEach(([dx,dz])=>{const b=new T.Mesh(ballG,hedgeM);b.scale.setScalar(.8);b.position.set(EX+dx,.75,EZ+dz);b.castShadow=true;site.add(b)});
+ const car={position:{x:0}};
+ // controls
+ const ctl=new T.OrbitControls(cam,cv);ctl.target.set(0,2.5,0);ctl.enableZoom=false;ctl.enablePan=false;ctl.maxPolarAngle=1.45;ctl.minPolarAngle=.25;ctl.enableDamping=true;ctl.autoRotateSpeed=.55;
+ if(matchMedia("(pointer:coarse)").matches){ctl.enableRotate=false;cv.style.touchAction="pan-y"}
+ cam.position.set(-74,66,96);
+ const pinEls=[...document.querySelectorAll("#pins .pin")],v=new T.Vector3();
+ const S=P3={renderer,st:pieStep(),raf:0,dist:1,carZ:-90,lawn:0};
+ stage.querySelectorAll(".zm button").forEach(b=>b.onclick=()=>{const d=cam.position.clone().sub(ctl.target),len=Math.min(190,Math.max(22,d.length()*+b.dataset.z));cam.position.copy(ctl.target).add(d.setLength(len))});
+ function size(){const w=stage.clientWidth,h=stage.clientHeight;renderer.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix()}
+ size();addEventListener("resize",size);
+ function frame(){
+  S.raf=requestAnimationFrame(frame);
+  const r=stage.getBoundingClientRect();if(r.bottom<0||r.top>innerHeight) return;
+  if(cv.width!==Math.round(stage.clientWidth*renderer.getPixelRatio())) size();
+  const st=S.st;
+  grp.forEach((g,i)=>{const t=i<=st?1:0;g.userData.k+=(t-g.userData.k)*.07;const k=g.userData.k;g.visible=k>.004;if(i<10){g.position.y=(1-k)*(1-k)*26}else{g.scale.setScalar(Math.max(.001,k))}});
+  S.lawn+=((st>=10?1:0)-S.lawn)*.04;grass.material.opacity=S.lawn;
+  
+  if(S.fly){const p=S.fly,tx=(p[1]*2.2-CX)*u,tz=(p[2]*1.932-CZ)*u,ty=p[3]===1?1.5:5.2;ctl.target.lerp(v.set(tx,ty,tz),.08);cam.position.lerp(v.set(tx-6,ty+9,tz+10),.06);S.back=1}
+  else if(S.back){ctl.target.lerp(v.set(0,2.5,0),.08);cam.position.lerp(v.set(-74,66,96),.06);if(cam.position.distanceTo(v)<1)S.back=0}
+  ctl.autoRotate=st>=10&&!S.fly&&!S.back;ctl.update();renderer.render(scene,cam);
+  const w=stage.clientWidth,h=stage.clientHeight;
+  pinEls.forEach((el,i)=>{const p=PINS[i],fl=p[3],show=st>=10||(fl===1&&st===4)||(fl===2&&st===7);
+   if(!show){el.classList.remove("in");return}
+   v.set((p[1]*2.2-CX)*u,st>=10?(fl===1?9:12.5):(fl===1?4.6:8.2),(p[2]*1.932-CZ)*u).project(cam);
+   el.style.left=(v.x*.5+.5)*w+"px";el.style.top=(-v.y*.5+.5)*h+"px";el.classList.toggle("in",v.z<1)});
+ }
+ frame();
+}
+
+const drawings=()=>`<section class="stone"><div class="w"><div class="sec-head"><span class="eyebrow">Из проекта</span><h2>Так дом выглядит до стройки</h2><p class="lead">Листы из проекта дома на Лазурной 19.1: аксонометрии, фасады, разрезы, кровли и планы мебели. Нажмите на лист, чтобы рассмотреть.</p></div>
+ <div class="draw">
+  <figure><button type="button" data-src="img/ax0.jpg"><img src="img/ax0.jpg" alt="Подвал и фундаменты" loading="lazy"></button><figcaption><b>Подвал и фундаменты</b>Монолитные стены, чаша бассейна, приямки.</figcaption></figure>
+  <figure><button type="button" data-src="img/ax1.jpg"><img src="img/ax1.jpg" alt="Первый этаж" loading="lazy"></button><figcaption><b>Первый этаж</b>Кладка стен и перегородок, отметка пола ±0,000.</figcaption></figure>
+  <figure><button type="button" data-src="img/ax2.jpg"><img src="img/ax2.jpg" alt="Второй этаж и кровли" loading="lazy"></button><figcaption><b>Второй этаж и кровли</b>Спальный этаж на отметке +4,670 и кровля первого.</figcaption></figure>
+  <figure><button type="button" data-src="plans/ar191-19.jpg"><img src="plans/ar191-19.jpg" alt="Фасады" loading="lazy"></button><figcaption><b>Фасады</b>Фасад 1–10 и фасад П–А с отметками и материалами.</figcaption></figure>
+  <figure><button type="button" data-src="plans/ar191-20.jpg"><img src="plans/ar191-20.jpg" alt="Фасады" loading="lazy"></button><figcaption><b>Фасады</b>Фасад 10–1 и фасад А–П.</figcaption></figure>
+  <figure><button type="button" data-src="plans/ar191-17.jpg"><img src="plans/ar191-17.jpg" alt="Разрезы" loading="lazy"></button><figcaption><b>Разрезы</b>Как дом устроен по высоте: подвал, этажи, кровля.</figcaption></figure>
+  <figure><button type="button" data-src="plans/ar191-21.jpg"><img src="plans/ar191-21.jpg" alt="Планы кровель" loading="lazy"></button><figcaption><b>Планы кровель</b>Уклоны, воронки и парапеты.</figcaption></figure>
+  <figure><button type="button" data-src="plans/l191-1.jpg"><img src="plans/l191-1.jpg" alt="План мебели, 1 этаж" loading="lazy"></button><figcaption><b>План мебели, 1 этаж</b>Расстановка по проекту Point Design.</figcaption></figure>
+  <figure><button type="button" data-src="plans/l191-2.jpg"><img src="plans/l191-2.jpg" alt="План мебели, 2 этаж" loading="lazy"></button><figcaption><b>План мебели, 2 этаж</b>Спальни, гардеробные, ванные.</figcaption></figure>
+ </div></div></section>`;
+
+const V={
+ home:()=>`
+  <div class="hero" style="background-image:url(${img("hero")})"><div class="w">
+   <span class="eyebrow">Частные дома · Подмосковье</span>
+   <h1>Дом начинается с тех, <em>кто его строит</em></h1>
+   <p class="lead">Семья Трейвас проектирует, строит и отделывает дома сама — силами собственных компаний, от первой линии на чертеже до света в гостиной.</p>
+   <div class="row"><a class="btn" href="#doma">Смотреть дома</a><a class="btn" href="#o-nas">Наша история</a></div>
+   <span class="todo" style="justify-self:start">Здесь будет видео: авторский надзор обходит дома</span>
+  </div></div>
+  <section class="stone"><div class="w" style="display:grid;gap:56px">
+   <div class="split"><div class="lft"><span class="eyebrow">Кто мы</span><h2>Семейное дело полного цикла</h2><a class="more" href="#o-nas">История семьи и группы</a></div>
+   <div class="prose"><p>Обычно дом делают пять разных подрядчиков, и каждый отвечает только за свой кусок. У нас всё внутри одной семьи и одной группы компаний.</p><p>Поэтому архитектор знает, как пойдёт вентиляция, столяр видит проект за год до монтажа, а за результат отвечают люди с фамилией на вывеске.</p></div></div>
+   ${group()}
+   ${numsB([["13+","лет группе"],["3000+","м² своё производство"],["4000+","сделок Point Estate"],["100 000","м² объектов Point Design"]])}
+  </div></section>
+  <section><div class="w">
+   <div class="sec-head"><span class="eyebrow">Дома</span><h2>Восемь домов в Agalarov Estate</h2></div>
+   ${streets()}
+   <div class="row" style="margin-top:36px"><a class="btn" href="#doma">Все дома</a></div>
+  </div></section>
+  ${pie()}
+  <section><div class="w"><div class="sec-head"><span class="eyebrow">Кто строит</span><h2>Люди за каждым домом</h2><a class="more" href="#lyudi">Подробнее о каждом</a></div>${people()}</div></section>
+  <section style="padding-top:0"><div class="w"><div class="sec-head"><span class="eyebrow">Контроль</span><h2>Контроль на каждом этапе</h2><a class="more" href="#kak-stroim">Как мы строим</a></div>${control()}</div></section>`,
+
+ doma:()=>`<div class="w phead"><div class="sec-head"><span class="eyebrow">Дома</span><h1>Все дома</h1><p class="lead">У каждого дома своя страница: цифры, история, планировка, галерея и дневник стройки.</p></div></div>
+  <section style="padding-top:24px"><div class="w">${streets()}</div></section>`,
+
+ "kak-stroim":()=>`<div class="w phead"><div class="sec-head"><span class="eyebrow">Как мы строим</span><h1>Сначала то, чего не видно</h1><p class="lead">Отделку можно переделать. Монолит, гидроизоляцию и инженерию — почти никогда. Поэтому основное внимание уходит туда, куда потом никто не заглянет.</p></div></div>
+  <section style="padding-top:24px"><div class="w"><div class="sec-head"><span class="eyebrow">Шесть этапов</span><h2>От первой встречи до ключей</h2></div>
+   <div class="cols4" style="grid-template-columns:repeat(3,1fr)">
+   ${[["Техническое задание","Записываем привычки и пожелания семьи. С этого документа начинается проект."],["Концепция и планировка","Планировочное решение и общий образ. От них зависят стиль и инженерные сети."],["Визуализация","Фотореалистичные изображения показывают, каким дом получится на самом деле."],["Рабочая документация","Чертежи для строителей: все коммуникации и узлы, чтобы дом работал правильно."],["Строительство и комплектация","Стройка идёт параллельно с подбором материалов, мебели и производством столярки."],["Авторский надзор и сдача","Еженедельный надзор авторов проекта и поэтапная приёмка до передачи ключей."]].map((s,i)=>`<div style="padding-bottom:28px"><i>0${i+1}</i><b>${s[0]}</b><span>${s[1]}</span></div>`).join("")}</div></div></section>
+  ${pie()}${drawings()}
+  <section><div class="w"><div class="sec-head"><span class="eyebrow">Контроль</span><h2>Контроль на каждом этапе</h2></div>${control()}</div></section>`,
+
+ "o-nas":()=>`<div class="ahero"><div class="ah-txt"><span class="eyebrow">О нас</span><h1>Семья Трейвас и Point Group</h1><p class="ah-cap"><b>Павел и Ирина Трейвас</b>основатели Point Estate и Point Group</p></div><img src="img/couple.jpg" alt="Павел и Ирина Трейвас"></div>
+  <section><div class="w"><div class="split"><div class="lft"><span class="eyebrow">Идея</span><h2>Продавали чужие дома. Потом начали строить свои</h2></div>
+   <div class="prose"><p>Тринадцать лет Point Estate продаёт лучшие дома Москвы и Подмосковья. За это время семья увидела тысячи домов изнутри: удачных и тех, что стоят годами.</p><p>Стало понятно, чего не хватает рынку: дома, где архитектура, инженерия и отделка сделаны одной командой и не спорят друг с другом. Так агентство обросло собственной студией, мастерской и стройкой.</p><p>Treyvas Development — следующий шаг. Дома, под которыми семья готова поставить свою фамилию.</p></div></div></div></section>
+  <section class="stone"><div class="w"><div class="sec-head"><span class="eyebrow">История</span><h2>Как собиралась группа</h2><p class="lead">Группа росла не по плану, а по необходимости: каждый раз появлялось то, чего не хватало для хорошего дома.</p></div>
+   <div class="tl">
+    <div><b>I</b><h3>Point Estate</h3><p>Павел и Ирина Трейвас открывают агентство элитной недвижимости. Больше тринадцати лет оно уверенно стоит на ногах и остаётся основой группы.</p></div>
+    <div><b>II</b><h3>Point Design</h3><p>Рядом с агентством появляется студия архитектуры и дизайна интерьера. Клиенты, купившие дом, тут же получают проект.</p></div>
+    <div><b>III</b><h3>Point WoodCraft</h3><p>Группа покупает столярное производство и перестраивает его под свои проекты. Потому что хорошую столярку проще сделать самим, чем объяснить чужой фабрике.</p></div>
+    <div><b>IV</b><h3>Treyvas Development</h3><p>Восемь домов в Agalarov Estate. Проект, стройка, столярка и продажа внутри одной группы.</p></div>
+   </div></div></section>
+  <section><div class="w"><div class="sec-head"><span class="eyebrow">Группа</span><h2>Четыре компании, один дом</h2></div>${group()}</div></section>
+  <section style="padding-top:0"><div class="w"><div class="sec-head"><span class="eyebrow">Люди</span><h2>Кто за этим стоит</h2></div>${people()}</div></section>`,
+
+ gruppa:()=>`<div class="w phead"><div class="sec-head"><span class="eyebrow">Point Group</span><h1>Четыре компании, один дом</h1><p class="lead">Дом можно найти, спроектировать, построить и обставить, не выходя из одной группы. У каждой компании своя страница.</p></div></div>
+  <section style="padding-top:24px"><div class="w"><div class="houses">${Object.keys(C).map(k=>`<a class="card" href="#${k}"><div class="ph"><img src="${img(C[k].img)}" alt="${C[k].name}" loading="lazy"></div><span class="tag">${C[k].kind}</span><h3>${C[k].name}</h3><div class="meta">${C[k].lead}</div></a>`).join("")}</div></div></section>`,
+
+ lyudi:()=>`<div class="w phead"><div class="sec-head"><span class="eyebrow">Люди</span><h1>Те, кто строит</h1><p class="lead">У каждого руководителя своя страница: чем занимается, за что отвечает в доме и что об этом думает.</p></div></div>
+  <section style="padding-top:24px"><div class="w">${people()}</div></section>`,
+
+ zhurnal:()=>`<div class="w phead"><div class="sec-head"><span class="eyebrow">Журнал</span><h1>Заметки со стройки и пресса</h1><p class="lead">Репортажи с объектов, разборы «как это устроено» и публикации о проектах группы.</p></div></div>
+  <section style="padding-top:24px"><div class="w"><div class="sec-head"><span class="eyebrow">О нас пишут</span><h2>Проекты Point Design и Олеси Головой</h2></div><div class="jr">
+   ${[["Interior+Design · Россия","Загородный дом для отдыха большой семьи в Подмосковье","https://www.interior.ru/place/18622-zagorodnii-dom-dlya-otdiha-bolishoi-semii-v-podmoskovie-proekt-point-design.html"],["House & Garden · ЮАР","A timeless suburban retreat: Olesja Golova's vision for a luxurious home near Moscow","https://www.houseandgarden.co.za/interiors/a-timeless-suburban-retreat-olesja-golovas-vision-for-a-luxurious-home-near-moscow-44a5441d-779e-4393-a655-e0bd698d9b5f"],["Amazing Architecture · США","Elegant countryside residence with Art Deco accents by Point Design Studio","https://amazingarchitecture.com/houses/elegant-countryside-residence-with-art-deco-accents-by-point-design-studio"],["Nuevo Estilo · Испания","Дом в современном минималистичном стиле","https://www.nuevoestilo.es/casas/a61298024/casa-diseno-moderno-minimalista/"],["Yinji · Китай","Point Design Studio: Agalarov Estate House","https://www.yinjispace.com/article/Point-Design-Studio-Agalarov-Estate-House.html"]].map(p=>`<article><span class="tag">${p[0]}</span><h3>${p[1]}</h3><a class="more" href="${p[2]}" target="_blank" rel="noopener">Читать</a></article>`).join("")}
+  </div></div></section>
+  <section style="padding-top:0"><div class="w"><div class="sec-head"><span class="eyebrow">Семья Трейвас в прессе</span><h2>Интервью и комментарии</h2></div><div class="jr">
+   ${[["YouTube · Point Estate","Резиденция 1900 м² у гольф-поля в Agalarov Estate","Видеообзор дома в посёлке, где строит Treyvas Development.","https://www.youtube.com/watch?v=tqqih0JyAnM"],["VDT · видеоинтервью, 2019","Павел Трейвас: дома на продажу и инвестиции в недвижимость","Сколько спален нужно дому, почему важна архитектура и как продают дома, построенные на продажу.","https://vesco.ru/development/doma-na-prodazhu-investitsii-v-nedvizhimost-pavel-trejvas-vdt/"],["Коммерсантъ · 2022","Инфраструктура меняет приоритеты","Павел Трейвас о том, почему время больших посёлков прошло и рынок уходит в камерные проекты.","https://www.kommersant.ru/doc/5406950"],["РБК · журнал","Элита просится во двор","Павел Трейвас о том, как менялась карта элитных районов Москвы.","https://kiozk.ru/article/rbk/elita-prositsa-vo-dvor"],["Telegram · Ирина Трейвас","Канал соучредителя Point Group","Проекты Point Design в Agalarov Estate, загородные дома, рынок.","https://t.me/point_est"],["Telegram · Point Estate","Жизнь агентства","Новости, объекты и репортажи команды.","https://t.me/pointestate_life"]].map(p=>`<article><span class="tag">${p[0]}</span><h3>${p[1]}</h3><p>${p[2]}</p><a class="more" href="${p[3]}" target="_blank" rel="noopener">Открыть</a></article>`).join("")}
+  </div></div></section>
+  <section style="padding-top:0"><div class="w"><div class="sec-head"><span class="eyebrow">Со стройки</span><h2>Что появится первым</h2></div><div class="jr">
+   <article><span class="tag">Скоро · Стройка</span><h3>Как принимают монолит</h3><p>Что проверяют до заливки и после, и почему это главный день для дома.</p></article>
+   <article><span class="tag">Скоро · Производство</span><h3>Почему шпон мы делаем сами</h3><p>Репортаж из цеха Point WoodCraft: от подбора рисунка до монтажа.</p></article>
+   <article><span class="tag">Скоро · Инженерия</span><h3>Что спрятано под бассейном</h3><p>Техническое помещение, вентиляция и гидроизоляция бассейна на 173 м².</p></article>
+  </div></div></section>`,
+
+ kontakty:()=>`<div class="w phead"><div class="sec-head"><span class="eyebrow">Контакты</span><h1>Приезжайте посмотреть дома</h1><p class="lead">Загородный офис находится в самом посёлке: можно в один приезд пройти по стройке и посмотреть готовые интерьеры.</p></div></div>
+  <section style="padding-top:24px"><div class="w"><div class="split contact"><dl>
+   <div><dt>Телефон</dt><dd>${cval("+7 499 288-88-67")}</dd></div>
+   <div><dt>Почта</dt><dd>${cval("info@pointestate.ru")}</dd></div>
+   <div><dt>Центральный офис</dt><dd>${cval("Москва, Кутузовский проспект, 1/7")}</dd></div>
+   <div><dt>Загородный офис</dt><dd>${cval("д. Захарово, Заречная ул., 45А, стр. 10, Estate Mall")}</dd></div>
+   <div><dt>Часы работы</dt><dd>Пн–Вс, 9:00–21:00</dd></div>
+  </dl><dl>
+   <div><dt>Telegram</dt><dd><a href="https://t.me/Point_Estate" target="_blank" rel="noopener">t.me/Point_Estate</a></dd></div>
+   <div><dt>Канал</dt><dd><a href="https://t.me/pointestate_life" target="_blank" rel="noopener">t.me/pointestate_life</a></dd></div>
+   <div><dt>YouTube</dt><dd><a href="https://www.youtube.com/@PointEstate" target="_blank" rel="noopener">@PointEstate</a></dd></div>
+   <div><dt>Компании группы</dt><dd><a href="#point-estate">Point Estate</a> · <a href="#point-design">Point Design</a> · <a href="#point-woodcraft">Point WoodCraft</a></dd></div>
+  </dl></div></div></section>`
+};
+
+function house(k){
+ const h=H[k],nk=order[(order.indexOf(k)+1)%order.length],nx=H[nk];
+ return `<div class="hero" style="background-image:url(${img(h.hero)})"><div class="w"><span class="eyebrow">Agalarov Estate · ул. ${h.st}</span><h1>${h.name}</h1><div><span class="rdy${h.ready==="Дом готов"?" ok":""}">${h.ready}</span>${h.ready==="Дом готов"?"":` <span class="todo">срок требует уточнения</span>`}</div></div></div>
+ <section><div class="w" style="display:grid;gap:64px">
+  ${numsB(h.nums)}
+  <div class="story"><h2>${h.title}</h2><div class="prose">${h.story.map(t=>`<p>${t}</p>`).join("")}</div></div>
+  ${h.imgs.length?`<div class="gal">${h.imgs.map(i=>`<button type="button" data-src="${img(i)}"><img src="${img(i)}" alt="${h.name}" loading="lazy"></button>`).join("")}</div>`:""}
+  ${h.rooms?`<div class="story"><div class="lft" style="display:grid;gap:14px"><span class="eyebrow">Экспликация</span><h2>Дом в помещениях</h2><p class="note">Площади из проекта, м²</p></div><ul class="rooms">${h.rooms.map(r=>`<li>${r[0]}<span>${r[1]}</span></li>`).join("")}</ul></div>`:""}
+  <div><div class="sec-head"><span class="eyebrow">Проект</span><h2 style="font-size:clamp(28px,3.4vw,44px)">Планировки</h2><p class="note">Листы из проекта. Нажмите, чтобы увеличить.</p></div><div class="plans">${[1,2].map(n=>`<button type="button" data-src="plans/${h.plan}-${n}.jpg"><img src="plans/${h.plan}-${n}.jpg" alt="План ${n} этажа, ${h.name}" loading="lazy"><span>${n===1?"Первый этаж":"Второй этаж"}</span></button>`).join("")}</div></div>
+  <div class="story"><div class="soon"><b>Видео и дневник стройки</b><span>Фильм о доме и хроника по этапам: котлован, монолит, кровля, отделка.</span></div>
+  <div class="soon"><b>Презентация дома</b><span>PDF с планами, визуализациями и характеристиками, который можно отправить клиенту.</span></div></div>
+ </div></section>
+ ${h.pie?pie()+drawings():""}
+ ${h.team?`<section><div class="w"><div class="sec-head"><span class="eyebrow">Команда дома</span><h2>Кто сделал этот дом</h2></div><div class="cols4">${h.team.map(t=>`<div><i>${t[0]}</i><b style="font-size:21px">${t[1]}</b></div>`).join("")}</div></div></section>`:""}
+ <a class="next" href="#dom-${nk}" style="background-image:url(${img(nx.hero)})"><div class="w"><span class="eyebrow">Следующий дом</span><h2>${nx.name}</h2></div></a>`;
+}
+function bio(k){
+ const p=P[k],ck=Object.keys(C).find(c=>C[c].who===k);
+ return `<section><div class="w"><div class="bio">
+  <div class="portrait">${p.photo?`<img src="${img(p.photo)}" alt="${p.name}">`:`<span class="mono">${p.mono}</span>`}</div>
+  <div style="display:grid;gap:26px"><span class="eyebrow">${p.role}</span><h1>${p.name}</h1>
+   <div class="prose">${p.text.map(t=>`<p>${t}</p>`).join("")}</div>
+   ${p.quote?`<p class="quote">«${p.quote}»</p>`:`<span class="todo" style="justify-self:start">Здесь будет прямая речь: 2–3 фразы из короткого интервью</span>`}
+   <div class="row"><a class="btn" href="#${ck}">${C[ck].name}</a><a class="btn" href="#lyudi">Вся команда</a></div></div>
+ </div></div></section>`;
+}
+function company(k){
+ const c=C[k];
+ return `<div class="hero sm" style="background-image:url(${img(c.img)})"><div class="w"><span class="eyebrow">${c.kind} · Point Group</span><h1>${c.name}</h1><p class="lead">${c.lead}</p></div></div>
+ <section><div class="w" style="display:grid;gap:56px">${numsB(c.nums)}
+  <div class="split"><div class="lft"><span class="eyebrow">Роль в доме</span><h2>Что делает компания</h2></div><div class="prose">${c.text.map(t=>`<p>${t}</p>`).join("")}</div></div>
+  ${c.facts.length?`<div class="cols4">${c.facts.map(f=>`<div><b>${f[0]}</b><span>${f[1]}</span></div>`).join("")}</div>`:""}
+  <div class="split"><div><div class="sec-head"><span class="eyebrow">Руководитель</span></div><div class="people" style="grid-template-columns:minmax(0,300px)">${person(c.who)}</div></div>
+  <div class="contact"><div class="sec-head"><span class="eyebrow">Контакты</span></div><dl>${c.contacts.map(x=>`<div><dt>${x[0]}</dt><dd>${cval(x[1])}</dd></div>`).join("")}${c.site?`<div><dt>Сайт</dt><dd><a href="https://${c.site}" target="_blank" rel="noopener" style="border-bottom:1px solid var(--bronze)">${c.site}</a></dd></div>`:""}</dl></div></div>
+ </div></section>
+ <section class="stone"><div class="w"><div class="sec-head"><span class="eyebrow">Группа</span><h2>Остальные компании</h2></div>${group()}</div></section>`;
+}
+
+function route(){
+ const h=(location.hash||"#home").slice(1),app=document.getElementById("app");
+ app.innerHTML=h.startsWith("dom-")&&H[h.slice(4)]?house(h.slice(4)):P[h]?bio(h):C[h]?company(h):(V[h]||V.home)();
+ const sec=h.startsWith("dom-")?"doma":P[h]?"lyudi":C[h]?"gruppa":h;
+ document.querySelectorAll("#nav a").forEach(a=>a.getAttribute("href")==="#"+sec?a.setAttribute("aria-current","page"):a.removeAttribute("aria-current"));
+ document.documentElement.style.setProperty("--head",document.querySelector("header").offsetHeight+"px");
+ scrollTo(0,0);pieTick();pie3d();
+}
+addEventListener("hashchange",route);route();
+const lb=document.getElementById("lb");
+document.addEventListener("click",e=>{const rx=e.target.closest("#roomx");if(rx){document.getElementById("room").classList.remove("on");if(P3)P3.fly=null;return}const pn=e.target.closest(".pin");if(pn&&P3){const p=PINS[+pn.dataset.i],rm=document.getElementById("room");rm.querySelector("img").src=pn.dataset.src;rm.querySelector("b").textContent=p[0];P3.fly=p;setTimeout(()=>rm.classList.add("on"),900);return}const b=e.target.closest(".gal button,.plans button,.draw button");if(b){lb.querySelector("img").src=b.dataset.src;lb.showModal()}else if(e.target.closest("#lb"))lb.close()});
+</script>
+
+</body>
+</html>
