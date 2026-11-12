@@ -467,7 +467,7 @@ async function pie3d(){
   const py=new T.Mesh(new T.ConeGeometry(hw*Math.SQRT2,3.2,4,1),new T.MeshPhysicalMaterial({color:0xa9cddd,roughness:.03,metalness:.4,transparent:true,opacity:.62,envMapIntensity:1.8}));py.rotation.y=Math.PI/4;py.position.set(cx0,RY+.9+1.6,cz0);SG.add(py);
   const eg=new T.LineSegments(new T.EdgesGeometry(py.geometry),new T.LineBasicMaterial({color:0x2a2b2d}));eg.rotation.y=Math.PI/4;eg.position.copy(py.position);SG.add(eg);
   for(let k=1;k<4;k++){const t=k/4,r=new T.Mesh(new T.BoxGeometry(sw*u*(1-t)+.05,.06,.06),M(0x2a2b2d));[[0,1],[0,-1]].forEach(([a,b])=>{const m1=r.clone();m1.position.set(cx0,RY+.9+3.2*t,cz0+b*hw*(1-t));SG.add(m1);const m2=r.clone();m2.rotation.y=Math.PI/2;m2.position.set(cx0+b*hw*(1-t),RY+.9+3.2*t,cz0);SG.add(m2)})}}}
- else grp[9].add(boxes(G.eave,7.21,7.43,M(0xe6dfd2,{roughness:.8}),0),boxes(G.eave,7.43,7.5,anth,0,false),boxes(G.roof2,7.5,7.62,roofM,-.6,false));
+ else grp[9].add(boxes(G.eave,7.21,7.43,M(0xe6dfd2,{roughness:.8}),0),boxes(G.eave,7.43,7.5,anth,0,false),boxes(G.roof2,7.5,7.62,roofM,0,false));
  {const deckT=ctex(x=>{for(let i=0;i<16;i++){x.fillStyle=`hsl(${28+Math.random()*6},${30+Math.random()*12}%,${40+Math.random()*10}%)`;x.fillRect(0,i*16,256,15);x.fillStyle="rgba(40,25,12,.6)";x.fillRect(0,i*16+15,256,1);const o=Math.random()*256;x.fillRect(o,i*16,1,15)}noise(x,.05)},1.6);
   grp[9].add(boxes(G.terrace,3.99,4.05,MT(deckT,{roughness:.7}),0,false));
   const railG=new T.MeshPhysicalMaterial({color:0xcfe3ea,roughness:.02,metalness:.1,transparent:true,opacity:.28,envMapIntensity:1.5,side:T.DoubleSide});
