@@ -144,6 +144,7 @@ a.co:hover b{color:var(--bronze)}
 .person p{font-size:13px;color:var(--mute)}
 .tag{color:var(--bronze);letter-spacing:.1em;text-transform:uppercase;font-size:11px}
 .bio{display:grid;grid-template-columns:minmax(0,380px) 1fr;gap:56px;align-items:start}
+.pf{display:grid;gap:0;margin:0;border-top:1px solid var(--line)}.pf div{display:grid;grid-template-columns:minmax(0,200px) 1fr;gap:20px;padding:16px 0;border-bottom:1px solid var(--line)}.pf dt{color:var(--bronze);font-size:12px;letter-spacing:.1em;text-transform:uppercase;padding-top:3px}.pf dd{margin:0;color:var(--stone);line-height:1.55}@media(max-width:700px){.pf div{grid-template-columns:1fr;gap:6px}}.pr{display:flex;flex-wrap:wrap;gap:10px 22px;align-items:baseline}.pr .eyebrow{width:100%}.pr a{color:var(--stone);border-bottom:1px solid var(--line);padding-bottom:2px}.pr a:hover{border-color:var(--bronze)}
 .bio h1{font-size:clamp(40px,6vw,76px)}
 .quote{font-family:var(--display);font-style:italic;font-size:clamp(24px,3vw,36px);line-height:1.25;border-left:1px solid var(--bronze);padding-left:22px;max-width:28ch}
 
@@ -278,15 +279,21 @@ const STREETS=[["Лазурная",["l11","l191","l192","l193"]],["Заречн�
 const order=STREETS.flatMap(s=>s[1]);
 
 const P={
- pavel:{name:"Павел Трейвас",co:"Point Group",role:"Основатель",photo:"pavel_2026",mono:"ПТ",
-  short:"Основатель. Стоит за каждым домом: от выбора участка до сдачи ключей.",
-  text:["Вместе с Ириной основал Point Estate, а затем собрал вокруг агентства проектное бюро, столярное производство и строительство.","Лично утверждает участок, концепцию и подрядчиков каждого дома и приезжает на стройку."],quote:null},
- irina:{name:"Ирина Трейвас",co:"Point Estate",role:"Генеральный директор Point Estate",photo:"irina_2026",mono:"ИТ",
-  short:"Генеральный директор Point Estate. Знает, какой дом будут хотеть через пять лет.",
-  text:["Руководит агентством элитной недвижимости, через которое прошло больше четырёх тысяч сделок.","Этот опыт возвращается в проекты: планировки и состав помещений каждого дома сверяются с тем, что на самом деле ищут покупатели."],quote:null},
- natalia:{name:"Наталия Гринфельд",co:"Point Design",role:"Руководитель Point Design",photo:"natalia_2026",
-  short:"Руководитель Point Design. Архитектура и интерьеры всех домов.",
-  text:["Пятнадцать лет ведёт студию архитектуры и дизайна интерьера: 105 проектов и 100 000 м² объектов.","За каждым домом закреплён свой автор, который ведёт его от первой встречи до развески штор."],quote:"Дизайн — это эволюция, и наша студия развивается благодаря вам"},
+ pavel:{name:"Павел Трейвас",co:"Point Group",role:"Основатель Point Group",photo:"pavel_2026",mono:"ПТ",
+  short:"Основатель Point Group. Строит дома на продажу больше десяти лет и сам решает, каким будет каждый.",
+  text:["Начинал в девелопменте: работал в Villagio Estate, которая строила посёлки «Миллениум Парк», «Монтевиль» и «Мэдисон». В 2013 году вместе с Ириной основал агентство элитной недвижимости Point Estate.","Вокруг агентства выросла группа: Point Design проектирует интерьеры, Point WoodCraft делает столярку, Treyvas Development строит дома. Павел построил и продал больше двадцати домов на собственные средства, без кредитов.","Как управляющий партнёр комментирует рынок загородной недвижимости для «Коммерсанта», РИА Новости и РБК."],
+  facts:[["Что делает в доме","Выбирает участок, утверждает проект и подрядчиков, ездит на стройку и принимает дом."],["Четыре спальни минимум","Дом на продажу должен совпадать с тем, что ищут покупатели: не меньше четырёх спален, современная архитектура, честная цена."],["Проект важнее эффектов","Уникальность дома — в грамотной, логичной планировке и инженерии, а не в декоре."],["Камерные посёлки","Считает, что время больших посёлков прошло: ценятся небольшие проекты с настоящей инфраструктурой, как Agalarov Estate."]],
+  press:[["Коммерсантъ, 2022","https://www.kommersant.ru/doc/5406950"],["РИА Новости, 2020","https://realty.ria.ru/20200320/1568856648.html"],["VDT, видеоинтервью","https://vesco.ru/development/doma-na-prodazhu-investitsii-v-nedvizhimost-pavel-trejvas-vdt/"],["Коммерсантъ","https://www.kommersant.ru/doc/2856923"]],quote:null},
+ irina:{name:"Ирина Трейвас",co:"Point Estate",role:"Соосновательница Point Group · Point Estate",photo:"irina_2026",mono:"ИТ",
+  short:"Соосновательница Point Group и Point Estate. Знает, какой дом будут хотеть через пять лет.",
+  text:["Вместе с Павлом основала Point Estate в 2013 году. Агентство продаёт и сдаёт городскую, загородную и коммерческую недвижимость Москвы и Подмосковья, через него прошло больше четырёх тысяч сделок.","Соосновательница Point Group: кроме агентства в группу входят Point Design, Point WoodCraft и Estate Mall в Захарово. Запустила Point Education — обучение для тех, кто хочет прийти в недвижимость с нуля.","Ведёт Telegram-канал о рынке и посёлках — Agalarov Estate, Millennium Park — и о том, как устроена работа агентства изнутри."],
+  facts:[["Что делает в доме","Сверяет планировку и состав помещений с тем, что на самом деле ищут покупатели, и выводит готовый дом на рынок."],["Рынок изнутри","Тринадцать лет сделок в Москве и Подмосковье: городская, загородная и коммерческая недвижимость, юридическое сопровождение."],["Команда","Растит брокеров внутри компании через Point Education."]],
+  press:[["Telegram-канал Ирины","https://t.me/point_est"],["О компании Point Estate","https://www.pointestate.ru/about/"]],quote:null},
+ natalia:{name:"Наталия Гринфельд",co:"Point Design",role:"Руководитель Point Design Studio",photo:"natalia_2026",
+  short:"Руководитель Point Design. Интерьеры всех домов Treyvas Development.",
+  text:["Руководит Point Design Studio — бюро архитектуры и дизайна интерьера, которое пятнадцать лет проектирует премиальные интерьеры. За студией 105 проектов и 100 000 м² объектов.","В команде двенадцать человек: архитекторы, дизайнеры, менеджеры проектов и комплектации. Ведущие авторы — Олеся Голова, Сергей Корн, Елизавета Куварзина.","Проекты студии публиковали Interior+Design, House & Garden и Amazing Architecture."],
+  facts:[["Что делает в доме","Ведёт интерьер каждого дома: планировочное решение, концепция, визуализации, рабочая документация."],["Комплектация","Подбирает отделку, мебель и свет, столярку заказывает в Point WoodCraft."],["Авторский надзор","Студия на объекте от первого кирпича до развески штор."]],
+  press:[["Сайт Point Design","https://point-design.ru/about/"],["Interior+Design","https://www.interior.ru/place/18622-zagorodnii-dom-dlya-otdiha-bolishoi-semii-v-podmoskovie-proekt-point-design.html"]],quote:"Дизайн — это эволюция, и наша студия развивается благодаря вам"},
 };
 const C={
  "point-estate":{logo:"img/logo/point-estate.svg",name:"Point Estate",kind:"Недвижимость",who:"irina",img:"l192_eve",site:"pointestate.ru",
@@ -729,8 +736,10 @@ function bio(k){
   <div class="portrait">${p.photo?`<img src="${img(p.photo)}" alt="${p.name}">`:`<span class="mono">${p.mono}</span>`}</div>
   <div style="display:grid;gap:26px"><span class="eyebrow">${p.role}</span><h1>${p.name}</h1>
    <div class="prose">${p.text.map(t=>`<p>${t}</p>`).join("")}</div>
-   ${p.quote?`<p class="quote">«${p.quote}»</p>`:`<span class="todo" style="justify-self:start">Здесь будет прямая речь: 2–3 фразы из короткого интервью</span>`}
-   <div class="row"><a class="btn" href="#${ck}">${C[ck].name}</a><a class="btn" href="#lyudi">Вся команда</a></div></div>
+   ${p.facts?`<dl class="pf">${p.facts.map(f=>`<div><dt>${f[0]}</dt><dd>${f[1]}</dd></div>`).join("")}</dl>`:""}
+   ${p.quote?`<p class="quote">«${p.quote}»</p>`:""}
+   ${p.press?`<div class="pr"><span class="eyebrow">Почитать</span>${p.press.map(x=>`<a href="${x[1]}" target="_blank" rel="noopener">${x[0]} ↗</a>`).join("")}</div>`:""}
+   <div class="row">${ck?`<a class="btn" href="#${ck}">${C[ck].name}</a>`:`<a class="btn" href="#gruppa">Point Group</a>`}<a class="btn" href="#lyudi">Вся команда</a></div></div>
  </div></div></section>`;
 }
 function company(k){
