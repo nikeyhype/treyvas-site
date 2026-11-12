@@ -36,8 +36,10 @@ p{margin:0}
 
 header{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:color-mix(in srgb,var(--oak) 90%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
 header .w{display:flex;align-items:center;justify-content:space-between;gap:8px 16px;padding-block:14px;flex-wrap:wrap}
-.logo{font-family:var(--display);font-size:22px;letter-spacing:.14em;text-transform:uppercase;white-space:nowrap}
-.logo small{font-family:var(--body);font-size:10px;letter-spacing:.3em;color:var(--mute);margin-left:8px}
+.logo{display:inline-flex;flex-direction:column;align-items:center;line-height:1;text-transform:uppercase;white-space:nowrap}.logo b{font-family:var(--display);font-weight:500;font-size:23px;letter-spacing:.34em;margin-right:-.34em}.logo b::after{content:"";display:block;height:1px;background:var(--bronze);opacity:.7;margin:6px .34em 0 0}
+.logo small{font-family:var(--body);font-size:8px;font-weight:500;letter-spacing:.66em;margin-right:-.66em;color:var(--mute);margin-top:6px}
+.card .ph.lg{display:grid;place-items:center;background:var(--oak-2);border:1px solid var(--line)}.card .ph.lg img{width:auto;height:auto;max-width:58%;max-height:46%;object-fit:contain;filter:brightness(0) invert(.9)}.card:hover .ph.lg img{transform:scale(1.04)}
+.hero.lgh{background:var(--oak-2)}.hero.lgh .hlogo{position:absolute;right:max(20px,8vw);top:50%;transform:translateY(-60%);width:min(38vw,440px);max-height:40%;object-fit:contain;filter:brightness(0) invert(.9);opacity:.95}@media(max-width:760px){.hero.lgh .hlogo{position:static;transform:none;width:60%;margin:0 0 24px}.hero.lgh .w{display:flex;flex-direction:column}}
 nav{display:flex;gap:6px 20px;flex-wrap:wrap;font-size:13px;letter-spacing:.05em}
 nav a{color:var(--mute);padding-block:4px;border-bottom:1px solid transparent}
 nav a:hover,nav a[aria-current]{color:var(--stone);border-color:var(--bronze)}
@@ -219,14 +221,14 @@ footer a:hover{color:var(--stone)}
 </head>
 <body>
 <header><div class="w">
-  <a class="logo" href="#home">Treyvas<small>Development</small></a>
+  <a class="logo" href="#home"><b>Treyvas</b><small>Development</small></a>
   <nav id="nav">
     <a href="#doma">Дома</a><a href="#kak-stroim">Как мы строим</a><a href="#o-nas">О нас</a><a href="#gruppa">Группа</a><a href="#lyudi">Люди</a><a href="#zhurnal">Журнал</a><a href="#kontakty">Контакты</a>
   </nav>
 </div></header>
 <main id="app"></main>
 <footer><div class="w">
-  <div><span class="logo" style="color:var(--stone)">Treyvas</span><p style="margin-top:10px;max-width:36ch">Частные дома в Подмосковье. Входит в Point Group. Это прототип сайта, изображения — визуализации проектов.</p></div>
+  <div><span class="logo" style="color:var(--stone)"><b>Treyvas</b><small>Development</small></span><p style="margin-top:10px;max-width:36ch">Частные дома в Подмосковье. Входит в Point Group. Это прототип сайта, изображения — визуализации проектов.</p></div>
   <div><b>Дома</b><a href="#dom-l191">Лазурная 19.1</a><a href="#dom-r2">Речная 2</a><a href="#dom-z36">Заречная 36</a><a href="#doma">Все дома</a></div>
   <div><b>Компания</b><a href="#o-nas">История</a><a href="#lyudi">Люди</a><a href="#kak-stroim">Как мы строим</a><a href="#zhurnal">Журнал</a></div>
   <div><b>Группа</b><a href="#point-estate">Point Estate</a><a href="#point-design">Point Design</a><a href="#point-woodcraft">Point WoodCraft</a><a href="#kontakty">Контакты</a></div>
@@ -287,19 +289,19 @@ const P={
   text:["Пятнадцать лет ведёт студию архитектуры и дизайна интерьера: 105 проектов и 100 000 м² объектов.","За каждым домом закреплён свой автор, который ведёт его от первой встречи до развески штор."],quote:"Дизайн — это эволюция, и наша студия развивается благодаря вам"},
 };
 const C={
- "point-estate":{name:"Point Estate",kind:"Недвижимость",who:"irina",img:"l192_eve",site:"pointestate.ru",
+ "point-estate":{logo:"img/logo/point-estate.svg",name:"Point Estate",kind:"Недвижимость",who:"irina",img:"l192_eve",site:"pointestate.ru",
   lead:"Агентство элитной недвижимости Москвы и Подмосковья. С него началась группа.",
   text:["Point Estate основала семейная пара Павел и Ирина Трейвас. За плечами у них большой опыт работы с российской и зарубежной недвижимостью.","Больше тринадцати лет агентство работает по принципу «всё в одном месте»: продажа и аренда жилой и коммерческой недвижимости, юридическое сопровождение, консалтинг и продвижение объектов.","Для девелопмента это главный источник знания о рынке: какие участки ценятся, какие планировки покупают, а какие стоят годами."],
   nums:[["13","лет на рынке"],["4000+","завершённых сделок"],["300+","сделок за 2024 год"],["80+","человек в команде"]],
   facts:[["Загородная","Дома, посёлки и участки Подмосковья"],["Городская","Квартиры, новостройки и жилые комплексы Москвы"],["Коммерческая","Офисы, особняки, торговые помещения"],["Услуги","Юридическое сопровождение и консалтинг"]],
   contacts:[["Телефон","+7 499 288-88-67"],["Почта","info@pointestate.ru"],["Центральный офис","Москва, Кутузовский проспект, 1/7"],["Загородный офис","д. Захарово, Заречная ул., 45А, стр. 10, Estate Mall"],["Часы работы","Пн–Вс, 9:00–21:00"],["Telegram","t.me/Point_Estate"]]},
- "point-design":{name:"Point Design",kind:"Архитектура и интерьер",who:"natalia",img:"l191_living",site:"point-design.ru",
+ "point-design":{logo:"img/logo/point-design.svg",name:"Point Design",kind:"Архитектура и интерьер",who:"natalia",img:"l191_living",site:"point-design.ru",
   lead:"Студия архитектуры и дизайна интерьера. Проектирует каждый дом Treyvas Development.",
   text:["Студия создаёт интерьеры и архитектуру вне времени: начинает с того, как живёт семья, и только потом переходит к стилю. Поэтому дом остаётся удобным и актуальным через годы.","На стройке команда ведёт авторский надзор от первого кирпича до развески штор.","Проекты студии публиковали Interior+Design, House & Garden, Nuevo Estilo и Amazing Architecture."],
   nums:[["15","лет студии"],["105","проектов"],["100 000","м² объектов"],["12","человек в команде"]],
   facts:[["Наталия Гринфельд","Руководитель студии"],["Олеся Голова","Ведущий дизайнер-архитектор"],["Сергей Корн","Ведущий архитектор"],["Елизавета Куварзина","Ведущий дизайнер-архитектор"]],
   contacts:[["Телефон","+7 495 141 57 77"],["Почта","info@point-design.ru"],["Офис","Москва, Кутузовский проспект, 1/7"]]},
- "point-woodcraft":{name:"Point WoodCraft",kind:"Столярное производство",who:"marina",img:"l191_kitchen",site:"pointwood.ru",
+ "point-woodcraft":{logo:"img/logo/point-woodcraft.png",name:"Point WoodCraft",kind:"Столярное производство",who:"marina",img:"l191_kitchen",site:"pointwood.ru",
   lead:"Собственное производство мебели и столярных изделий из дерева на Новорижском шоссе.",
   text:["Цех площадью больше 3000 м² оснащён современными станками и традиционной деревообрабатывающей техникой. В нём работают 29 человек: конструкторы, столяры, маляры, монтажники.","Стеновые панели, двери, кухни, гардеробные, лестницы. Всё, что в интерьере сделано из дерева, приходит из одного цеха. Поэтому оттенок и рисунок шпона совпадают по всему дому, а сроки не зависят от сторонних фабрик.","Для Agalarov Estate мастерская уже делала гардеробные из шпона эвкалипта, стойку гольф-клуба и полную столярку двухэтажного дома с бассейном."],
   nums:[["3000+","м² производство"],["29","человек в цехе"],["6","этапов от проекта до монтажа"]],
@@ -647,7 +649,7 @@ const V={
   <section style="padding-top:0"><div class="w"><div class="sec-head"><span class="eyebrow">Люди</span><h2>Кто за этим стоит</h2></div>${people()}</div></section>`,
 
  gruppa:()=>`<div class="w phead"><div class="sec-head"><span class="eyebrow">Point Group</span><h1>Четыре компании, один дом</h1><p class="lead">Дом можно найти, спроектировать, построить и обставить, не выходя из одной группы. У каждой компании своя страница.</p></div></div>
-  <section style="padding-top:24px"><div class="w"><div class="houses">${Object.keys(C).map(k=>`<a class="card" href="#${k}"><div class="ph"><img src="${img(C[k].img)}" alt="${C[k].name}" loading="lazy"></div><span class="tag">${C[k].kind}</span><h3>${C[k].name}</h3><div class="meta">${C[k].lead}</div></a>`).join("")}</div></div></section>`,
+  <section style="padding-top:24px"><div class="w"><div class="houses">${Object.keys(C).map(k=>`<a class="card" href="#${k}"><div class="ph lg"><img src="${C[k].logo}" alt="${C[k].name}" loading="lazy"></div><span class="tag">${C[k].kind}</span><h3>${C[k].name}</h3><div class="meta">${C[k].lead}</div></a>`).join("")}</div></div></section>`,
 
  lyudi:()=>`<div class="w phead"><div class="sec-head"><span class="eyebrow">Люди</span><h1>Те, кто строит</h1><p class="lead">У каждого руководителя своя страница: чем занимается, за что отвечает в доме и что об этом думает.</p></div></div>
   <section style="padding-top:24px"><div class="w">${people()}</div></section>`,
@@ -708,7 +710,7 @@ function bio(k){
 }
 function company(k){
  const c=C[k];
- return `<div class="hero sm" style="background-image:url(${img(c.img)})"><div class="w"><span class="eyebrow">${c.kind} · Point Group</span><h1>${c.name}</h1><p class="lead">${c.lead}</p></div></div>
+ return `<div class="hero sm lgh"><div class="w"><img class="hlogo" src="${c.logo}" alt="${c.name}"><span class="eyebrow">${c.kind} · Point Group</span><h1>${c.name}</h1><p class="lead">${c.lead}</p></div></div>
  <section><div class="w" style="display:grid;gap:56px">${numsB(c.nums)}
   <div class="split"><div class="lft"><span class="eyebrow">Роль в доме</span><h2>Что делает компания</h2></div><div class="prose">${c.text.map(t=>`<p>${t}</p>`).join("")}</div></div>
   ${c.facts.length?`<div class="cols4">${c.facts.map(f=>`<div><b>${f[0]}</b><span>${f[1]}</span></div>`).join("")}</div>`:""}
