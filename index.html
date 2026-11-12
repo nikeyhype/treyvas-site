@@ -126,7 +126,7 @@ a.co:hover b{color:var(--bronze)}
 .pie-in{position:relative;height:calc(100vh - var(--head) - 40px);height:calc(100dvh - var(--head) - 40px);min-height:520px;max-height:900px;display:grid;grid-template-columns:minmax(0,1.9fr) minmax(0,1fr);grid-template-rows:minmax(0,1fr) auto;gap:14px 32px;align-items:stretch;padding-block:20px}.pie-in .stage{grid-column:1;grid-row:1}.pie-in .pbar{grid-column:1;grid-row:2}.pie-in .pie-txt{grid-column:2;grid-row:1/3;align-self:center}
 .pbar{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:12px 28px;align-items:center}.pst{display:grid;grid-template-columns:44px minmax(0,1fr) 44px;gap:12px;align-items:center}.pstx{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 12px;align-items:baseline;min-width:0}.pcnt{font-size:12px;letter-spacing:.1em;color:var(--bronze);font-variant-numeric:tabular-nums}.pnm{font-family:var(--display);font-weight:500;font-size:19px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--stone)}.pstx .prng{grid-column:1/3}
 .pb{width:44px;height:44px;border:1px solid var(--line);background:var(--oak-2);color:var(--stone);font-size:20px;cursor:pointer;touch-action:manipulation}.pb:hover{background:var(--bronze);color:var(--ink)}
-.pvw{display:grid;gap:8px}.pplay{justify-self:start;border:1px solid var(--bronze);background:transparent;color:var(--bronze);font:600 11px var(--body);letter-spacing:.12em;text-transform:uppercase;padding:9px 14px;cursor:pointer}.pplay:hover{background:var(--bronze);color:var(--ink)}.steps-l li{cursor:pointer}.pvw label{display:grid;grid-template-columns:minmax(0,120px) minmax(0,1fr);gap:12px;align-items:center;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute)}
+.pvw{display:grid;gap:8px}.pplay{justify-self:start;border:1px solid var(--bronze);background:transparent;color:var(--bronze);font:600 11px var(--body);letter-spacing:.12em;text-transform:uppercase;padding:9px 14px;cursor:pointer}.pplay:hover,.pplay[aria-pressed="true"]{background:var(--bronze);color:var(--ink)}.prow{display:flex;gap:8px;flex-wrap:wrap}.steps-l li{cursor:pointer}.pvw label{display:grid;grid-template-columns:minmax(0,120px) minmax(0,1fr);gap:12px;align-items:center;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute)}
 .prng{-webkit-appearance:none;appearance:none;width:100%;height:28px;background:transparent;margin:0;cursor:pointer;touch-action:pan-x}.prng::-webkit-slider-runnable-track{height:2px;background:var(--line)}.prng::-moz-range-track{height:2px;background:var(--line)}.prng::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:var(--bronze);margin-top:-10px;border:0}.prng::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:var(--bronze);border:0}
 button,a,input{touch-action:manipulation}
 .stage{position:relative;height:100%;min-height:0;overflow:hidden;background:linear-gradient(#c4d9e6,#dbe6ea)}
@@ -401,7 +401,7 @@ function pie(k="l191"){
    <div class="room" id="room"><img alt=""><div><b></b><button type="button" class="btn" id="roomx">Назад к дому</button></div></div><p class="hint">Потяните, чтобы повернуть дом</p></div>
   <div class="pbar" id="pbar">
    <div class="pst"><button type="button" class="pb" data-st="-1" aria-label="Предыдущий этап">←</button><div class="pstx"><span class="pcnt">01 / ${String(PIE.length).padStart(2,"0")}</span><b class="pnm">${PIE[0][0]}</b><input class="prng" id="pstep" type="range" min="0" max="${PIE.length-1}" step="1" value="0" aria-label="Этап сборки"></div><button type="button" class="pb" data-st="1" aria-label="Следующий этап">→</button></div>
-   <div class="pvw"><button type="button" id="pplay" class="pplay">▶ Собрать дом</button><label><span>Повернуть</span><input class="prng" id="prot" type="range" min="0" max="360" step="1" value="0" aria-label="Повернуть дом"></label><label><span>Масштаб</span><input class="prng" id="pzm" type="range" min="0" max="100" step="1" value="50" aria-label="Приблизить или отдалить"></label></div>
+   <div class="pvw"><div class="prow"><button type="button" id="pplay" class="pplay">▶ Собрать дом</button><button type="button" id="pnight" class="pplay" aria-pressed="false">☾ Вечер</button></div><label><span>Повернуть</span><input class="prng" id="prot" type="range" min="0" max="360" step="1" value="0" aria-label="Повернуть дом"></label><label><span>Масштаб</span><input class="prng" id="pzm" type="range" min="0" max="100" step="1" value="50" aria-label="Приблизить или отдалить"></label></div>
   </div>
   <div class="pie-txt"><span class="eyebrow">Как строится дом · ${H[k==="l192"&&location.hash==="#dom-r2"?"r2":k].name}</span><h2>Дом собирается на ваших глазах</h2>
    <p class="lead" style="font-size:15px">Стрелками или ползунком под моделью — по этапам, кнопка «Собрать дом» проиграет всю стройку. Модель построена по настоящим планам дома${k==="l191"?"":": стены, бассейн, мебель и кровли распознаны автоматически, детали уточняем по АР"}.</p>
@@ -436,7 +436,7 @@ async function pie3d(){
  renderer.toneMapping=T.ACESFilmicToneMapping;renderer.toneMappingExposure=.62;renderer.outputEncoding=T.sRGBEncoding;
  const scene=new T.Scene();scene.background=new T.Color(0xc4d9e6);scene.fog=new T.Fog(0xc9dbe4,110,300);
  const cam=new T.PerspectiveCamera(32,1,2,700);
- scene.add(new T.HemisphereLight(0xdfefff,0x6a5a44,.3));
+ const hemi=new T.HemisphereLight(0xdfefff,0x6a5a44,.3);scene.add(hemi);
  const sun=new T.DirectionalLight(0xfff1d6,1.25);sun.position.set(55,70,35);sun.castShadow=true;sun.shadow.mapSize.set(2048,2048);
  Object.assign(sun.shadow.camera,{left:-75,right:75,top:75,bottom:-75,near:10,far:220});sun.shadow.bias=-.0006;sun.shadow.normalBias=.05;scene.add(sun);
  const u=.3,GW=G.W||220,GH=G.H||193,CX=GW/2,CZ=GH/2,HX=GW*u/2,HZ=GH*u/2,SC=Math.max(1,Math.max(HX,HZ)/32),M=(c,o={})=>new T.MeshStandardMaterial(Object.assign({color:c,roughness:.85},o));
@@ -774,6 +774,17 @@ async function pie3d(){
   cv.addEventListener("touchstart",e=>{if(e.touches.length===1){tx=e.touches[0].clientX;ty=e.touches[0].clientY;lock=0}},{passive:true});
   cv.addEventListener("touchmove",e=>{if(tx===null||e.touches.length!==1)return;const x=e.touches[0].clientX,y=e.touches[0].clientY,dx=x-tx,dy=y-ty;if(!lock)lock=Math.abs(dx)>=Math.abs(dy)&&Math.abs(dx)>2?1:(Math.abs(dy)>10?2:0);if(lock===1){e.preventDefault();const d=cam.position.clone().sub(ctl.target),sp=new T.Spherical().setFromVector3(d);sp.theta-=dx*.012;cam.position.copy(ctl.target).add(new T.Vector3().setFromSpherical(sp));tx=x;ty=y;S.back=0;uiHold=performance.now()-400}},{passive:false});
   cv.addEventListener("touchend",()=>{tx=null},{passive:true})}
+ // evening mode
+ {const nb=document.getElementById("pnight");S.nt=0;S.night=0;if(nb){nb.setAttribute("aria-pressed","false");nb.onclick=()=>{S.night=!S.night;nb.setAttribute("aria-pressed",S.night?"true":"false");nb.textContent=S.night?"☀ День":"☾ Вечер"}}
+  const winM=glass,day={sun:sun.intensity,hemi:hemi.intensity,exp:renderer.toneMappingExposure,bg:scene.background,fog:scene.fog.color.clone(),env:scene.environment},nightC=new T.Color(0x0e1626),fogN=new T.Color(0x141c2a);
+  const lamps=[],lampM=new T.MeshStandardMaterial({color:0x222222,emissive:0xffd9a0,emissiveIntensity:0});
+  if(G.site){const SI=G.site,pts=[];for(let z=SI.path[1]+3;z<SI.front-1;z+=5)pts.push([SI.path[0]+1.6,z]);for(let x=-SI.fx+6;x<SI.fx;x+=12)pts.push([x,SI.front-1.2]);
+   pts.forEach(([x,z])=>{const p=new T.Mesh(new T.CylinderGeometry(.06,.08,1.2,6),M(0x2a2a2a));p.position.set(x,.6,z);const h=new T.Mesh(new T.CylinderGeometry(.24,.24,.32,10),lampM);h.position.set(x,1.25,z);SB.add(p,h);lamps.push(h)})}
+  const pl=[];for(let i=0;i<3;i++){const l=new T.PointLight(0xffc98a,0,90,2);l.position.set((i-1)*HX*.6,3,HZ*.2);scene.add(l);pl.push(l)}
+  ANIM.push(()=>{const tgt=S.night?1:0;S.nt+=(tgt-S.nt)*.05;const n=S.nt;if(n<.002&&!S.night){if(scene.background!==day.bg){scene.background=day.bg;scene.environment=day.env}}
+   sun.intensity=day.sun*(1-n*.88);hemi.intensity=day.hemi*(1-n*.6);renderer.toneMappingExposure=day.exp*(1-n*.15);scene.fog.color.copy(day.fog).lerp(fogN,n);
+   if(n>.5&&scene.background!==nightC){scene.background=nightC;scene.environment=null}if(n<=.5&&scene.background===nightC){scene.background=day.bg;scene.environment=day.env}
+   winM.emissive.setHex(0xffb35c);winM.emissiveIntensity=n*2.2;winM.opacity=.55+n*.3;lampM.emissiveIntensity=n*4;pl.forEach(l=>l.intensity=n*2.6)})}
  function size(){const w=stage.clientWidth,h=stage.clientHeight;renderer.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix()}
  size();addEventListener("resize",size);
  function frame(){
