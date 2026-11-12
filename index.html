@@ -347,8 +347,8 @@ const PIE=[
  ["Перекрытие","Первый этаж закрыт. Сверху плита второго и кровли террас."],
  ["Стены второго этажа","Пять спален, у каждой своя гардеробная и ванная."],
  ["Отделка второго этажа","Полы, встроенная мебель, спальни."],
- ["Фасады и вход","Панорамные окна в пол, входная группа с козырьком и дверью в светлом шпоне."],
- ["Кровля и террасы","Кровля второго этажа, эксплуатируемые террасы из инженерной доски со стеклянным ограждением."],
+ ["Фасады и вход","Облицовка камнем по проекту, панорамные окна в тёмных рамах, входной портал в антраците с дверью в шпоне."],
+ ["Кровля и террасы","Кровля с карнизом-выносом 1,5 м, террасы из террасной доски и стеклянное ограждение по всему периметру первого этажа."],
  ["Участок","Подъезд к гаражу, терраса с шезлонгами, за домом — гольф-поле Agalarov Estate. Дом можно крутить и открывать комнаты."]
 ];
 const PINS=[["Гостиная",27.9,33.6,1,"l191_living"],["Камин",21,30,1,"l191_living2"],["Кухня",45.4,30,1,"l191_kitchen"],["Столовая",60.8,35.2,1,"l191_dining"],["Лестница",42.6,54.3,1,"l191_stairs"],["Бассейн",88,22,1,"l191_pool"],["Зона отдыха у бассейна",80,12,1,"l191_pool2"],["Ванная",4.8,59.9,1,"l191_bath"],
@@ -414,7 +414,7 @@ async function pie3d(){
  const skyT=new T.CanvasTexture(sk);skyT.mapping=T.EquirectangularReflectionMapping;skyT.encoding=T.sRGBEncoding;scene.background=skyT;scene.environment=pm.fromEquirectangular(skyT).texture;scene.fog=new T.Fog(0xdfeaf0,120,330);
  const tl=new T.TextureLoader(),tex=n=>{const t=tl.load("pie/"+n);t.encoding=T.sRGBEncoding;t.anisotropy=8;return t};
  const floorPlane=(n,y)=>{const m=new T.Mesh(new T.PlaneGeometry(220*u,193.2*u),new T.MeshStandardMaterial({map:tex(n),transparent:true,alphaTest:.4,roughness:.6}));m.rotation.x=-Math.PI/2;m.position.set(0,y,.03);m.receiveShadow=true;return m};
- const wall=MT(stoneT),conc=MT(concT),sofa=MT(fabT,{roughness:1}),roofM=MT(roofT),ceil=MT(concT,{color:0xf2efe8});
+ const wall=MT(stoneT),conc=MT(concT),sofa=MT(fabT,{roughness:1}),roofM=MT(roofT),ceil=MT(concT,{color:0xd2cfc8});const frameM=M(0x2a2b2d,{roughness:.45,metalness:.5}),anth=M(0x2f3033,{roughness:.6});
  const glass=new T.MeshPhysicalMaterial({color:0x7fa3b5,roughness:.03,metalness:.6,transparent:true,opacity:.55,envMapIntensity:1.6,envMapIntensity:1});
  const water=new T.MeshPhysicalMaterial({color:0x3f9ac0,roughness:.08,metalness:.1,transparent:true,opacity:.88});
  const grp=PIE.map(()=>{const g=new T.Group();g.userData.k=0;scene.add(g);return g});
@@ -440,15 +440,15 @@ async function pie3d(){
   return car};
  for(let i=0,cl=[0x121316,0xe6e2da,0x26303a];i<G.cars.length;i+=3){const g=mkCar(cl[i/3%3]);g.position.set((G.cars[i]-CX)*u,.3,(G.cars[i+1]-CZ)*u);if(!G.cars[i+2])g.rotation.y=Math.PI/2;grp[4].add(g)}
  grp[5].add(boxes(G.slab2,3.71,3.98,ceil,0));
- grp[6].add(boxes(G.walls2,4,7.2,MT(lamT,{roughness:.7})));
+ grp[6].add(boxes(G.walls2,4,7.2,wall));
  grp[7].add(floorPlane("tex2.png",4.02),...furn("2",4.02));
- grp[8].add(boxes(G.glass1,.31,3.38,glass,-.14,false),boxes(G.glass2,4.01,7.19,glass,-.14,false),boxes(G.house1,3.4,3.69,roofM,0));
- {const cx=(95-CX)*u,cz=(134-CZ)*u,can=new T.Mesh(unit,M(0xe9e3d7));can.scale.set(10,.26,5);can.position.set(cx,3.25,cz+.6);can.castShadow=true;grp[8].add(can);
-  [-4.4,4.4].forEach(dx=>{const c=new T.Mesh(new T.CylinderGeometry(.22,.22,2.9,16),M(0xe9e3d7));c.position.set(cx+dx,1.6,cz+2.6);c.castShadow=true;grp[8].add(c)});
+ grp[8].add(boxes(G.glass1,.31,3.38,glass,-.14,false),boxes(G.glass2,4.01,7.19,glass,-.14,false),boxes(G.glass1,.3,.42,frameM,-.08),boxes(G.glass1,3.24,3.39,frameM,-.08),boxes(G.glass2,4.0,4.1,frameM,-.08),boxes(G.glass2,7.08,7.2,frameM,-.08),boxes(G.house1,3.4,3.69,MT(stoneT),0));
+ {const cx=(95-CX)*u,cz=(134-CZ)*u,can=new T.Mesh(unit,anth);can.scale.set(8.2,.4,4.2);can.position.set(cx,3.5,cz+.5);can.castShadow=true;grp[8].add(can);
+  [-3.9,3.9].forEach(dx=>{const c=new T.Mesh(unit,anth);c.scale.set(.45,3.4,4.2);c.position.set(cx+dx,1.9,cz+.5);c.castShadow=true;grp[8].add(c)});
   const door=new T.Mesh(unit,veneer);door.scale.set(2.2,3,.16);door.position.set(cx,1.8,(128.4-CZ)*u);grp[8].add(door);
   const hnd=new T.Mesh(unit,M(0x2a2a2a,{metalness:.8,roughness:.3}));hnd.scale.set(.06,1.4,.08);hnd.position.set(cx+.7,1.8,(128.4-CZ)*u+.13);grp[8].add(hnd);
   const porch=new T.Mesh(unit,M(0xbdb5a6));porch.scale.set(10,.18,5.2);porch.position.set(cx,.2,cz+.7);porch.receiveShadow=true;grp[8].add(porch);}
- grp[9].add(boxes(G.roof2,7.21,7.5,roofM,0));
+ grp[9].add(boxes(G.eave,7.21,7.43,M(0xe6dfd2,{roughness:.8}),0),boxes(G.eave,7.43,7.5,anth,0,false),boxes(G.roof2,7.5,7.62,roofM,-.6,false));
  {const deckT=ctex(x=>{for(let i=0;i<16;i++){x.fillStyle=`hsl(${28+Math.random()*6},${30+Math.random()*12}%,${40+Math.random()*10}%)`;x.fillRect(0,i*16,256,15);x.fillStyle="rgba(40,25,12,.6)";x.fillRect(0,i*16+15,256,1);const o=Math.random()*256;x.fillRect(o,i*16,1,15)}noise(x,.05)},1.6);
   grp[9].add(boxes(G.terrace,3.99,4.05,MT(deckT,{roughness:.7}),0,false));
   const railG=new T.MeshPhysicalMaterial({color:0xcfe3ea,roughness:.02,metalness:.1,transparent:true,opacity:.28,envMapIntensity:1.5,side:T.DoubleSide});
