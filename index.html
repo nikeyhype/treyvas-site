@@ -163,9 +163,9 @@ a.co:hover b{color:var(--bronze)}
 .rooms{columns:2;column-gap:40px;margin:0;padding:0;list-style:none;font-size:15px}
 .rooms li{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid var(--line);break-inside:avoid;font-variant-numeric:tabular-nums}
 .rooms li span{color:var(--mute)}
-.gal{columns:3;column-gap:16px}@media(max-width:760px){.gal{columns:2;column-gap:10px}}
-.gal button{display:block;width:100%;padding:0;border:0;background:none;margin:0 0 16px;cursor:zoom-in;break-inside:avoid}
-.gal img{width:100%;display:block}
+.gal{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}@media(max-width:760px){.gal{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}}
+.gal button{display:block;width:100%;padding:0;border:0;background:none;margin:0;cursor:zoom-in;aspect-ratio:3/2;overflow:hidden}
+.gal img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s}.gal button:hover img{transform:scale(1.03)}
 .rdy{display:inline-block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;border:1px solid var(--line);padding:5px 9px;color:var(--stone)}.rdy.ok{border-color:var(--bronze);color:var(--bronze)}
 .plans{display:grid;grid-template-columns:1fr 1fr;gap:16px}.plans button{padding:10px;border:0;background:#f4f1ea;cursor:zoom-in;display:grid;gap:8px;color:var(--ink);font:500 12px var(--body);letter-spacing:.1em;text-transform:uppercase}.plans img{width:100%;display:block}
 .draw button{padding:0;border:0;background:none;cursor:zoom-in;display:block;width:100%}
