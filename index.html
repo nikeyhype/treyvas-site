@@ -112,7 +112,7 @@ a.co:hover b{color:var(--bronze)}
 .pin.in{opacity:1;pointer-events:auto}
 .pin span{display:block;white-space:nowrap;background:rgba(23,19,15,.86);color:#f1e9dc;font:600 12px/1 var(--body);letter-spacing:.05em;padding:8px 12px;border-left:2px solid var(--bronze);box-shadow:0 6px 16px rgba(0,0,0,.35)}
 .pin span::after{content:"";position:absolute;left:50%;top:100%;width:1px;height:22px;background:rgba(23,19,15,.8)}
-.pin.np{cursor:default}.pin.np span{background:rgba(23,19,15,.6);border-left-color:transparent}
+.pin.nb{position:absolute;z-index:3;opacity:1;pointer-events:auto}.pin.nb span{background:var(--bronze);color:var(--ink);border-left-color:var(--ink)}.pin.np{cursor:default}.pin.np span{background:rgba(23,19,15,.6);border-left-color:transparent}
 .pin:not(.np):hover span{background:var(--bronze);color:var(--ink)}
 .room{position:absolute;inset:0;z-index:4;opacity:0;pointer-events:none;transition:opacity .7s;background:#000}.room.on{opacity:1;pointer-events:auto}.room img{width:100%;height:100%;object-fit:cover;display:block}.room div{position:absolute;inset:auto 0 0;padding:22px;display:flex;justify-content:space-between;align-items:end;gap:12px;flex-wrap:wrap;background:linear-gradient(transparent,rgba(23,19,15,.85))}.room b{font-family:var(--display);font-weight:400;font-size:clamp(28px,4vw,48px);line-height:1}
 .zm{position:absolute;left:16px;bottom:16px;display:flex;gap:8px;z-index:3}
@@ -271,7 +271,7 @@ const H={
   title:"Тот же проект, другой участок",
   story:["Дом построен по проекту Лазурной 19.2: каменный портал камина, остекление первого этажа, бассейн под одной крышей с домом.","Участок другой, поэтому посадка дома и виды из окон свои."]}
 };
-const H3D={l191:"l191"};
+const H3D={l191:"l191",z36:"z36"};
 const STREETS=[["Лазурная",["l11","l191","l192","l193"]],["Заречная",["z35","z36"]],["Речная",["r1","r2"]]];
 const order=STREETS.flatMap(s=>s[1]);
 
@@ -424,6 +424,9 @@ async function pie3d(){
  grp[0].add(boxes(G.slab,-.05,.02,M(0x3a2f25),.8,false));
  grp[1].add(boxes(G.slab,.03,.29,conc,0));
  grp[2].add(boxes(G.walls1,.3,3.7,wall));
+ const whiteM1=()=>MT(ctex(x=>{x.fillStyle="#e9e4da";x.fillRect(0,0,256,256);x.strokeStyle="rgba(120,112,100,.35)";for(let i=0;i<=256;i+=128){x.beginPath();x.moveTo(i,0);x.lineTo(i,256);x.stroke()}for(let i=0;i<=256;i+=64){x.beginPath();x.moveTo(0,i);x.lineTo(256,i);x.stroke()}noise(x,.03)},3),{roughness:.75});
+ if(G.skin1)grp[2].add(boxes(G.skin1,.3,3.4,whiteM1(),.06));
+ if(G.clad_garage)grp[2].add(boxes(G.clad_garage,.3,3.75,MT(ctex(x=>{x.fillStyle="#e6e1d8";x.fillRect(0,0,256,256);x.fillStyle="rgba(110,100,90,.35)";for(let i=0;i<256;i+=32)x.fillRect(i,0,1.5,256);noise(x,.03)},1.6),{roughness:.75}),.06));
  grp[3].add(floorPlane("tex1.png",.32),boxes(G.pool,.12,.33,water,0,false));
  const veneer=MT(veT,{roughness:.5}),walnut=M(0x4a3526,{roughness:.5}),chairM=M(0x8f7f6a,{roughness:.9}),stepM=M(0xb98d5c,{roughness:.5});
  const furn=(fl,y)=>[boxes(G["low"+fl],y,y+.5,sofa,-.06),boxes(G["low"+fl],y+.5,y+.62,M(0xe7dfd0,{roughness:1}),-.3,false),boxes(G["tall"+fl],y,y+2.6,veneer,-.04),boxes(G["table"+fl],y+.68,y+.78,walnut,-.04),boxes(G["table"+fl],y,y+.68,walnut,-.5,false),boxes(G["chair"+fl],y,y+.48,chairM,-.08),boxes(G["chair"+fl],y+.48,y+.95,chairM,-.34,false)];
@@ -444,14 +447,26 @@ async function pie3d(){
  for(let i=0,cl=[0x121316,0xe6e2da,0x26303a];i<G.cars.length;i+=3){const g=mkCar(cl[i/3%3]);g.position.set((G.cars[i]-CX)*u,.3,(G.cars[i+1]-CZ)*u);if(!G.cars[i+2])g.rotation.y=Math.PI/2;grp[4].add(g)}
  grp[5].add(boxes(G.slab2,3.71,3.98,ceil,0));
  grp[6].add(boxes(G.walls2,4,7.2,wall));
+ const whiteM=MT(ctex(x=>{x.fillStyle="#efece6";x.fillRect(0,0,256,256);x.strokeStyle="rgba(120,115,105,.35)";for(let i=0;i<=256;i+=64){x.beginPath();x.moveTo(i,0);x.lineTo(i,256);x.stroke()}for(let i=0;i<=256;i+=128){x.beginPath();x.moveTo(0,i);x.lineTo(256,i);x.stroke()}noise(x,.03)},3),{roughness:.7});
+ if(G.clad_wood)grp[6].add(boxes(G.clad_wood,4.0,7.2,MT(lamT,{roughness:.7}),.08));
+ if(G.clad_white)grp[6].add(boxes(G.clad_white,4.0,7.2,whiteM,.08));
  grp[7].add(floorPlane("tex2.png",4.02),...furn("2",4.02));
- grp[8].add(boxes(G.glass1,.31,3.38,glass,-.14,false),boxes(G.glass2,4.01,7.19,glass,-.14,false),boxes(G.glass1,.3,.42,frameM,-.08),boxes(G.glass1,3.24,3.39,frameM,-.08),boxes(G.glass2,4.0,4.1,frameM,-.08),boxes(G.glass2,7.08,7.2,frameM,-.08),boxes(G.house1,3.4,3.69,MT(stoneT),0));
+ grp[8].add(boxes(G.glass1,.31,3.38,glass,-.14,false),boxes(G.glass2,4.01,7.19,glass,-.14,false),boxes(G.glass1,.3,.42,frameM,-.08),boxes(G.glass1,3.24,3.39,frameM,-.08),boxes(G.glass2,4.0,4.1,frameM,-.08),boxes(G.glass2,7.08,7.2,frameM,-.08),boxes(G.house1,3.4,3.69,G.roofw?whiteM:MT(stoneT),G.roofw?.5:0));
+ if(G.gdoors)G.gdoors.forEach(([gx,gy,gw])=>{const d=new T.Mesh(unit,MT(ctex(x=>{x.fillStyle="#f2f0ec";x.fillRect(0,0,256,256);x.fillStyle="rgba(90,90,90,.35)";for(let i=0;i<256;i+=42)x.fillRect(0,i,256,2);for(let i=20;i<256;i+=60)x.fillRect(i,18,30,8)},4)));d.scale.set(gw*u,2.5,.15);d.position.set((gx+gw/2-CX)*u,1.55,(gy+1-CZ)*u+.14);grp[8].add(d)});
+ if(G.entry){const [ex,ey,ew]=G.entry,fr=new T.Mesh(unit,anth);fr.scale.set(ew*u,3.2,.5);fr.position.set((ex+ew/2-CX)*u,1.9,(ey-CZ)*u+.3);grp[8].add(fr);const dd=new T.Mesh(unit,veneer);dd.scale.set(ew*u*.45,2.7,.2);dd.position.set((ex+ew/2-CX)*u,1.65,(ey-CZ)*u+.56);grp[8].add(dd)}
+ if(G.ground_deck){const dk=ctex(x=>{for(let i=0;i<16;i++){x.fillStyle=`hsl(${28+Math.random()*6},${30+Math.random()*12}%,${40+Math.random()*10}%)`;x.fillRect(0,i*16,256,15)}},1.6);grp[3].add(boxes(G.ground_deck,0,.12,MT(dk,{roughness:.7}),0,false))}
  if(L191){const cx=(95-CX)*u,cz=(134-CZ)*u,can=new T.Mesh(unit,anth);can.scale.set(8.2,.4,4.2);can.position.set(cx,3.5,cz+.5);can.castShadow=true;grp[8].add(can);
   [-3.9,3.9].forEach(dx=>{const c=new T.Mesh(unit,anth);c.scale.set(.45,3.4,4.2);c.position.set(cx+dx,1.9,cz+.5);c.castShadow=true;grp[8].add(c)});
   const door=new T.Mesh(unit,veneer);door.scale.set(2.2,3,.16);door.position.set(cx,1.8,(128.4-CZ)*u);grp[8].add(door);
   const hnd=new T.Mesh(unit,M(0x2a2a2a,{metalness:.8,roughness:.3}));hnd.scale.set(.06,1.4,.08);hnd.position.set(cx+.7,1.8,(128.4-CZ)*u+.13);grp[8].add(hnd);
   const porch=new T.Mesh(unit,M(0xbdb5a6));porch.scale.set(10,.18,5.2);porch.position.set(cx,.2,cz+.7);porch.receiveShadow=true;grp[8].add(porch);}
- grp[9].add(boxes(G.eave,7.21,7.43,M(0xe6dfd2,{roughness:.8}),0),boxes(G.eave,7.43,7.5,anth,0,false),boxes(G.roof2,7.5,7.62,roofM,-.6,false));
+ if(G.roofw){grp[9].add(boxes(G.roofw,7.2,8.3,whiteM,0),boxes(G.roofm,8.3,8.36,roofM,0,false));
+  if(G.skylight){const [sx,sy,sw]=G.skylight,cx0=(sx+sw/2-CX)*u,cz0=(sy+sw/2-CZ)*u,hw=sw*u/2;
+  const curb=new T.Mesh(new T.BoxGeometry(sw*u+.8,.9,sw*u+.8),whiteM);curb.position.set(cx0,8.36+.45,cz0);curb.castShadow=true;grp[9].add(curb);
+  const py=new T.Mesh(new T.ConeGeometry(hw*Math.SQRT2,3.2,4,1),new T.MeshPhysicalMaterial({color:0xa9cddd,roughness:.03,metalness:.4,transparent:true,opacity:.62,envMapIntensity:1.8}));py.rotation.y=Math.PI/4;py.position.set(cx0,8.36+.9+1.6,cz0);grp[9].add(py);
+  const eg=new T.LineSegments(new T.EdgesGeometry(py.geometry),new T.LineBasicMaterial({color:0x2a2b2d}));eg.rotation.y=Math.PI/4;eg.position.copy(py.position);grp[9].add(eg);
+  for(let k=1;k<4;k++){const t=k/4,r=new T.Mesh(new T.BoxGeometry(sw*u*(1-t)+.05,.06,.06),M(0x2a2b2d));[[0,1],[0,-1]].forEach(([a,b])=>{const m1=r.clone();m1.position.set(cx0,8.36+.9+3.2*t,cz0+b*hw*(1-t));grp[9].add(m1);const m2=r.clone();m2.rotation.y=Math.PI/2;m2.position.set(cx0+b*hw*(1-t),8.36+.9+3.2*t,cz0);grp[9].add(m2)})}}}
+ else grp[9].add(boxes(G.eave,7.21,7.43,M(0xe6dfd2,{roughness:.8}),0),boxes(G.eave,7.43,7.5,anth,0,false),boxes(G.roof2,7.5,7.62,roofM,-.6,false));
  {const deckT=ctex(x=>{for(let i=0;i<16;i++){x.fillStyle=`hsl(${28+Math.random()*6},${30+Math.random()*12}%,${40+Math.random()*10}%)`;x.fillRect(0,i*16,256,15);x.fillStyle="rgba(40,25,12,.6)";x.fillRect(0,i*16+15,256,1);const o=Math.random()*256;x.fillRect(o,i*16,1,15)}noise(x,.05)},1.6);
   grp[9].add(boxes(G.terrace,3.99,4.05,MT(deckT,{roughness:.7}),0,false));
   const railG=new T.MeshPhysicalMaterial({color:0xcfe3ea,roughness:.02,metalness:.1,transparent:true,opacity:.28,envMapIntensity:1.5,side:T.DoubleSide});
@@ -468,21 +483,54 @@ async function pie3d(){
  const asph=MT(asT,{roughness:.92}),pave=MT(paveT),curbM=M(0xcfcac0,{roughness:.8});
  const EX=L191?(95-CX)*u:0,EZ=L191?(132-CZ)*u:HZ+2;
  if(L191){flat(10,15,asph,5.8,20.5);flat(52,7,asph,-21,24.5);}
+ else if(G.gdoors){const g0=G.gdoors[0],g1=G.gdoors[G.gdoors.length-1],x0=(g0[0]-CX)*u,x1=(g1[0]+g1[2]-CX)*u,z0=(g0[1]+1-CZ)*u,SI=G.site;
+  const dz=SI?SI.front-z0:22;flat(x1-x0+2,dz,asph,(x0+x1)/2,z0+dz/2);
+  if(SI){flat(260,8,asph,0,SI.road);
+   flat(1.8,SI.front-SI.path[1],pave,SI.path[0],(SI.front+SI.path[1])/2,0,.06);
+   const postM=M(0x2b2c2e,{roughness:.5,metalness:.4}),slatM=M(0x3a3b3e,{roughness:.6,metalness:.3});
+   const fence=(ax,az,bx,bz)=>{const L=Math.hypot(bx-ax,bz-az),n=Math.max(1,Math.round(L/2.5)),ang=Math.atan2(bz-az,bx-ax);for(let i=0;i<=n;i++){const t=i/n,p=new T.Mesh(new T.BoxGeometry(.15,2,.15),postM);p.position.set(ax+(bx-ax)*t,1,az+(bz-az)*t);p.castShadow=true;site.add(p)}
+    for(const h of [.35,.75,1.15,1.55,1.9]){const b=new T.Mesh(new T.BoxGeometry(L,.12,.05),slatM);b.position.set((ax+bx)/2,h,(az+bz)/2);b.rotation.y=-ang;b.castShadow=true;site.add(b)}};
+   const gx0=x0-1.2,gx1=x1+1.2;fence(-SI.fx,SI.front,gx0-2,SI.front);fence(gx1+.2,SI.front,SI.path[0]-1.4,SI.front);fence(SI.path[0]+1.4,SI.front,SI.fx,SI.front);
+   fence(-SI.fx,SI.front,-SI.fx,SI.back);fence(SI.fx,SI.front,SI.fx,SI.back);
+   {const gate=new T.Group(),gw=gx1-gx0;const fr=new T.Mesh(new T.BoxGeometry(gw,.12,.08),postM);fr.position.y=1.95;gate.add(fr);for(let i=0;i<Math.floor(gw/.22);i++){const sl=new T.Mesh(new T.BoxGeometry(.12,1.8,.06),slatM);sl.position.set(-gw/2+.11+i*.22,1,0);gate.add(sl)}
+    const rail=new T.Mesh(new T.BoxGeometry(gw*2,.1,.12),postM);rail.position.set(-gw/2,.05,0);gate.add(rail);gate.position.set((gx0+gx1)/2,0,SI.front);gate.traverse(o=>{if(o.isMesh)o.castShadow=true});site.add(gate);
+    [gx0-.15,gx1+.15].forEach(x=>{const p=new T.Mesh(new T.BoxGeometry(.3,2.2,.3),postM);p.position.set(x,1.1,SI.front);site.add(p)})}
+   const wk=new T.Mesh(new T.BoxGeometry(1.2,2.1,.06),slatM);wk.position.set(SI.path[0],1.05,SI.front);site.add(wk);
+  }}
  const curb=(x,z,w,d)=>{const c=new T.Mesh(new T.BoxGeometry(w,.16,d),curbM);c.position.set(x,.06,z);c.castShadow=true;site.add(c)};
  
  if(L191)flat(11,5,pave,EX,EZ+3,0,.06);
  const hedgeM=MT(ctex(x=>{x.fillStyle="#3f5f2c";x.fillRect(0,0,256,256);for(let i=0;i<3000;i++){x.fillStyle=`hsl(${95+Math.random()*25},${35+Math.random()*20}%,${18+Math.random()*18}%)`;x.beginPath();x.arc(Math.random()*256,Math.random()*256,1+Math.random()*2.5,0,7);x.fill()}},1.2),{roughness:1});
  let seed=7;const rnd=()=>(seed=(seed*16807)%2147483647)/2147483647;
- const GZ=-(HZ-29);const free=(x,z)=>!(z<-40+GZ&&Math.abs(x)<95)&&!(L191&&x<14&&x>-50&&z>14&&z<34)&&!(L191&&Math.abs(x-EX)<8&&z>EZ-2&&z<EZ+22)&&Math.hypot(x/(HX+10),z/(HZ+10))>1;
- const firs=[];for(let k=0;k<1200&&firs.length<95;k++){const a=rnd()*6.283,r=55+Math.pow(rnd(),.7)*120,x=Math.cos(a)*r,z=Math.sin(a)*r*.9;if(!free(x,z))continue;firs.push([x,z,9+rnd()*11])}
+ const PF=[],PB=[];
+ if(G.site){const SI=G.site,F=SI.fx;
+  // living green fence: clipped hedge along the back and both sides, inside the metal fence
+  const hedge=(x,z,w,d,h)=>{const m=new T.Mesh(new T.BoxGeometry(w,h,d),hedgeM);m.position.set(x,h/2,z);m.castShadow=m.receiveShadow=true;const uv=m.geometry.attributes.uv;for(let i=0;i<uv.count;i++)uv.setXY(i,uv.getX(i)*Math.max(w,d)/2.4,uv.getY(i)*h/2.4);site.add(m)};
+  hedge(0,SI.back+.9,2*F-.4,1.4,2.6);hedge(-F+.8,(SI.back+SI.front)/2,1.2,SI.front-SI.back-2,2.1);hedge(F-.8,(SI.back+SI.front)/2,1.2,SI.front-SI.back-2,2.1);
+  // spruce row behind the back hedge, before the golf course
+  for(let x=-F+2;x<=F-2;x+=5.2)PF.push([x+(rnd()-.5)*1.2,SI.back-1.6-rnd()*1.4,8+rnd()*4]);
+  // trees along the side fences: spruce and broadleaf alternating
+  for(const sx of [-1,1])for(let z=SI.back+7,k=0;z<SI.front-6;z+=8.5,k++){const x=sx*(F-3.4);if(k%2)PF.push([x,z,7+rnd()*3]);else PB.push([x,z])}
+  // front garden: sculpture on a stone plinth beside the entrance path, paved circle, boxwood balls
+  const sx0=SI.path[0]+7,sz0=(SI.path[1]+SI.front)/2+2;
+  const disc=new T.Mesh(new T.CylinderGeometry(3.2,3.2,.06,48),pave);disc.position.set(sx0,0,sz0);disc.receiveShadow=true;site.add(disc);
+  flat(SI.path[0]+7-SI.path[0]-1.3,1.2,pave,(SI.path[0]+.9+sx0-3.2)/2,sz0,0,.06);
+  const stone=M(0xe4dfd5,{roughness:.6}),bronze=M(0x8a6a3e,{roughness:.35,metalness:.85});
+  const pl=new T.Mesh(new T.BoxGeometry(1.3,1.1,1.3),stone);pl.position.set(sx0,.55,sz0);pl.castShadow=pl.receiveShadow=true;site.add(pl);
+  const sc=new T.Mesh(new T.TorusKnotGeometry(.55,.16,140,18,2,3),bronze);sc.scale.set(1,1.6,1);sc.position.set(sx0,2.2,sz0);sc.castShadow=true;site.add(sc);
+  const ballG=new T.IcosahedronGeometry(1,2);[[-2.4,0],[2.4,0],[0,-2.4],[0,2.4]].forEach(([dx,dz])=>{const b=new T.Mesh(ballG,hedgeM);b.scale.setScalar(.55);b.position.set(sx0+dx,.5,sz0+dz);b.castShadow=true;site.add(b)});
+  for(let z=SI.path[1]+3;z<SI.front-1;z+=4)[-1.6,1.6].forEach(dx=>{if(Math.abs(z-sz0)<1.6&&dx>0)return;const b=new T.Mesh(ballG,hedgeM);b.scale.setScalar(.45);b.position.set(SI.path[0]+dx,.4,z);b.castShadow=true;site.add(b)});
+ }
+ const GZ=-(HZ-29);const SIT=G.site;const GD=G.gdoors?[(G.gdoors[0][0]-CX)*u-2,(G.gdoors[G.gdoors.length-1][0]+G.gdoors[G.gdoors.length-1][2]-CX)*u+2,(G.gdoors[0][1]-CZ)*u]:null;const free=(x,z)=>!(SIT&&((Math.abs(x)<SIT.fx+3&&z>SIT.back-3&&z<SIT.road+6)||Math.abs(z-SIT.road)<6||(SIT.neighbor&&x>SIT.neighbor.dx-SIT.fx-4&&x<SIT.neighbor.dx+SIT.fx+4&&z>SIT.back-3&&z<SIT.road)))&&!(GD&&x>GD[0]-4&&x<GD[1]+4&&z>GD[2]-2&&z<GD[2]+26)&&!(z<-40+GZ&&Math.abs(x)<95)&&!(L191&&x<14&&x>-50&&z>14&&z<34)&&!(L191&&Math.abs(x-EX)<8&&z>EZ-2&&z<EZ+22)&&Math.hypot(x/(HX+10),z/(HZ+10))>1;
+ const firs=PF.slice();for(let k=0;k<1200&&firs.length<95+PF.length;k++){const a=rnd()*6.283,r=55+Math.pow(rnd(),.7)*120,x=Math.cos(a)*r,z=Math.sin(a)*r*.9;if(!free(x,z))continue;firs.push([x,z,9+rnd()*11])}
  const TIERS=7,cone=new T.ConeGeometry(1,1,12,1,true),leaf=new T.MeshStandardMaterial({color:0xffffff,roughness:.95,side:T.DoubleSide});
  const cones=new T.InstancedMesh(cone,leaf,firs.length*TIERS),trunks=new T.InstancedMesh(new T.CylinderGeometry(.14,.3,1,7),M(0x4b3a2c,{roughness:1}),firs.length);
  firs.forEach(([x,z,h],i)=>{dummy.rotation.set(0,0,0);dummy.position.set(x,h*.18,z);dummy.scale.set(1,h*.36,1);dummy.updateMatrix();trunks.setMatrixAt(i,dummy.matrix);
   const base=new T.Color().setHSL(.36+rnd()*.05,.28+rnd()*.1,.09+rnd()*.05);
   for(let c=0;c<TIERS;c++){const f=c/TIERS,w=h*.27*(1-f*.86)*(.9+rnd()*.2);dummy.position.set(x+(rnd()-.5)*.25,h*(.16+f*.78)+h*.07,z+(rnd()-.5)*.25);dummy.rotation.set((rnd()-.5)*.08,rnd()*3,(rnd()-.5)*.08);dummy.scale.set(w,h*.22,w);dummy.updateMatrix();cones.setMatrixAt(i*TIERS+c,dummy.matrix);cones.setColorAt(i*TIERS+c,base.clone().offsetHSL(0,0,f*.06))}});
  cones.castShadow=trunks.castShadow=cones.receiveShadow=true;site.add(cones,trunks);
- const nb=34,CL=7,crown=new T.InstancedMesh(new T.IcosahedronGeometry(1,2),new T.MeshStandardMaterial({color:0xffffff,roughness:1}),nb*CL),tr2=new T.InstancedMesh(new T.CylinderGeometry(.14,.26,1,7),M(0x5d4a39,{roughness:1}),nb);
- for(let n=0,k=0;n<nb&&k<1200;k++){const a=rnd()*6.283,r=46+rnd()*60,x=Math.cos(a)*r,z=Math.sin(a)*r*.9;if(!free(x,z))continue;const h=6+rnd()*5,col=new T.Color().setHSL(.22+rnd()*.06,.3+rnd()*.12,.17+rnd()*.07);
+ const nb=34+PB.length,CL=7,crown=new T.InstancedMesh(new T.IcosahedronGeometry(1,2),new T.MeshStandardMaterial({color:0xffffff,roughness:1}),nb*CL),tr2=new T.InstancedMesh(new T.CylinderGeometry(.14,.26,1,7),M(0x5d4a39,{roughness:1}),nb);
+ for(let n=0,k=0;n<nb&&k<1200;k++){let x,z;if(n<PB.length)[x,z]=PB[n];else{const a=rnd()*6.283,r=46+rnd()*60;x=Math.cos(a)*r;z=Math.sin(a)*r*.9;if(!free(x,z))continue}const h=6+rnd()*5,col=new T.Color().setHSL(.22+rnd()*.06,.3+rnd()*.12,.17+rnd()*.07);
   dummy.rotation.set(0,0,0);dummy.position.set(x,h*.3,z);dummy.scale.set(1,h*.6,1);dummy.updateMatrix();tr2.setMatrixAt(n,dummy.matrix);
   for(let c=0;c<CL;c++){const s2=h*(.18+rnd()*.12);dummy.position.set(x+(rnd()-.5)*h*.42,h*(.6+rnd()*.32),z+(rnd()-.5)*h*.42);dummy.scale.set(s2,s2*.82,s2);dummy.rotation.set(rnd()*3,rnd()*3,0);dummy.updateMatrix();crown.setMatrixAt(n*CL+c,dummy.matrix);crown.setColorAt(n*CL+c,col.clone().offsetHSL(0,0,(rnd()-.5)*.06))}n++}
  crown.castShadow=tr2.castShadow=crown.receiveShadow=true;site.add(crown,tr2);
@@ -501,12 +549,15 @@ async function pie3d(){
  {const PZ=-HZ-4;flat(16,7,pave,-12,PZ,0,.06);const lm=M(0xece6da,{roughness:.9}),wm=M(0x8a6440,{roughness:.6});
   [-18,-15,-12].forEach(x=>{const b=new T.Mesh(new T.BoxGeometry(.75,.3,2),wm);b.position.set(x,.2,PZ);const c=new T.Mesh(new T.BoxGeometry(.7,.12,1.9),lm);c.position.set(x,.41,PZ-.05);const back=new T.Mesh(new T.BoxGeometry(.7,.1,.7),lm);back.position.set(x,.62,PZ-.85);back.rotation.x=-.7;[b,c,back].forEach(o=>{o.castShadow=true;site.add(o)})});
   const up=new T.Mesh(new T.CylinderGeometry(.04,.04,2.4,6),M(0x666666));up.position.set(-7,1.2,PZ);const can=new T.Mesh(new T.ConeGeometry(1.6,.5,8,1,true),new T.MeshStandardMaterial({color:0xefe9dd,side:T.DoubleSide,roughness:.9}));can.position.set(-7,2.4,PZ);[up,can].forEach(o=>{o.castShadow=true;site.add(o)})}
+ if(SIT&&SIT.neighbor){const NB=SIT.neighbor;fetch(`pie/${NB.k}/geo.json`).then(r=>r.json()).then(N=>{const nw=N.W*u/2,nh=N.H*u/2,g=new T.Group(),bx=(r,y0,y1,m)=>{for(let i=0;i<r.length;i+=4){const b=new T.Mesh(unit,m);b.scale.set(r[i+2]*u,y1-y0,r[i+3]*u);b.position.set((r[i]+r[i+2]/2)*u-nw,(y0+y1)/2,(r[i+1]+r[i+3]/2)*u-nh);b.castShadow=b.receiveShadow=true;g.add(b)}};
+   bx(N.house1,0,3.5,M(0xe8e3da,{roughness:.8}));bx(N.roof2||[],3.5,7.0,MT(lamT,{roughness:.7}));bx(N.roof2||[],7.0,7.6,M(0xefece6));g.position.set(NB.dx,0,0);g.rotation.y=Math.PI;site.add(g);P3&&(P3.nb=[NB,new T.Vector3(NB.dx,11,0)])}).catch(()=>{})}
  const car={position:{x:0}};
  // controls
  const ctl=new T.OrbitControls(cam,cv);ctl.target.set(0,2.5,0);ctl.enableZoom=false;ctl.enablePan=false;ctl.maxPolarAngle=1.45;ctl.minPolarAngle=.25;ctl.enableDamping=true;ctl.autoRotateSpeed=.55;
  if(matchMedia("(pointer:coarse)").matches){ctl.enableRotate=false;cv.style.touchAction="pan-y"}
- const C0=new T.Vector3(-74,66,96).multiplyScalar(SC);cam.position.copy(C0);
+ const C0=(G.roofw?new T.Vector3(-70,44,100):new T.Vector3(-74,66,96)).multiplyScalar(SC);cam.position.copy(C0);
  const PP=L191?PINS.map(p=>[p[0],p[1]*2.2,p[2]*1.932,p[3],img(p[4])]):(G.pins||[]).map(p=>[p[0],p[1],p[2],p[3],p[4]?img(p[4]):""]);
+ document.getElementById("pins").insertAdjacentHTML("afterend",G.site&&G.site.neighbor?`<a class="pin nb in" id="nbpin" hidden href="#dom-${G.site.neighbor.k}"><span>${G.site.neighbor.name} — соседний дом →</span></a>`:"");
  document.getElementById("pins").innerHTML=PP.map((p,i)=>`<button class="pin${p[4]?"":" np"}" type="button" data-i="${i}" ${p[4]?`data-src="${p[4]}"`:""}><span>${p[0]}</span></button>`).join("");
  const pinEls=[...document.querySelectorAll("#pins .pin")],v=new T.Vector3();
  const S=P3={pp:PP,renderer,st:pieStep(),raf:0,dist:1,carZ:-90,lawn:0};
@@ -525,6 +576,7 @@ async function pie3d(){
   else if(S.back){ctl.target.lerp(v.set(0,2.5,0),.08);cam.position.lerp(C0,.06);if(cam.position.distanceTo(C0)<1)S.back=0}
   ctl.autoRotate=st>=10&&!S.fly&&!S.back;ctl.update();renderer.render(scene,cam);
   const w=stage.clientWidth,h=stage.clientHeight;
+ {const nbEl=document.getElementById("nbpin");if(S.nb&&st>=10){const pv=S.nb[1].clone().project(cam);nbEl.hidden=false;nbEl.style.left=(pv.x*.5+.5)*w+"px";nbEl.style.top=(-pv.y*.5+.5)*h+"px"}else if(nbEl)nbEl.hidden=true}
   pinEls.forEach((el,i)=>{const p=PP[i],fl=p[3],show=st>=10||(fl===1&&st===4)||(fl===2&&st===7);
    if(!show){el.classList.remove("in");return}
    v.set((p[1]-CX)*u,st>=10?(fl===1?9:12.5):(fl===1?4.6:8.2),(p[2]-CZ)*u).project(cam);
@@ -677,6 +729,5 @@ addEventListener("hashchange",route);route();
 const lb=document.getElementById("lb");
 document.addEventListener("click",e=>{const rx=e.target.closest("#roomx");if(rx){document.getElementById("room").classList.remove("on");if(P3)P3.fly=null;return}const pn=e.target.closest(".pin");if(pn&&!pn.dataset.src)return;if(pn&&P3){const p=P3.pp[+pn.dataset.i],rm=document.getElementById("room");rm.querySelector("img").src=pn.dataset.src;rm.querySelector("b").textContent=p[0];P3.fly=p;setTimeout(()=>rm.classList.add("on"),900);return}const b=e.target.closest(".gal button,.plans button,.draw button");if(b){lb.querySelector("img").src=b.dataset.src;lb.showModal()}else if(e.target.closest("#lb"))lb.close()});
 </script>
-
 </body>
 </html>
