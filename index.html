@@ -780,6 +780,18 @@ async function pie3d(){
   const lamps=[],lampM=new T.MeshStandardMaterial({color:0x222222,emissive:0xffd9a0,emissiveIntensity:0});
   if(G.site){const SI=G.site,pts=[];for(let z=SI.path[1]+3;z<SI.front-1;z+=5)pts.push([SI.path[0]+1.6,z]);for(let x=-SI.fx+6;x<SI.fx;x+=12)pts.push([x,SI.front-1.2]);
    pts.forEach(([x,z])=>{const p=new T.Mesh(new T.CylinderGeometry(.06,.08,1.2,6),M(0x2a2a2a));p.position.set(x,.6,z);const h=new T.Mesh(new T.CylinderGeometry(.24,.24,.32,10),lampM);h.position.set(x,1.25,z);SB.add(p,h);lamps.push(h)})}
+  // facade lighting: uplight washes on walls, glow strip under the roof edge
+  const washT=(()=>{const c=document.createElement("canvas");c.width=64;c.height=128;const x=c.getContext("2d");const g=x.createRadialGradient(32,128,2,32,128,120);g.addColorStop(0,"rgba(255,214,150,1)");g.addColorStop(.35,"rgba(255,190,120,.55)");g.addColorStop(1,"rgba(255,170,100,0)");x.fillStyle=g;x.fillRect(0,0,64,128);const t=new T.CanvasTexture(c);t.encoding=T.sRGBEncoding;return t})();
+  const washM=new T.MeshBasicMaterial({map:washT,transparent:true,opacity:0,blending:T.AdditiveBlending,depthWrite:false,side:T.DoubleSide});
+  const stripM=new T.MeshBasicMaterial({color:0xffd7a0,transparent:true,opacity:0});
+  const lightBox=new T.Group();scene.add(lightBox);
+  const bbox=r=>{let a=1e9,b=1e9,c=-1e9,d=-1e9;for(let i=0;i<r.length;i+=4){a=Math.min(a,(r[i]-CX)*u);b=Math.min(b,(r[i+1]-CZ)*u);c=Math.max(c,(r[i]+r[i+2]-CX)*u);d=Math.max(d,(r[i+1]+r[i+3]-CZ)*u)}return[a,b,c,d]};
+  const wash=(rects,y0,h)=>{if(!rects||!rects.length)return;const W=G.W,Hh=G.H,g=new Uint8Array(W*Hh);for(let i=0;i<rects.length;i+=4)for(let y=rects[i+1];y<rects[i+1]+rects[i+3];y++)for(let x=rects[i];x<rects[i]+rects[i+2];x++)g[y*W+x]=1;
+   const st=14,o=.2,add=(x,z,rot)=>{const m=new T.Mesh(new T.PlaneGeometry(2.4,h),washM);m.position.set(x,y0+h/2,z);m.rotation.y=rot;m.renderOrder=5;lightBox.add(m);const sp=new T.Mesh(new T.BoxGeometry(.3,.12,.3),stripM);sp.position.set(x,y0+.06,z);lightBox.add(sp)};
+   for(let x=7;x<W;x+=st){let y0c=-1,y1c=-1;for(let y=0;y<Hh;y++)if(g[y*W+x]){if(y0c<0)y0c=y;y1c=y}if(y0c<0)continue;add((x+.5-CX)*u,(y0c-CZ)*u-o,0);add((x+.5-CX)*u,(y1c+1-CZ)*u+o,0)}
+   for(let y=7;y<Hh;y+=st){let x0c=-1,x1c=-1;for(let x=0;x<W;x++)if(g[y*W+x]){if(x0c<0)x0c=x;x1c=x}if(x0c<0)continue;add((x0c-CX)*u-o,(y+.5-CZ)*u,Math.PI/2);add((x1c+1-CX)*u+o,(y+.5-CZ)*u,Math.PI/2)}};
+  wash(G.house1,.3,3.1);wash(G.house2,4.05,3.1);
+  ANIM.push(()=>{const n=S.nt||0;lightBox.visible=n>.01&&S.st>=8;washM.opacity=n*1.15;stripM.opacity=n})
   const pl=[];for(let i=0;i<3;i++){const l=new T.PointLight(0xffc98a,0,90,2);l.position.set((i-1)*HX*.6,3,HZ*.2);scene.add(l);pl.push(l)}
   ANIM.push(()=>{const tgt=S.night?1:0;S.nt+=(tgt-S.nt)*.05;const n=S.nt;if(n<.002&&!S.night){if(scene.background!==day.bg){scene.background=day.bg;scene.environment=day.env}}
    sun.intensity=day.sun*(1-n*.88);hemi.intensity=day.hemi*(1-n*.6);renderer.toneMappingExposure=day.exp*(1-n*.15);scene.fog.color.copy(day.fog).lerp(fogN,n);
