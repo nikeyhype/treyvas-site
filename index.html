@@ -135,7 +135,7 @@ a.co:hover b{color:var(--bronze)}
 .people{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
 .person{display:grid;gap:10px;align-content:start;min-width:0}
 .person .ph,.portrait{aspect-ratio:3/4;background:var(--oak-2);border:1px solid var(--line);display:grid;place-items:center;overflow:hidden}
-.person img,.portrait img{width:100%;height:100%;object-fit:cover;object-position:top;filter:grayscale(1);transition:transform 1s}
+.person img,.portrait img{width:100%;height:100%;object-fit:cover;object-position:top;transition:transform 1s}
 .person:hover img{transform:scale(1.04)}
 .mono{font-family:var(--display);font-size:72px;color:var(--line)}
 .person h3{font-size:26px}
@@ -254,14 +254,14 @@ const H={
   nums:[["129,3","м² бассейн"],["92,7","м² гараж"]],
   title:"Гостиная под кольцами света",
   story:["Единое пространство гостиной, кухни и столовой собрано вокруг крупных кольцевых светильников.","Гараж и бассейн спланированы в одном объёме с домом."]},
- z35:{name:"Заречная 35",ready:"Дом готов",plan:"z35",st:"Заречная",area:"730,7",hero:"z35_ring",imgs:["z35_front","z35_fire","z35_corner","z35_lounge","z35_living","z35_living2","z35_dining","z35_kitchen","z35_bed","z35_bath","z35_ward","z35_wc"],
-  nums:[["136,9","м² бассейн"]],
+ z35:{name:"Заречная 35",ready:"Дом готов",plan:"z35",st:"Заречная",area:"730,7",hero:"z35_ring",imgs:["z35_front","z35_fire","z35_pool","z35_spa","z35_corner","z35_lounge","z35_living","z35_living2","z35_dining","z35_kitchen","z35_bed","z35_bath","z35_ward","z35_wc"],
+  nums:[["1 400","м² дом"],["30","соток у гольф-поля"],["5","спален, 7 санузлов"],["$14,9 млн","цена"]],
   title:"Терраса с живым огнём",
-  story:["Крытая терраса с очагом работает как ещё одна комната дома.","Во дворе — кольцевая скульптура, внутри — гостиная с двусветным пространством и мраморные ванные."]},
- z36:{name:"Заречная 36",ready:"Дом готов",plan:"z36",st:"Заречная",area:"835,3",hero:"z36_ext",imgs:["z36_pool","z36_car"],
-  nums:[["160,5","м² бассейн"],["75,2","м² гараж"]],
+  story:["Двухэтажный дом на припарковом участке с панорамным видом на гольф-поле. Натуральные премиальные материалы, «умный дом», отделка под ключ.","Первый этаж — двусветная гостиная с камином, кухня, столовая и рабочая кухня, кабинет, гостевая спальня, тренажёрный зал и СПА-зона с бассейном, сауной и душевой, гараж на три машины, крытая терраса с живым огнём.","Второй этаж — четыре спальни, у каждой своя гардеробная и ванная, блок для персонала, постирочная и три террасы. Во дворе — кольцевая скульптура."]},
+ z36:{name:"Заречная 36",ready:"Дом готов",plan:"z36",st:"Заречная",area:"835,3",hero:"z36_ext",imgs:["z36_front","z36_back","z36_corner","z36_pool","z36_pool2","z36_bed2","z36_car"],
+  nums:[["1 400","м² дом"],["30","соток у гольф-поля"],["5","спален, 7 санузлов"],["$14,9 млн","цена"]],
   title:"Белая консоль над садом",
-  story:["Второй этаж вынесен над террасой широкой консолью, под ней — летняя гостиная и вода.","Внутри атриум с лестницей, столовая с видом на лес и бассейн, отделанный камнем."]},
+  story:["Двухэтажный дом на участке 30 соток с видом на гольф-поле. Второй этаж вынесен над террасой широкой консолью, под ней — летняя гостиная и вода.","Первый этаж — двусветная гостиная с камином, кухня, столовая и рабочая кухня, кабинет, гостевая спальня, тренажёрный зал, СПА-зона с бассейном, сауной и душевыми, гараж на три машины, крытая терраса.","Второй этаж — четыре спальни с гардеробными и ванными, блок для персонала, постирочная, терраса. «Умный дом», натуральные материалы, отделка под ключ."]},
  r1:{name:"Речная 1",ready:"Сдача примерно через 8 месяцев",plan:"r1",st:"Речная",area:"569,0",hero:"l193_ext",imgs:["r1_bed"],
   nums:[["108,7","м² бассейн"]],
   title:"Спокойный дом у реки",
@@ -285,9 +285,6 @@ const P={
  natalia:{name:"Наталия Гринфельд",co:"Point Design",role:"Руководитель Point Design",photo:"natalia",
   short:"Руководитель Point Design. Архитектура и интерьеры всех домов.",
   text:["Пятнадцать лет ведёт студию архитектуры и дизайна интерьера: 105 проектов и 100 000 м² объектов.","За каждым домом закреплён свой автор, который ведёт его от первой встречи до развески штор."],quote:"Дизайн — это эволюция, и наша студия развивается благодаря вам"},
- marina:{name:"Марина",co:"Point WoodCraft",role:"Директор Point WoodCraft",mono:"М",
-  short:"Директор Point WoodCraft. Шпон, двери, кухни и вся столярка собственного производства.",
-  text:["Руководит мастерской, где делают стеновые панели, двери, кухни и встроенную мебель для домов группы.","Столяры видят проект задолго до монтажа, поэтому рисунок шпона сходится на стыках, а мебель встаёт в размер."],quote:null}
 };
 const C={
  "point-estate":{name:"Point Estate",kind:"Недвижимость",who:"irina",img:"l192_eve",site:"pointestate.ru",
@@ -713,7 +710,7 @@ function company(k){
  <section><div class="w" style="display:grid;gap:56px">${numsB(c.nums)}
   <div class="split"><div class="lft"><span class="eyebrow">Роль в доме</span><h2>Что делает компания</h2></div><div class="prose">${c.text.map(t=>`<p>${t}</p>`).join("")}</div></div>
   ${c.facts.length?`<div class="cols4">${c.facts.map(f=>`<div><b>${f[0]}</b><span>${f[1]}</span></div>`).join("")}</div>`:""}
-  <div class="split"><div><div class="sec-head"><span class="eyebrow">Руководитель</span></div><div class="people" style="grid-template-columns:minmax(0,300px)">${person(c.who)}</div></div>
+  <div class="split">${P[c.who]?`<div><div class="sec-head"><span class="eyebrow">Руководитель</span></div><div class="people" style="grid-template-columns:minmax(0,300px)">${person(c.who)}</div></div>`:""}
   <div class="contact"><div class="sec-head"><span class="eyebrow">Контакты</span></div><dl>${c.contacts.map(x=>`<div><dt>${x[0]}</dt><dd>${cval(x[1])}</dd></div>`).join("")}${c.site?`<div><dt>Сайт</dt><dd><a href="https://${c.site}" target="_blank" rel="noopener" style="border-bottom:1px solid var(--bronze)">${c.site}</a></dd></div>`:""}</dl></div></div>
  </div></section>
  <section class="stone"><div class="w"><div class="sec-head"><span class="eyebrow">Группа</span><h2>Остальные компании</h2></div>${group()}</div></section>`;
