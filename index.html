@@ -271,7 +271,7 @@ const H={
   title:"Тот же проект, другой участок",
   story:["Дом построен по проекту Лазурной 19.2: каменный портал камина, остекление первого этажа, бассейн под одной крышей с домом.","Участок другой, поэтому посадка дома и виды из окон свои."]}
 };
-const H3D={l191:"l191",z36:"z36"};
+const H3D={l191:"l191",z36:"z36",z35:"z35"};
 const STREETS=[["Лазурная",["l11","l191","l192","l193"]],["Заречная",["z35","z36"]],["Речная",["r1","r2"]]];
 const order=STREETS.flatMap(s=>s[1]);
 
@@ -425,8 +425,9 @@ async function pie3d(){
  grp[1].add(boxes(G.slab,.03,.29,conc,0));
  grp[2].add(boxes(G.walls1,.3,3.7,wall));
  const whiteM1=()=>MT(ctex(x=>{x.fillStyle="#e9e4da";x.fillRect(0,0,256,256);x.strokeStyle="rgba(120,112,100,.35)";for(let i=0;i<=256;i+=128){x.beginPath();x.moveTo(i,0);x.lineTo(i,256);x.stroke()}for(let i=0;i<=256;i+=64){x.beginPath();x.moveTo(0,i);x.lineTo(256,i);x.stroke()}noise(x,.03)},3),{roughness:.75});
- if(G.skin1)grp[2].add(boxes(G.skin1,.3,3.4,whiteM1(),.06));
- if(G.clad_garage)grp[2].add(boxes(G.clad_garage,.3,3.75,MT(ctex(x=>{x.fillStyle="#e6e1d8";x.fillRect(0,0,256,256);x.fillStyle="rgba(110,100,90,.35)";for(let i=0;i<256;i+=32)x.fillRect(i,0,1.5,256);noise(x,.03)},1.6),{roughness:.75}),.06));
+ const travM=G.dark?MT(ctex(x=>{x.fillStyle="#e3dccd";x.fillRect(0,0,256,256);for(let y=0;y<256;y+=3+Math.random()*5){x.fillStyle=`rgba(${120+Math.random()*40},${105+Math.random()*30},${80+Math.random()*30},${.08+Math.random()*.2})`;x.fillRect(0,y,256,1+Math.random()*2.5)}noise(x,.04)},2.4),{roughness:.8}):null,graphM=M(0x1d1e20,{roughness:.75,metalness:0,envMapIntensity:.35});
+ if(G.skin1)grp[2].add(boxes(G.skin1,.3,3.4,G.dark?travM:whiteM1(),.06));
+ if(G.clad_garage)grp[2].add(boxes(G.clad_garage,.3,3.75,G.dark?travM:MT(ctex(x=>{x.fillStyle="#e6e1d8";x.fillRect(0,0,256,256);x.fillStyle="rgba(110,100,90,.35)";for(let i=0;i<256;i+=32)x.fillRect(i,0,1.5,256);noise(x,.03)},1.6),{roughness:.75}),.06));
  grp[3].add(floorPlane("tex1.png",.32),boxes(G.pool,.12,.33,water,0,false));
  const veneer=MT(veT,{roughness:.5}),walnut=M(0x4a3526,{roughness:.5}),chairM=M(0x8f7f6a,{roughness:.9}),stepM=M(0xb98d5c,{roughness:.5});
  const furn=(fl,y)=>[boxes(G["low"+fl],y,y+.5,sofa,-.06),boxes(G["low"+fl],y+.5,y+.62,M(0xe7dfd0,{roughness:1}),-.3,false),boxes(G["tall"+fl],y,y+2.6,veneer,-.04),boxes(G["table"+fl],y+.68,y+.78,walnut,-.04),boxes(G["table"+fl],y,y+.68,walnut,-.5,false),boxes(G["chair"+fl],y,y+.48,chairM,-.08),boxes(G["chair"+fl],y+.48,y+.95,chairM,-.34,false)];
@@ -451,8 +452,9 @@ async function pie3d(){
  if(G.clad_wood)grp[6].add(boxes(G.clad_wood,4.0,7.2,MT(lamT,{roughness:.7}),.08));
  if(G.clad_white)grp[6].add(boxes(G.clad_white,4.0,7.2,whiteM,.08));
  grp[7].add(floorPlane("tex2.png",4.02),...furn("2",4.02));
- grp[8].add(boxes(G.glass1,.31,3.38,glass,-.14,false),boxes(G.glass2,4.01,7.19,glass,-.14,false),boxes(G.glass1,.3,.42,frameM,-.08),boxes(G.glass1,3.24,3.39,frameM,-.08),boxes(G.glass2,4.0,4.1,frameM,-.08),boxes(G.glass2,7.08,7.2,frameM,-.08),boxes(G.house1,3.4,3.69,G.roofw?whiteM:MT(stoneT),G.roofw?.5:0));
- if(G.gdoors)G.gdoors.forEach(([gx,gy,gw])=>{const d=new T.Mesh(unit,MT(ctex(x=>{x.fillStyle="#f2f0ec";x.fillRect(0,0,256,256);x.fillStyle="rgba(90,90,90,.35)";for(let i=0;i<256;i+=42)x.fillRect(0,i,256,2);for(let i=20;i<256;i+=60)x.fillRect(i,18,30,8)},4)));d.scale.set(gw*u,2.5,.15);d.position.set((gx+gw/2-CX)*u,1.55,(gy+1-CZ)*u+.14);grp[8].add(d)});
+ grp[8].add(boxes(G.glass1,.31,3.38,glass,-.14,false),boxes(G.glass2,4.01,7.19,glass,-.14,false),boxes(G.glass1,.3,.42,frameM,-.08),boxes(G.glass1,3.24,3.39,frameM,-.08),boxes(G.glass2,4.0,4.1,frameM,-.08),boxes(G.glass2,7.08,7.2,frameM,-.08),G.dark?boxes(G.fascia||G.house1,3.3,3.99,graphM,.3):boxes(G.house1,3.4,3.69,G.roofw?whiteM:MT(stoneT),G.roofw?.5:0));
+ if(G.cols)G.cols.forEach(([x,y])=>{const c=new T.Mesh(unit,graphM);c.scale.set(.45,3.1,.45);c.position.set((x-CX)*u,.3+1.55,(y-CZ)*u);c.castShadow=true;grp[8].add(c)});
+ if(G.gdoors)G.gdoors.forEach(([gx,gy,gw])=>{const d=new T.Mesh(unit,MT(ctex(x=>{x.fillStyle=G.dark?"#45484c":"#f2f0ec";x.fillRect(0,0,256,256);x.fillStyle="rgba(90,90,90,.35)";for(let i=0;i<256;i+=42)x.fillRect(0,i,256,2);for(let i=20;i<256;i+=60)x.fillRect(i,18,30,8)},4)));d.scale.set(gw*u,2.5,.15);d.position.set((gx+gw/2-CX)*u,1.55,(gy+1-CZ)*u+.14);grp[8].add(d)});
  if(G.entry){const [ex,ey,ew]=G.entry,fr=new T.Mesh(unit,anth);fr.scale.set(ew*u,3.2,.5);fr.position.set((ex+ew/2-CX)*u,1.9,(ey-CZ)*u+.3);grp[8].add(fr);const dd=new T.Mesh(unit,veneer);dd.scale.set(ew*u*.45,2.7,.2);dd.position.set((ex+ew/2-CX)*u,1.65,(ey-CZ)*u+.56);grp[8].add(dd)}
  if(G.ground_deck){const dk=ctex(x=>{for(let i=0;i<16;i++){x.fillStyle=`hsl(${28+Math.random()*6},${30+Math.random()*12}%,${40+Math.random()*10}%)`;x.fillRect(0,i*16,256,15)}},1.6);grp[3].add(boxes(G.ground_deck,0,.12,MT(dk,{roughness:.7}),0,false))}
  if(L191){const cx=(95-CX)*u,cz=(134-CZ)*u,can=new T.Mesh(unit,anth);can.scale.set(8.2,.4,4.2);can.position.set(cx,3.5,cz+.5);can.castShadow=true;grp[8].add(can);
@@ -460,12 +462,12 @@ async function pie3d(){
   const door=new T.Mesh(unit,veneer);door.scale.set(2.2,3,.16);door.position.set(cx,1.8,(128.4-CZ)*u);grp[8].add(door);
   const hnd=new T.Mesh(unit,M(0x2a2a2a,{metalness:.8,roughness:.3}));hnd.scale.set(.06,1.4,.08);hnd.position.set(cx+.7,1.8,(128.4-CZ)*u+.13);grp[8].add(hnd);
   const porch=new T.Mesh(unit,M(0xbdb5a6));porch.scale.set(10,.18,5.2);porch.position.set(cx,.2,cz+.7);porch.receiveShadow=true;grp[8].add(porch);}
- if(G.roofw){grp[9].add(boxes(G.roofw,7.2,8.3,whiteM,0),boxes(G.roofm,8.3,8.36,roofM,0,false));
-  if(G.skylight){const [sx,sy,sw]=G.skylight,cx0=(sx+sw/2-CX)*u,cz0=(sy+sw/2-CZ)*u,hw=sw*u/2;
-  const curb=new T.Mesh(new T.BoxGeometry(sw*u+.8,.9,sw*u+.8),whiteM);curb.position.set(cx0,8.36+.45,cz0);curb.castShadow=true;grp[9].add(curb);
-  const py=new T.Mesh(new T.ConeGeometry(hw*Math.SQRT2,3.2,4,1),new T.MeshPhysicalMaterial({color:0xa9cddd,roughness:.03,metalness:.4,transparent:true,opacity:.62,envMapIntensity:1.8}));py.rotation.y=Math.PI/4;py.position.set(cx0,8.36+.9+1.6,cz0);grp[9].add(py);
-  const eg=new T.LineSegments(new T.EdgesGeometry(py.geometry),new T.LineBasicMaterial({color:0x2a2b2d}));eg.rotation.y=Math.PI/4;eg.position.copy(py.position);grp[9].add(eg);
-  for(let k=1;k<4;k++){const t=k/4,r=new T.Mesh(new T.BoxGeometry(sw*u*(1-t)+.05,.06,.06),M(0x2a2b2d));[[0,1],[0,-1]].forEach(([a,b])=>{const m1=r.clone();m1.position.set(cx0,8.36+.9+3.2*t,cz0+b*hw*(1-t));grp[9].add(m1);const m2=r.clone();m2.rotation.y=Math.PI/2;m2.position.set(cx0+b*hw*(1-t),8.36+.9+3.2*t,cz0);grp[9].add(m2)})}}}
+ if(G.roofw){const RY=G.dark?7.95:8.36;if(G.dark)grp[9].add(boxes(G.roofw,7.2,7.3,MT(lamT,{roughness:.7}),0),boxes(G.roofw,7.3,7.9,graphM,0),boxes(G.roofm,7.9,7.95,roofM,0,false));else grp[9].add(boxes(G.roofw,7.2,8.3,whiteM,0),boxes(G.roofm,8.3,8.36,roofM,0,false));
+  if(G.skylight){const [sx,sy,sw,sh0]=G.skylight,sh=sh0||sw,cx0=0,cz0=0,hw=sw*u/2,SG=new T.Group();SG.position.set((sx+sw/2-CX)*u,0,(sy+sh/2-CZ)*u);SG.scale.z=sh/sw;grp[9].add(SG);
+  const curb=new T.Mesh(new T.BoxGeometry(sw*u+.8,.9,sw*u+.8),(G.dark?graphM:whiteM));curb.position.set(cx0,RY+.45,cz0);curb.castShadow=true;SG.add(curb);
+  const py=new T.Mesh(new T.ConeGeometry(hw*Math.SQRT2,3.2,4,1),new T.MeshPhysicalMaterial({color:0xa9cddd,roughness:.03,metalness:.4,transparent:true,opacity:.62,envMapIntensity:1.8}));py.rotation.y=Math.PI/4;py.position.set(cx0,RY+.9+1.6,cz0);SG.add(py);
+  const eg=new T.LineSegments(new T.EdgesGeometry(py.geometry),new T.LineBasicMaterial({color:0x2a2b2d}));eg.rotation.y=Math.PI/4;eg.position.copy(py.position);SG.add(eg);
+  for(let k=1;k<4;k++){const t=k/4,r=new T.Mesh(new T.BoxGeometry(sw*u*(1-t)+.05,.06,.06),M(0x2a2b2d));[[0,1],[0,-1]].forEach(([a,b])=>{const m1=r.clone();m1.position.set(cx0,RY+.9+3.2*t,cz0+b*hw*(1-t));SG.add(m1);const m2=r.clone();m2.rotation.y=Math.PI/2;m2.position.set(cx0+b*hw*(1-t),RY+.9+3.2*t,cz0);SG.add(m2)})}}}
  else grp[9].add(boxes(G.eave,7.21,7.43,M(0xe6dfd2,{roughness:.8}),0),boxes(G.eave,7.43,7.5,anth,0,false),boxes(G.roof2,7.5,7.62,roofM,-.6,false));
  {const deckT=ctex(x=>{for(let i=0;i<16;i++){x.fillStyle=`hsl(${28+Math.random()*6},${30+Math.random()*12}%,${40+Math.random()*10}%)`;x.fillRect(0,i*16,256,15);x.fillStyle="rgba(40,25,12,.6)";x.fillRect(0,i*16+15,256,1);const o=Math.random()*256;x.fillRect(o,i*16,1,15)}noise(x,.05)},1.6);
   grp[9].add(boxes(G.terrace,3.99,4.05,MT(deckT,{roughness:.7}),0,false));
@@ -517,7 +519,7 @@ async function pie3d(){
   flat(SI.path[0]+7-SI.path[0]-1.3,1.2,pave,(SI.path[0]+.9+sx0-3.2)/2,sz0,0,.06);
   const stone=M(0xe4dfd5,{roughness:.6}),bronze=M(0x8a6a3e,{roughness:.35,metalness:.85});
   const pl=new T.Mesh(new T.BoxGeometry(1.3,1.1,1.3),stone);pl.position.set(sx0,.55,sz0);pl.castShadow=pl.receiveShadow=true;site.add(pl);
-  const sc=new T.Mesh(new T.TorusKnotGeometry(.55,.16,140,18,2,3),bronze);sc.scale.set(1,1.6,1);sc.position.set(sx0,2.2,sz0);sc.castShadow=true;site.add(sc);
+  if(SI.statue==='ring'){const st=M(0x3b3d41,{roughness:.3,metalness:.9}),rg=new T.Mesh(new T.TorusGeometry(2.1,.32,24,72),st);rg.position.set(sx0,2.75,sz0);rg.rotation.y=Math.PI/2.6;rg.castShadow=true;site.add(rg);const wf=new T.Mesh(new T.CircleGeometry(1.8,48),new T.MeshPhysicalMaterial({color:0xcfe6f0,roughness:.1,transparent:true,opacity:.35,side:T.DoubleSide}));wf.position.copy(rg.position);wf.rotation.y=rg.rotation.y;site.add(wf);pl.scale.set(2.6,.4,1.2);pl.position.y=.2;pl.rotation.y=rg.rotation.y}else{const sc=new T.Mesh(new T.TorusKnotGeometry(.55,.16,140,18,2,3),bronze);sc.scale.set(1,1.6,1);sc.position.set(sx0,2.2,sz0);sc.castShadow=true;site.add(sc)}
   const ballG=new T.IcosahedronGeometry(1,2);[[-2.4,0],[2.4,0],[0,-2.4],[0,2.4]].forEach(([dx,dz])=>{const b=new T.Mesh(ballG,hedgeM);b.scale.setScalar(.55);b.position.set(sx0+dx,.5,sz0+dz);b.castShadow=true;site.add(b)});
   for(let z=SI.path[1]+3;z<SI.front-1;z+=4)[-1.6,1.6].forEach(dx=>{if(Math.abs(z-sz0)<1.6&&dx>0)return;const b=new T.Mesh(ballG,hedgeM);b.scale.setScalar(.45);b.position.set(SI.path[0]+dx,.4,z);b.castShadow=true;site.add(b)});
  }
@@ -550,7 +552,7 @@ async function pie3d(){
   [-18,-15,-12].forEach(x=>{const b=new T.Mesh(new T.BoxGeometry(.75,.3,2),wm);b.position.set(x,.2,PZ);const c=new T.Mesh(new T.BoxGeometry(.7,.12,1.9),lm);c.position.set(x,.41,PZ-.05);const back=new T.Mesh(new T.BoxGeometry(.7,.1,.7),lm);back.position.set(x,.62,PZ-.85);back.rotation.x=-.7;[b,c,back].forEach(o=>{o.castShadow=true;site.add(o)})});
   const up=new T.Mesh(new T.CylinderGeometry(.04,.04,2.4,6),M(0x666666));up.position.set(-7,1.2,PZ);const can=new T.Mesh(new T.ConeGeometry(1.6,.5,8,1,true),new T.MeshStandardMaterial({color:0xefe9dd,side:T.DoubleSide,roughness:.9}));can.position.set(-7,2.4,PZ);[up,can].forEach(o=>{o.castShadow=true;site.add(o)})}
  if(SIT&&SIT.neighbor){const NB=SIT.neighbor;fetch(`pie/${NB.k}/geo.json`).then(r=>r.json()).then(N=>{const nw=N.W*u/2,nh=N.H*u/2,g=new T.Group(),bx=(r,y0,y1,m)=>{for(let i=0;i<r.length;i+=4){const b=new T.Mesh(unit,m);b.scale.set(r[i+2]*u,y1-y0,r[i+3]*u);b.position.set((r[i]+r[i+2]/2)*u-nw,(y0+y1)/2,(r[i+1]+r[i+3]/2)*u-nh);b.castShadow=b.receiveShadow=true;g.add(b)}};
-   bx(N.house1,0,3.5,M(0xe8e3da,{roughness:.8}));bx(N.roof2||[],3.5,7.0,MT(lamT,{roughness:.7}));bx(N.roof2||[],7.0,7.6,M(0xefece6));g.position.set(NB.dx,0,0);g.rotation.y=Math.PI;site.add(g);P3&&(P3.nb=[NB,new T.Vector3(NB.dx,11,0)])}).catch(()=>{})}
+   const nwood=MT(lamT,{roughness:.7});bx(N.house1,0,3.4,N.dark?(travM||M(0xe3dccd)):M(0xe8e3da,{roughness:.8}));if(N.dark)bx(N.fascia||N.house1,3.3,3.99,graphM);else bx(N.house1,3.4,3.7,M(0xefece6));bx(N.house2||N.roof2||[],3.95,7.2,nwood);if(N.roofw){if(N.dark){bx(N.roofw,7.2,7.3,nwood);bx(N.roofw,7.3,7.9,graphM)}else bx(N.roofw,7.2,8.3,M(0xefece6))}else bx(N.roof2||[],7.2,7.6,M(0xefece6));g.position.set(NB.dx,0,0);g.rotation.y=NB.rot||0;site.add(g);P3&&(P3.nb=[NB,new T.Vector3(NB.dx,11,0)])}).catch(()=>{})}
  const car={position:{x:0}};
  // controls
  const ctl=new T.OrbitControls(cam,cv);ctl.target.set(0,2.5,0);ctl.enableZoom=false;ctl.enablePan=false;ctl.maxPolarAngle=1.45;ctl.minPolarAngle=.25;ctl.enableDamping=true;ctl.autoRotateSpeed=.55;
