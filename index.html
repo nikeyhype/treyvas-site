@@ -36,8 +36,8 @@ p{margin:0}
 
 header{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:color-mix(in srgb,var(--oak) 90%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
 header .w{display:flex;align-items:center;justify-content:space-between;gap:8px 16px;padding-block:14px;flex-wrap:wrap}
-.logo{display:inline-flex;flex-direction:column;align-items:center;line-height:1;text-transform:uppercase;white-space:nowrap}.logo b{font-family:var(--display);font-weight:500;font-size:23px;letter-spacing:.34em;margin-right:-.34em}.logo b::after{content:"";display:block;height:1px;background:var(--bronze);opacity:.7;margin:6px .34em 0 0}
-.logo small{font-family:var(--body);font-size:8px;font-weight:500;letter-spacing:.66em;margin-right:-.66em;color:var(--mute);margin-top:6px}
+.logo{display:inline-flex;color:var(--stone);line-height:0}.logo .lgsvg{height:50px;width:auto;overflow:visible}footer .logo .lgsvg{height:60px}
+
 .card .ph.lg{display:grid;place-items:center;background:var(--oak-2);border:1px solid var(--line)}.card .ph.lg img{width:auto;height:auto;max-width:58%;max-height:46%;object-fit:contain;filter:brightness(0) invert(.9)}.card:hover .ph.lg img{transform:scale(1.04)}
 .hero.lgh{background:var(--oak-2)}.hero.lgh .hlogo{position:absolute;right:max(20px,8vw);top:50%;transform:translateY(-60%);width:min(38vw,440px);max-height:40%;object-fit:contain;filter:brightness(0) invert(.9);opacity:.95}@media(max-width:760px){.hero.lgh .hlogo{position:static;transform:none;width:60%;margin:0 0 24px}.hero.lgh .w{display:flex;flex-direction:column}}
 nav{display:flex;gap:6px 20px;flex-wrap:wrap;font-size:13px;letter-spacing:.05em}
@@ -221,14 +221,14 @@ footer a:hover{color:var(--stone)}
 </head>
 <body>
 <header><div class="w">
-  <a class="logo" href="#home"><b>Treyvas</b><small>Development</small></a>
+  <a class="logo" href="#home"><svg class="lgsvg" viewBox="0 0 210 60" role="img" aria-label="Treyvas Development"><text x="105" y="29" text-anchor="middle" textLength="204" lengthAdjust="spacing" style="font-family:var(--display);font-size:31px;font-weight:500;fill:currentColor">TREYVAS</text><rect x="3" y="35" width="204" height="1.2" style="fill:var(--bronze)"/><text x="105" y="56" text-anchor="middle" textLength="204" lengthAdjust="spacing" style="font-family:var(--body);font-size:14px;font-weight:600;fill:var(--bronze)">DEVELOPMENT</text></svg></a>
   <nav id="nav">
     <a href="#doma">Дома</a><a href="#kak-stroim">Как мы строим</a><a href="#o-nas">О нас</a><a href="#gruppa">Группа</a><a href="#lyudi">Люди</a><a href="#zhurnal">Журнал</a><a href="#kontakty">Контакты</a>
   </nav>
 </div></header>
 <main id="app"></main>
 <footer><div class="w">
-  <div><span class="logo" style="color:var(--stone)"><b>Treyvas</b><small>Development</small></span><p style="margin-top:10px;max-width:36ch">Частные дома в Подмосковье. Входит в Point Group. Это прототип сайта, изображения — визуализации проектов.</p></div>
+  <div><span class="logo" style="color:var(--stone)"><svg class="lgsvg" viewBox="0 0 210 60" role="img" aria-label="Treyvas Development"><text x="105" y="29" text-anchor="middle" textLength="204" lengthAdjust="spacing" style="font-family:var(--display);font-size:31px;font-weight:500;fill:currentColor">TREYVAS</text><rect x="3" y="35" width="204" height="1.2" style="fill:var(--bronze)"/><text x="105" y="56" text-anchor="middle" textLength="204" lengthAdjust="spacing" style="font-family:var(--body);font-size:14px;font-weight:600;fill:var(--bronze)">DEVELOPMENT</text></svg></span><p style="margin-top:10px;max-width:36ch">Частные дома в Подмосковье. Входит в Point Group. Это прототип сайта, изображения — визуализации проектов.</p></div>
   <div><b>Дома</b><a href="#dom-l191">Лазурная 19.1</a><a href="#dom-r2">Речная 2</a><a href="#dom-z36">Заречная 36</a><a href="#doma">Все дома</a></div>
   <div><b>Компания</b><a href="#o-nas">История</a><a href="#lyudi">Люди</a><a href="#kak-stroim">Как мы строим</a><a href="#zhurnal">Журнал</a></div>
   <div><b>Группа</b><a href="#point-estate">Point Estate</a><a href="#point-design">Point Design</a><a href="#point-woodcraft">Point WoodCraft</a><a href="#kontakty">Контакты</a></div>
