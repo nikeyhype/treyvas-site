@@ -744,9 +744,10 @@ async function pie3d(){
   // a car drives in and parks in the garage on the last step
   if(G.gdoors){const g0=G.gdoors[Math.min(1,G.gdoors.length-1)],gx=(g0[0]+g0[2]/2-CX)*u,gz=(g0[1]+1-CZ)*u;
    const mv=mkCar(0x2a2f36);scene.add(mv);EXT.push([mv,10,10]);
-   const P=[[-120,SI.road+1.8],[gx-6,SI.road+1.8],[gx,SI.road-2],[gx,SI.front+1],[gx,gz+4]];const segL=P.slice(1).map((p,i)=>Math.hypot(p[0]-P[i][0],p[1]-P[i][1])),tot=segL.reduce((a,b)=>a+b,0);
-   ANIM.push((t,st)=>{if(!mv.visible)return;const C=24000,q=(t%C)/C,dr=q<.55?q/.55:1,d=tot*(1-Math.pow(1-dr,2.2));let s=d,i=0;while(i<segL.length-1&&s>segL[i]){s-=segL[i];i++}const a=P[i],b=P[i+1],f=Math.min(1,s/segL[i]);
-    mv.position.set(a[0]+(b[0]-a[0])*f,.04,a[1]+(b[1]-a[1])*f);const GT=G._gate;if(GT){const want=q<.62&&(i<3?Math.abs(mv.position.x-GT.x0)<30:1)?1:0;GT.o+=(want-GT.o)*.04;GT.g.position.x=GT.x0-GT.o*GT.gw}mv.rotation.y=Math.atan2(-(b[1]-a[1]),b[0]-a[0])+Math.PI;mv.visible=q<.97})}
+   const RZ=SI.road+1.8,CRV=new T.CatmullRomCurve3([[-120,RZ],[gx-40,RZ],[gx-14,RZ],[gx-5,RZ-1.2],[gx-.8,SI.front+3.5],[gx,SI.front-2],[gx,gz+4]].map(p=>new T.Vector3(p[0],.04,p[1])),false,"centripetal",.5),CL=CRV.getLength(),tg=new T.Vector3();
+   ANIM.push((t,st)=>{if(!mv.visible)return;const C=26000,q=(t%C)/C,dr=Math.min(1,q/.6),e=dr<.75?dr/.75*.86:.86+.14*(1-Math.pow(1-(dr-.75)/.25,2)),u0=Math.min(1,e);
+    CRV.getPointAt(u0,mv.position);CRV.getTangentAt(Math.min(.999,u0),tg);mv.rotation.y=Math.atan2(tg.z,-tg.x);
+    const GT=G._gate;if(GT){const want=q<.66&&mv.position.x>GT.x0-40?1:0;GT.o+=(want-GT.o)*.035;GT.g.position.x=GT.x0-GT.o*GT.gw}mv.visible=q<.97})}
   // pool water moves
   if(water.map==null){const wt=ctex(x=>{x.fillStyle="#3f9ac0";x.fillRect(0,0,256,256);for(let i=0;i<220;i++){x.strokeStyle=`rgba(255,255,255,${.06+Math.random()*.12})`;x.lineWidth=1+Math.random()*2;x.beginPath();const cx=Math.random()*256,cy=Math.random()*256;x.ellipse(cx,cy,8+Math.random()*22,3+Math.random()*6,Math.random()*.4,0,Math.PI*2);x.stroke()}},3);water.map=wt;water.color.set(0xffffff);water.needsUpdate=true;
    ANIM.push(t=>{wt.offset.set(t*.00003,Math.sin(t*.0004)*.03)})}
@@ -820,7 +821,7 @@ const V={
    ${streets()}
    <div class="row" style="margin-top:36px"><a class="btn" href="#doma">Все дома</a></div>
   </div></section>
-  ${pie()}
+  ${pie("z36")}
   <section><div class="w"><div class="sec-head"><span class="eyebrow">Кто строит</span><h2>Люди за каждым домом</h2><a class="more" href="#lyudi">Подробнее о каждом</a></div>${people()}</div></section>
   <section style="padding-top:0"><div class="w"><div class="sec-head"><span class="eyebrow">Контроль</span><h2>Контроль на каждом этапе</h2><a class="more" href="#kak-stroim">Как мы строим</a></div>${control()}</div></section>`,
 
@@ -831,7 +832,7 @@ const V={
   <section style="padding-top:24px"><div class="w"><div class="sec-head"><span class="eyebrow">Шесть этапов</span><h2>От первой встречи до ключей</h2></div>
    <div class="cols4" style="grid-template-columns:repeat(3,1fr)">
    ${[["Техническое задание","Записываем привычки и пожелания семьи. С этого документа начинается проект."],["Концепция и планировка","Планировочное решение и общий образ. От них зависят стиль и инженерные сети."],["Визуализация","Фотореалистичные изображения показывают, каким дом получится на самом деле."],["Рабочая документация","Чертежи для строителей: все коммуникации и узлы, чтобы дом работал правильно."],["Строительство и комплектация","Стройка идёт параллельно с подбором материалов, мебели и производством столярки."],["Авторский надзор и сдача","Еженедельный надзор авторов проекта и поэтапная приёмка до передачи ключей."]].map((s,i)=>`<div style="padding-bottom:28px"><i>0${i+1}</i><b>${s[0]}</b><span>${s[1]}</span></div>`).join("")}</div></div></section>
-  ${pie()}${drawings()}
+  ${pie("z36")}${drawings()}
   <section><div class="w"><div class="sec-head"><span class="eyebrow">Контроль</span><h2>Контроль на каждом этапе</h2></div>${control()}</div></section>`,
 
  "o-nas":()=>`<div class="ahero"><div class="ah-txt"><span class="eyebrow">О нас</span><h1>Семья Трейвас и Point Group</h1><p class="ah-cap"><b>Павел и Ирина Трейвас</b>основатели Point Estate и Point Group</p></div><img src="img/couple.jpg" alt="Павел и Ирина Трейвас"></div>
