@@ -826,7 +826,12 @@ async function pie3d(){
    for(let x=7;x<W;x+=st){let y0c=-1,y1c=-1;for(let y=0;y<Hh;y++)if(g[y*W+x]){if(y0c<0)y0c=y;y1c=y}if(y0c<0)continue;add((x+.5-CX)*u,(y0c-CZ)*u-o,0);add((x+.5-CX)*u,(y1c+1-CZ)*u+o,0)}
    for(let y=7;y<Hh;y+=st){let x0c=-1,x1c=-1;for(let x=0;x<W;x++)if(g[y*W+x]){if(x0c<0)x0c=x;x1c=x}if(x0c<0)continue;add((x0c-CX)*u-o,(y+.5-CZ)*u,Math.PI/2);add((x1c+1-CX)*u+o,(y+.5-CZ)*u,Math.PI/2)}};
   wash(G.house1,.3,3.1);wash(G.house2,4.05,3.1);
-  ANIM.push(()=>{const n=S.nt||0;lightBox.visible=n>.01&&S.st>=8;washM.opacity=n*1.15;stripM.opacity=n})
+  // soffit light line along every floor's top edge
+  const edgeLine=(rects,y)=>{if(!rects||!rects.length)return;const W=G.W,Hh=G.H,g=new Uint8Array(W*Hh);for(let i=0;i<rects.length;i+=4)for(let yy=rects[i+1];yy<rects[i+1]+rects[i+3];yy++)for(let x=rects[i];x<rects[i]+rects[i+2];x++)g[yy*W+x]=1;
+   const pts=[];for(let yy=0;yy<Hh;yy++)for(let x=0;x<W;x++)if(g[yy*W+x]&&(!g[yy*W+x-1]||!g[yy*W+x+1]||yy===0||!g[(yy-1)*W+x]||yy===Hh-1||!g[(yy+1)*W+x]))pts.push([x,yy]);
+   const im=new T.InstancedMesh(new T.BoxGeometry(u*1.05,.07,u*1.05),stripM,pts.length);pts.forEach(([x,yy],i)=>{dummy.rotation.set(0,0,0);dummy.scale.set(1,1,1);dummy.position.set((x+.5-CX)*u,y,(yy+.5-CZ)*u);dummy.updateMatrix();im.setMatrixAt(i,dummy.matrix)});lightBox.add(im)};
+  edgeLine(G.house1,3.36);edgeLine(G.house2,7.12);
+  ANIM.push(()=>{const n=S.nt||0;lightBox.visible=n>.01&&S.st>=8;washM.opacity=n*1.45;stripM.opacity=n})
   // winter mode
   {const wb=document.getElementById("pwin");S.wt=0;S.win=0;if(wb){wb.setAttribute("aria-pressed","false");wb.onclick=()=>{S.win=!S.win;wb.setAttribute("aria-pressed",S.win?"true":"false")}}
    const snowM=[grass.material,earth.material,hedgeM,cones.material,crown.material,roofM];scene.traverse(o=>{if(o.isMesh&&o.material&&o.material.color&&!snowM.includes(o.material)){const c=o.material.color;if(c.g>c.r*1.1&&c.g>c.b*1.1&&o.geometry.type==="CircleGeometry")snowM.push(o.material)}});snowM.forEach(m=>{if(!m.emissive)m.emissive=new T.Color(0);m.userData.e0=m.emissive.clone()});
