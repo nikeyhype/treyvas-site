@@ -6,6 +6,15 @@
 <meta name="description" content="Treyvas Development — частные дома в Agalarov Estate. Проект, стройка, столярка и продажа внутри одной семьи и группы Point Group.">
 <title>Treyvas Development</title>
 <meta name="claude:viewport-fit-sides" content="cover">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Treyvas Development">
+<meta property="og:title" content="Treyvas Development — частные дома в Agalarov Estate">
+<meta property="og:description" content="Дома, которые проектирует, строит и обставляет одна команда: от котлована до ключей.">
+<meta property="og:image" content="https://treyvas.dev/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://treyvas.dev/">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
@@ -167,6 +176,7 @@ button,a,input{touch-action:manipulation}
 .inst{position:fixed;left:max(12px,env(safe-area-inset-left,0px));right:max(12px,env(safe-area-inset-right,0px));bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:20;display:flex;align-items:center;gap:12px;padding:12px;background:var(--oak-2);border:1px solid var(--line);box-shadow:0 10px 30px rgba(0,0,0,.45)}.inst img{width:44px;height:44px;flex:none}.inst div{display:grid;gap:2px;min-width:0;flex:1}.inst b{font-weight:600;font-size:14px;color:var(--stone)}.inst span{font-size:12px;color:var(--mute);line-height:1.35}.inst .ib{border:0;background:var(--bronze);color:var(--ink);padding:10px 14px;font:600 12px var(--body);letter-spacing:.06em;text-transform:uppercase}.inst .ix{border:0;background:none;color:var(--mute);font-size:24px;width:32px;height:32px;padding:0}.inst .ih{font-size:11px;color:var(--bronze);max-width:120px}
 @media(max-width:760px){header .w{flex-wrap:nowrap;flex-direction:column;align-items:flex-start;gap:8px;padding-block:10px}.logo .lgsvg{height:36px}nav{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;max-width:100%;gap:18px;font-size:14px;-webkit-mask-image:linear-gradient(90deg,#000 85%,transparent);mask-image:linear-gradient(90deg,#000 85%,transparent);padding-right:24px}nav::-webkit-scrollbar{display:none}nav a{white-space:nowrap}}
 @media(max-width:760px){.pin span{font-size:10.5px;padding:4px 7px}.pin.np{display:none}}
+@media(max-width:760px){.hero::after{background:linear-gradient(180deg,rgba(23,19,15,.45) 0%,rgba(23,19,15,.62) 40%,rgba(23,19,15,.95) 100%)}.nums{display:grid;grid-template-columns:1fr 1fr;gap:22px 20px}.nums b{font-size:38px}}
 .bio h1{font-size:clamp(40px,6vw,76px)}
 .quote{font-family:var(--display);font-style:italic;font-size:clamp(24px,3vw,36px);line-height:1.25;border-left:1px solid var(--bronze);padding-left:22px;max-width:28ch}
 
@@ -936,7 +946,7 @@ function route(){
  const sec=h.startsWith("dom-")?"doma":P[h]?"lyudi":C[h]?"gruppa":h;
  document.querySelectorAll("#nav a").forEach(a=>a.getAttribute("href")==="#"+sec?a.setAttribute("aria-current","page"):a.removeAttribute("aria-current"));
  document.documentElement.style.setProperty("--head",document.querySelector("header").offsetHeight+"px");
- scrollTo(0,0);PST=PIE.length-1;if(typeof pieStop==="function")pieStop();pieTick();pie3d();
+ scrollTo(0,0);PST=PIE.length-1;if(typeof pieStop==="function")pieStop();pieTick();if(P3){cancelAnimationFrame(P3.raf);P3.renderer.dispose();P3=null}{const pe=document.getElementById("pie");if(pe){if(window.IntersectionObserver){const io=new IntersectionObserver(es=>{if(es.some(e=>e.isIntersecting)){io.disconnect();pie3d()}},{rootMargin:"600px 0px"});io.observe(pe)}else pie3d()}}
 }
 addEventListener("hashchange",route);route();
 const lb=document.getElementById("lb");
