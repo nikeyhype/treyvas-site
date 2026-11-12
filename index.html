@@ -534,7 +534,7 @@ async function pie3d(){
    const gx0=x0-1.2,gx1=x1+1.2;fence(-SI.fx,SI.front,gx0-2,SI.front);fence(gx1+.2,SI.front,SI.path[0]-1.4,SI.front);fence(SI.path[0]+1.4,SI.front,SI.fx,SI.front);
    fence(-SI.fx,SI.front,-SI.fx,SI.back);fence(SI.fx,SI.front,SI.fx,SI.back);
    {const gate=new T.Group(),gw=gx1-gx0;const fr=new T.Mesh(new T.BoxGeometry(gw,.12,.08),postM);fr.position.y=1.95;gate.add(fr);for(let i=0;i<Math.floor(gw/.22);i++){const sl=new T.Mesh(new T.BoxGeometry(.12,1.8,.06),slatM);sl.position.set(-gw/2+.11+i*.22,1,0);gate.add(sl)}
-    const rail=new T.Mesh(new T.BoxGeometry(gw*2,.1,.12),postM);rail.position.set(-gw/2,.05,0);gate.add(rail);gate.position.set((gx0+gx1)/2,0,SI.front);gate.traverse(o=>{if(o.isMesh)o.castShadow=true});site.add(gate);
+    const rail=new T.Mesh(new T.BoxGeometry(gw*2,.1,.12),postM);rail.position.set(-gw/2,.05,0);gate.add(rail);gate.position.set((gx0+gx1)/2,0,SI.front);G._gate={g:gate,x0:(gx0+gx1)/2,gw,o:0};gate.traverse(o=>{if(o.isMesh)o.castShadow=true});site.add(gate);
     [gx0-.15,gx1+.15].forEach(x=>{const p=new T.Mesh(new T.BoxGeometry(.3,2.2,.3),postM);p.position.set(x,1.1,SI.front);site.add(p)})}
    const wk=new T.Mesh(new T.BoxGeometry(1.2,2.1,.06),slatM);wk.position.set(SI.path[0],1.05,SI.front);site.add(wk);
   }}
@@ -735,10 +735,10 @@ async function pie3d(){
    const tail=new T.Mesh(new T.BoxGeometry(.08,.08,.4),fur);tail.position.set(0,.75,-.55);tail.rotation.x=-.6;dog.add(tail);const dl=[[-.12,.3],[.12,.3],[-.12,-.3],[.12,-.3]].map(([x,z])=>{const l=new T.Mesh(new T.BoxGeometry(.09,.38,.09),fur);l.position.set(x,.19,z);dog.add(l);return l});
    dog.traverse(o=>{if(o.isMesh)o.castShadow=true});scene.add(dog);EXT.push([dog,10,10]);
    ANIM.push(t=>{if(!dog.visible)return;const a=t*.0011,R=3.2+Math.sin(t*.0007)*1.2;dog.position.set(sx+Math.cos(a)*R,Math.abs(Math.sin(t*.012))*.12,sz-3+Math.sin(a)*R*.8);dog.rotation.y=-a;tail.rotation.y=Math.sin(t*.03)*.6;dl.forEach((l,i)=>l.rotation.x=Math.sin(t*.02+i*Math.PI/2)*.5)})}
-  ANIM.push((t,st)=>{walkers.forEach(w=>{if(!w.g.visible)return;let d=(t*w.speed*.06+w.ph)%(w.door?w.tot*2+40:w.tot);let hide=false;
+  ANIM.push((t,st)=>{walkers.forEach(w=>{if(!w.g.visible)return;let d=(t*w.speed*.55+w.ph)%(w.door?w.tot*2+40:w.tot);let hide=false;
     if(w.door){if(d<w.tot){}else if(d<w.tot+40){d=w.tot;hide=true}else d=w.tot*2+40-d}
     let i=0;while(i<w.segs.length-1&&d>w.segs[i]){d-=w.segs[i];i++}const a=w.path[i],b=w.path[i+1],f=Math.min(1,d/(w.segs[i]||1));let dir=1;
-    if(w.door){const tt=(t*w.speed*.06+w.ph)%(w.tot*2+40);dir=tt>w.tot+40?-1:1}
+    if(w.door){const tt=(t*w.speed*.55+w.ph)%(w.tot*2+40);dir=tt>w.tot+40?-1:1}
     w.g.position.set(a[0]+(b[0]-a[0])*f,w.yf(st),a[1]+(b[1]-a[1])*f);w.g.rotation.y=Math.atan2((b[0]-a[0])*dir,(b[1]-a[1])*dir);w.g.children.forEach(c=>c.visible=!hide);
     const sw=hide?0:Math.sin(t*.009+w.ph)*.55;w.g.userData.legs[0].rotation.x=sw;w.g.userData.legs[1].rotation.x=-sw})});
   // a car drives in and parks in the garage on the last step
@@ -746,7 +746,7 @@ async function pie3d(){
    const mv=mkCar(0x2a2f36);scene.add(mv);EXT.push([mv,10,10]);
    const P=[[-120,SI.road+1.8],[gx-6,SI.road+1.8],[gx,SI.road-2],[gx,SI.front+1],[gx,gz+4]];const segL=P.slice(1).map((p,i)=>Math.hypot(p[0]-P[i][0],p[1]-P[i][1])),tot=segL.reduce((a,b)=>a+b,0);
    ANIM.push((t,st)=>{if(!mv.visible)return;const C=24000,q=(t%C)/C,dr=q<.55?q/.55:1,d=tot*(1-Math.pow(1-dr,2.2));let s=d,i=0;while(i<segL.length-1&&s>segL[i]){s-=segL[i];i++}const a=P[i],b=P[i+1],f=Math.min(1,s/segL[i]);
-    mv.position.set(a[0]+(b[0]-a[0])*f,.04,a[1]+(b[1]-a[1])*f);mv.rotation.y=Math.atan2(-(b[1]-a[1]),b[0]-a[0])+Math.PI;mv.visible=q<.97})}
+    mv.position.set(a[0]+(b[0]-a[0])*f,.04,a[1]+(b[1]-a[1])*f);const GT=G._gate;if(GT){const want=q<.62&&(i<3?Math.abs(mv.position.x-GT.x0)<30:1)?1:0;GT.o+=(want-GT.o)*.04;GT.g.position.x=GT.x0-GT.o*GT.gw}mv.rotation.y=Math.atan2(-(b[1]-a[1]),b[0]-a[0])+Math.PI;mv.visible=q<.97})}
   // pool water moves
   if(water.map==null){const wt=ctex(x=>{x.fillStyle="#3f9ac0";x.fillRect(0,0,256,256);for(let i=0;i<220;i++){x.strokeStyle=`rgba(255,255,255,${.06+Math.random()*.12})`;x.lineWidth=1+Math.random()*2;x.beginPath();const cx=Math.random()*256,cy=Math.random()*256;x.ellipse(cx,cy,8+Math.random()*22,3+Math.random()*6,Math.random()*.4,0,Math.PI*2);x.stroke()}},3);water.map=wt;water.color.set(0xffffff);water.needsUpdate=true;
    ANIM.push(t=>{wt.offset.set(t*.00003,Math.sin(t*.0004)*.03)})}
