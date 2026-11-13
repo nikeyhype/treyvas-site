@@ -1,4 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-<url><loc>https://treyvas.dev/</loc></url>
+<url><loc>https://treyvas.dev/</loc><lastmod>2026-11-13</lastmod><priority>1.0</priority></url>
+<url><loc>https://treyvas.dev/doma/</loc><lastmod>2026-11-13</lastmod><priority>0.9</priority></url>
+<url><loc>https://treyvas.dev/kak-stroim/</loc><lastmod>2026-11-13</lastmod><priority>0.7</priority></url>
+<url><loc>https://treyvas.dev/o-nas/</loc><lastmod>2026-11-13</lastmod><priority>0.7</priority></url>
+<url><loc>https://treyvas.dev/gruppa/</loc><lastmod>2026-11-13</lastmod><priority>0.7</priority></url>
+<url><loc>https://treyvas.dev/lyudi/</loc><lastmod>2026-11-13</lastmod><priority>0.7</priority></url>
+<url><loc>https://treyvas.dev/zhurnal/</loc><lastmod>2026-11-13</lastmod><priority>0.7</priority></url>
+<url><loc>https://treyvas.dev/poselok/</loc><lastmod>2026-11-13</lastmod><priority>0.7</priority></url>
+<url><loc>https://treyvas.dev/zayavka/</loc><lastmod>2026-11-13</lastmod><priority>0.7</priority></url>
+<url><loc>https://treyvas.dev/partneram/</loc><lastmod>2026-11-13</lastmod><priority>0.7</priority></url>
+<url><loc>https://treyvas.dev/kontakty/</loc><lastmod>2026-11-13</lastmod><priority>0.7</priority></url>
+<url><loc>https://treyvas.dev/dom-l11/</loc><lastmod>2026-11-13</lastmod><priority>0.9</priority></url>
+<url><loc>https://treyvas.dev/dom-l191/</loc><lastmod>2026-11-13</lastmod><priority>0.9</priority></url>
+<url><loc>https://treyvas.dev/dom-l192/</loc><lastmod>2026-11-13</lastmod><priority>0.9</priority></url>
+<url><loc>https://treyvas.dev/dom-l193/</loc><lastmod>2026-11-13</lastmod><priority>0.9</priority></url>
+<url><loc>https://treyvas.dev/dom-z35/</loc><lastmod>2026-11-13</lastmod><priority>0.9</priority></url>
+<url><loc>https://treyvas.dev/dom-z36/</loc><lastmod>2026-11-13</lastmod><priority>0.9</priority></url>
+<url><loc>https://treyvas.dev/dom-r1/</loc><lastmod>2026-11-13</lastmod><priority>0.9</priority></url>
+<url><loc>https://treyvas.dev/dom-r2/</loc><lastmod>2026-11-13</lastmod><priority>0.9</priority></url>
+<url><loc>https://treyvas.dev/pavel/</loc><lastmod>2026-11-13</lastmod><priority>0.7</priority></url>
+<url><loc>https://treyvas.dev/irina/</loc><lastmod>2026-11-13</lastmod><priority>0.7</priority></url>
+<url><loc>https://treyvas.dev/natalia/</loc><lastmod>2026-11-13</lastmod><priority>0.7</priority></url>
+<url><loc>https://treyvas.dev/point-estate/</loc><lastmod>2026-11-13</lastmod><priority>0.7</priority></url>
+<url><loc>https://treyvas.dev/point-design/</loc><lastmod>2026-11-13</lastmod><priority>0.7</priority></url>
+<url><loc>https://treyvas.dev/point-woodcraft/</loc><lastmod>2026-11-13</lastmod><priority>0.7</priority></url>
+<url><loc>https://treyvas.dev/treyvas/</loc><lastmod>2026-11-13</lastmod><priority>0.7</priority></url>
 </urlset>
