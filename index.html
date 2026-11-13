@@ -577,7 +577,7 @@ async function pie3d(){
    const postM=M(0x2b2c2e,{roughness:.5,metalness:.4}),slatM=M(0x3a3b3e,{roughness:.6,metalness:.3});
    const fence=(ax,az,bx,bz)=>{const L=Math.hypot(bx-ax,bz-az),n=Math.max(1,Math.round(L/2.5)),ang=Math.atan2(bz-az,bx-ax);for(let i=0;i<=n;i++){const t=i/n,p=new T.Mesh(new T.BoxGeometry(.15,2,.15),postM);p.position.set(ax+(bx-ax)*t,1,az+(bz-az)*t);p.castShadow=true;site.add(p)}
     for(const h of [.35,.75,1.15,1.55,1.9]){const b=new T.Mesh(new T.BoxGeometry(L,.12,.05),slatM);b.position.set((ax+bx)/2,h,(az+bz)/2);b.rotation.y=-ang;b.castShadow=true;site.add(b)}};
-   const gx0=x0-1.2,gx1=x1+1.2;fence(-SI.fx,SI.front,gx0-2,SI.front);fence(gx1+.2,SI.front,SI.path[0]-1.4,SI.front);fence(SI.path[0]+1.4,SI.front,SI.fx,SI.front);
+   const gx0=x0-1.2,gx1=x1+1.2;{const op=[[gx0-.3,gx1+.3],[SI.path[0]-.7,SI.path[0]+.7]].sort((a,b)=>a[0]-b[0]);let cx=-SI.fx;op.forEach(([a,b])=>{if(a>cx+.3)fence(cx,SI.front,a,SI.front);cx=Math.max(cx,b)});if(SI.fx>cx+.3)fence(cx,SI.front,SI.fx,SI.front)}
    fence(-SI.fx,SI.front,-SI.fx,SI.back);fence(SI.fx,SI.front,SI.fx,SI.back);
    {const gate=new T.Group(),gw=gx1-gx0;const fr=new T.Mesh(new T.BoxGeometry(gw,.12,.08),postM);fr.position.y=1.95;gate.add(fr);for(let i=0;i<Math.floor(gw/.22);i++){const sl=new T.Mesh(new T.BoxGeometry(.12,1.8,.06),slatM);sl.position.set(-gw/2+.11+i*.22,1,0);gate.add(sl)}
     const rail=new T.Mesh(new T.BoxGeometry(gw*2,.1,.12),postM);rail.position.set(-gw/2,.05,0);gate.add(rail);gate.position.set((gx0+gx1)/2,0,SI.front-.4);G._gate={g:gate,x0:(gx0+gx1)/2,gw,o:0};gate.traverse(o=>{if(o.isMesh)o.castShadow=true});site.add(gate);
@@ -793,16 +793,22 @@ async function pie3d(){
   // a car drives in and parks in the garage on the last step
   if(G.gdoors){const g0=G.gdoors[Math.min(1,G.gdoors.length-1)],gx=(g0[0]+g0[2]/2-CX)*u,gz=(g0[1]+1-CZ)*u;
    const mv=mkCar(0x2a2f36);scene.add(mv);EXT.push([mv,10,10]);
-   const RZ=SI.road+1.8,CRV=new T.CatmullRomCurve3([[-120,RZ],[gx-40,RZ],[gx-14,RZ],[gx-5,RZ-1.2],[gx-.8,SI.front+3.5],[gx,SI.front-2],[gx,gz+5],[gx,gz-4.5]].map(p=>new T.Vector3(p[0],.04,p[1])),false,"centripetal",.5),tg=new T.Vector3();
-   const GDm=(G._gd||[])[Math.min(1,(G._gd||[]).length-1)];let gdo=0,uW=.85;{let best=1e9;for(let i=0;i<=400;i++){const pt=CRV.getPointAt(i/400);const d=Math.hypot(pt.x-gx,pt.z-(gz+5));if(d<best){best=d;uW=i/400}}}
-   let tw=-1;
-   ANIM.push((t,st)=>{if(st<10)return;const C=32000,q=(t%C)/C;let u0;
-    if(q<.5){const f=q/.5;u0=uW*(1-Math.pow(1-f,1.8));tw=-1}
-    else{if(gdo<.92){u0=uW}else{if(tw<0)tw=t;u0=Math.min(1,uW+(1-uW)*Math.min(1,(t-tw)/2500))}}
-    CRV.getPointAt(u0,mv.position);CRV.getTangentAt(Math.min(.999,u0),tg);mv.rotation.y=Math.atan2(tg.z,-tg.x);
-    const GT=G._gate;if(GT){const want=q<.55?1:0;GT.o+=(want-GT.o)*.05;GT.g.position.x=GT.x0-GT.o*GT.gw}
-    const wantD=(q>.4&&q<.85)?1:0;gdo+=(wantD-gdo)*.05;if(GDm){GDm.scale.y=2.5*(1-gdo*.88);GDm.position.y=1.55+2.5*gdo*.44}
-    mv.visible=q<.9})}
+   const RZ=SI.road+1.8,CRV=new T.CatmullRomCurve3([[gx-60,RZ],[gx-40,RZ],[gx-14,RZ],[gx-5,RZ-1.2],[gx-.8,SI.front+3.5],[gx,SI.front-2],[gx,gz+5],[gx,gz-4.5]].map(p=>new T.Vector3(p[0],.04,p[1])),false,"centripetal",.5),tg=new T.Vector3();
+   const GDm=(G._gd||[])[Math.min(1,(G._gd||[]).length-1)],CL=CRV.getLength();let gdo=0,uW=.85,uG=.6;
+   const near=(px,pz)=>{let best=1e9,ub=0;for(let i=0;i<=500;i++){const pt=CRV.getPointAt(i/500);const d=Math.hypot(pt.x-px,pt.z-pz);if(d<best){best=d;ub=i/500}}return ub};
+   uW=near(gx,gz+5);uG=near(gx,SI.front+5.5);
+   let ph=0,uc=0,tl=0,tw=0;
+   ANIM.push((t,st)=>{const dt=Math.min(.1,tl?(t-tl)/1000:0);tl=t;if(st<10){ph=0;uc=0;return}
+    const ease=(k)=>1-Math.exp(-dt*k),GT=G._gate,v=9/CL;
+    let gateW=0,doorW=0;
+    if(ph===0){gateW=uc>uG*.5?1:0;uc=Math.min(uG,uc+v*dt);if(uc>=uG&&GT&&GT.o<.97)ph=0;else if(uc>=uG)ph=1}
+    else if(ph===1){gateW=1;doorW=uc>uW-.08?1:0;uc=Math.min(uW,uc+v*dt);if(uc>=uW)ph=2}
+    else if(ph===2){gateW=1;doorW=1;if(gdo>.97){uc=Math.min(1,uc+v*.6*dt);if(uc>=1){ph=3;tw=t}}}
+    else{doorW=t-tw<2500?1:0;gateW=0;if(t-tw>6500){ph=0;uc=0}}
+    if(GT){GT.o+=(gateW-GT.o)*ease(2.2);GT.g.position.x=GT.x0-GT.o*GT.gw}
+    gdo+=(doorW-gdo)*ease(2.2);if(GDm){GDm.scale.y=2.5*(1-gdo*.88);GDm.position.y=1.55+2.5*gdo*.44}
+    CRV.getPointAt(uc,mv.position);CRV.getTangentAt(Math.min(.999,Math.max(.001,uc)),tg);mv.rotation.y=Math.atan2(tg.z,-tg.x);
+    mv.visible=!(ph===3&&t-tw>4000)})}
   // pool water moves
   if(water.map==null){const wt=ctex(x=>{x.fillStyle="#3f9ac0";x.fillRect(0,0,256,256);for(let i=0;i<220;i++){x.strokeStyle=`rgba(255,255,255,${.06+Math.random()*.12})`;x.lineWidth=1+Math.random()*2;x.beginPath();const cx=Math.random()*256,cy=Math.random()*256;x.ellipse(cx,cy,8+Math.random()*22,3+Math.random()*6,Math.random()*.4,0,Math.PI*2);x.stroke()}},3);water.map=wt;water.color.set(0xffffff);water.needsUpdate=true;
    ANIM.push(t=>{wt.offset.set(t*.00003,Math.sin(t*.0004)*.03)})}
