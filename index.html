@@ -186,6 +186,12 @@ button,a,input{touch-action:manipulation}
 @media(max-width:620px){.qzc{grid-template-columns:1fr}}
 .cmpw{overflow-x:auto;border:1px solid var(--line)}.cmp{border-collapse:collapse;min-width:900px;width:100%;font-size:14px}.cmp th,.cmp td{padding:14px 16px;border-bottom:1px solid var(--line);text-align:left;white-space:nowrap}.cmp thead th{font-family:var(--display);font-weight:500;font-size:19px;background:var(--oak-2)}.cmp thead a{color:var(--stone)}.cmp thead a:hover{color:var(--bronze)}.cmp tbody th{color:var(--mute);font-weight:500;font-size:12px;letter-spacing:.1em;text-transform:uppercase;position:sticky;left:0;background:var(--oak)}.cmp td{color:var(--stone);font-variant-numeric:tabular-nums}.cmp .ok{color:var(--bronze);font-weight:500}.cmp tbody tr:hover td{background:var(--oak-2)}
 .cta{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px 48px;align-items:center;border:1px solid var(--bronze);padding:clamp(22px,4vw,44px);background:linear-gradient(120deg,var(--oak-2),var(--oak))}.cta>div:first-child{display:grid;gap:10px}.cta h2{font-size:clamp(26px,3vw,40px);text-wrap:balance}.cta p{margin:0;color:var(--mute);max-width:56ch}.ctab{display:grid;gap:10px}.btn.solid{background:var(--bronze);color:var(--ink);border-color:var(--bronze)}@media(max-width:760px){.cta{grid-template-columns:1fr}}
+.lf{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px 20px;border:1px solid var(--line);padding:clamp(20px,3.5vw,40px);background:var(--oak-2)}.lf label{display:grid;gap:8px;min-width:0}.lf label span{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}.lf .full{grid-column:1/-1}
+.lf input,.lf select,.lf textarea{width:100%;background:var(--oak);border:1px solid var(--line);color:var(--stone);font:15px var(--body);padding:13px 14px;border-radius:0;-webkit-appearance:none;appearance:none}.lf select{background-image:linear-gradient(45deg,transparent 50%,var(--bronze) 50%),linear-gradient(135deg,var(--bronze) 50%,transparent 50%);background-position:calc(100% - 18px) 50%,calc(100% - 13px) 50%;background-size:5px 5px;background-repeat:no-repeat;padding-right:36px}.lf input:focus,.lf select:focus,.lf textarea:focus{outline:none;border-color:var(--bronze)}.lf .err{border-color:#c2563f}
+.lfb{display:flex;flex-wrap:wrap;gap:14px 22px;align-items:center}.lfn{font-size:13px;color:var(--mute);max-width:52ch}.lfn a,.note a,.ctap a{color:var(--bronze)}.lfdone[hidden]{display:none}.lfdone{border-top:1px solid var(--line);padding-top:16px;display:grid;gap:10px;color:var(--stone);font-size:14px}.lfdone pre{white-space:pre-wrap;background:var(--oak);border:1px solid var(--line);padding:12px;margin:0;font:13px/1.5 var(--body);color:var(--mute)}.lfdone .btn{justify-self:start}
+@media(max-width:620px){.lf{grid-template-columns:1fr}}
+.pc{border:1px solid var(--line);padding:24px;display:grid;gap:10px;align-content:start}.pc b{font-family:var(--display);font-weight:500;font-size:24px;color:var(--bronze)}.pc p{margin:0;color:var(--mute);line-height:1.6}@media(max-width:760px){.cols4{grid-template-columns:1fr!important}}
+.ctap{grid-column:1/-1;margin:4px 0 0;font-size:14px;color:var(--mute)}.pdfb{border-style:solid;border-color:var(--bronze);text-decoration:none;color:inherit;transition:background .2s}.pdfb:hover{background:var(--oak-2)}.pdfb em{font-style:normal;color:var(--bronze);font-size:13px;letter-spacing:.08em;margin-top:4px}
 .bio h1{font-size:clamp(40px,6vw,76px)}
 .quote{font-family:var(--display);font-style:italic;font-size:clamp(24px,3vw,36px);line-height:1.25;border-left:1px solid var(--bronze);padding-left:22px;max-width:28ch}
 
@@ -274,13 +280,14 @@ footer a:hover{color:var(--stone)}
   <div><a class="logo" href="#home" aria-label="На главную" style="color:var(--stone)"><svg class="lgsvg" viewBox="0 0 210 60" role="img" aria-label="Treyvas Development"><text x="105" y="29" text-anchor="middle" textLength="204" lengthAdjust="spacing" style="font-family:var(--display);font-size:31px;font-weight:500;fill:currentColor">TREYVAS</text><rect x="3" y="35" width="204" height="1.2" style="fill:var(--bronze)"/><text x="105" y="56" text-anchor="middle" textLength="204" lengthAdjust="spacing" style="font-family:var(--body);font-size:14px;font-weight:600;fill:var(--bronze)">DEVELOPMENT</text></svg></a><p style="margin-top:10px;max-width:36ch">Частные дома в Подмосковье. Входит в Point Group. Это прототип сайта, изображения — визуализации проектов.</p></div>
   <div><b>Дома</b><a href="#dom-l191">Лазурная 19.1</a><a href="#dom-r2">Речная 2</a><a href="#dom-z36">Заречная 36</a><a href="#doma">Все дома</a></div>
   <div><b>Компания</b><a href="#o-nas">История</a><a href="#lyudi">Люди</a><a href="#kak-stroim">Как мы строим</a><a href="#zhurnal">Журнал</a></div>
-  <div><b>Группа</b><a href="#point-estate">Point Estate</a><a href="#point-design">Point Design</a><a href="#point-woodcraft">Point WoodCraft</a><a href="#kontakty">Контакты</a></div>
+  <div><b>Группа</b><a href="#point-estate">Point Estate</a><a href="#point-design">Point Design</a><a href="#point-woodcraft">Point WoodCraft</a><a href="#kontakty">Контакты</a><a href="#partneram">Партнёрам</a></div>
 </div></footer>
 <dialog id="lb"><img alt=""></dialog>
 
 <script>
 const img=n=>`img/${n}.jpg`;
-const BUILD="1794557970";
+const PDF={z35:"docs/zarechnaya-35.pdf",z36:"docs/zarechnaya-36.pdf"};
+const BUILD="1794558243";
 const HM={l11:{price:null,area:null,lot:null,view:"park",ready:4,water:0},l191:{price:24,area:2200,lot:50,view:"park",ready:12},l192:{price:20,area:2000,lot:37,view:"park",ready:12},l193:{price:18,area:1900,lot:33,view:"park",ready:12},z35:{price:14.9,area:1400,lot:30,view:"golf",ready:0},z36:{price:14.9,area:1400,lot:30,view:"golf",ready:0},r1:{price:20,area:1900,lot:50,view:"river",ready:8},r2:{price:20,area:2000,lot:50,view:"river",ready:8}};
 const QZ=[["budget","Бюджет",[["до $15 млн",15],["до $20 млн",20],["до $25 млн",25],["Не важно",99]]],["area","Площадь дома",[["Около 1 400 м²",1400],["Около 2 000 м²",2000],["Чем больше, тем лучше",9999]]],["view","Что за окном",[["Гольф-поле","golf"],["Река и свой пирс","river"],["Парк и тишина","park"],["Не важно","any"]]],["when","Когда въезжать",[["Сразу",0],["В течение года",12],["Не спешу",99]]]];
 function qzScore(a){return Object.keys(HM).map(k=>{const m=HM[k];let s=0,why=[];
@@ -299,6 +306,24 @@ const compare=()=>{const ks=["z35","z36","l191","l192","l193","r1","r2","l11"],v
  ${row("Готовность",k=>HM[k].ready===0?"<b class='ok'>Дом готов</b>":"≈ "+HM[k].ready+" мес.")}
  ${row("3D-стройка",k=>H3D[k]?"Есть":"—")}
  </tbody></table></div>`};
+const HOUSES_OPT=()=>Object.keys(H).filter(k=>k!=="l11").map(k=>`<option value="${H[k].name}">${H[k].name}</option>`).join("");
+const leadForm=(kind)=>`<form class="lf" data-kind="${kind}" novalidate>
+ ${kind==="partner"?`<label><span>Кто вы</span><select name="role" required><option>Брокер / агент</option><option>Дизайнер интерьера</option><option>Архитектор</option><option>Семейный офис / управляющий</option><option>Другое</option></select></label><label><span>Компания</span><input name="company" autocomplete="organization" placeholder="Необязательно"></label>`:""}
+ <label><span>Имя</span><input name="name" required autocomplete="name"></label>
+ <label><span>Телефон</span><input name="phone" required type="tel" autocomplete="tel" placeholder="+7"></label>
+ <label><span>${kind==="partner"?"Дом для клиента":"Какой дом интересен"}</span><select name="house"><option>Пока не знаю</option>${HOUSES_OPT()}</select></label>
+ <label class="full"><span>${kind==="partner"?"Коротко о клиенте":"Комментарий"}</span><textarea name="msg" rows="3" placeholder="${kind==="partner"?"Бюджет, сроки, что важно клиенту":"Удобное время для звонка, вопросы"}"></textarea></label>
+ <div class="full lfb"><button class="btn solid" type="submit">${kind==="partner"?"Отправить запрос":"Записаться на показ"}</button><span class="lfn">Откроется ваша почта с готовым письмом в Point Estate. Можно и просто позвонить: <a href="tel:+74992888867">+7 499 288-88-67</a></span></div>
+ <div class="full lfdone" hidden><b>Письмо подготовлено.</b> Если почта не открылась, скопируйте текст и отправьте на info@pointestate.ru: <pre></pre><button type="button" class="btn lfcopy">Скопировать текст</button></div>
+</form>`;
+document.addEventListener("submit",e=>{const f=e.target.closest("form.lf");if(!f)return;e.preventDefault();const d=Object.fromEntries(new FormData(f));
+ const bad=[...f.querySelectorAll("[required]")].filter(x=>!x.value.trim());f.querySelectorAll(".err").forEach(x=>x.classList.remove("err"));if(bad.length){bad.forEach(x=>x.classList.add("err"));bad[0].focus();return}
+ const partner=f.dataset.kind==="partner",subj=(partner?"Партнёр: ":"Показ: ")+(d.house||"")+" — "+d.name;
+ const body=[partner?"Запрос партнёра с сайта treyvas.dev":"Заявка на показ с сайта treyvas.dev","",partner?"Кто: "+d.role+(d.company?" ("+d.company+")":""):"","Имя: "+d.name,"Телефон: "+d.phone,"Дом: "+d.house,d.msg?"Комментарий: "+d.msg:""].filter(Boolean).join("\n");
+ const dn=f.querySelector(".lfdone");dn.hidden=false;dn.querySelector("pre").textContent=body;
+ location.href="mailto:info@pointestate.ru?subject="+encodeURIComponent(subj)+"&body="+encodeURIComponent(body)});
+document.addEventListener("click",e=>{const c=e.target.closest(".lfcopy");if(c){const t=c.parentElement.querySelector("pre").textContent;(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(()=>c.textContent="Скопировано",()=>{const r=document.createRange();r.selectNodeContents(c.parentElement.querySelector("pre"));getSelection().removeAllRanges();getSelection().addRange(r)})}
+ const hb=e.target.closest("[data-house]");if(hb)sessionStorage&&(()=>{try{sessionStorage.setItem("tv_house",H[hb.dataset.house].name)}catch(x){}})()});
 const quiz=()=>`<div class="qz" id="qz"><div class="qzh"><span class="eyebrow">Подбор дома</span><h2>Четыре вопроса — и мы покажем, какой дом ваш</h2></div><div class="qzb"></div></div>`;
 function qzRender(st){const el=document.querySelector("#qz .qzb");if(!el)return;const i=Object.keys(st).length;
  if(i<QZ.length){const [key,title,opts]=QZ[i];el.innerHTML=`<div class="qzp">${QZ.map((_,j)=>`<i class="${j<i?"on":j===i?"cur":""}"></i>`).join("")}</div><p class="qzq"><span>${String(i+1).padStart(2,"0")} / 04</span>${title}</p><div class="qzo">${opts.map(o=>`<button type="button" data-k="${key}" data-v="${o[1]}">${o[0]}</button>`).join("")}</div>${i?`<button type="button" class="qzback">← Назад</button>`:""}`;return}
@@ -979,6 +1004,14 @@ const V={
    <article><span class="tag">Скоро · Инженерия</span><h3>Что спрятано под бассейном</h3><p>Техническое помещение, вентиляция и гидроизоляция бассейна на 173 м².</p></article>
   </div></div></section>`,
 
+ zayavka:()=>`<div class="w phead"><div class="sec-head"><span class="eyebrow">Заявка</span><h1>Записаться на показ</h1><p class="lead">Оставьте телефон — Point Estate перезвонит, подберёт время и покажет дом вживую: готовые интерьеры или стройку.</p></div></div>
+  <section style="padding-top:24px"><div class="w">${leadForm("client")}</div></section>`,
+ partneram:()=>`<div class="w phead"><div class="sec-head"><span class="eyebrow">Партнёрам</span><h1>У вас есть клиент на наш дом?</h1><p class="lead">Мы открыты к работе с брокерами, дизайнерами, архитекторами и управляющими семейными офисами. Если у вас есть клиент на один из наших домов — напишите или позвоните, условия сотрудничества обсудим индивидуально.</p></div></div>
+  <section style="padding-top:24px"><div class="w" style="display:grid;gap:48px">
+   <div class="cols4" style="grid-template-columns:repeat(3,minmax(0,1fr))">${[["Брокерам","Организуем показ дома вам и клиенту, дадим планы, визуализации, презентацию и ответим на вопросы по стройке и документам."],["Дизайнерам и архитекторам","Покажем проект и рабочую документацию дома, расскажем, что уже сделано на объекте и что ещё можно изменить под клиента."],["Семейным офисам","Подготовим пакет по дому: планы, характеристики, сроки готовности и контакты для юридических вопросов."]].map(c=>`<div class="pc"><b>${c[0]}</b><p>${c[1]}</p></div>`).join("")}</div>
+   ${leadForm("partner")}
+   <p class="note">Напрямую: <a href="tel:+74992888867">+7 499 288-88-67</a> · <a href="mailto:info@pointestate.ru">info@pointestate.ru</a> · <a href="https://t.me/Point_Estate" target="_blank" rel="noopener">Telegram</a></p>
+  </div></section>`,
  kontakty:()=>`<div class="w phead"><div class="sec-head"><span class="eyebrow">Контакты</span><h1>Приезжайте посмотреть дома</h1><p class="lead">Загородный офис находится в самом посёлке: можно в один приезд пройти по стройке и посмотреть готовые интерьеры.</p></div></div>
   <section style="padding-top:24px"><div class="w"><div class="split contact"><dl>
    <div><dt>Телефон</dt><dd>${cval("+7 499 288-88-67")}</dd></div>
@@ -991,7 +1024,8 @@ const V={
    <div><dt>Канал</dt><dd><a href="https://t.me/pointestate_life" target="_blank" rel="noopener">t.me/pointestate_life</a></dd></div>
    <div><dt>YouTube</dt><dd><a href="https://www.youtube.com/@PointEstate" target="_blank" rel="noopener">@PointEstate</a></dd></div>
    <div><dt>Компании группы</dt><dd><a href="#point-estate">Point Estate</a> · <a href="#point-design">Point Design</a> · <a href="#point-woodcraft">Point WoodCraft</a></dd></div>
-  </dl></div></div></section>`
+  </dl></div></div></section>
+  <section style="padding-top:0"><div class="w"><div class="sec-head"><span class="eyebrow">Заявка</span><h2>Записаться на показ</h2><a class="more" href="#partneram">Брокерам и дизайнерам</a></div>${leadForm("client")}</div></section>`
 };
 
 function house(k){
@@ -1003,9 +1037,9 @@ function house(k){
   ${h.imgs.length?`<div class="galw"><div class="galt"><div class="gal">${h.imgs.map(i=>`<button type="button" data-src="${img(i)}"><img src="${img(i)}" alt="${h.name}" loading="lazy"></button>`).join("")}</div><button type="button" class="ga gp" aria-label="Назад" disabled>←</button><button type="button" class="ga gn" aria-label="Дальше">→</button></div><div class="gbar"><span class="gcnt">01 / ${String(h.imgs.length).padStart(2,"0")}</span><input class="gscr" type="range" min="0" max="1000" value="0" aria-label="Прокрутка визуализаций"></div></div>`:""}
   ${h.rooms?`<div class="story"><div class="lft" style="display:grid;gap:14px"><span class="eyebrow">Экспликация</span><h2>Дом в помещениях</h2><p class="note">Площади из проекта, м²</p></div><ul class="rooms">${h.rooms.map(r=>`<li>${r[0]}<span>${r[1]}</span></li>`).join("")}</ul></div>`:""}
   <div><div class="sec-head"><span class="eyebrow">Проект</span><h2 style="font-size:clamp(28px,3.4vw,44px)">Планировки</h2><p class="note">Листы из проекта. Нажмите, чтобы увеличить.</p></div><div class="plans">${[1,2].map(n=>`<button type="button" data-src="plans/${h.plan}-${n}.jpg"><img src="plans/${h.plan}-${n}.jpg" alt="План ${n} этажа, ${h.name}" loading="lazy"><span>${n===1?"Первый этаж":"Второй этаж"}</span></button>`).join("")}</div></div>
-  <div class="cta"><div><span class="eyebrow">${h.ready==="Дом готов"?"Дом готов к показу":"Дом в стройке"}</span><h2>${(()=>{const loc="на "+h.name.replace(/ая /,"ой ");return h.ready==="Дом готов"?"Приезжайте посмотреть дом "+loc:"Посмотрите стройку "+loc+" вживую"})()}</h2><p>Покажем дом, расскажем про планировку, инженерию и сроки. Показы ведёт Point Estate.</p></div><div class="ctab"><a class="btn solid" href="tel:+74992888867">+7 499 288-88-67</a><a class="btn" href="mailto:info@pointestate.ru?subject=${encodeURIComponent("Показ: "+h.name)}">Написать на почту</a></div></div>
+  <div class="cta"><div><span class="eyebrow">${h.ready==="Дом готов"?"Дом готов к показу":"Дом в стройке"}</span><h2>${(()=>{const loc="на "+h.name.replace(/ая /,"ой ");return h.ready==="Дом готов"?"Приезжайте посмотреть дом "+loc:"Посмотрите стройку "+loc+" вживую"})()}</h2><p>Покажем дом, расскажем про планировку, инженерию и сроки. Показы ведёт Point Estate.</p></div><div class="ctab"><a class="btn solid" href="tel:+74992888867">+7 499 288-88-67</a><a class="btn" href="#zayavka" data-house="${k}">Оставить заявку</a></div><p class="ctap">Брокер или дизайнер, и у вас есть клиент на этот дом? <a href="#partneram">Условия для партнёров →</a></p></div>
   <div class="story"><div class="soon"><b>Видео и дневник стройки</b><span>Фильм о доме и хроника по этапам: котлован, монолит, кровля, отделка.</span></div>
-  <div class="soon"><b>Презентация дома</b><span>PDF с планами, визуализациями и характеристиками, который можно отправить клиенту.</span></div></div>
+  ${PDF[k]?`<a class="soon pdfb" href="${PDF[k]}" target="_blank" rel="noopener"><b>Презентация дома · PDF</b><span>Планы, визуализации и характеристики от Point Estate. Можно открыть и переслать клиенту.</span><em>Открыть презентацию ↗</em></a>`:`<div class="soon"><b>Презентация дома</b><span>PDF с планами, визуализациями и характеристиками готовится. Пока можно запросить у Point Estate.</span></div>`}</div>
  </div></section>
  ${H3D[k]?pie(H3D[k])+(k==="l191"?drawings():""):""}
  ${h.team?`<section><div class="w"><div class="sec-head"><span class="eyebrow">Команда дома</span><h2>Кто сделал этот дом</h2></div><div class="cols4">${h.team.map(t=>`<div><i>${t[0]}</i><b style="font-size:21px">${t[1]}</b></div>`).join("")}</div></div></section>`:""}
@@ -1042,7 +1076,7 @@ function route(){
  {const T0="Treyvas Development",nm={doma:"Дома","kak-stroim":"Как мы строим","o-nas":"О нас",gruppa:"Point Group",lyudi:"Люди",zhurnal:"Журнал",kontakty:"Контакты"};document.title=h.startsWith("dom-")&&H[h.slice(4)]?H[h.slice(4)].name+" — "+T0:P[h]?P[h].name+" — "+T0:C[h]?C[h].name+" — "+T0:nm[h]?nm[h]+" — "+T0:T0}
  document.querySelectorAll("#nav a").forEach(a=>a.getAttribute("href")==="#"+sec?a.setAttribute("aria-current","page"):a.removeAttribute("aria-current"));
  document.documentElement.style.setProperty("--head",document.querySelector("header").offsetHeight+"px");
- scrollTo(0,0);PST=PIE.length-1;if(typeof pieStop==="function")pieStop();QS={};qzRender(QS);pieTick();if(P3){cancelAnimationFrame(P3.raf);P3.renderer.dispose();P3=null}{const pe=document.getElementById("pie");if(pe){if(window.IntersectionObserver){const io=new IntersectionObserver(es=>{if(es.some(e=>e.isIntersecting)){io.disconnect();pie3d()}},{rootMargin:"600px 0px"});io.observe(pe)}else pie3d()}}
+ scrollTo(0,0);PST=PIE.length-1;if(typeof pieStop==="function")pieStop();QS={};qzRender(QS);try{const hv=sessionStorage.getItem("tv_house");if(hv){document.querySelectorAll("form.lf select[name=house]").forEach(s=>s.value=hv);sessionStorage.removeItem("tv_house")}}catch(x){}pieTick();if(P3){cancelAnimationFrame(P3.raf);P3.renderer.dispose();P3=null}{const pe=document.getElementById("pie");if(pe){if(window.IntersectionObserver){const io=new IntersectionObserver(es=>{if(es.some(e=>e.isIntersecting)){io.disconnect();pie3d()}},{rootMargin:"600px 0px"});io.observe(pe)}else pie3d()}}
 }
 addEventListener("hashchange",route);route();
 const lb=document.getElementById("lb");
