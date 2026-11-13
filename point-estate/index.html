@@ -320,7 +320,7 @@ const REELS={nadzor:"Авторский надзор: обход Заречно�
 const reels=ks=>`<div class="reels">${ks.map(k=>`<button type="button" class="vplay reel" data-v="img/vid/${k}"><img src="img/vid/${k}.jpg" alt="" loading="lazy"><i aria-hidden="true">▶</i><span>${REELS[k]}</span></button>`).join("")}</div>`;
 const VID={z35:"img/vid/z35",z36:"img/vid/z36"};
 const PDF={z35:"docs/zarechnaya-35.pdf",z36:"docs/zarechnaya-36.pdf",l191:"docs/lazurnaya-19-1.pdf",l192:"docs/lazurnaya-19-2.pdf",l193:"docs/lazurnaya-19-3.pdf",r1:"docs/rechnaya-1.pdf",r2:"docs/rechnaya-2.pdf"};
-const BUILD="1794587267";
+const BUILD="1794591235";
 const HM={l11:{price:null,area:null,lot:null,view:"park",ready:4,water:0},l191:{price:30,area:2300,lot:48,view:"golf",ready:12},l192:{price:26,area:2125,lot:34,view:"golf",ready:12},l193:{price:23,area:2000,lot:35,view:"golf",ready:12},z35:{price:14.9,area:1465,lot:30,view:"golf",ready:0},z36:{price:14.9,area:1482,lot:30,view:"golf",ready:0},r1:{price:26,area:1800,lot:52,view:"river",ready:8},r2:{price:28,area:2125,lot:51,view:"river",ready:8}};
 const QZ=[["budget","Бюджет",[["до $15 млн",15],["до $25 млн",25],["до $30 млн",30],["Не важно",99]]],["area","Площадь дома",[["Около 1 400 м²",1400],["Около 2 000 м²",2000],["Чем больше, тем лучше",9999]]],["view","Что за окном",[["Гольф-поле","golf"],["Река и свой пирс","river"],["Парк и тишина","park"],["Не важно","any"]]],["when","Когда въезжать",[["Сразу",0],["В течение года",12],["Не спешу",99]]]];
 function qzScore(a){return Object.keys(HM).map(k=>{const m=HM[k];let s=0,why=[];
@@ -687,7 +687,7 @@ async function pie3d(){
    const ws=new T.Mesh(new T.BoxGeometry(1.9,.5,.06),new T.MeshPhysicalMaterial({color:0x223038,roughness:.05,transparent:true,opacity:.7}));ws.position.set(0,1.15,-.6);ws.rotation.x=-.35;boat.add(ws);
    const seat=new T.Mesh(new T.BoxGeometry(1.8,.4,1.2),M(0xe8e1d4,{roughness:.9}));seat.position.set(0,1.05,-2.2);boat.add(seat);
    const stripe=new T.Mesh(new T.BoxGeometry(2.36,.1,6.6),M(0x1f3a5a));stripe.position.set(0,.55,-.3);boat.add(stripe);
-   boat.traverse(o=>{if(o.isMesh)o.castShadow=true});boat.position.set(px+pw/2+1.8,.0,pz-1.2);boat.rotation.y=Math.PI;site.add(boat)}
+   boat.traverse(o=>{if(o.isMesh)o.castShadow=true});boat.position.set(px+pw/2+1.8,.0,pz-1.2);boat.rotation.y=Math.PI;site.add(boat);var BOATA={b:boat,x0:px+pw/2+1.8,z0:pz-1.2,zm:bz-RV.w*.4}}
   // trees along the side fences: spruce and broadleaf alternating
   for(const sx of [-1,1])for(let z=SI.back+7,k=0;z<SI.front-6;z+=8.5,k++){const x=sx*(F-3.4);if(k%2)PF.push([x,z,7+rnd()*3]);else PB.push([x,z])}
   // front garden: sculpture on a stone plinth beside the entrance path, paved circle, boxwood balls
@@ -747,6 +747,16 @@ async function pie3d(){
  const S=P3={pp:PP,renderer,st:pieStep(),raf:0,dist:1,carZ:-90,lawn:0};
  // ---- construction site: pit, crane, rebar, scaffold, trucks, workers, residents, arriving car
  const EXT=[],ANIM=[];S.ext=EXT;S.anims=ANIM;
+ if(typeof BOATA!=="undefined"&&BOATA){const{b,x0,z0,zm}=BOATA,V3=(x,z)=>new T.Vector3(x,0,z);
+  const inA=new T.CubicBezierCurve3(V3(x0+34,zm),V3(x0+10,zm),V3(x0,zm+4),V3(x0,z0)),outA=new T.CubicBezierCurve3(V3(x0,z0),V3(x0,z0-8),V3(x0-4,zm),V3(x0-22,zm));
+  const ph=[[15,"run",x0+190,x0+34],[7,"in"],[8,"dock"],[6,"out"],[15,"run",x0-22,x0-200],[3,"hide"]],TOT=ph.reduce((a,p)=>a+p[0],0),ease=k=>k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2;
+  const setH=(dx,dz)=>{if(Math.abs(dx)+Math.abs(dz)>1e-5)b.rotation.y=Math.atan2(-dx,-dz)};
+  ANIM.push(t=>{let s=(t/1000)%TOT;let i=0;while(s>ph[i][0]){s-=ph[i][0];i++}const P=ph[i],k=s/P[0];b.visible=P[1]!=="hide";
+   if(P[1]==="run"){b.position.x=P[2]+(P[3]-P[2])*k;b.position.z=zm;b.rotation.y=Math.PI/2}
+   else if(P[1]==="in"){const e=1-Math.pow(1-k,2),p=inA.getPoint(e),d=inA.getTangent(e);b.position.x=p.x;b.position.z=p.z;setH(d.x,d.z)}
+   else if(P[1]==="dock"){b.position.x=x0;b.position.z=z0;b.rotation.y=Math.PI}
+   else if(P[1]==="out"){const e=ease(k),p=outA.getPoint(e),d=outA.getTangent(e);b.position.x=p.x;b.position.z=p.z;b.rotation.y=Math.PI-Math.PI/2*e}
+   b.position.y=Math.sin(t*.0021)*.06;b.rotation.z=Math.sin(t*.0017)*.025})}
  if(G.site){const SI=G.site,F=SI.fx;
   // footprint bbox
   let bx0=1e9,bz0=1e9,bx1=-1e9,bz1=-1e9;for(let i=0;i<G.slab.length;i+=4){bx0=Math.min(bx0,(G.slab[i]-CX)*u);bz0=Math.min(bz0,(G.slab[i+1]-CZ)*u);bx1=Math.max(bx1,(G.slab[i]+G.slab[i+2]-CX)*u);bz1=Math.max(bz1,(G.slab[i+1]+G.slab[i+3]-CZ)*u)}
