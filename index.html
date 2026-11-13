@@ -192,6 +192,8 @@ button,a,input{touch-action:manipulation}
 @media(max-width:620px){.lf{grid-template-columns:1fr}}
 .pc{border:1px solid var(--line);padding:24px;display:grid;gap:10px;align-content:start}.pc b{font-family:var(--display);font-weight:500;font-size:24px;color:var(--bronze)}.pc p{margin:0;color:var(--mute);line-height:1.6}@media(max-width:760px){.cols4{grid-template-columns:1fr!important}}
 .ctap{grid-column:1/-1;margin:4px 0 0;font-size:14px;color:var(--mute)}.pdfb{border-style:solid;border-color:var(--bronze);text-decoration:none;color:inherit;transition:background .2s}.pdfb:hover{background:var(--oak-2)}.pdfb em{font-style:normal;color:var(--bronze);font-size:13px;letter-spacing:.08em;margin-top:4px}
+.infr{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--line);border-left:1px solid var(--line)}.infr div{padding:22px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);display:grid;gap:6px}.infr b{font-family:var(--display);font-weight:500;font-size:24px}.infr span{color:var(--mute);font-size:14px;line-height:1.5}@media(max-width:760px){.infr{grid-template-columns:1fr 1fr}}@media(max-width:460px){.infr{grid-template-columns:1fr}}
+.strs{display:grid;gap:18px}.str{display:grid;grid-template-columns:minmax(0,420px) 1fr;gap:28px;align-items:center;border:1px solid var(--line);padding:14px}.str .ph{aspect-ratio:16/10;overflow:hidden}.str img{width:100%;height:100%;object-fit:cover;display:block}.str>div:last-child{display:grid;gap:10px;min-width:0}.str h3{font-size:32px}.str p{margin:0;color:var(--mute);max-width:52ch}.strl{display:flex;flex-wrap:wrap;gap:8px 20px}.strl a{color:var(--bronze)}@media(max-width:760px){.str{grid-template-columns:1fr}}
 .bio h1{font-size:clamp(40px,6vw,76px)}
 .quote{font-family:var(--display);font-style:italic;font-size:clamp(24px,3vw,36px);line-height:1.25;border-left:1px solid var(--bronze);padding-left:22px;max-width:28ch}
 
@@ -272,13 +274,13 @@ footer a:hover{color:var(--stone)}
 <header><div class="w">
   <a class="logo" href="#home"><svg class="lgsvg" viewBox="0 0 210 60" role="img" aria-label="Treyvas Development"><text x="105" y="29" text-anchor="middle" textLength="204" lengthAdjust="spacing" style="font-family:var(--display);font-size:31px;font-weight:500;fill:currentColor">TREYVAS</text><rect x="3" y="35" width="204" height="1.2" style="fill:var(--bronze)"/><text x="105" y="56" text-anchor="middle" textLength="204" lengthAdjust="spacing" style="font-family:var(--body);font-size:14px;font-weight:600;fill:var(--bronze)">DEVELOPMENT</text></svg></a>
   <nav id="nav">
-    <a href="#doma">Дома</a><a href="#kak-stroim">Как мы строим</a><a href="#o-nas">О нас</a><a href="#gruppa">Группа</a><a href="#lyudi">Люди</a><a href="#zhurnal">Журнал</a><a href="#kontakty">Контакты</a>
+    <a href="#doma">Дома</a><a href="#poselok">Посёлок</a><a href="#kak-stroim">Как мы строим</a><a href="#o-nas">О нас</a><a href="#gruppa">Группа</a><a href="#lyudi">Люди</a><a href="#zhurnal">Журнал</a><a href="#kontakty">Контакты</a>
   </nav>
 </div></header>
 <main id="app"></main>
 <footer><div class="w">
   <div><a class="logo" href="#home" aria-label="На главную" style="color:var(--stone)"><svg class="lgsvg" viewBox="0 0 210 60" role="img" aria-label="Treyvas Development"><text x="105" y="29" text-anchor="middle" textLength="204" lengthAdjust="spacing" style="font-family:var(--display);font-size:31px;font-weight:500;fill:currentColor">TREYVAS</text><rect x="3" y="35" width="204" height="1.2" style="fill:var(--bronze)"/><text x="105" y="56" text-anchor="middle" textLength="204" lengthAdjust="spacing" style="font-family:var(--body);font-size:14px;font-weight:600;fill:var(--bronze)">DEVELOPMENT</text></svg></a><p style="margin-top:10px;max-width:36ch">Частные дома в Подмосковье. Входит в Point Group. Это прототип сайта, изображения — визуализации проектов.</p></div>
-  <div><b>Дома</b><a href="#dom-l191">Лазурная 19.1</a><a href="#dom-r2">Речная 2</a><a href="#dom-z36">Заречная 36</a><a href="#doma">Все дома</a></div>
+  <div><b>Дома</b><a href="#dom-l191">Лазурная 19.1</a><a href="#dom-r2">Речная 2</a><a href="#dom-z36">Заречная 36</a><a href="#doma">Все дома</a><a href="#poselok">Посёлок</a></div>
   <div><b>Компания</b><a href="#o-nas">История</a><a href="#lyudi">Люди</a><a href="#kak-stroim">Как мы строим</a><a href="#zhurnal">Журнал</a></div>
   <div><b>Группа</b><a href="#point-estate">Point Estate</a><a href="#point-design">Point Design</a><a href="#point-woodcraft">Point WoodCraft</a><a href="#kontakty">Контакты</a><a href="#partneram">Партнёрам</a></div>
 </div></footer>
@@ -287,7 +289,7 @@ footer a:hover{color:var(--stone)}
 <script>
 const img=n=>`img/${n}.jpg`;
 const PDF={z35:"docs/zarechnaya-35.pdf",z36:"docs/zarechnaya-36.pdf"};
-const BUILD="1794558243";
+const BUILD="1794558296";
 const HM={l11:{price:null,area:null,lot:null,view:"park",ready:4,water:0},l191:{price:24,area:2200,lot:50,view:"park",ready:12},l192:{price:20,area:2000,lot:37,view:"park",ready:12},l193:{price:18,area:1900,lot:33,view:"park",ready:12},z35:{price:14.9,area:1400,lot:30,view:"golf",ready:0},z36:{price:14.9,area:1400,lot:30,view:"golf",ready:0},r1:{price:20,area:1900,lot:50,view:"river",ready:8},r2:{price:20,area:2000,lot:50,view:"river",ready:8}};
 const QZ=[["budget","Бюджет",[["до $15 млн",15],["до $20 млн",20],["до $25 млн",25],["Не важно",99]]],["area","Площадь дома",[["Около 1 400 м²",1400],["Около 2 000 м²",2000],["Чем больше, тем лучше",9999]]],["view","Что за окном",[["Гольф-поле","golf"],["Река и свой пирс","river"],["Парк и тишина","park"],["Не важно","any"]]],["when","Когда въезжать",[["Сразу",0],["В течение года",12],["Не спешу",99]]]];
 function qzScore(a){return Object.keys(HM).map(k=>{const m=HM[k];let s=0,why=[];
@@ -943,7 +945,7 @@ const V={
    ${numsB([["13+","лет группе"],["3000+","м² своё производство"],["4000+","сделок Point Estate"],["100 000","м² объектов Point Design"]])}
   </div></section>
   <section><div class="w">
-   <div class="sec-head"><span class="eyebrow">Дома</span><h2>Восемь домов в Agalarov Estate</h2></div>
+   <div class="sec-head"><span class="eyebrow">Дома</span><h2>Восемь домов в Agalarov Estate</h2><a class="more" href="#poselok">О посёлке</a></div>
    ${streets()}
    <div class="row" style="margin-top:36px"><a class="btn" href="#doma">Все дома</a></div>
   </div></section>
@@ -1004,6 +1006,16 @@ const V={
    <article><span class="tag">Скоро · Инженерия</span><h3>Что спрятано под бассейном</h3><p>Техническое помещение, вентиляция и гидроизоляция бассейна на 173 м².</p></article>
   </div></div></section>`,
 
+ poselok:()=>`<div class="hero" style="background-image:url(${img("z36_back")})"><div class="w"><span class="eyebrow">Новорижское шоссе · 23 км от МКАД</span><h1>Agalarov Estate</h1><p class="lead">Посёлок, где стоят все наши дома. Гольф-поле, озёра, рощи и живые изгороди вместо высоких заборов.</p></div></div>
+  <section><div class="w" style="display:grid;gap:56px">
+   ${numsB([["330","гектаров территории"],["70","гектаров гольф-поля"],["8 000+","высаженных крупномеров"],["23","км от МКАД"]])}
+   <div class="split"><div class="lft"><span class="eyebrow">О посёлке</span><h2>Резиденции, которые сливаются с природой</h2></div><div class="prose"><p>Agalarov Estate считают одним из лучших посёлков Подмосковья — и по масштабу инфраструктуры, и по тому, как организовано пространство. Дома стоят среди полей для гольфа, озёр и рощ, при этом сохраняют высокий уровень приватности.</p><p>В ландшафте нет высоких заборов — только живые изгороди и лёгкие ограды, чтобы не закрывать виды. На въезде гостей встречает аллея к гольф-клубу. Девелопер посёлка — Crocus Group.</p></div></div>
+   <div><div class="sec-head"><span class="eyebrow">Внутри посёлка</span><h2>Инфраструктура</h2></div>
+    <div class="infr">${[["Гольф","Профессиональное поле на 70 гектарах и гольф-клуб"],["Рестораны","Три ресторана на территории посёлка"],["Спорт","Спорткомплекс с кортами и футбольное поле"],["СПА","Спа-комплекс и студия танцев"],["Природа","Озёра, водопад, рощи и прогулочные аллеи"],["Estate Mall","Загородный офис Point Estate — прямо в посёлке, д. Захарово"]].map(i=>`<div><b>${i[0]}</b><span>${i[1]}</span></div>`).join("")}</div></div>
+   <div><div class="sec-head"><span class="eyebrow">Наши дома в посёлке</span><h2>Три улицы — три характера</h2></div>
+    <div class="strs">${[["Заречная","У гольф-поля","Готовые дома с видом на гольф-поле.",["z35","z36"],"z35_corner"],["Лазурная","Три соседа","Три соседних дома — 19.1, 19.2 и 19.3 — и Лазурная 11.",["l191","l192","l193"],"l192_eve"],["Речная","У реки","Участки по 50 соток с выходом к воде и собственным пирсом.",["r1","r2"],"pier1"]].map(([n,t,d,ks,im])=>`<div class="str"><div class="ph"><img src="${img(im)}" alt="Улица ${n}" loading="lazy"></div><div><span class="tag">${t}</span><h3>Улица ${n}</h3><p>${d}</p><div class="strl">${ks.map(k=>`<a href="#dom-${k}">${H[k].name} →</a>`).join("")}</div></div></div>`).join("")}</div></div>
+   <div class="cta"><div><span class="eyebrow">Как добраться</span><h2>Посёлок на карте</h2><p>Новорижское шоссе, 23 км от МКАД. Загородный офис Point Estate — в Estate Mall на территории посёлка: оттуда удобно начать показ.</p></div><div class="ctab"><a class="btn solid" href="https://yandex.ru/maps/?rtext=~55.789173,37.011749&rtt=auto" target="_blank" rel="noopener">Маршрут в Яндекс Картах</a><a class="btn" href="#zayavka">Записаться на показ</a></div></div>
+  </div></section>`,
  zayavka:()=>`<div class="w phead"><div class="sec-head"><span class="eyebrow">Заявка</span><h1>Записаться на показ</h1><p class="lead">Оставьте телефон — Point Estate перезвонит, подберёт время и покажет дом вживую: готовые интерьеры или стройку.</p></div></div>
   <section style="padding-top:24px"><div class="w">${leadForm("client")}</div></section>`,
  partneram:()=>`<div class="w phead"><div class="sec-head"><span class="eyebrow">Партнёрам</span><h1>У вас есть клиент на наш дом?</h1><p class="lead">Мы открыты к работе с брокерами, дизайнерами, архитекторами и управляющими семейными офисами. Если у вас есть клиент на один из наших домов — напишите или позвоните, условия сотрудничества обсудим индивидуально.</p></div></div>
@@ -1030,7 +1042,7 @@ const V={
 
 function house(k){
  const h=H[k],nk=order[(order.indexOf(k)+1)%order.length],nx=H[nk];
- return `<div class="hero" style="background-image:url(${img(h.hero)})"><div class="w"><span class="eyebrow">Agalarov Estate · ул. ${h.st}</span><h1>${h.name}</h1><div><span class="rdy${h.ready==="Дом готов"?" ok":""}">${h.ready}</span>${h.ready==="Дом готов"?"":` <span class="todo">срок требует уточнения</span>`}</div></div></div>
+ return `<div class="hero" style="background-image:url(${img(h.hero)})"><div class="w"><a class="eyebrow" href="#poselok" style="color:inherit">Agalarov Estate · ул. ${h.st}</a><h1>${h.name}</h1><div><span class="rdy${h.ready==="Дом готов"?" ok":""}">${h.ready}</span>${h.ready==="Дом готов"?"":` <span class="todo">срок требует уточнения</span>`}</div></div></div>
  <section><div class="w" style="display:grid;gap:64px">
   ${numsB(h.nums)}
   <div class="story"><h2>${h.title}</h2><div class="prose">${h.story.map(t=>`<p>${t}</p>`).join("")}</div></div>
@@ -1073,7 +1085,7 @@ function route(){
  const h=(location.hash||"#home").slice(1),app=document.getElementById("app");
  app.innerHTML=h.startsWith("dom-")&&H[h.slice(4)]?house(h.slice(4)):P[h]?bio(h):C[h]?company(h):(V[h]||V.home)();
  const sec=h.startsWith("dom-")?"doma":P[h]?"lyudi":C[h]?"gruppa":h;
- {const T0="Treyvas Development",nm={doma:"Дома","kak-stroim":"Как мы строим","o-nas":"О нас",gruppa:"Point Group",lyudi:"Люди",zhurnal:"Журнал",kontakty:"Контакты"};document.title=h.startsWith("dom-")&&H[h.slice(4)]?H[h.slice(4)].name+" — "+T0:P[h]?P[h].name+" — "+T0:C[h]?C[h].name+" — "+T0:nm[h]?nm[h]+" — "+T0:T0}
+ {const T0="Treyvas Development",nm={poselok:"Agalarov Estate",zayavka:"Заявка на показ",partneram:"Партнёрам",doma:"Дома","kak-stroim":"Как мы строим","o-nas":"О нас",gruppa:"Point Group",lyudi:"Люди",zhurnal:"Журнал",kontakty:"Контакты"};document.title=h.startsWith("dom-")&&H[h.slice(4)]?H[h.slice(4)].name+" — "+T0:P[h]?P[h].name+" — "+T0:C[h]?C[h].name+" — "+T0:nm[h]?nm[h]+" — "+T0:T0}
  document.querySelectorAll("#nav a").forEach(a=>a.getAttribute("href")==="#"+sec?a.setAttribute("aria-current","page"):a.removeAttribute("aria-current"));
  document.documentElement.style.setProperty("--head",document.querySelector("header").offsetHeight+"px");
  scrollTo(0,0);PST=PIE.length-1;if(typeof pieStop==="function")pieStop();QS={};qzRender(QS);try{const hv=sessionStorage.getItem("tv_house");if(hv){document.querySelectorAll("form.lf select[name=house]").forEach(s=>s.value=hv);sessionStorage.removeItem("tv_house")}}catch(x){}pieTick();if(P3){cancelAnimationFrame(P3.raf);P3.renderer.dispose();P3=null}{const pe=document.getElementById("pie");if(pe){if(window.IntersectionObserver){const io=new IntersectionObserver(es=>{if(es.some(e=>e.isIntersecting)){io.disconnect();pie3d()}},{rootMargin:"600px 0px"});io.observe(pe)}else pie3d()}}
