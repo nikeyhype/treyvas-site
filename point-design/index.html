@@ -266,7 +266,7 @@ footer a:hover{color:var(--stone)}
   .people{grid-template-columns:1fr 1fr}
   .rooms{columns:1}
   .draw,.jr{grid-template-columns:1fr}
-  .tl div{grid-template-columns:1fr}.tl p{grid-column:1}
+  .tl div,.tl a.tli{grid-template-columns:1fr}.tl p{grid-column:1}
   footer .w{grid-template-columns:1fr 1fr}
   .pie-in{grid-template-columns:1fr;grid-template-rows:minmax(0,1fr) auto;gap:10px;padding-block:10px 14px}.pie-in .stage{grid-row:1}.pie-in .pbar{grid-row:2;grid-template-columns:1fr;gap:6px}.pie-in .pie-txt{display:none}
   .pvw label{grid-template-columns:minmax(0,96px) minmax(0,1fr);font-size:10px}
@@ -277,7 +277,7 @@ footer a:hover{color:var(--stone)}
 }
 .lang{font:600 12px/1 var(--body);letter-spacing:.1em;border:1px solid var(--line);background:none;color:inherit;padding:7px 10px;cursor:pointer;border-radius:2px}.lang:hover{border-color:var(--bronze);color:var(--bronze)}
 @media(max-width:760px){header .w{position:relative}.lang{position:absolute;right:max(16px,env(safe-area-inset-right,0px));top:12px}}
-.hero.hm{background-color:#000}.mont{position:absolute;inset:0;display:grid;grid-template-columns:repeat(3,1fr);gap:3px;background:#000;overflow:hidden}@media(orientation:portrait){.mont{grid-template-columns:1fr;grid-template-rows:repeat(3,1fr)}}.mp{overflow:hidden;opacity:0;transform:scale(1.06);transition:opacity 1s ease,transform 1.6s ease}.mp.on{opacity:1;transform:none}.mont video{width:100%;height:100%;object-fit:cover;display:block}.mf{position:absolute;inset:0;opacity:0;transition:opacity 1.2s ease;background:#000}.mf.on{opacity:1}
+.hero.hm{background-color:#000}.mont{position:absolute;inset:0;display:grid;grid-template-columns:repeat(3,1fr);gap:3px;background:#000;overflow:hidden}@media(orientation:portrait){.mont{grid-template-columns:1fr;grid-template-rows:repeat(3,1fr)}}.mp{overflow:hidden;opacity:0;transform:scale(1.06);transition:opacity 1s ease,transform 1.6s ease}.mp.on{opacity:1;transform:none}.mont video{width:100%;height:100%;object-fit:cover;display:block}.mfl{position:absolute;inset:0;opacity:0;transition:opacity 1.2s ease;background:#000}.mfl.on{opacity:1}
 .vplay{justify-self:start;display:inline-flex;align-items:center;gap:12px;background:rgba(0,0,0,.35);border:1px solid rgba(230,198,146,.6);color:#f3ead9;font:500 14px/1 var(--body);letter-spacing:.04em;padding:10px 16px 10px 10px;cursor:pointer;backdrop-filter:blur(6px)}.vplay i{font-style:normal;display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--bronze);color:#17130f;font-size:11px;padding-left:2px}.vplay:hover{border-color:var(--bronze)}
 #vd{padding:0;border:0;background:#000;width:min(92vw,calc(86vh*9/16));max-width:none;overflow:visible}#vd::backdrop{background:rgba(10,8,6,.88)}#vd video{display:block;width:100%;max-height:86vh;background:#000}.vx{position:absolute;top:-44px;right:0;background:none;border:0;color:#f3ead9;font-size:34px;line-height:1;cursor:pointer;padding:4px 8px}
 .reels{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}.vplay.reel{position:relative;display:block;padding:0;aspect-ratio:9/16;overflow:hidden;background:#000;border:1px solid var(--line);backdrop-filter:none;width:100%}.reel img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .8s}.reel:hover img{transform:scale(1.04)}.reel::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(10,8,6,.85))}.vplay.reel i{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:52px;height:52px;font-size:16px;z-index:1}.reel span{position:absolute;left:14px;right:14px;bottom:14px;z-index:1;text-align:left;font:500 14px/1.35 var(--body);color:#f3ead9}
@@ -294,6 +294,7 @@ html:not(.beta) .pbeta,html.beta .pnob{display:none!important}.pplay.pgo{backgro
 .wk[hidden],.wkc[hidden],#wkm[hidden]{display:none}.wkfade{position:absolute;inset:0;background:#0d0b09;opacity:0;transition:opacity .35s;pointer-events:none!important}.wkfade.on{opacity:1}
 .hero.hs{min-height:min(88vh,860px)}.hero.hs::after{background:linear-gradient(180deg,rgba(23,19,15,.05) 45%,rgba(23,19,15,.88))}.hsl{position:absolute;inset:0;overflow:hidden}.hsl img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.08);transition:opacity 1.4s ease,transform 7s linear;max-width:none}.hsl img.on{opacity:1;transform:scale(1)}.hsl img:not([src]){visibility:hidden}
 .hctl{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:6px}.hcap{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#f3ead9;min-width:0}.hnv{width:38px;height:38px;border:1px solid rgba(230,198,146,.6);background:rgba(0,0,0,.3);color:#f3ead9;cursor:pointer;font-size:15px;backdrop-filter:blur(4px)}.hbar{flex-basis:100%;height:2px;background:rgba(243,234,217,.25);max-width:320px}.hbar s{display:block;height:100%;width:0;background:var(--bronze)}
+.tl a.tli{color:inherit;text-decoration:none;display:grid;grid-template-columns:70px 1fr;gap:6px 24px;padding:0 0 34px 28px;position:relative}.tl a.tli::before{content:"";position:absolute;left:-5px;top:12px;width:9px;height:9px;background:#8a6a3c;border-radius:50%}.tl a.tli:hover h3{color:var(--bronze)}.eco a{padding:24px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);display:grid;gap:8px;align-content:start;color:inherit;text-decoration:none;transition:background .3s}.eco a:hover{background:rgba(196,154,98,.08)}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 
@@ -345,7 +346,7 @@ function heroSlides(){clearInterval(HST);const b=document.querySelector(".hsl");
  document.querySelectorAll(".hnv").forEach(n=>n.onclick=()=>{go(i+ +n.dataset.d);start()});go(0);start()}
 const VID={z35:"img/vid/z35",z36:"img/vid/z36"};
 const PDF={z35:"docs/zarechnaya-35.pdf",z36:"docs/zarechnaya-36.pdf",l191:"docs/lazurnaya-19-1.pdf",l192:"docs/lazurnaya-19-2.pdf",l193:"docs/lazurnaya-19-3.pdf",r1:"docs/rechnaya-1.pdf",r2:"docs/rechnaya-2.pdf"};
-const BUILD="1794922127";
+const BUILD="1794923265";
 const HM={l11:{price:null,area:null,lot:null,view:"park",ready:4,water:0},l191:{price:30,area:2300,lot:48,view:"golf",ready:12},l192:{price:26,area:2125,lot:34,view:"golf",ready:12},l193:{price:23,area:2000,lot:35,view:"golf",ready:12},z35:{price:14.9,area:1465,lot:30,view:"golf",ready:0},z36:{price:14.9,area:1482,lot:30,view:"golf",ready:0},r1:{price:26,area:1800,lot:52,view:"river",ready:8},r2:{price:28,area:2125,lot:51,view:"river",ready:8}};
 const QZ=[["budget","Бюджет",[["до $15 млн",15],["до $25 млн",25],["до $30 млн",30],["Не важно",99]]],["area","Площадь дома",[["Около 1 400 м²",1400],["Около 2 000 м²",2000],["Чем больше, тем лучше",9999]]],["view","Что за окном",[["Гольф-поле","golf"],["Река и свой пирс","river"],["Парк и тишина","park"],["Не важно","any"]]],["when","Когда въезжать",[["Сразу",0],["В течение года",12],["Не спешу",99]]]];
 function qzScore(a){return Object.keys(HM).map(k=>{const m=HM[k];let s=0,why=[];
@@ -498,6 +499,14 @@ const group=()=>`<div class="cols4">
  <a class="co" href="/point-design/"><i>Архитектура и интерьер</i><b>Point Design</b><span>Проектирует дом и ведёт авторский надзор.</span></a>
  <a class="co" href="/treyvas/"><i>Строительство</i><b>Treyvas Development</b><span>Строит от котлована до сдачи.</span></a>
  <a class="co" href="/point-woodcraft/"><i>Столярное производство</i><b>Point WoodCraft</b><span>Шпон, двери, кухни, мебель.</span></a></div>`;
+const mf=()=>`<section class="mf"><div class="w mfw">
+   <div class="mfq"><span class="eyebrow">Манифест Point Group</span><p class="mfbig">Мы выстраиваем с клиентами <u>партнёрские</u> отношения, чтобы воплощать их мечты о лучшем образе жизни в <u>реальность</u>.</p><span class="mfsig">Ирина Трейвас, сооснователь Point Group</span></div>
+   <div class="split"><div class="lft"><span class="eyebrow">Почему одна группа</span><h2>Цена ошибки</h2></div><div class="prose"><p>Участок, архитектура, стройка, дизайн, ремонт и мебель. С каждым шагом исправить ошибку дороже, и цена растёт в геометрической прогрессии. Не тот участок не исправит ни один дизайнер, а промах в отделке обойдётся дешевле.</p><p>Знакомые несправедливости рынка: десятки объявлений с вашей квартирой по заниженной цене, дизайнер, который пропал посреди стройки. Point Group ведёт клиента на всех этапах сама, поэтому за результат отвечает одна команда.</p></div></div>
+   <div class="cerrw"><svg class="cerr" viewBox="0 0 860 300" role="img" aria-label="Цена ошибки растёт на каждом этапе"><line x1="30" y1="270" x2="840" y2="270" stroke="var(--line)"/><line x1="30" y1="270" x2="30" y2="6" stroke="var(--line)"/><text x="836" y="292" text-anchor="end" class="cax">время</text><text x="40" y="18" class="cax">цена ошибки</text><path d="M90,240 C 300,232 480,205 600,150 S 740,80 770,52" fill="none" stroke="var(--bronze)" stroke-width="2"/><circle cx="90" cy="240" r="9" fill="var(--oak)" stroke="var(--bronze)" stroke-width="2"/><text x="90" y="270" text-anchor="middle" class="cel">Покупка участка</text><circle cx="260" cy="226" r="9" fill="var(--oak)" stroke="var(--bronze)" stroke-width="2"/><text x="260" y="256" text-anchor="middle" class="cel">Архитектурный проект</text><circle cx="430" cy="200" r="9" fill="var(--oak)" stroke="var(--bronze)" stroke-width="2"/><text x="430" y="230" text-anchor="middle" class="cel">Строительство</text><circle cx="600" cy="150" r="9" fill="var(--oak)" stroke="var(--bronze)" stroke-width="2"/><text x="600" y="180" text-anchor="middle" class="cel">Дизайн-проект</text><circle cx="770" cy="52" r="9" fill="var(--oak)" stroke="var(--bronze)" stroke-width="2"/><text x="770" y="82" text-anchor="middle" class="cel">Ремонт и меблировка</text></svg></div>
+   <p class="mfask">А кто сказал, что человек, который платит большие деньги за свою <u>мечту</u>, не может пройти этот путь без головной боли и с минимальными рисками?</p>
+   <div class="eco"><a href="/point-estate/"><b>Point Estate →</b><span>Агентство элитной недвижимости</span></a><div><b>Point Правовые решения</b><span>Юридическая защита и решение правовых задач</span></div><a href="/point-design/"><b>Point Design →</b><span>Студия архитектуры и дизайна интерьера</span></a><a href="/treyvas/"><b>Point Development →</b><span>Строительство коттеджей в Agalarov Estate — Treyvas Development</span></a><a href="/point-woodcraft/"><b>Point WoodCraft →</b><span>Эксклюзивная мебель из дерева</span></a><div><b>Point Education</b><span>Программа «Брокер элитной недвижимости»</span></div></div>
+   <div class="mfstory"><img src="img/team.jpg" alt="Команда Point Group" loading="lazy"><div><span class="eyebrow">Притча, с которой всё начинается</span><p>Пассажир корабля заметил под водой множество рифов и скал и спросил рулевого, как тот проходит среди них — наверное, знает каждый камешек?</p><p class="mfans">— Каждый подводный камень я не знаю. Но знаю самые глубокие места, где безопасно пройдёт мой корабль.</p><p>Так и Point Group с первого шага ведёт клиента по безопасному фарватеру — от покупки до последней мелочи в доме.</p></div></div>
+  </div></section>`;
 const control=()=>`<div class="cols4">
  <div><i>01</i><b>Проект</b><span>Архитектура, конструктив и инженерия согласуются между собой до выхода на площадку.</span></div>
  <div><i>02</i><b>Стройка</b><span>Каждый этап принимается отдельно: монолит, кровля, инженерные сети, черновая отделка.</span></div>
@@ -1121,7 +1130,7 @@ const drawings=()=>`<section class="stone"><div class="w"><div class="sec-head">
 
 const V={
  home:()=>`
-  <div class="hero hm" style="background-image:url(${img("hero")})"><div class="mont" aria-hidden="true">${[1,2,3].map(i=>`<div class="mp"><video muted playsinline loop preload="auto" poster="img/hm/p${i}.jpg" src="img/hm/p${i}.mp4"></video></div>`).join("")}<div class="mf"><video muted playsinline preload="none"></video></div></div><div class="w">
+  <div class="hero hm" style="background-image:url(${img("hero")})"><div class="mont" aria-hidden="true">${[1,2,3].map(i=>`<div class="mp"><video muted playsinline loop preload="auto" poster="img/hm/p${i}.jpg" src="img/hm/p${i}.mp4"></video></div>`).join("")}<div class="mfl"><video muted playsinline preload="none"></video></div></div><div class="w">
    <span class="eyebrow">Частные дома · Подмосковье</span>
    <h1>Дом начинается с тех, <em>кто его строит</em></h1>
    <p class="lead">Семья Трейвас проектирует, строит и отделывает дома сама — силами собственных компаний, от первой линии на чертеже до света в гостиной.</p>
@@ -1134,6 +1143,7 @@ const V={
    ${group()}
    ${numsB([["13+","лет группе"],["3000+","м² своё производство"],["4000+","сделок Point Estate"],["100 000","м² объектов Point Design"]])}
   </div></section>
+  ${mf()}
   <section><div class="w">
    <div class="sec-head"><span class="eyebrow">Дома</span><h2>Восемь домов в Agalarov Estate</h2><a class="more" href="/poselok/">О посёлке</a></div>
    ${streets()}
@@ -1162,24 +1172,18 @@ const V={
    <div class="prose"><p>Тринадцать лет Point Estate продаёт лучшие дома Москвы и Подмосковья. За это время семья увидела тысячи домов изнутри: удачных и тех, что стоят годами.</p><p>Стало понятно, чего не хватает рынку: дома, где архитектура, инженерия и отделка сделаны одной командой и не спорят друг с другом. Так агентство обросло собственной студией, мастерской и стройкой.</p><p>Treyvas Development — следующий шаг. Дома, под которыми семья готова поставить свою фамилию.</p></div></div></div></section>
   <section class="stone"><div class="w"><div class="sec-head"><span class="eyebrow">История</span><h2>Как собиралась группа</h2><p class="lead">Группа росла не по плану, а по необходимости: каждый раз появлялось то, чего не хватало для хорошего дома.</p></div>
    <div class="tl">
-    <div><b>I</b><h3>Point Estate</h3><p>Павел и Ирина Трейвас открывают агентство элитной недвижимости. Больше тринадцати лет оно уверенно стоит на ногах и остаётся основой группы.</p></div>
-    <div><b>II</b><h3>Point Design</h3><p>Рядом с агентством появляется студия архитектуры и дизайна интерьера. Клиенты, купившие дом, тут же получают проект.</p></div>
-    <div><b>III</b><h3>Point WoodCraft</h3><p>Группа покупает столярное производство и перестраивает его под свои проекты. Потому что хорошую столярку проще сделать самим, чем объяснить чужой фабрике.</p></div>
-    <div><b>IV</b><h3>Treyvas Development</h3><p>Восемь домов в Agalarov Estate. Проект, стройка, столярка и продажа внутри одной группы.</p></div>
+    <a class="tli" href="/point-estate/"><b>I</b><h3>Point Estate →</h3><p>Павел и Ирина Трейвас открывают агентство элитной недвижимости. Больше тринадцати лет оно уверенно стоит на ногах и остаётся основой группы.</p></a>
+    <a class="tli" href="/point-design/"><b>II</b><h3>Point Design →</h3><p>Рядом с агентством появляется студия архитектуры и дизайна интерьера. Клиенты, купившие дом, тут же получают проект.</p></a>
+    <a class="tli" href="/point-woodcraft/"><b>III</b><h3>Point WoodCraft →</h3><p>Группа покупает столярное производство и перестраивает его под свои проекты. Потому что хорошую столярку проще сделать самим, чем объяснить чужой фабрике.</p></a>
+    <a class="tli" href="/treyvas/"><b>IV</b><h3>Treyvas Development →</h3><p>Восемь домов в Agalarov Estate. Проект, стройка, столярка и продажа внутри одной группы.</p></a>
    </div></div></section>
+  ${mf()}
   <section><div class="w"><div class="sec-head"><span class="eyebrow">Группа</span><h2>Четыре компании, один дом</h2></div>${group()}</div></section>
   <section style="padding-top:0"><div class="w"><div class="sec-head"><span class="eyebrow">Люди</span><h2>Кто за этим стоит</h2></div>${people()}</div></section>`,
 
  gruppa:()=>`<div class="w phead"><div class="sec-head"><span class="pgbig">Point Group</span><h1>Четыре компании, один дом</h1><p class="lead">Дом можно найти, спроектировать, построить и обставить, не выходя из одной группы. У каждой компании своя страница.</p></div></div>
   <section style="padding-top:24px"><div class="w"><div class="houses">${Object.keys(C).map(k=>`<a class="card" href="/${k}/"><div class="ph lg">${C[k].logo?`<img src="${C[k].logo}" alt="${C[k].name}" loading="lazy">`:LOGO}</div><span class="tag">${C[k].kind}</span><h3>${C[k].name}</h3><div class="meta">${C[k].lead}</div></a>`).join("")}</div></div></section>
-  <section class="mf"><div class="w mfw">
-   <div class="mfq"><span class="eyebrow">Манифест Point Group</span><p class="mfbig">Мы выстраиваем с клиентами <u>партнёрские</u> отношения, чтобы воплощать их мечты о лучшем образе жизни в <u>реальность</u>.</p><span class="mfsig">Ирина Трейвас, сооснователь Point Group</span></div>
-   <div class="split"><div class="lft"><span class="eyebrow">Почему одна группа</span><h2>Цена ошибки</h2></div><div class="prose"><p>Участок, архитектура, стройка, дизайн, ремонт и мебель. С каждым шагом исправить ошибку дороже, и цена растёт в геометрической прогрессии. Не тот участок не исправит ни один дизайнер, а промах в отделке обойдётся дешевле.</p><p>Знакомые несправедливости рынка: десятки объявлений с вашей квартирой по заниженной цене, дизайнер, который пропал посреди стройки. Point Group ведёт клиента на всех этапах сама, поэтому за результат отвечает одна команда.</p></div></div>
-   <div class="cerrw"><svg class="cerr" viewBox="0 0 860 300" role="img" aria-label="Цена ошибки растёт на каждом этапе"><line x1="30" y1="270" x2="840" y2="270" stroke="var(--line)"/><line x1="30" y1="270" x2="30" y2="6" stroke="var(--line)"/><text x="836" y="292" text-anchor="end" class="cax">время</text><text x="40" y="18" class="cax">цена ошибки</text><path d="M90,240 C 300,232 480,205 600,150 S 740,80 770,52" fill="none" stroke="var(--bronze)" stroke-width="2"/><circle cx="90" cy="240" r="9" fill="var(--oak)" stroke="var(--bronze)" stroke-width="2"/><text x="90" y="270" text-anchor="middle" class="cel">Покупка участка</text><circle cx="260" cy="226" r="9" fill="var(--oak)" stroke="var(--bronze)" stroke-width="2"/><text x="260" y="256" text-anchor="middle" class="cel">Архитектурный проект</text><circle cx="430" cy="200" r="9" fill="var(--oak)" stroke="var(--bronze)" stroke-width="2"/><text x="430" y="230" text-anchor="middle" class="cel">Строительство</text><circle cx="600" cy="150" r="9" fill="var(--oak)" stroke="var(--bronze)" stroke-width="2"/><text x="600" y="180" text-anchor="middle" class="cel">Дизайн-проект</text><circle cx="770" cy="52" r="9" fill="var(--oak)" stroke="var(--bronze)" stroke-width="2"/><text x="770" y="82" text-anchor="middle" class="cel">Ремонт и меблировка</text></svg></div>
-   <p class="mfask">А кто сказал, что человек, который платит большие деньги за свою <u>мечту</u>, не может пройти этот путь без головной боли и с минимальными рисками?</p>
-   <div class="eco"><div><b>Point Estate</b><span>Агентство элитной недвижимости</span></div><div><b>Point Правовые решения</b><span>Юридическая защита и решение правовых задач</span></div><div><b>Point Design</b><span>Студия архитектуры и дизайна интерьера</span></div><div><b>Point Development</b><span>Строительство коттеджей в Agalarov Estate — Treyvas Development</span></div><div><b>Point WoodCraft</b><span>Эксклюзивная мебель из дерева</span></div><div><b>Point Education</b><span>Программа «Брокер элитной недвижимости»</span></div></div>
-   <div class="mfstory"><img src="img/team.jpg" alt="Команда Point Group" loading="lazy"><div><span class="eyebrow">Притча, с которой всё начинается</span><p>Пассажир корабля заметил под водой множество рифов и скал и спросил рулевого, как тот проходит среди них — наверное, знает каждый камешек?</p><p class="mfans">— Каждый подводный камень я не знаю. Но знаю самые глубокие места, где безопасно пройдёт мой корабль.</p><p>Так и Point Group с первого шага ведёт клиента по безопасному фарватеру — от покупки до последней мелочи в доме.</p></div></div>
-  </div></section>`,
+  ${mf()}`,
 
  lyudi:()=>`<div class="w phead"><div class="sec-head"><span class="eyebrow">Люди</span><h1>Те, кто строит</h1><p class="lead">Три человека отвечают за каждый дом. Под их руководством на объектах Treyvas Development одновременно работают 100–150 специалистов: прорабы, монолитчики, фасадчики, инженеры, столяры и дизайнеры. У каждого руководителя своя страница.</p></div></div>
   <section style="padding-top:24px"><div class="w">${people()}</div></section>`,
@@ -1331,7 +1335,7 @@ if(LANG==="en"){document.documentElement.lang="en";new MutationObserver(ms=>{for
 let MT=[];
 function montStop(){MT.forEach(clearTimeout);MT=[];document.querySelectorAll(".mont video").forEach(v=>{try{v.pause()}catch(x){}})}
 function montage(){montStop();const m=document.querySelector(".mont");if(!m)return;
- const ps=[...m.querySelectorAll(".mp")],mf=m.querySelector(".mf"),fv=mf.querySelector("video");
+ const ps=[...m.querySelectorAll(".mp")],mf=m.querySelector(".mfl"),fv=mf.querySelector("video");
  const port=matchMedia("(orientation:portrait)").matches;fv.poster=port?"img/hm/fp.jpg":"img/hm/fl.jpg";fv.src=port?"img/hm/fp.mp4":"img/hm/fl.mp4";fv.preload="auto";
  m.querySelectorAll("video").forEach(v=>{v.muted=true;v.defaultMuted=true});
  if(matchMedia("(prefers-reduced-motion:reduce)").matches){ps.forEach(p=>p.classList.add("on"));return}
