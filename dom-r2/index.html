@@ -335,7 +335,7 @@ html:not(.beta) .pbeta,html.beta .pnob{display:none!important}.pplay.pgo{backgro
    <ol class="steps-l"><li data-s="0" class="on"><i>01</i><b>Котлован</b><span>Разметка по осям и выемка грунта под плиту.</span></li><li data-s="1" class="on"><i>02</i><b>Монолитная плита</b><span>Основание дома. То, что потом уже не поменять.</span></li><li data-s="2" class="on"><i>03</i><b>Стены первого этажа</b><span>Несущие стены и перегородки по кладочному плану.</span></li><li data-s="3" class="on"><i>04</i><b>Полы и бассейн</b><span>Тёплые полы, стяжка, чистовое покрытие и чаша бассейна 173 м².</span></li><li data-s="4" class="on"><i>05</i><b>Столярка и мебель</b><span>Лестница, кухня, шкафы, столы, диваны, машины в гараже. Нажмите на табличку, чтобы зайти в комнату.</span></li><li data-s="5" class="on"><i>06</i><b>Перекрытие</b><span>Первый этаж закрыт. Сверху плита второго и кровли террас.</span></li><li data-s="6" class="on"><i>07</i><b>Стены второго этажа</b><span>Пять спален, у каждой своя гардеробная и ванная.</span></li><li data-s="7" class="on"><i>08</i><b>Отделка второго этажа</b><span>Полы, встроенная мебель, спальни.</span></li><li data-s="8" class="on"><i>09</i><b>Фасады и вход</b><span>Облицовка камнем по проекту, панорамные окна в тёмных рамах, входной портал в антраците с дверью в шпоне.</span></li><li data-s="9" class="on"><i>10</i><b>Кровля и террасы</b><span>Кровля с карнизом-выносом 1,5 м, террасы из террасной доски и стеклянное ограждение по всему периметру первого этажа.</span></li><li data-s="10" class="on cur"><i>11</i><b>Участок</b><span>Подъезд к гаражу, терраса с шезлонгами, за домом — гольф-поле Agalarov Estate. Дом можно крутить и открывать комнаты.</span></li></ol></div>
  </div></section>
  
- <a class="next" href="/dom-l11/" style="background-image:url(img/l11_ext.jpg)"><div class="w"><span class="eyebrow">Следующий дом</span><h2>Лот 1</h2></div></a></main>
+ <a class="next" href="/dom-z35/" style="background-image:url(img/z35_ring.jpg)"><div class="w"><span class="eyebrow">Следующий дом</span><h2>Лот 5 (1 465 м²)</h2></div></a></main>
 <footer><div class="w">
   <div><a class="logo" href="/" aria-label="На главную" style="color:var(--stone)"><svg class="lgsvg" viewBox="0 0 210 60" role="img" aria-label="Treyvas Development"><text x="105" y="29" text-anchor="middle" textLength="204" lengthAdjust="spacing" style="font-family:var(--display);font-size:31px;font-weight:500;fill:currentColor">TREYVAS</text><rect x="3" y="35" width="204" height="1.2" style="fill:var(--bronze)"/><text x="105" y="56" text-anchor="middle" textLength="204" lengthAdjust="spacing" style="font-family:var(--body);font-size:14px;font-weight:600;fill:var(--bronze)">DEVELOPMENT</text></svg></a><p style="margin-top:10px;max-width:36ch">Частные дома в Подмосковье. Входит в Point Group. Изображения строящихся домов — визуализации проектов.</p></div>
   <div><b>Дома</b><a href="/dom-l191/">Лот 2 (2 300 м²)</a><a href="/dom-r2/">Лот 8 (2 125 м²)</a><a href="/dom-z36/">Лот 6 (1 482 м²)</a><a href="/doma/">Все дома</a><a href="/poselok/">Посёлок</a></div>
@@ -361,7 +361,7 @@ function heroSlides(){clearInterval(HST);const b=document.querySelector(".hsl");
  document.querySelectorAll(".hnv").forEach(n=>n.onclick=()=>{go(i+ +n.dataset.d);start()});go(0);start()}
 const VID={z35:"img/vid/z35",z36:"img/vid/z36"};
 const PDF={z35:"docs/zarechnaya-35.pdf",z36:"docs/zarechnaya-36.pdf",l191:"docs/lazurnaya-19-1.pdf",l192:"docs/lazurnaya-19-2.pdf",l193:"docs/lazurnaya-19-3.pdf",r1:"docs/rechnaya-1.pdf",r2:"docs/rechnaya-2.pdf"};
-const BUILD="1794933272";
+const BUILD="1794933642";
 const HM={l11:{price:null,area:null,lot:null,view:"park",ready:4,water:0},l191:{price:30,area:2300,lot:48,view:"golf",ready:12},l192:{price:26,area:2125,lot:34,view:"golf",ready:12},l193:{price:23,area:2000,lot:35,view:"golf",ready:12},z35:{price:14.9,area:1465,lot:30,view:"golf",ready:0},z36:{price:14.9,area:1482,lot:30,view:"golf",ready:0},r1:{price:26,area:1800,lot:52,view:"river",ready:8},r2:{price:28,area:2125,lot:51,view:"river",ready:8}};
 const QZ=[["budget","Бюджет",[["до $15 млн",15],["до $25 млн",25],["до $30 млн",30],["Не важно",99]]],["area","Площадь дома",[["Около 1 400 м²",1400],["Около 2 000 м²",2000],["Чем больше, тем лучше",9999]]],["view","Что за окном",[["Гольф-поле","golf"],["Река и свой пирс","river"],["Парк и тишина","park"],["Не важно","any"]]],["when","Когда въезжать",[["Сразу",0],["В течение года",12],["Не спешу",99]]]];
 function qzScore(a){return Object.keys(HM).map(k=>{const m=HM[k];let s=0,why=[];
@@ -449,7 +449,7 @@ const H={
   story:["Дом построен по проекту Лота 3: каменный портал камина, остекление первого этажа, бассейн под одной крышей с домом.","Участок другой, поэтому посадка дома и виды из окон свои."]}
 };
 const H3D={l191:"l191",z36:"z36",z35:"z35",l192:"l192",r2:"r2",l193:"l193",r1:"r1"};
-const STREETS=[["В стройке",["l11","l191","l192","l193"]],["Готовые дома",["z35","z36"]],["У реки",["r1","r2"]]];
+const STREETS=[["Готовые дома",["z35","z36"]],["В стройке",["l11","l191","l192","l193"]],["У реки",["r1","r2"]]];
 const order=STREETS.flatMap(s=>s[1]);
 
 const P={

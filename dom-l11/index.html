@@ -350,7 +350,7 @@ function heroSlides(){clearInterval(HST);const b=document.querySelector(".hsl");
  document.querySelectorAll(".hnv").forEach(n=>n.onclick=()=>{go(i+ +n.dataset.d);start()});go(0);start()}
 const VID={z35:"img/vid/z35",z36:"img/vid/z36"};
 const PDF={z35:"docs/zarechnaya-35.pdf",z36:"docs/zarechnaya-36.pdf",l191:"docs/lazurnaya-19-1.pdf",l192:"docs/lazurnaya-19-2.pdf",l193:"docs/lazurnaya-19-3.pdf",r1:"docs/rechnaya-1.pdf",r2:"docs/rechnaya-2.pdf"};
-const BUILD="1794933272";
+const BUILD="1794933642";
 const HM={l11:{price:null,area:null,lot:null,view:"park",ready:4,water:0},l191:{price:30,area:2300,lot:48,view:"golf",ready:12},l192:{price:26,area:2125,lot:34,view:"golf",ready:12},l193:{price:23,area:2000,lot:35,view:"golf",ready:12},z35:{price:14.9,area:1465,lot:30,view:"golf",ready:0},z36:{price:14.9,area:1482,lot:30,view:"golf",ready:0},r1:{price:26,area:1800,lot:52,view:"river",ready:8},r2:{price:28,area:2125,lot:51,view:"river",ready:8}};
 const QZ=[["budget","Бюджет",[["до $15 млн",15],["до $25 млн",25],["до $30 млн",30],["Не важно",99]]],["area","Площадь дома",[["Около 1 400 м²",1400],["Около 2 000 м²",2000],["Чем больше, тем лучше",9999]]],["view","Что за окном",[["Гольф-поле","golf"],["Река и свой пирс","river"],["Парк и тишина","park"],["Не важно","any"]]],["when","Когда въезжать",[["Сразу",0],["В течение года",12],["Не спешу",99]]]];
 function qzScore(a){return Object.keys(HM).map(k=>{const m=HM[k];let s=0,why=[];
@@ -438,7 +438,7 @@ const H={
   story:["Дом построен по проекту Лота 3: каменный портал камина, остекление первого этажа, бассейн под одной крышей с домом.","Участок другой, поэтому посадка дома и виды из окон свои."]}
 };
 const H3D={l191:"l191",z36:"z36",z35:"z35",l192:"l192",r2:"r2",l193:"l193",r1:"r1"};
-const STREETS=[["В стройке",["l11","l191","l192","l193"]],["Готовые дома",["z35","z36"]],["У реки",["r1","r2"]]];
+const STREETS=[["Готовые дома",["z35","z36"]],["В стройке",["l11","l191","l192","l193"]],["У реки",["r1","r2"]]];
 const order=STREETS.flatMap(s=>s[1]);
 
 const P={
