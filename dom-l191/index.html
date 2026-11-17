@@ -277,7 +277,7 @@ footer a:hover{color:var(--stone)}
 }
 .lang{font:600 12px/1 var(--body);letter-spacing:.1em;border:1px solid var(--line);background:none;color:inherit;padding:7px 10px;cursor:pointer;border-radius:2px}.lang:hover{border-color:var(--bronze);color:var(--bronze)}
 @media(max-width:760px){header .w{position:relative}.lang{position:absolute;right:max(16px,env(safe-area-inset-right,0px));top:12px}}
-.hero.hm{background-color:#000}.mont{position:absolute;inset:0;display:grid;grid-template-columns:repeat(3,1fr);gap:3px;background:#000;overflow:hidden}@media(orientation:portrait){.mont{grid-template-columns:1fr;grid-template-rows:repeat(3,1fr)}}.mp{overflow:hidden;opacity:0;transform:scale(1.06);transition:opacity 1s ease,transform 1.6s ease}.mp.on{opacity:1;transform:none}.mont video{width:100%;height:100%;object-fit:cover;display:block}.mfl{position:absolute;inset:0;opacity:0;transition:opacity 1.2s ease;background:#000}.mfl.on{opacity:1}
+.hero.hm{background-color:#000}.mont{position:absolute;inset:0;display:grid;grid-template-columns:repeat(2,1fr);gap:3px;background:#000;overflow:hidden}@media(orientation:portrait){.mont{grid-template-columns:1fr;grid-template-rows:repeat(2,1fr)}}.mp{overflow:hidden;opacity:0;transform:scale(1.06);transition:opacity 1s ease,transform 1.6s ease}.mp.on{opacity:1;transform:none}.mont video{width:100%;height:100%;object-fit:cover;display:block}.mfl{position:absolute;inset:0;opacity:0;transition:opacity 1.2s ease;background:#000}.mfl.on{opacity:1}
 .vplay{justify-self:start;display:inline-flex;align-items:center;gap:12px;background:rgba(0,0,0,.35);border:1px solid rgba(230,198,146,.6);color:#f3ead9;font:500 14px/1 var(--body);letter-spacing:.04em;padding:10px 16px 10px 10px;cursor:pointer;backdrop-filter:blur(6px)}.vplay i{font-style:normal;display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--bronze);color:#17130f;font-size:11px;padding-left:2px}.vplay:hover{border-color:var(--bronze)}
 #vd{padding:0;border:0;background:#000;width:min(92vw,calc(86vh*9/16));max-width:none;overflow:visible}#vd::backdrop{background:rgba(10,8,6,.88)}#vd video{display:block;width:100%;max-height:86vh;background:#000}.vx{position:absolute;top:-44px;right:0;background:none;border:0;color:#f3ead9;font-size:34px;line-height:1;cursor:pointer;padding:4px 8px}
 .reels{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}.vplay.reel{position:relative;display:block;padding:0;aspect-ratio:9/16;overflow:hidden;background:#000;border:1px solid var(--line);backdrop-filter:none;width:100%}.reel img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .8s}.reel:hover img{transform:scale(1.04)}.reel::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(10,8,6,.85))}.vplay.reel i{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:52px;height:52px;font-size:16px;z-index:1}.reel span{position:absolute;left:14px;right:14px;bottom:14px;z-index:1;text-align:left;font:500 14px/1.35 var(--body);color:#f3ead9}
@@ -370,7 +370,7 @@ function heroSlides(){clearInterval(HST);const b=document.querySelector(".hsl");
  document.querySelectorAll(".hnv").forEach(n=>n.onclick=()=>{go(i+ +n.dataset.d);start()});go(0);start()}
 const VID={z35:"img/vid/z35",z36:"img/vid/z36"};
 const PDF={z35:"docs/zarechnaya-35.pdf",z36:"docs/zarechnaya-36.pdf",l191:"docs/lazurnaya-19-1.pdf",l192:"docs/lazurnaya-19-2.pdf",l193:"docs/lazurnaya-19-3.pdf",r1:"docs/rechnaya-1.pdf",r2:"docs/rechnaya-2.pdf"};
-const BUILD="1794924523";
+const BUILD="1794929701";
 const HM={l11:{price:null,area:null,lot:null,view:"park",ready:4,water:0},l191:{price:30,area:2300,lot:48,view:"golf",ready:12},l192:{price:26,area:2125,lot:34,view:"golf",ready:12},l193:{price:23,area:2000,lot:35,view:"golf",ready:12},z35:{price:14.9,area:1465,lot:30,view:"golf",ready:0},z36:{price:14.9,area:1482,lot:30,view:"golf",ready:0},r1:{price:26,area:1800,lot:52,view:"river",ready:8},r2:{price:28,area:2125,lot:51,view:"river",ready:8}};
 const QZ=[["budget","Бюджет",[["до $15 млн",15],["до $25 млн",25],["до $30 млн",30],["Не важно",99]]],["area","Площадь дома",[["Около 1 400 м²",1400],["Около 2 000 м²",2000],["Чем больше, тем лучше",9999]]],["view","Что за окном",[["Гольф-поле","golf"],["Река и свой пирс","river"],["Парк и тишина","park"],["Не важно","any"]]],["when","Когда въезжать",[["Сразу",0],["В течение года",12],["Не спешу",99]]]];
 function qzScore(a){return Object.keys(HM).map(k=>{const m=HM[k];let s=0,why=[];
@@ -1154,7 +1154,7 @@ const drawings=()=>`<section class="stone"><div class="w"><div class="sec-head">
 
 const V={
  home:()=>`
-  <div class="hero hm" style="background-image:url(${img("hero")})"><div class="mont" aria-hidden="true">${[1,2,3].map(i=>`<div class="mp"><video muted playsinline loop preload="auto" poster="img/hm/p${i}.jpg" src="img/hm/p${i}.mp4"></video></div>`).join("")}<div class="mfl"><video muted playsinline preload="none"></video></div></div><div class="w">
+  <div class="hero hm" style="background-image:url(${img("hero")})"><div class="mont" aria-hidden="true">${[2,3].map(i=>`<div class="mp"><video muted playsinline loop preload="auto" poster="img/hm/p${i}.jpg" src="img/hm/p${i}.mp4"></video></div>`).join("")}<div class="mfl"><video muted playsinline preload="none"></video></div></div><div class="w">
    <span class="eyebrow">Частные дома · Подмосковье</span>
    <h1>Дом начинается с тех, <em>кто его строит</em></h1>
    <p class="lead">Семья Трейвас проектирует, строит и отделывает дома сама — силами собственных компаний, от первой линии на чертеже до света в гостиной.</p>
@@ -1366,10 +1366,10 @@ function montage(){montStop();const m=document.querySelector(".mont");if(!m)retu
  const at=(t,f)=>MT.push(setTimeout(f,t));
  const cycle=()=>{ps.forEach(p=>p.classList.remove("on"));mf.classList.remove("on");
   ps.forEach((p,i)=>at(300+i*2000,()=>{p.classList.add("on");play(p.querySelector("video"))}));
-  at(10500,()=>{mf.classList.add("on");play(fv)});
-  at(11700,()=>ps.forEach(p=>{p.classList.remove("on");p.querySelector("video").pause()}));
-  at(19500,()=>{mf.classList.remove("on")});
-  at(20700,()=>{fv.pause();cycle()})};
+  at(8500,()=>{mf.classList.add("on");play(fv)});
+  at(9700,()=>ps.forEach(p=>{p.classList.remove("on");p.querySelector("video").pause()}));
+  at(17500,()=>{mf.classList.remove("on")});
+  at(18700,()=>{fv.pause();cycle()})};
  cycle()}
 document.addEventListener("click",e=>{const b=e.target.closest(".vplay");if(b){const d=document.getElementById("vd"),v=d.querySelector("video");v.poster=b.dataset.v+".jpg";v.src=b.dataset.v+".mp4";d.showModal();const r=v.play();if(r&&r.catch)r.catch(()=>{});try{ym(114231388,"reachGoal","video")}catch(x){}return}
  const d=document.getElementById("vd");if(d&&d.open&&(e.target===d||e.target.closest(".vx"))){d.close()}});
