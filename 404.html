@@ -83,6 +83,7 @@ nav a:hover,nav a[aria-current]{color:var(--stone);border-color:var(--bronze)}
 .hero .w{position:relative;z-index:1;width:100%;padding-block:56px 48px;display:grid;gap:18px}
 .fly{position:absolute;top:42%;left:0;z-index:3;white-space:nowrap;pointer-events:none;font-family:var(--display);font-size:clamp(56px,11vw,170px);line-height:1;color:#fff;text-shadow:0 2px 30px rgba(0,0,0,.35);transform:translate(100vw,-50%);animation:fly 15s linear 1.5s infinite}@keyframes fly{0%{transform:translate(100vw,-50%)}33.3%,100%{transform:translate(-100%,-50%)}}@media(prefers-reduced-motion:reduce){.fly{display:none}}.hero.hm{overflow:hidden}
 .ph.cr{position:relative}.ph.cr img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .8s ease}.ph.cr img.on{opacity:1}
+.pst.pfl{display:flex!important;flex-wrap:wrap;gap:8px;grid-column:1/-1;align-items:center}.pfl .pfb{width:auto;white-space:nowrap}.pfb.on{background:var(--bronze);color:#fff;border-color:var(--bronze)}
 .hero h1{font-size:clamp(40px,7vw,92px);max-width:14ch}
 .hero h1 em{font-style:italic;color:var(--bronze)}
 .hero .lead{color:var(--stone)}
@@ -337,7 +338,7 @@ function heroSlides(){clearInterval(HST);const b=document.querySelector(".hsl");
  document.querySelectorAll(".hnv").forEach(n=>n.onclick=()=>{go(i+ +n.dataset.d);start()});go(0);start()}
 const VID={z35:"img/vid/z35",z36:"img/vid/z36"};
 const PDF={z35:"docs/zarechnaya-35.pdf",z36:"docs/zarechnaya-36.pdf",l191:"docs/lazurnaya-19-1.pdf",l192:"docs/lazurnaya-19-2.pdf",l193:"docs/lazurnaya-19-3.pdf",r1:"docs/rechnaya-1.pdf",r2:"docs/rechnaya-2.pdf"};
-const BUILD="1794935183";
+const BUILD="1794936517";
 const HM={l11:{price:null,area:null,lot:null,view:"park",ready:4,water:0},l191:{price:30,area:2300,lot:48,view:"golf",ready:12},l192:{price:26,area:2125,lot:34,view:"golf",ready:12},l193:{price:23,area:1900,lot:35,view:"golf",ready:12},z35:{price:14.9,area:1465,lot:30,view:"golf",ready:0},z36:{price:14.9,area:1482,lot:30,view:"golf",ready:0},r1:{price:26,area:1800,lot:52,view:"river",ready:8},r2:{price:28,area:2125,lot:51,view:"river",ready:8}};
 const QZ=[["budget","Бюджет",[["до $15 млн",15],["до $25 млн",25],["до $30 млн",30],["Не важно",99]]],["area","Площадь дома",[["Около 1 400 м²",1400],["Около 2 000 м²",2000],["Чем больше, тем лучше",9999]]],["view","Что за окном",[["Гольф-поле","golf"],["Река и свой пирс","river"],["Парк и тишина","park"],["Не важно","any"]]],["when","Когда въезжать",[["Сразу",0],["В течение года",12],["Не спешу",99]]]];
 function qzScore(a){return Object.keys(HM).map(k=>{const m=HM[k];let s=0,why=[];
@@ -527,27 +528,26 @@ function pie(k="l191"){
    <div class="room" id="room"><img alt=""><div><b></b><button type="button" class="btn" id="roomx">Назад к дому</button></div></div><p class="hint">Потяните, чтобы повернуть дом</p>
    <div class="wk" id="wk" hidden><div class="wkt"><button type="button" id="wkx" class="wkb">✕ Выйти</button><div class="wkf"><button type="button" class="wkb" data-fl="1" aria-pressed="true">1 этаж</button><button type="button" class="wkb" data-fl="2" aria-pressed="false">2 этаж</button></div><button type="button" id="wkm" class="wkb" aria-pressed="false" hidden>♪ Музыка</button></div><p class="wkh"></p><div class="wkc" id="wkc" hidden><i></i><b></b><span></span><em></em></div><label class="wktd"><span aria-hidden="true">☀</span><input type="range" id="wktod" min="0" max="100" step="1" value="35" aria-label="Время суток"><span aria-hidden="true">☾</span></label><div class="wkfade" id="wkfade"></div></div></div>
   <div class="pbar" id="pbar">
-   <div class="pst"><button type="button" class="pb" data-st="-1" aria-label="Предыдущий этап">←</button><div class="pstx"><span class="pcnt">01 / ${String(PIE.length).padStart(2,"0")}</span><b class="pnm">${PIE[0][0]}</b><input class="prng" id="pstep" type="range" min="0" max="${PIE.length-1}" step="1" value="0" aria-label="Этап сборки"></div><button type="button" class="pb" data-st="1" aria-label="Следующий этап">→</button></div>
-   <div class="pvw"><div class="prow"><button type="button" id="pplay" class="pplay">▶ Собрать дом</button><button type="button" id="pnight" class="pplay pnob" aria-pressed="false">☾ Вечер</button><button type="button" id="ptour" class="pplay pgo pbeta">▶ Тур по дому</button><button type="button" id="pwalk" class="pplay pbeta">Пройти по дому</button><button type="button" id="pwin" class="pplay" aria-pressed="false">❄ Зима</button></div><label class="pbeta"><span>Время суток</span><input class="prng" id="ptod" type="range" min="0" max="100" step="1" value="35" aria-label="Время суток: утро, день, закат, ночь"></label><label><span>Повернуть</span><input class="prng" id="prot" type="range" min="0" max="360" step="1" value="0" aria-label="Повернуть дом"></label><label><span>Масштаб</span><input class="prng" id="pzm" type="range" min="0" max="100" step="1" value="50" aria-label="Приблизить или отдалить"></label></div>
+   <div class="pst pfl"><button type="button" class="pplay pfb on" data-go="${PIE.length-1}">Дом целиком</button><button type="button" class="pplay pfb" data-go="${PIE.length-1}" data-pl="1">План 1 этажа</button><button type="button" class="pplay pfb" data-go="${PIE.length-1}" data-pl="2">План 2 этажа</button></div>
+   <div class="pvw"><div class="prow"><button type="button" id="pnight" class="pplay pnob" aria-pressed="false">☾ Вечер</button><button type="button" id="ptour" class="pplay pgo pbeta">▶ Тур по дому</button><button type="button" id="pwalk" class="pplay pbeta">Пройти по дому</button><button type="button" id="pwin" class="pplay" aria-pressed="false">❄ Зима</button></div><label class="pbeta"><span>Время суток</span><input class="prng" id="ptod" type="range" min="0" max="100" step="1" value="35" aria-label="Время суток: утро, день, закат, ночь"></label><label><span>Повернуть</span><input class="prng" id="prot" type="range" min="0" max="360" step="1" value="0" aria-label="Повернуть дом"></label><label><span>Масштаб</span><input class="prng" id="pzm" type="range" min="0" max="100" step="1" value="50" aria-label="Приблизить или отдалить"></label></div>
   </div>
-  <div class="pie-txt"><span class="eyebrow">Как строится дом · ${H[k==="l192"&&curR()==="dom-r2"?"r2":k].name}</span><h2>Дом собирается на ваших глазах</h2>
-   <p class="lead" style="font-size:15px">Стрелками или ползунком под моделью — по этапам, кнопка «Собрать дом» проиграет всю стройку. Модель построена по настоящим планам дома${k==="l191"?"":": стены, бассейн, мебель и кровли распознаны автоматически, детали уточняем по АР"}.</p>
-   <ol class="steps-l">${PIE.map((s,i)=>`<li data-s="${i}"><i>${String(i+1).padStart(2,"0")}</i><b>${s[0]}</b><span>${s[1]}</span></li>`).join("")}</ol></div>
+  <div class="pie-txt"><span class="eyebrow">Дом в 3D · ${H[k==="l192"&&curR()==="dom-r2"?"r2":k].name}</span><h2>Покрутите дом</h2>
+   <p class="lead" style="font-size:15px">Потяните, чтобы повернуть дом. Кнопки под моделью снимают крышу и показывают планировку первого и второго этажа.</p></div>
  </div></section>`;
 }
 let P3=null;
-let PST=0,PPLAY=0;
+let PST=PIE.length-1,PPLAY=0;window.PLAN=0;
 function pieStep(){return PST}
 function pieTick(){
  const s=document.getElementById("pie"); if(!s) return; const st=pieStep();
  s.querySelectorAll("li[data-s]").forEach(e=>{const n=+e.dataset.s;e.classList.toggle("on",n<=st);e.classList.toggle("cur",n===st)});
  if(P3) P3.st=st;
- const r=document.getElementById("pstep");if(r&&document.activeElement!==r){r.value=st}const pb=document.getElementById("pbar");if(pb){pb.querySelector(".pcnt").textContent=String(st+1).padStart(2,"0")+" / "+String(PIE.length).padStart(2,"0");pb.querySelector(".pnm").textContent=PIE[st][0]}
+ const r=document.getElementById("pstep");if(r&&document.activeElement!==r){r.value=st}const pb=document.getElementById("pbar");if(pb&&pb.querySelector(".pcnt")){pb.querySelector(".pcnt").textContent=String(st+1).padStart(2,"0")+" / "+String(PIE.length).padStart(2,"0");pb.querySelector(".pnm").textContent=PIE[st][0]}
 }
 function pieGo(n,keep){PST=Math.max(0,Math.min(PIE.length-1,n));if(!keep)pieStop();pieTick()}
 function pieStop(){clearInterval(PPLAY);PPLAY=0;const b=document.getElementById("pplay");if(b)b.textContent="▶ Собрать дом"}
 function piePlay(){if(PPLAY){pieStop();return}PST=0;pieTick();const b=document.getElementById("pplay");if(b)b.textContent="❚❚ Пауза";PPLAY=setInterval(()=>{if(PST>=PIE.length-1){pieStop();return}pieGo(PST+1,1)},2600)}
-document.addEventListener("click",e=>{const b=e.target.closest(".pb[data-st]");if(b)pieGo(pieStep()+ +b.dataset.st);if(e.target.closest("#pplay"))piePlay();const li=e.target.closest(".steps-l li[data-s]");if(li)pieGo(+li.dataset.s)});
+document.addEventListener("click",e=>{const f=e.target.closest(".pfb[data-go]");if(f){window.PLAN=+(f.dataset.pl||0);pieGo(+f.dataset.go);document.querySelectorAll(".pfb").forEach(x=>x.classList.toggle("on",x===f))}const b=e.target.closest(".pb[data-st]");if(b)pieGo(pieStep()+ +b.dataset.st);if(e.target.closest("#pplay"))piePlay();const li=e.target.closest(".steps-l li[data-s]");if(li)pieGo(+li.dataset.s)});
 document.addEventListener("input",e=>{if(e.target.id==="pstep")pieGo(+e.target.value)});
 addEventListener("scroll",pieTick,{passive:true});addEventListener("resize",pieTick);
 
@@ -718,7 +718,9 @@ async function pie3d(){
    const ws=new T.Mesh(new T.BoxGeometry(1.9,.5,.06),new T.MeshPhysicalMaterial({color:0x223038,roughness:.05,transparent:true,opacity:.7}));ws.position.set(0,1.15,-.6);ws.rotation.x=-.35;boat.add(ws);
    const seat=new T.Mesh(new T.BoxGeometry(1.8,.4,1.2),M(0xe8e1d4,{roughness:.9}));seat.position.set(0,1.05,-2.2);boat.add(seat);
    const stripe=new T.Mesh(new T.BoxGeometry(2.36,.1,6.6),M(0x1f3a5a));stripe.position.set(0,.55,-.3);boat.add(stripe);
-   boat.traverse(o=>{if(o.isMesh)o.castShadow=true});boat.position.set(px+pw/2+1.8,.0,pz-1.2);boat.rotation.y=Math.PI;site.add(boat);var BOATA={b:boat,x0:px+pw/2+1.8,z0:pz-1.2,zm:bz-RV.w*.4}}
+   boat.traverse(o=>{if(o.isMesh)o.castShadow=true});boat.position.set(px+pw/2+1.8,.0,pz-1.2);boat.rotation.y=Math.PI;site.add(boat);var BOATA={b:boat,x0:px+pw/2+1.8,z0:pz-1.2,zm:bz-RV.w*.4}
+   // lake on the left side of the plot, from the river up to the garage
+   {const gz=G.gdoorW?(G.gdoorW[1]+G.gdoorW[2]-CZ)*u:HZ,L0=bz-RV.w,lw=60,ll=gz-L0,lk=new T.Mesh(new T.PlaneGeometry(lw,ll),wM);lk.rotation.x=-Math.PI/2;lk.position.set(-F-lw/2+.6,.035,L0+ll/2);lk.receiveShadow=true;site.add(lk);const lb=new T.Mesh(new T.BoxGeometry(1.2,.12,ll),M(0x6b6a3e,{roughness:1}));lb.position.set(-F+.6,.02,L0+ll/2);site.add(lb)}}
   // trees along the side fences: spruce and broadleaf alternating
   for(const sx of [-1,1])for(let z=SI.back+7,k=0;z<SI.front-6;z+=8.5,k++){const x=sx*(F-3.4);if(k%2)PF.push([x,z,7+rnd()*3]);else PB.push([x,z])}
   // front garden: sculpture on a stone plinth beside the entrance path, paved circle, boxwood balls
@@ -771,7 +773,7 @@ async function pie3d(){
  const ctl=new T.OrbitControls(cam,cv);ctl.target.set(0,2.5,0);ctl.enableZoom=false;ctl.enablePan=false;ctl.maxPolarAngle=1.45;ctl.minPolarAngle=.25;ctl.enableDamping=true;ctl.autoRotateSpeed=.55;
  if(matchMedia("(pointer:coarse)").matches){ctl.enableRotate=false;cv.style.touchAction="pan-y"}
  const C0=(G.roofw?new T.Vector3(-70,44,100):new T.Vector3(-74,66,96)).multiplyScalar(SC);cam.position.copy(C0);
- const PP=L191?PINS.map(p=>[p[0],p[1]*2.2,p[2]*1.932,p[3],img(p[4])]):(G.pins||[]).map(p=>[p[0],p[1],p[2],p[3],p[4]?img(p[4]):""]);
+ const PP=[]||(L191?PINS.map(p=>[p[0],p[1]*2.2,p[2]*1.932,p[3],img(p[4])]):(G.pins||[]).map(p=>[p[0],p[1],p[2],p[3],p[4]?img(p[4]):""]));
  document.querySelectorAll(".pin.nb").forEach(e=>e.remove());document.getElementById("pins").insertAdjacentHTML("afterend",NBS.map((NB,i)=>`<a class="pin nb in" id="nbpin${i}" hidden href="/dom-${NB.k}/"><span>${NB.name} →</span></a>`).join(""));
  document.getElementById("pins").innerHTML=PP.map((p,i)=>`<button class="pin${p[4]?"":" np"}" type="button" data-i="${i}" ${p[4]?`data-src="${p[4]}"`:""}><span>${p[0]}</span></button>`).join("");
  const pinEls=[...document.querySelectorAll("#pins .pin")],v=new T.Vector3();
@@ -1090,7 +1092,7 @@ async function pie3d(){
   if(cv.width!==Math.round(stage.clientWidth*renderer.getPixelRatio())) size();
   const st=S.st;
   if(S.noPit0)grp[0].visible=false;const NOW=performance.now();if(S.ext)S.ext.forEach(e=>e[0].visible=st>=e[1]&&st<=e[2]);if(S.anims)S.anims.forEach(f=>f(NOW,st));
-  grp.forEach((g,i)=>{const t=i<=st?1:0;g.userData.k+=(t-g.userData.k)*.07;const k=g.userData.k;g.visible=k>.004&&!(i===0&&S.noPit0);if(i<10){g.position.y=(1-k)*(1-k)*26}else{g.scale.setScalar(Math.max(.001,k))}});
+  const PL=window.PLAN||0;grp.forEach((g,i)=>{const t=i<=st&&!(PL===1&&i>=5&&i<=9)&&!(PL===2&&i>=8&&i<=9)?1:0;g.userData.k+=(t-g.userData.k)*.07;const k=g.userData.k;g.visible=k>.004&&!(i===0&&S.noPit0);if(i<10){g.position.y=(1-k)*(1-k)*26}else{g.scale.setScalar(Math.max(.001,k))}});
   S.lawn+=((st>=10?1:0)-S.lawn)*.04;grass.material.opacity=S.lawn;
   
   if(S.wk&&S.wk.on){if(S.wk.roofOff)grp[9].visible=false;S.wk.update(NOW);if(S.wkLight)S.wkLight(NOW);renderer.render(scene,cam);pinEls.forEach(el=>el.classList.remove("in"));NBS.forEach((NB,i)=>{const e=document.getElementById("nbpin"+i);if(e)e.hidden=true});return}
