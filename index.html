@@ -358,6 +358,34 @@ html.v2{--oak:#F5F2EB;--oak-2:#ECE7DC;--line:#D5D0C5;--stone:#242621;--mute:#555
 .sllink{word-break:break-all}
 .lf2 .v2crm{font-size:12px;color:#8a6d1f;border:1px dashed #c9b27a;padding:6px 10px;margin:0}
 #slfab b{font-weight:700}
+/* v2 · комнаты */
+.rmg{display:grid;gap:28px}@media(min-width:900px){.rmg{grid-template-columns:1.15fr 1fr;align-items:start}.rmplay{position:sticky;top:calc(var(--head,80px) + 16px)}}
+.rmfl{display:flex;gap:8px;margin-bottom:12px}.rmfl button,.rmlist button{border:1px solid #D5D0C5;background:none;color:#242621;font:inherit;font-size:14px;min-height:44px;padding:8px 14px;cursor:pointer}
+.rmfl button[aria-selected=true]{background:#30392D;border-color:#30392D;color:#F5F2EB}
+.rmsvg{width:100%;height:auto;display:block;background:#fff;border:1px solid #D5D0C5}
+.rmz rect{fill:rgba(48,57,45,.08);stroke:#30392D;stroke-width:3;stroke-dasharray:10 6;cursor:pointer;transition:fill .2s}
+.rmz.rmph rect{stroke:#8a8d80}
+.rmz text{font:600 22px Manrope,system-ui,sans-serif;fill:#242621;text-anchor:middle;dominant-baseline:middle;pointer-events:none;paint-order:stroke;stroke:#fff;stroke-width:6px}
+.rmz:hover rect,.rmz:focus rect,.rmz.on rect{fill:rgba(48,57,45,.28);stroke-dasharray:none}.rmz:focus{outline:none}.rmz:focus-visible rect{stroke-width:6}
+.rmlist{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}.rmlist button em{font-style:normal;font-size:11px;opacity:.6;margin-left:8px;text-transform:uppercase;letter-spacing:.06em}.rmlist button.on{background:#30392D;color:#F5F2EB;border-color:#30392D}
+.rmv{position:relative;background:#242621;aspect-ratio:9/16;max-height:78vh;margin-inline:auto;width:100%;max-width:min(100%,calc(78vh*9/16))}
+.rmv video,.rmv img{width:100%;height:100%;object-fit:cover;display:block}
+.rmsnd{position:absolute;top:10px;right:10px;background:rgba(36,38,33,.75);color:#F5F2EB;border:0;font:inherit;font-size:13px;min-height:36px;padding:6px 12px;cursor:pointer}
+.rmcap{margin:12px 0 4px;font-size:15px}.rmsec .note{font-size:13px;opacity:.7;margin:0 0 14px}
+/* v2 · генплан */
+.gpg{display:grid;gap:28px}@media(min-width:900px){.gpg{grid-template-columns:1.5fr 1fr;align-items:start}}
+#gpsvg{width:100%;height:auto;display:block;border:1px solid #D5D0C5;touch-action:manipulation}
+.gpz{font:italic 22px "PT Serif",Georgia,serif;fill:#55584F;text-anchor:middle}
+.gpl{cursor:pointer}.gpl circle{fill:#F5F2EB;stroke:#30392D;stroke-width:2.5}.gpl.ok circle{fill:#30392D}
+.gpl text{font:700 15px Manrope,system-ui,sans-serif;text-anchor:middle;fill:#30392D;pointer-events:none}.gpl.ok text{fill:#F5F2EB}
+.gpl.on circle{stroke:#242621;stroke-width:5;r:19}.gpl:focus{outline:none}.gpl:focus-visible circle{stroke-width:6}
+.gpleg{display:flex;gap:18px;font-size:13px;margin-top:10px}.gpleg i{display:inline-block;width:12px;height:12px;border-radius:50%;border:2px solid #30392D;margin-right:6px;vertical-align:-1px}.gpleg i.ok{background:#30392D}
+.gpsec .note{font-size:13px;opacity:.7}.gpa{margin-top:14px;flex-wrap:wrap}
+.gp3{margin-top:36px}.gp3h{display:flex;flex-wrap:wrap;justify-content:space-between;gap:14px;align-items:center;margin-bottom:14px}.gp3h b{font:400 28px "PT Serif",Georgia,serif}
+.gp3w{position:relative}.gp3p{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2;transition:opacity .4s}.gp3s{position:absolute;left:16px;bottom:16px;z-index:3;background:rgba(245,242,235,.92);padding:8px 12px;margin:0;font-size:14px}
+.gp3w.ld .gp3p,.gp3w.ld .gp3s{opacity:0;pointer-events:none}.gp3w.err .pie{display:none}.gp3w.err{min-height:320px}.gp3w.err .gp3p{position:relative;height:auto;aspect-ratio:3/2}
+.gp3w .pie{padding:0}
+.lg2{height:46px}@media(max-width:760px){.lg2{height:34px}}
 </style>
 
 
@@ -431,7 +459,7 @@ html.v2{--oak:#F5F2EB;--oak-2:#ECE7DC;--line:#D5D0C5;--stone:#242621;--mute:#555
 
 <script>
 const img=n=>`img/${n}.jpg`;
-const V2=(()=>{try{const q=location.search;if(/[?&]v2\b/.test(q))localStorage.setItem("tv_v2","1");if(/[?&]v1\b/.test(q))localStorage.removeItem("tv_v2");if(!sessionStorage.getItem("tv_src")){const p=new URLSearchParams(q),u=["utm_source","utm_medium","utm_campaign","utm_content"].map(k=>p.get(k)?k.slice(4)+"="+p.get(k):"").filter(Boolean).join(", ");sessionStorage.setItem("tv_src",(u||"")+(document.referrer&&!document.referrer.includes(location.host)?(u?" · ":"")+"откуда: "+document.referrer:"")||"прямой заход");sessionStorage.setItem("tv_land",location.pathname)}const v=!!localStorage.getItem("tv_v2");if(v){document.documentElement.classList.add("v2");addEventListener("DOMContentLoaded",()=>{const n=document.getElementById("nav");if(n)n.innerHTML='<a href="/doma/">Резиденции</a><a href="/poselok/">Посёлок</a><a href="/o-nas/">О девелопере</a><a href="/podborka/" id="slfab" hidden>Подборка · <b>0</b></a><a href="/zayavka/" class="navcta">Записаться на просмотр</a>';try{slSync()}catch(x){}})}return v}catch(x){return false}})();
+const V2=(()=>{try{const q=location.search;if(/[?&]v2\b/.test(q))localStorage.setItem("tv_v2","1");if(/[?&]v1\b/.test(q))localStorage.removeItem("tv_v2");if(!sessionStorage.getItem("tv_src")){const p=new URLSearchParams(q),u=["utm_source","utm_medium","utm_campaign","utm_content"].map(k=>p.get(k)?k.slice(4)+"="+p.get(k):"").filter(Boolean).join(", ");sessionStorage.setItem("tv_src",(u||"")+(document.referrer&&!document.referrer.includes(location.host)?(u?" · ":"")+"откуда: "+document.referrer:"")||"прямой заход");sessionStorage.setItem("tv_land",location.pathname)}const v=!!localStorage.getItem("tv_v2");if(v){document.documentElement.classList.add("v2");addEventListener("DOMContentLoaded",()=>{const n=document.getElementById("nav");if(n)n.innerHTML='<a href="/doma/">Резиденции</a><a href="/poselok/">Посёлок</a><a href="/o-nas/">О девелопере</a><a href="/podborka/" id="slfab" hidden>Подборка · <b>0</b></a><a href="/zayavka/" class="navcta">Записаться на просмотр</a>';try{slSync()}catch(x){}try{logo2()}catch(x){}})}return v}catch(x){return false}})();
 try{if(/[?&]beta/.test(location.search))sessionStorage.setItem("tv_beta","1");if(sessionStorage.getItem("tv_beta"))document.documentElement.classList.add("beta")}catch(x){}
 const REELS={nadzor:"Авторский надзор: обход дома",nadzor2:"Едем на объект: день надзора",nadzor3:"Надзор с дизайнерами Point Design",woodcraft:"Столярка в доме: работа Point WoodCraft"};
 const reels=ks=>`<div class="reels">${ks.map(k=>`<button type="button" class="vplay reel" data-v="img/vid/${k}"><img src="img/vid/${k}.jpg" alt="" loading="lazy"><i aria-hidden="true">▶</i><span>${REELS[k]}</span></button>`).join("")}</div>`;
@@ -446,7 +474,7 @@ function heroSlides(){clearInterval(HST);const b=document.querySelector(".hsl");
  document.querySelectorAll(".hnv").forEach(n=>n.onclick=()=>{go(i+ +n.dataset.d);start()});go(0);start()}
 const VID={z35:"img/vid/z35",z36:"img/vid/z36"};
 const PDF={z35:"docs/zarechnaya-35.pdf",z36:"docs/zarechnaya-36.pdf",l191:"docs/lazurnaya-19-1.pdf",l192:"docs/lazurnaya-19-2.pdf",l193:"docs/lazurnaya-19-3.pdf",r1:"docs/rechnaya-1.pdf",r2:"docs/rechnaya-2.pdf"};
-const BUILD="1795074003";
+const BUILD="1795110244";
 const HM={l11:{price:null,area:null,lot:null,view:"park",ready:4,water:0},l191:{price:30,area:2300,lot:48,view:"golf",ready:12},l192:{price:26,area:2125,lot:34,view:"golf",ready:12},l193:{price:23,area:1900,lot:35,view:"golf",ready:12},z35:{price:14.9,area:1465,lot:30,view:"golf",ready:0},z36:{price:14.9,area:1482,lot:30,view:"golf",ready:0},r1:{price:26,area:1800,lot:52,view:"river",ready:8},r2:{price:28,area:2125,lot:51,view:"river",ready:8}};
 const QZ=[["budget","Бюджет",[["до $15 млн",15],["до $25 млн",25],["до $30 млн",30],["Не важно",99]]],["area","Площадь дома",[["Около 1 400 м²",1400],["Около 2 000 м²",2000],["Чем больше, тем лучше",9999]]],["view","Что за окном",[["Гольф-поле","golf"],["Река и свой пирс","river"],["Парк и тишина","park"],["Не важно","any"]]],["when","Когда въезжать",[["Сразу",0],["В течение года",12],["Не спешу",99]]]];
 function qzScore(a){return Object.keys(HM).filter(k=>!V2||(HM[k].ready<=a.when&&(a.budget>=99||HM[k].price==null||HM[k].price<=a.budget))).map(k=>{const m=HM[k];let s=0,why=[];
@@ -1263,7 +1291,7 @@ function v2Home(){return `
  <section id="ready" class="s2"><div class="w"><div class="s2h"><span class="eyebrow">Готовые дома</span><h2>Можно приехать и посмотреть</h2><a class="more" href="/sravnenie/?l=z35,z36">Сравнить два дома</a></div><div class="t2g">${["z35","z36"].map(tile2).join("")}</div></div></section>
  ${GROUPS.slice(1).map(([id,t,f])=>`<section class="s2" id="${id}"><div class="w"><div class="s2h"><span class="eyebrow">Строятся</span><h2>${t}</h2></div><div class="t2g t2s">${ORDER2.filter(k=>f(k)&&k!=="l11").map(tile2).join("")}</div></div></section>`).join("")}
  <section class="s2"><div class="w h2v"><div><span class="eyebrow">Жизнь внутри</span><h2>Первый этаж готового дома</h2><p class="lead">Короткая прогулка по гостиной, столовой и ванной Лота 5. Видео запускается по нажатию.</p><a class="btn" href="/dom-z35/">Открыть Лот 5</a></div><div class="h2vf"><video src="img/hm/z35i.mp4" poster="img/hm/z35i.jpg" controls playsinline preload="none" muted></video></div></div></section>
- <section class="s2"><div class="w h2g2"><a class="h2ph" href="/poselok/"><img src="${img("ae/aerial")}" alt="Agalarov Estate" loading="lazy"><span>Посёлок Agalarov Estate →</span></a><div><span class="eyebrow">Посёлок</span><h2>Гольф-поле, озёра и рощи</h2><p class="lead">Живые изгороди вместо высоких заборов, гольф-клуб, рестораны, спорт и отель внутри посёлка.</p><a class="btn" href="/poselok/">О посёлке</a></div></div></section>
+ <section class="s2"><div class="w h2g2"><a class="h2ph" href="/poselok/"><img src="${img("ae/aerial")}" alt="Agalarov Estate" loading="lazy"><span>Посёлок Agalarov Estate →</span></a><div><span class="eyebrow">Посёлок</span><h2>Гольф-поле, озёра и рощи</h2><p class="lead">Живые изгороди вместо высоких заборов, гольф-клуб, рестораны, спорт и отель внутри посёлка.</p><a class="btn" href="/poselok/">О посёлке</a><a class="btn" href="/poselok/#karta">Карта домов</a></div></div></section>
  <section class="s2"><div class="w"><div class="s2h"><span class="eyebrow">Как построены дома</span><h2>Одна команда от проекта до мебели</h2><a class="more" href="/kak-stroim/">Как мы строим</a></div>${group()}</div></section>
  <section class="s2 s2c"><div class="w"><div class="s2h"><span class="eyebrow">Частный просмотр</span><h2>Выберите дом и удобный день</h2></div><p class="lead">Брокер Point Estate свяжется с вами, чтобы согласовать время просмотра.</p><div class="row"><a class="btn solid" href="/zayavka/">Записаться на просмотр</a><a class="btn" href="/doma/">Все резиденции</a></div></div></section>`}
 function v2House(k,rest){const h=H[k],liv=LIVING[k]||(HS[k]&&(HS[k].find(x=>/Гостин/.test(x[1]))||[])[0])||h.imgs[1]||h.hero,fac=FACADE[k]||h.hero,viz=!READY(k),alt=ALT(k);
@@ -1271,6 +1299,7 @@ function v2House(k,rest){const h=H[k],liv=LIVING[k]||(HS[k]&&(HS[k].find(x=>/Г�
  return `<section class="c2top"><div class="w"><div class="c2h"><span class="eyebrow">${LOTN(k)} · ${READY(k)?"Дом готов":h.ready} · Agalarov Estate</span><h1>${TITLE2(k)}</h1><p class="c2par">${[HM[k].area?HM[k].area.toLocaleString("ru")+" м²":"",HM[k].lot?HM[k].lot+" соток":"",bedr(k).replace("спал.","спален"),money(k)].filter(Boolean).join(" · ")}</p><p class="lead">${h.story&&h.story[0]||""}</p>
  <div class="row hcta"><a class="btn solid" href="${zLink(k)}" data-house="${k}">Записаться на просмотр</a><a class="btn" href="/dom-${k}/#plans" data-scroll="plans">Смотреть планировки</a><a class="btn" href="/sravnenie/?l=${k},${alt}">Сравнить</a>${slBtn(k)}</div></div></div></section>
  <section class="c2st"><div class="w c2g"><figure class="c2f c2fa"><img src="${img(fac)}" alt="${LOTN(k)} — фасад"><figcaption>${cap("Фасад")}</figcaption></figure><figure class="c2f"><img src="${img(liv)}" alt="${LOTN(k)} — гостиная" loading="lazy"><figcaption>${cap("Жизнь внутри · гостиная")}</figcaption></figure><a class="c2f c2pl" href="/dom-${k}/#plans" data-scroll="plans"><img src="plans/${h.plan}-1.jpg" alt="План первого этажа, ${LOTN(k)}" loading="lazy"><span>План первого этажа · открыть планировки →</span></a></div></section>
+ ${roomsBlock(k)}
  ${rest}
  <section class="s2"><div class="w"><div class="s2h"><span class="eyebrow">Ближайшая альтернатива</span><h2>${READY(k)?"Второй готовый дом рядом":"Похожая резиденция"}</h2><a class="more" href="/sravnenie/?l=${k},${alt}">Сравнить с ${LOTN(alt)}</a></div><div class="t2g t2one">${tile2(alt)}</div></div></section>`}
 /* сравнение */
@@ -1308,6 +1337,91 @@ const leadForm2=()=>`<form class="lf lf2" data-kind="client" novalidate>
 function v2Zayavka(){const p=new URLSearchParams(location.search),lot=p.get("lot"),lots=(p.get("lots")||"").split(",").filter(k=>H[k]);
  return `<div class="w phead"><div class="sec-head"><span class="eyebrow">Частный просмотр</span><h1>${lots.length>1?"Просмотр: "+lots.map(LOTN).join(", "):H[lot]?"Частный просмотр · "+LOTN(lot):"Записаться на просмотр"}</h1><p class="lead">Оставьте контакт и, если удобно, предпочтительный день. Брокер Point Estate подтвердит время и пришлёт точку встречи.</p></div></div>
  <section style="padding-top:12px"><div class="w">${leadForm2()}</div></section>`}
+/* v2 · видео из плана: разметка комнат хранится отдельно от плеера */
+const ROOMS={z36:{v:"img/vid/z36.mp4",poster:"img/vid/z36.jpg",chk:"19.11.2026",
+ fl:{1:{src:"plans/z36-1.jpg",vb:[235,150,755,1160],n:"1 этаж"},2:{src:"plans/z36-2.jpg",vb:[270,470,725,615],n:"2 этаж"}},
+ r:[["entr","Прихожая",1,[575,925,85,145],[0,3],null],
+  ["stair","Лестничный холл",1,[495,690,160,170],[3,6],"live/z36/696527"],
+  ["living","Гостиная с камином",1,[455,480,260,200],[6,17],"live/z36/696492"],
+  ["dining","Кухня и столовая",1,[300,480,155,205],[17,27],"live/z36/696496"],
+  ["pool","Бассейн",1,[720,160,255,520],[27,38],"live/z36/696473"],
+  ["sauna","Сауна",1,[805,690,78,140],[38,42],"live/z36/696471"],
+  ["terr","Терраса под консолью",1,[295,345,420,130],null,"live/z36/696591"],
+  ["hall2","Холл второго этажа",2,[495,690,305,210],[91,98],"live/z36/696567"],
+  ["master","Мастер-спальня",2,[285,485,410,205],[99,118],"live/z36/696482"]]}};
+function roomsBlock(k){const R=ROOMS[k];if(!R)return "";const fls=Object.keys(R.fl);
+ const svg=f=>{const F=R.fl[f];return `<svg class="rmsvg" data-fl="${f}" viewBox="${F.vb.join(" ")}" role="group" aria-label="План, ${F.n}"${f==="1"?"":" hidden"}><image href="${F.src}" x="0" y="0" width="1026" height="1450"/>${R.r.filter(r=>r[2]==f).map(r=>`<g class="rmz${r[4]?"":" rmph"}" data-r="${r[0]}" tabindex="0" role="button" aria-label="${r[1]}${r[4]?" — видео":" — фото"}"><rect x="${r[3][0]}" y="${r[3][1]}" width="${r[3][2]}" height="${r[3][3]}" rx="6"/><text x="${r[3][0]+r[3][2]/2}" y="${r[3][1]+r[3][3]/2}">${r[1]}</text></g>`).join("")}</svg>`};
+ return `<section class="s2 rmsec" id="rooms" data-k="${k}"><div class="w"><div class="s2h"><span class="eyebrow">Дом по комнатам · ${LOTN(k)}</span><h2>Нажмите на комнату — покажем её</h2></div>
+ <div class="rmg"><div class="rmplan"><div class="rmfl" role="tablist">${fls.map(f=>`<button type="button" role="tab" data-fl="${f}" aria-selected="${f==="1"}">${R.fl[f].n}</button>`).join("")}</div>${fls.map(svg).join("")}
+ <div class="rmlist">${R.r.map(r=>`<button type="button" data-r="${r[0]}" data-fl="${r[2]}">${r[1]}<em>${r[4]?"видео":"фото"}</em></button>`).join("")}</div></div>
+ <div class="rmplay"><div class="rmv"><video id="rmvid" playsinline preload="none" muted controls poster="${R.poster}"><source src="${R.v}" type="video/mp4"></video><img id="rmimg" alt="" hidden><button type="button" class="rmsnd" id="rmsnd" aria-pressed="false">Звук</button></div>
+ <p class="rmcap" id="rmcap" aria-live="polite">Выберите комнату на плане или в списке.</p><p class="note">Видеоглавы сверены по кадрам ${R.chk}. Где главы нет — показываем подтверждённое фото.</p>
+ <div class="row"><a class="btn solid" href="${zLink(k)}" data-house="${k}">Записаться на просмотр</a><a class="btn" href="/dom-${k}/#plans" data-scroll="plans">Все планировки</a></div></div></div></div></section>`}
+let RMT=null;
+function rmShow(id){const s=document.getElementById("rooms");if(!s)return;const R=ROOMS[s.dataset.k],r=R.r.find(x=>x[0]===id);if(!r)return;
+ rmFloor(String(r[2]));s.querySelectorAll("[data-r]").forEach(e=>e.classList.toggle("on",e.dataset.r===id));
+ const v=document.getElementById("rmvid"),im=document.getElementById("rmimg"),cap=document.getElementById("rmcap");clearInterval(RMT);
+ const fl=R.fl[r[2]].n;
+ if(r[4]){im.hidden=true;v.hidden=false;const go=()=>{v.currentTime=r[4][0];const p=v.play();if(p&&p.catch)p.catch(()=>{});RMT=setInterval(()=>{if(v.currentTime>=r[4][1]||v.currentTime<r[4][0]-1){v.pause();clearInterval(RMT)}},200)};
+  if(v.readyState>=1)go();else{v.preload="auto";v.addEventListener("loadedmetadata",go,{once:true});v.load()}
+  cap.innerHTML=`<b>${r[1]}</b> · ${fl} · фрагмент ${r[4][1]-r[4][0]} с`;goal("room_open")}
+ else{v.pause();v.hidden=true;im.hidden=false;im.src=img(r[5]);im.alt=r[1];cap.innerHTML=`<b>${r[1]}</b> · ${fl} · фото, видео этой зоны ещё не снято`;goal("room_open")}
+ try{history.replaceState(history.state,"",location.pathname+"?"+new URLSearchParams(Object.assign(Object.fromEntries(new URLSearchParams(location.search)),{room:id}))+location.hash)}catch(x){}}
+function rmFloor(f){const s=document.getElementById("rooms");if(!s)return;s.querySelectorAll(".rmsvg").forEach(e=>e.hidden=e.dataset.fl!==f);s.querySelectorAll(".rmfl button").forEach(b=>b.setAttribute("aria-selected",b.dataset.fl===f))}
+document.addEventListener("click",e=>{const z=e.target.closest("#rooms [data-r]");if(z){rmShow(z.dataset.r);if(z.tagName==="BUTTON"&&innerWidth<900)document.getElementById("rmvid").closest(".rmplay").scrollIntoView({block:"nearest",behavior:matchMedia("(prefers-reduced-motion:reduce)").matches?"auto":"smooth"});return}
+ const t=e.target.closest("#rooms .rmfl button");if(t)rmFloor(t.dataset.fl);
+ const sn=e.target.closest("#rmsnd");if(sn){const v=document.getElementById("rmvid");v.muted=!v.muted;sn.setAttribute("aria-pressed",String(!v.muted));sn.textContent=v.muted?"Звук":"Без звука"}});
+document.addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&e.target.closest&&e.target.closest("#rooms g[data-r]")){e.preventDefault();rmShow(e.target.closest("g").dataset.r)}});
+function rmAfter(){const s=document.getElementById("rooms");if(!s)return;const q=new URLSearchParams(location.search).get("room");if(q)rmShow(q)}
+
+/* v2 · генплан в три состояния: карта → участок и карточка → 3D */
+const GP={vb:[0,0,1000,620],lots:{z35:[560,300],z36:[612,282],l191:[430,210],l192:[470,182],l193:[512,165],r1:[262,452],r2:[308,476],l11:[812,470]},
+ zoom:{golf:[340,100,380,260],river:[150,350,300,200],park:[690,360,260,190]}};
+const gpZone=k=>HM[k].view==="river"?"river":HM[k].view==="park"?"park":"golf";
+function gpBlock(){const L=GP.lots;
+ return `<section class="s2 gpsec" id="karta"><div class="w"><div class="s2h"><span class="eyebrow">Карта домов</span><h2>Где стоят резиденции</h2><a class="more" href="/doma/">Все резиденции</a></div>
+ <div class="gpg"><div class="gpm"><svg id="gpsvg" viewBox="${GP.vb.join(" ")}" role="group" aria-label="Схема посёлка с нашими домами">
+  <rect width="1000" height="620" fill="#ECE7DC"/>
+  <path d="M330 120 C420 60 640 70 720 140 C790 200 760 330 690 380 C600 440 430 420 360 360 C300 300 270 170 330 120Z" fill="#C9D2BC"/>
+  <path d="M440 260 C480 230 560 240 590 270 C610 300 560 330 510 320 C470 312 430 290 440 260Z" fill="#B7C2A6"/>
+  <path d="M0 560 C120 520 200 420 300 400 C380 385 420 430 520 470 C640 520 760 600 1000 590 L1000 620 L0 620Z" fill="#BFD0D6"/>
+  <path d="M690 420 C760 390 900 400 950 460 C980 510 920 560 840 560 C760 560 690 520 690 420Z" fill="#CCD3BE"/>
+  <text class="gpz" x="560" y="120">Гольф-поле</text><text class="gpz" x="200" y="560">Река</text><text class="gpz" x="830" y="410">Парк</text>
+  ${Object.keys(L).map(k=>`<g class="gpl${READY(k)?" ok":""}" data-k="${k}" tabindex="0" role="button" aria-label="${LOTN(k)}, ${READY(k)?"дом готов":H[k].ready}"><circle cx="${L[k][0]}" cy="${L[k][1]}" r="15"/><text x="${L[k][0]}" y="${L[k][1]+5}">${LOTN(k).slice(4)}</text></g>`).join("")}
+ </svg><div class="gpleg"><span><i class="ok"></i>Дом готов</span><span><i></i>Строится</span></div>
+ <p class="note">Схема расположения, не в масштабе. Точные границы участков брокер покажет по согласованному генплану.</p></div>
+ <div class="gpc" id="gpc" aria-live="polite"><p class="lead">Нажмите на номер участка — покажем дом и его карточку.</p></div></div>
+ <div class="gp3" id="gp3" hidden></div></div></section>`}
+function gpVB(to,instant){const s=document.getElementById("gpsvg");if(!s)return;const from=s.getAttribute("viewBox").split(" ").map(Number);
+ if(instant||matchMedia("(prefers-reduced-motion:reduce)").matches){s.setAttribute("viewBox",to.join(" "));return}
+ const t0=performance.now(),D=450;const st=n=>{const p=Math.min(1,(n-t0)/D),e=p<.5?2*p*p:1-Math.pow(-2*p+2,2)/2;s.setAttribute("viewBox",from.map((f,i)=>f+(to[i]-f)*e).join(" "));if(p<1)requestAnimationFrame(st)};requestAnimationFrame(st)}
+function gpSet(q){try{const p=new URLSearchParams(location.search);["u","m"].forEach(k=>q[k]?p.set(k,q[k]):p.delete(k));history.replaceState(history.state,"",location.pathname+(p.toString()?"?"+p:"")+"#karta")}catch(x){}}
+function gpPick(k,instant){const c=document.getElementById("gpc");if(!c||!H[k])return;gpVB(GP.zoom[gpZone(k)],instant);
+ document.querySelectorAll(".gpl").forEach(g=>g.classList.toggle("on",g.dataset.k===k));
+ c.innerHTML=`${tile2(k)}<div class="row gpa">${H3D[k]?`<button type="button" class="btn solid" data-gp3="${k}">Дом в 3D</button>`:""}<a class="btn" href="/dom-${k}/#plans" data-scroll="plans">Планировки</a><a class="btn" href="${zLink(k)}" data-house="${k}">Записаться на просмотр</a><button type="button" class="btn" data-gpback>Вся карта</button></div>`;
+ document.getElementById("gp3").hidden=true;gpSet({u:k});goal("plot_select")}
+function gpAll(){gpVB(GP.vb);document.querySelectorAll(".gpl").forEach(g=>g.classList.remove("on"));const c=document.getElementById("gpc");if(c)c.innerHTML=`<p class="lead">Нажмите на номер участка — покажем дом и его карточку.</p>`;const g3=document.getElementById("gp3");if(g3){g3.hidden=true;g3.innerHTML=""}gpSet({})}
+function gp3(k){const g=document.getElementById("gp3");if(!g)return;const ph=img(FACADE[k]||H[k].hero);
+ if(P3){cancelAnimationFrame(P3.raf);P3.renderer.dispose();P3=null}
+ g.innerHTML=`<div class="gp3h"><b>${LOTN(k)} в 3D</b><div class="row"><a class="btn" href="/dom-${k}/#plans" data-scroll="plans">Планировки</a><a class="btn solid" href="${zLink(k)}" data-house="${k}">Записаться на просмотр</a><button type="button" class="btn" data-gpback2="${k}">Назад к генплану</button></div></div><div class="gp3w"><img class="gp3p" src="${ph}" alt="${LOTN(k)} — фасад"><p class="gp3s">Загружаем модель…</p>${pie(k)}</div>`;
+ g.hidden=false;gpSet({u:k,m:"3d"});goal("model_open");g.scrollIntoView({block:"start",behavior:matchMedia("(prefers-reduced-motion:reduce)").matches?"auto":"smooth"});
+ const fail=()=>{g.querySelector(".gp3w").classList.add("err");const s=g.querySelector(".gp3s");if(s)s.innerHTML=`Модель не загрузилась. Фасад, планировки и карточка дома доступны выше.`;goal("model_error")};
+ let ok=false;try{const c=document.createElement("canvas");ok=!!(window.WebGLRenderingContext&&(c.getContext("webgl")||c.getContext("experimental-webgl")))&&!!window.THREE}catch(x){}
+ if(!ok){fail();return}
+ Promise.resolve(pie3d()).then(()=>{if(P3)g.querySelector(".gp3w").classList.add("ld");else fail()},fail)}
+document.addEventListener("click",e=>{const l=e.target.closest(".gpl");if(l){gpPick(l.dataset.k);return}
+ if(e.target.closest("[data-gpback]")){gpAll();return}
+ const b2=e.target.closest("[data-gpback2]");if(b2){const k=b2.dataset.gpback2;if(P3){cancelAnimationFrame(P3.raf);P3.renderer.dispose();P3=null}gpPick(k,true);document.getElementById("karta").scrollIntoView({block:"start"});return}
+ const t=e.target.closest("[data-gp3]");if(t)gp3(t.dataset.gp3)});
+document.addEventListener("keydown",e=>{const g=e.target.closest&&e.target.closest(".gpl");if(g&&(e.key==="Enter"||e.key===" ")){e.preventDefault();gpPick(g.dataset.k)}});
+function gpAfter(){if(!V2||curR()!=="poselok")return;const h=document.querySelector("#app > .hero");if(!h||document.getElementById("karta"))return;h.insertAdjacentHTML("afterend",gpBlock());
+ const p=new URLSearchParams(location.search),u=p.get("u");if(H[u]){gpPick(u,true);if(p.get("m")==="3d"&&H3D[u])gp3(u);else if(location.hash==="#karta")document.getElementById("karta").scrollIntoView()}else if(location.hash==="#karta")document.getElementById("karta").scrollIntoView()}
+
+/* v2 · знак: словесная марка с консолью */
+const LOGO2=`<svg class="lgsvg lg2" viewBox="0 0 220 60" role="img" aria-label="Treyvas Development"><text x="110" y="27" text-anchor="middle" textLength="214" lengthAdjust="spacing" style="font-family:'PT Serif',Georgia,serif;font-size:27px;font-weight:400;fill:currentColor">TREYVAS</text><rect x="58" y="35" width="159" height="2.6" style="fill:#30392D"/><rect x="58" y="35" width="2.6" height="8" style="fill:#30392D"/><rect x="3" y="43" width="98" height="1.1" style="fill:#30392D"/><text x="217" y="57" text-anchor="end" style="font-family:Manrope,system-ui,sans-serif;font-size:10.5px;font-weight:600;letter-spacing:.32em;fill:#30392D">DEVELOPMENT</text></svg>`;
+const FAV2="data:image/svg+xml,"+encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="12" fill="#30392D"/><rect x="12" y="16" width="44" height="7" fill="#F5F2EB"/><rect x="22" y="16" width="7" height="34" fill="#F5F2EB"/><rect x="8" y="50" width="34" height="3" fill="#D5D0C5"/></svg>`);
+function logo2(){document.querySelectorAll("header .logo").forEach(a=>a.innerHTML=LOGO2);document.querySelectorAll('link[rel~="icon"]').forEach(l=>l.remove());const l=document.createElement("link");l.rel="icon";l.type="image/svg+xml";l.href=FAV2;document.head.appendChild(l)}
+
 function v2After2(){if(!V2)return;slSync();const p=new URLSearchParams(location.search),lots=p.get("lots");const hl=document.querySelector("form.lf2 input[name=lots]");if(hl&&lots)hl.value=lots;
  document.querySelectorAll("form.lf2").forEach(f=>f.addEventListener("input",()=>{if(!f.dataset.st){f.dataset.st=1;goal("form_start")}},{once:true}))}
 
@@ -1481,7 +1595,7 @@ function route(){
  if(LASTURL&&LASTURL!==location.href){try{ym(114231388,"hit",location.href,{title:document.title,referer:LASTURL})}catch(x){}}LASTURL=location.href;
  document.querySelectorAll("#nav a").forEach(a=>a.getAttribute("href")==="/"+sec+"/"?a.setAttribute("aria-current","page"):a.removeAttribute("aria-current"));
  document.documentElement.style.setProperty("--head",document.querySelector("header").offsetHeight+"px");
- scrollTo(0,0);montage();heroSlides();PST=PIE.length-1;if(typeof pieStop==="function")pieStop();QS={};qzRender(QS);v2After();v2After2();try{const lot=new URLSearchParams(location.search).get("lot");if(lot){const ss=document.querySelectorAll("form.lf select[name=house]");ss.forEach(s=>{s.value=H[lot]&&[...s.options].some(o=>o.dataset.k===lot)?H[lot].name:"Пока не знаю"});if(H[lot])sessionStorage.removeItem("tv_house")}}catch(x){}try{const hv=sessionStorage.getItem("tv_house");if(hv){document.querySelectorAll("form.lf select[name=house]").forEach(s=>s.value=hv);sessionStorage.removeItem("tv_house")}}catch(x){}pieTick();if(P3){cancelAnimationFrame(P3.raf);P3.renderer.dispose();P3=null}{const pe=document.getElementById("pie");if(pe){if(window.IntersectionObserver){const io=new IntersectionObserver(es=>{if(es.some(e=>e.isIntersecting)){io.disconnect();pie3d()}},{rootMargin:"600px 0px"});io.observe(pe)}else pie3d()}}
+ scrollTo(0,0);montage();heroSlides();PST=PIE.length-1;if(typeof pieStop==="function")pieStop();QS={};qzRender(QS);v2After();v2After2();if(V2){rmAfter();gpAfter()}try{const lot=new URLSearchParams(location.search).get("lot");if(lot){const ss=document.querySelectorAll("form.lf select[name=house]");ss.forEach(s=>{s.value=H[lot]&&[...s.options].some(o=>o.dataset.k===lot)?H[lot].name:"Пока не знаю"});if(H[lot])sessionStorage.removeItem("tv_house")}}catch(x){}try{const hv=sessionStorage.getItem("tv_house");if(hv){document.querySelectorAll("form.lf select[name=house]").forEach(s=>s.value=hv);sessionStorage.removeItem("tv_house")}}catch(x){}pieTick();if(P3){cancelAnimationFrame(P3.raf);P3.renderer.dispose();P3=null}{const pe=document.getElementById("pie");if(pe){if(window.IntersectionObserver){const io=new IntersectionObserver(es=>{if(es.some(e=>e.isIntersecting)){io.disconnect();pie3d()}},{rootMargin:"600px 0px"});io.observe(pe)}else pie3d()}}
 }
 
 /* ---------- i18n RU/EN ---------- */
