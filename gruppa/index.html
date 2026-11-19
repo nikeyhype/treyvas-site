@@ -365,7 +365,7 @@ html.v2{--oak:#F5F2EB;--oak-2:#ECE7DC;--line:#D5D0C5;--stone:#242621;--mute:#555
 .rmsvg{width:100%;height:auto;display:block;background:#fff;border:1px solid #D5D0C5}
 .rmz rect{fill:rgba(48,57,45,.08);stroke:#30392D;stroke-width:3;stroke-dasharray:10 6;cursor:pointer;transition:fill .2s}
 .rmz.rmph rect{stroke:#8a8d80}
-.rmz text{font:600 22px Manrope,system-ui,sans-serif;fill:#242621;text-anchor:middle;dominant-baseline:middle;pointer-events:none;paint-order:stroke;stroke:#fff;stroke-width:6px}
+.rmz text{font:600 17px Manrope,system-ui,sans-serif;fill:#242621;text-anchor:middle;dominant-baseline:middle;pointer-events:none;paint-order:stroke;stroke:#fff;stroke-width:6px}
 .rmz:hover rect,.rmz:focus rect,.rmz.on rect{fill:rgba(48,57,45,.28);stroke-dasharray:none}.rmz:focus{outline:none}.rmz:focus-visible rect{stroke-width:6}
 .rmlist{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}.rmlist button em{font-style:normal;font-size:11px;opacity:.6;margin-left:8px;text-transform:uppercase;letter-spacing:.06em}.rmlist button.on{background:#30392D;color:#F5F2EB;border-color:#30392D}
 .rmv{position:relative;background:#242621;aspect-ratio:9/16;max-height:78vh;margin-inline:auto;width:100%;max-width:min(100%,calc(78vh*9/16))}
@@ -427,7 +427,7 @@ function heroSlides(){clearInterval(HST);const b=document.querySelector(".hsl");
  document.querySelectorAll(".hnv").forEach(n=>n.onclick=()=>{go(i+ +n.dataset.d);start()});go(0);start()}
 const VID={z35:"img/vid/z35",z36:"img/vid/z36"};
 const PDF={z35:"docs/zarechnaya-35.pdf",z36:"docs/zarechnaya-36.pdf",l191:"docs/lazurnaya-19-1.pdf",l192:"docs/lazurnaya-19-2.pdf",l193:"docs/lazurnaya-19-3.pdf",r1:"docs/rechnaya-1.pdf",r2:"docs/rechnaya-2.pdf"};
-const BUILD="1795110244";
+const BUILD="1795110360";
 const HM={l11:{price:null,area:null,lot:null,view:"park",ready:4,water:0},l191:{price:30,area:2300,lot:48,view:"golf",ready:12},l192:{price:26,area:2125,lot:34,view:"golf",ready:12},l193:{price:23,area:1900,lot:35,view:"golf",ready:12},z35:{price:14.9,area:1465,lot:30,view:"golf",ready:0},z36:{price:14.9,area:1482,lot:30,view:"golf",ready:0},r1:{price:26,area:1800,lot:52,view:"river",ready:8},r2:{price:28,area:2125,lot:51,view:"river",ready:8}};
 const QZ=[["budget","Бюджет",[["до $15 млн",15],["до $25 млн",25],["до $30 млн",30],["Не важно",99]]],["area","Площадь дома",[["Около 1 400 м²",1400],["Около 2 000 м²",2000],["Чем больше, тем лучше",9999]]],["view","Что за окном",[["Гольф-поле","golf"],["Река и свой пирс","river"],["Парк и тишина","park"],["Не важно","any"]]],["when","Когда въезжать",[["Сразу",0],["В течение года",12],["Не спешу",99]]]];
 function qzScore(a){return Object.keys(HM).filter(k=>!V2||(HM[k].ready<=a.when&&(a.budget>=99||HM[k].price==null||HM[k].price<=a.budget))).map(k=>{const m=HM[k];let s=0,why=[];
@@ -1244,7 +1244,7 @@ function v2Home(){return `
  <section id="ready" class="s2"><div class="w"><div class="s2h"><span class="eyebrow">Готовые дома</span><h2>Можно приехать и посмотреть</h2><a class="more" href="/sravnenie/?l=z35,z36">Сравнить два дома</a></div><div class="t2g">${["z35","z36"].map(tile2).join("")}</div></div></section>
  ${GROUPS.slice(1).map(([id,t,f])=>`<section class="s2" id="${id}"><div class="w"><div class="s2h"><span class="eyebrow">Строятся</span><h2>${t}</h2></div><div class="t2g t2s">${ORDER2.filter(k=>f(k)&&k!=="l11").map(tile2).join("")}</div></div></section>`).join("")}
  <section class="s2"><div class="w h2v"><div><span class="eyebrow">Жизнь внутри</span><h2>Первый этаж готового дома</h2><p class="lead">Короткая прогулка по гостиной, столовой и ванной Лота 5. Видео запускается по нажатию.</p><a class="btn" href="/dom-z35/">Открыть Лот 5</a></div><div class="h2vf"><video src="img/hm/z35i.mp4" poster="img/hm/z35i.jpg" controls playsinline preload="none" muted></video></div></div></section>
- <section class="s2"><div class="w h2g2"><a class="h2ph" href="/poselok/"><img src="${img("ae/aerial")}" alt="Agalarov Estate" loading="lazy"><span>Посёлок Agalarov Estate →</span></a><div><span class="eyebrow">Посёлок</span><h2>Гольф-поле, озёра и рощи</h2><p class="lead">Живые изгороди вместо высоких заборов, гольф-клуб, рестораны, спорт и отель внутри посёлка.</p><a class="btn" href="/poselok/">О посёлке</a><a class="btn" href="/poselok/#karta">Карта домов</a></div></div></section>
+ <section class="s2"><div class="w h2g2"><a class="h2ph" href="/poselok/"><img src="${img("ae/aerial")}" alt="Agalarov Estate" loading="lazy"><span>Посёлок Agalarov Estate →</span></a><div><span class="eyebrow">Посёлок</span><h2>Гольф-поле, озёра и рощи</h2><p class="lead">Живые изгороди вместо высоких заборов, гольф-клуб, рестораны, спорт и отель внутри посёлка.</p><a class="btn" href="/poselok/">О посёлке</a><a class="btn" href="/poselok/?karta">Карта домов</a></div></div></section>
  <section class="s2"><div class="w"><div class="s2h"><span class="eyebrow">Как построены дома</span><h2>Одна команда от проекта до мебели</h2><a class="more" href="/kak-stroim/">Как мы строим</a></div>${group()}</div></section>
  <section class="s2 s2c"><div class="w"><div class="s2h"><span class="eyebrow">Частный просмотр</span><h2>Выберите дом и удобный день</h2></div><p class="lead">Брокер Point Estate свяжется с вами, чтобы согласовать время просмотра.</p><div class="row"><a class="btn solid" href="/zayavka/">Записаться на просмотр</a><a class="btn" href="/doma/">Все резиденции</a></div></div></section>`}
 function v2House(k,rest){const h=H[k],liv=LIVING[k]||(HS[k]&&(HS[k].find(x=>/Гостин/.test(x[1]))||[])[0])||h.imgs[1]||h.hero,fac=FACADE[k]||h.hero,viz=!READY(k),alt=ALT(k);
@@ -1348,7 +1348,7 @@ function gpBlock(){const L=GP.lots;
 function gpVB(to,instant){const s=document.getElementById("gpsvg");if(!s)return;const from=s.getAttribute("viewBox").split(" ").map(Number);
  if(instant||matchMedia("(prefers-reduced-motion:reduce)").matches){s.setAttribute("viewBox",to.join(" "));return}
  const t0=performance.now(),D=450;const st=n=>{const p=Math.min(1,(n-t0)/D),e=p<.5?2*p*p:1-Math.pow(-2*p+2,2)/2;s.setAttribute("viewBox",from.map((f,i)=>f+(to[i]-f)*e).join(" "));if(p<1)requestAnimationFrame(st)};requestAnimationFrame(st)}
-function gpSet(q){try{const p=new URLSearchParams(location.search);["u","m"].forEach(k=>q[k]?p.set(k,q[k]):p.delete(k));history.replaceState(history.state,"",location.pathname+(p.toString()?"?"+p:"")+"#karta")}catch(x){}}
+function gpSet(q){try{const p=new URLSearchParams(location.search);["u","m"].forEach(k=>q[k]?p.set(k,q[k]):p.delete(k));p.set("karta","");history.replaceState(history.state,"",location.pathname+"?"+p.toString().replace(/=(?=&|$)/g,""))}catch(x){}}
 function gpPick(k,instant){const c=document.getElementById("gpc");if(!c||!H[k])return;gpVB(GP.zoom[gpZone(k)],instant);
  document.querySelectorAll(".gpl").forEach(g=>g.classList.toggle("on",g.dataset.k===k));
  c.innerHTML=`${tile2(k)}<div class="row gpa">${H3D[k]?`<button type="button" class="btn solid" data-gp3="${k}">Дом в 3D</button>`:""}<a class="btn" href="/dom-${k}/#plans" data-scroll="plans">Планировки</a><a class="btn" href="${zLink(k)}" data-house="${k}">Записаться на просмотр</a><button type="button" class="btn" data-gpback>Вся карта</button></div>`;
@@ -1368,7 +1368,7 @@ document.addEventListener("click",e=>{const l=e.target.closest(".gpl");if(l){gpP
  const t=e.target.closest("[data-gp3]");if(t)gp3(t.dataset.gp3)});
 document.addEventListener("keydown",e=>{const g=e.target.closest&&e.target.closest(".gpl");if(g&&(e.key==="Enter"||e.key===" ")){e.preventDefault();gpPick(g.dataset.k)}});
 function gpAfter(){if(!V2||curR()!=="poselok")return;const h=document.querySelector("#app > .hero");if(!h||document.getElementById("karta"))return;h.insertAdjacentHTML("afterend",gpBlock());
- const p=new URLSearchParams(location.search),u=p.get("u");if(H[u]){gpPick(u,true);if(p.get("m")==="3d"&&H3D[u])gp3(u);else if(location.hash==="#karta")document.getElementById("karta").scrollIntoView()}else if(location.hash==="#karta")document.getElementById("karta").scrollIntoView()}
+ const p=new URLSearchParams(location.search),u=p.get("u");if(H[u]){gpPick(u,true);if(p.get("m")==="3d"&&H3D[u])gp3(u);}if(p.has("karta"))setTimeout(()=>document.getElementById("karta").scrollIntoView(),60)}
 
 /* v2 · знак: словесная марка с консолью */
 const LOGO2=`<svg class="lgsvg lg2" viewBox="0 0 220 60" role="img" aria-label="Treyvas Development"><text x="110" y="27" text-anchor="middle" textLength="214" lengthAdjust="spacing" style="font-family:'PT Serif',Georgia,serif;font-size:27px;font-weight:400;fill:currentColor">TREYVAS</text><rect x="58" y="35" width="159" height="2.6" style="fill:#30392D"/><rect x="58" y="35" width="2.6" height="8" style="fill:#30392D"/><rect x="3" y="43" width="98" height="1.1" style="fill:#30392D"/><text x="217" y="57" text-anchor="end" style="font-family:Manrope,system-ui,sans-serif;font-size:10.5px;font-weight:600;letter-spacing:.32em;fill:#30392D">DEVELOPMENT</text></svg>`;
