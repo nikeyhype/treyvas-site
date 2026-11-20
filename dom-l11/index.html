@@ -440,7 +440,7 @@ function heroSlides(){clearInterval(HST);const b=document.querySelector(".hsl");
  document.querySelectorAll(".hnv").forEach(n=>n.onclick=()=>{go(i+ +n.dataset.d);start()});go(0);start()}
 const VID={z35:"img/vid/z35",z36:"img/vid/z36"};
 const PDF={z35:"docs/zarechnaya-35.pdf",z36:"docs/zarechnaya-36.pdf",l191:"docs/lazurnaya-19-1.pdf",l192:"docs/lazurnaya-19-2.pdf",l193:"docs/lazurnaya-19-3.pdf",r1:"docs/rechnaya-1.pdf",r2:"docs/rechnaya-2.pdf"};
-const BUILD="1795110360";
+const BUILD="1795174424";
 const HM={l11:{price:null,area:null,lot:null,view:"park",ready:4,water:0},l191:{price:30,area:2300,lot:48,view:"golf",ready:12},l192:{price:26,area:2125,lot:34,view:"golf",ready:12},l193:{price:23,area:1900,lot:35,view:"golf",ready:12},z35:{price:14.9,area:1465,lot:30,view:"golf",ready:0},z36:{price:14.9,area:1482,lot:30,view:"golf",ready:0},r1:{price:26,area:1800,lot:52,view:"river",ready:8},r2:{price:28,area:2125,lot:51,view:"river",ready:8}};
 const QZ=[["budget","Бюджет",[["до $15 млн",15],["до $25 млн",25],["до $30 млн",30],["Не важно",99]]],["area","Площадь дома",[["Около 1 400 м²",1400],["Около 2 000 м²",2000],["Чем больше, тем лучше",9999]]],["view","Что за окном",[["Гольф-поле","golf"],["Река и свой пирс","river"],["Парк и тишина","park"],["Не важно","any"]]],["when","Когда въезжать",[["Сразу",0],["В течение года",12],["Не спешу",99]]]];
 function qzScore(a){return Object.keys(HM).filter(k=>!V2||(HM[k].ready<=a.when&&(a.budget>=99||HM[k].price==null||HM[k].price<=a.budget))).map(k=>{const m=HM[k];let s=0,why=[];
@@ -1395,7 +1395,7 @@ const V={
  sravnenie:()=>v2Compare(),
  podborka:()=>v2Podborka(),
  home:()=>V2?v2Home():`
-  <div class="hero hm" style="background-image:url(${img("hero")})"><div class="mont" aria-hidden="true">${(V2?["z35i","p3"]:["p2","p3"]).map(i=>`<div class="mp"><video muted playsinline loop preload="auto" poster="img/hm/${i}.jpg" src="img/hm/${i}.mp4"></video></div>`).join("")}<div class="mfl"><video muted playsinline preload="none"></video></div></div><div class="fly" aria-hidden="true">Treyvas Development</div><div class="w">
+  <div class="hero hm" style="background-image:url(${img("hero")})"><div class="mont" aria-hidden="true">${(V2?["z35i","p3"]:["p2","p3"]).map(i=>`<div class="mp"><video muted playsinline loop preload="auto" poster="img/hm/${i}.jpg" src="img/hm/${i}.mp4"></video></div>`).join("")}<div class="mfl"><video muted playsinline preload="none"></video></div></div><div class="w">
    ${V2?"":`<span class="eyebrow">Частные дома · Подмосковье</span>
    <h1>Дом начинается с тех, <em>кто его строит</em></h1>
    <p class="lead">Семья Трейвас проектирует, строит и отделывает дома сама — силами собственных компаний, от первой линии на чертеже до света в гостиной.</p>
