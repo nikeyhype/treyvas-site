@@ -432,8 +432,8 @@ function heroSlides(){clearInterval(HST);const b=document.querySelector(".hsl");
  document.querySelectorAll(".hnv").forEach(n=>n.onclick=()=>{go(i+ +n.dataset.d);start()});go(0);start()}
 const VID={z35:"img/vid/z35",z36:"img/vid/z36"};
 const PDF={z35:"docs/zarechnaya-35.pdf",z36:"docs/zarechnaya-36.pdf",l191:"docs/lazurnaya-19-1.pdf",l192:"docs/lazurnaya-19-2.pdf",l193:"docs/lazurnaya-19-3.pdf",r1:"docs/rechnaya-1.pdf",r2:"docs/rechnaya-2.pdf"};
-const BUILD="1795435137";
-const HM={l11:{price:null,area:2062.7,lot:null,view:"park",ready:4,water:0},l191:{price:30,area:2303.1,lot:48,view:"golf",ready:12},l192:{price:26,area:2117.9,lot:34,view:"golf",ready:12},l193:{price:23,area:2226.8,lot:35,view:"golf",ready:12},z35:{price:14.9,area:1544.5,lot:30,view:"golf",ready:0},z36:{price:14.9,area:1537.1,lot:30,view:"golf",ready:0},r1:{price:26,area:1800,lot:52,view:"river",ready:8},r2:{price:28,area:2125,lot:51,view:"river",ready:8}};
+const BUILD="1795523179";
+const HM={l11:{price:null,area:2062.7,lot:null,view:"park",ready:4,water:0},l191:{price:30,area:2303.1,lot:48,view:"golf",ready:12},l192:{price:26,area:2117.9,lot:34,view:"golf",ready:12},l193:{price:23,area:2226.8,lot:35,view:"golf",ready:12},z35:{price:14.9,area:1465,lot:30,view:"golf",ready:0},z36:{price:14.9,area:1537.1,lot:30,view:"golf",ready:0},r1:{price:26,area:1800,lot:52,view:"river",ready:8},r2:{price:28,area:2125,lot:51,view:"river",ready:8}};
 const QZ=[["budget","Бюджет",[["до $15 млн",15],["до $25 млн",25],["до $30 млн",30],["Не важно",99]]],["area","Площадь дома",[["Около 1 400 м²",1400],["Около 2 000 м²",2000],["Чем больше, тем лучше",9999]]],["view","Что за окном",[["Гольф-поле","golf"],["Река и свой пирс","river"],["Парк и тишина","park"],["Не важно","any"]]],["when","Когда въезжать",[["Сразу",0],["В течение года",12],["Не спешу",99]]]];
 function qzScore(a){return Object.keys(HM).filter(k=>!V2||(HM[k].ready<=a.when&&(a.budget>=99||HM[k].price==null||HM[k].price<=a.budget))).map(k=>{const m=HM[k];let s=0,why=[];
  if(m.price!=null){if(m.price<=a.budget){s+=3;why.push("в бюджете")}else s-=(m.price-a.budget)*.6}else s+=1;
@@ -509,8 +509,8 @@ const H={
   nums:[["2 226,8","м² дом"],["35","соток у гольф-поля"],["6","спален, 8 санузлов"],["$23 млн","цена"]],
   title:"Гостиная под кольцами света",
   story:["Единое пространство гостиной, кухни и столовой собрано вокруг крупных кольцевых светильников.","Гараж и бассейн спланированы в одном объёме с домом."]},
- z35:{name:"Лот 5 (1 544,5 м²)",ready:"Дом готов",plan:"z35",st:"",area:"730,7",hero:"z35_ring",imgs:["v/z35/01","v/z35/05","v/z35/04","live/z35/696353","live/z35/696344","live/z35/696418","live/z35/696355","live/z35/696367","live/z35/696357","live/z35/696379","live/z35/696319","live/z35/696394","live/z35/696395","live/z35/696403","live/z35/696425"],
-  nums:[["1 544,5","м² дом"],["30","соток у гольф-поля"],["5","спален, 7 санузлов"],["$14,9 млн","цена"]],
+ z35:{name:"Лот 5 (1 465 м²)",ready:"Дом готов",plan:"z35",st:"",area:"730,7",hero:"z35_ring",imgs:["v/z35/01","v/z35/05","v/z35/04","live/z35/696353","live/z35/696344","live/z35/696418","live/z35/696355","live/z35/696367","live/z35/696357","live/z35/696379","live/z35/696319","live/z35/696394","live/z35/696395","live/z35/696403","live/z35/696425"],
+  nums:[["1 465","м² дом"],["30","соток у гольф-поля"],["5","спален, 7 санузлов"],["$14,9 млн","цена"]],
   title:"Терраса с живым огнём",
   story:["Двухэтажный дом на припарковом участке с панорамным видом на гольф-поле. Натуральные премиальные материалы, «умный дом», отделка под ключ.","Первый этаж — двусветная гостиная с камином, кухня, столовая и рабочая кухня, кабинет, гостевая спальня, тренажёрный зал и СПА-зона с бассейном, сауной и душевой, гараж на три машины, крытая терраса с живым огнём.","Второй этаж — четыре спальни, у каждой своя гардеробная и ванная, блок для персонала, постирочная и три террасы. Во дворе — кольцевая скульптура."]},
  z36:{name:"Лот 6 (1 537,1 м²)",ready:"Дом готов",plan:"z36",st:"",area:"835,3",hero:"live/z36/696591",imgs:["live/z36/696591","live/z36/696598","live/z36/696492","live/z36/696496","live/z36/696497","live/z36/696499","live/z36/696527","live/z36/696473","live/z36/696478","live/z36/696471","live/z36/696482","live/z36/696484","live/z36/696485","live/z36/696481","live/z36/696567","live/z36/696529"],
@@ -1610,10 +1610,8 @@ function montage(){montStop();const m=document.querySelector(".mont");if(!m)retu
  const at=(t,f)=>MT.push(setTimeout(f,t));
  const cycle=()=>{ps.forEach(p=>p.classList.remove("on"));mf.classList.remove("on");
   ps.forEach((p,i)=>at(300+i*2000,()=>{p.classList.add("on");play(p.querySelector("video"))}));
-  at(8500,()=>{mf.classList.add("on");play(fv)});
-  at(9700,()=>ps.forEach(p=>{p.classList.remove("on");p.querySelector("video").pause()}));
-  at(17500,()=>{mf.classList.remove("on")});
-  at(18700,()=>{fv.pause();cycle()})};
+  at(8500,()=>{mf.classList.add("on");play(fv);const d=(isFinite(fv.duration)&&fv.duration>2?fv.duration:16)*1000;at(Math.max(1000,d-1200),()=>{mf.classList.remove("on")});at(d,()=>{fv.pause();cycle()})});
+  at(9700,()=>ps.forEach(p=>{p.classList.remove("on");p.querySelector("video").pause()}))};
  cycle()}
 document.addEventListener("click",e=>{const b=e.target.closest(".vplay");if(b){const d=document.getElementById("vd"),v=d.querySelector("video");v.poster=b.dataset.v+".jpg";v.src=b.dataset.v+".mp4";d.showModal();const r=v.play();if(r&&r.catch)r.catch(()=>{});try{ym(114231388,"reachGoal","video")}catch(x){}return}
  const d=document.getElementById("vd");if(d&&d.open&&(e.target===d||e.target.closest(".vx"))){d.close()}});
