@@ -441,7 +441,7 @@ function heroSlides(){clearInterval(HST);const b=document.querySelector(".hsl");
  document.querySelectorAll(".hnv").forEach(n=>n.onclick=()=>{go(i+ +n.dataset.d);start()});go(0);start()}
 const VID={z35:"img/vid/z35",z36:"img/vid/z36"};
 const PDF={z35:"docs/zarechnaya-35.pdf",z36:"docs/zarechnaya-36.pdf",l191:"docs/lazurnaya-19-1.pdf",l192:"docs/lazurnaya-19-2.pdf",l193:"docs/lazurnaya-19-3.pdf",r1:"docs/rechnaya-1.pdf",r2:"docs/rechnaya-2.pdf"};
-const BUILD="1795782043";
+const BUILD="1795782591";
 const HM={l11:{price:25,area:2062.7,lot:null,view:"park",ready:4,water:0},l191:{price:30,area:2303.1,lot:48,view:"golf",ready:12},l192:{price:26,area:2117.9,lot:34,view:"golf",ready:12},l193:{price:23,area:2226.8,lot:35,view:"golf",ready:12},z35:{price:14.9,area:1465,lot:30,view:"golf",ready:0},z36:{price:14.9,area:1537.1,lot:30,view:"golf",ready:0},r1:{price:26,area:1800,lot:52,view:"river",ready:8},r2:{price:28,area:2125,lot:51,view:"river",ready:8}};
 const QZ=[["budget","Бюджет",[["до $15 млн",15],["до $25 млн",25],["до $30 млн",30],["Не важно",99]]],["area","Площадь дома",[["Около 1 400 м²",1400],["Около 2 000 м²",2000],["Чем больше, тем лучше",9999]]],["view","Что за окном",[["Гольф-поле","golf"],["Река и свой пирс","river"],["Парк и тишина","park"],["Не важно","any"]]],["when","Когда въезжать",[["Сразу",0],["В течение года",12],["Не спешу",99]]]];
 function qzScore(a){return Object.keys(HM).filter(k=>!V2||(HM[k].ready<=a.when&&(a.budget>=99||HM[k].price==null||HM[k].price<=a.budget))).map(k=>{const m=HM[k];let s=0,why=[];
@@ -781,13 +781,13 @@ async function pie3d(){
  if(L191&&!G.drive){const _s=site;site=grp[10];flat(10,15,asph,5.8,20.5);flat(52,7,asph,-21,24.5);site=_s}
  if(G.drive||(!L191&&G.gdoors)){const DR=G.drive,g0=G.gdoors?G.gdoors[0]:null,g1=G.gdoors?G.gdoors[G.gdoors.length-1]:null,x0=DR?DR[0]:(g0[0]-CX)*u,x1=DR?DR[1]:(g1[0]+g1[2]-CX)*u,z0=DR?DR[2]:(g0[1]+1-CZ)*u,SI=G.site;
   const dz=SI?SI.front-z0:22;flat(x1-x0+2,dz,asph,(x0+x1)/2,z0+dz/2);
-  if(SI){if(SI.cul!=null){flat(280-SI.cul,8,asph,(SI.cul+280)/2,SI.road);const cr=new T.Mesh(new T.CylinderGeometry(11,11,.04,48),asph);cr.position.set(SI.cul,-.02,SI.road);cr.receiveShadow=true;site.add(cr)}else flat(560,8,asph,0,SI.road);
+  if(SI){if(SI.lz){const {L,R}=SI.lz,disc=(r,x,z)=>{const c=new T.Mesh(new T.CylinderGeometry(r,r,.04,48),asph);c.position.set(x,-.02,z);c.receiveShadow=true;site.add(c)};flat(R-L,8,asph,(L+R)/2,SI.road);disc(9,R,SI.road);disc(4,L,SI.road);const dx=-48,dz=-64,len=Math.hypot(dx,dz),dg=new T.Mesh(new T.BoxGeometry(len,.04,8),asph);dg.position.set(L+dx/2,-.02,SI.road+dz/2);dg.rotation.y=Math.atan2(-dz,dx);dg.receiveShadow=true;site.add(dg);disc(11,L+dx,SI.road+dz)}else flat(560,8,asph,0,SI.road);
    flat(1.8,SI.front-SI.path[1],pave,SI.path[0],(SI.front+SI.path[1])/2,0,.06);
    const postM=M(0x2b2c2e,{roughness:.5,metalness:.4}),slatM=M(0x3a3b3e,{roughness:.6,metalness:.3});
    const fence=(ax,az,bx,bz)=>{const L=Math.hypot(bx-ax,bz-az),n=Math.max(1,Math.round(L/2.5)),ang=Math.atan2(bz-az,bx-ax);for(let i=0;i<=n;i++){const t=i/n,p=new T.Mesh(new T.BoxGeometry(.15,2,.15),postM);p.position.set(ax+(bx-ax)*t,1,az+(bz-az)*t);p.castShadow=true;site.add(p)}
     for(const h of [.35,.75,1.15,1.55,1.9]){const b=new T.Mesh(new T.BoxGeometry(L,.12,.05),slatM);b.position.set((ax+bx)/2,h,(az+bz)/2);b.rotation.y=-ang;b.castShadow=true;site.add(b)}};
    const gx0=x0-1.2,gx1=x1+1.2;{const op=[[gx0-.3,gx1+.3],[SI.path[0]-.7,SI.path[0]+.7]].sort((a,b)=>a[0]-b[0]);let cx=-SI.fx;op.forEach(([a,b])=>{if(a>cx+.3)fence(cx,SI.front,a,SI.front);cx=Math.max(cx,b)});if(SI.fx>cx+.3)fence(cx,SI.front,SI.fx,SI.front)}
-   fence(-SI.fx,SI.front,-SI.fx,SI.back);fence(SI.fx,SI.front,SI.fx,SI.back);
+   fence(-SI.fx,SI.front,-SI.fx,SI.back);fence(SI.fx,SI.front,SI.fx,SI.back);if(SI.backFence)fence(-SI.fx,SI.back,SI.fx,SI.back);
    {const gate=new T.Group(),gw=gx1-gx0;const fr=new T.Mesh(new T.BoxGeometry(gw,.12,.08),postM);fr.position.y=1.95;gate.add(fr);for(let i=0;i<Math.floor(gw/.22);i++){const sl=new T.Mesh(new T.BoxGeometry(.12,1.8,.06),slatM);sl.position.set(-gw/2+.11+i*.22,1,0);gate.add(sl)}
     const rail=new T.Mesh(new T.BoxGeometry(gw*2,.1,.12),postM);rail.position.set(-gw/2,.05,0);gate.add(rail);gate.position.set((gx0+gx1)/2,0,SI.front-.4);G._gate={g:gate,x0:(gx0+gx1)/2,gw,o:0};gate.traverse(o=>{if(o.isMesh)o.castShadow=true});site.add(gate);
     [gx0-.15,gx1+.15].forEach(x=>{const p=new T.Mesh(new T.BoxGeometry(.3,2.2,.3),postM);p.position.set(x,1.1,SI.front);site.add(p)})}
@@ -846,7 +846,8 @@ async function pie3d(){
   const ballG=new T.IcosahedronGeometry(1,2);[[-2.4,0],[2.4,0],[0,-2.4],[0,2.4]].forEach(([dx,dz])=>{const b=new T.Mesh(ballG,hedgeM);b.scale.setScalar(.55);b.position.set(sx0+dx,.5,sz0+dz);b.castShadow=true;site.add(b)});
   for(let z=SI.path[1]+3;z<SI.front-1;z+=4)[-1.6,1.6].forEach(dx=>{if(Math.abs(z-sz0)<1.6&&dx>0)return;const b=new T.Mesh(ballG,hedgeM);b.scale.setScalar(.45);b.position.set(SI.path[0]+dx,.4,z);b.castShadow=true;site.add(b)});}
  }
- const GZ=-(HZ-29);const SIT=G.site;const NBS=SIT?(SIT.neighbors||(SIT.neighbor?[SIT.neighbor]:[])):[];const GD=G.gdoors?[(G.gdoors[0][0]-CX)*u-2,(G.gdoors[G.gdoors.length-1][0]+G.gdoors[G.gdoors.length-1][2]-CX)*u+2,(G.gdoors[0][1]-CZ)*u]:null;const free=(x,z)=>!(SIT&&SIT.cul!=null&&Math.hypot(x-SIT.cul,z-SIT.road)<15)&&!(SIT&&SIT.river&&z<SIT.back+2&&z>SIT.back-SIT.river.w-4)&&!(SIT&&((Math.abs(x)<SIT.fx+3&&z>SIT.back-3&&z<SIT.road+6)||Math.abs(z-SIT.road)<6||NBS.some(NB=>x>NB.dx-SIT.fx-4&&x<NB.dx+SIT.fx+4&&z>SIT.back-3&&z<SIT.road)))&&!(GD&&x>GD[0]-4&&x<GD[1]+4&&z>GD[2]-2&&z<GD[2]+26)&&!(z<-40+GZ&&Math.abs(x)<95)&&!(L191&&x<14&&x>-50&&z>14&&z<34)&&!(L191&&Math.abs(x-EX)<8&&z>EZ-2&&z<EZ+22)&&Math.hypot(x/(HX+10),z/(HZ+10))>1;
+ const GZ=-(HZ-29);const SIT=G.site;const NBS=SIT?(SIT.neighbors||(SIT.neighbor?[SIT.neighbor]:[])):[];const GD=G.gdoors?[(G.gdoors[0][0]-CX)*u-2,(G.gdoors[G.gdoors.length-1][0]+G.gdoors[G.gdoors.length-1][2]-CX)*u+2,(G.gdoors[0][1]-CZ)*u]:null;const lzF=(x,z)=>{if(!(SIT&&SIT.lz))return true;const {L,R}=SIT.lz,ax=L,az=SIT.road,bx=L-48,bz=SIT.road-64,t=Math.max(0,Math.min(1,((x-ax)*(bx-ax)+(z-az)*(bz-az))/((bx-ax)**2+(bz-az)**2))),d=Math.hypot(x-ax-t*(bx-ax),z-az-t*(bz-az));return d>8&&Math.hypot(x-R,z-SIT.road)>13&&Math.hypot(x-bx,z-bz)>15};
+ const free=(x,z)=>lzF(x,z)&&!(SIT&&SIT.river&&z<SIT.back+2&&z>SIT.back-SIT.river.w-4)&&!(SIT&&((Math.abs(x)<SIT.fx+3&&z>SIT.back-3&&z<SIT.road+6)||Math.abs(z-SIT.road)<6||NBS.some(NB=>x>NB.dx-SIT.fx-4&&x<NB.dx+SIT.fx+4&&z>SIT.back-3&&z<SIT.road)))&&!(GD&&x>GD[0]-4&&x<GD[1]+4&&z>GD[2]-2&&z<GD[2]+26)&&!(z<-40+GZ&&Math.abs(x)<95)&&!(L191&&x<14&&x>-50&&z>14&&z<34)&&!(L191&&Math.abs(x-EX)<8&&z>EZ-2&&z<EZ+22)&&Math.hypot(x/(HX+10),z/(HZ+10))>1;
  const firs=PF.slice();for(let k=0;k<1200&&firs.length<95+PF.length;k++){const a=rnd()*6.283,r=55+Math.pow(rnd(),.7)*120,x=Math.cos(a)*r,z=Math.sin(a)*r*.9;if(!free(x,z))continue;firs.push([x,z,9+rnd()*11])}
  const TIERS=7,cone=new T.ConeGeometry(1,1,12,1,true),leaf=new T.MeshStandardMaterial({color:0xffffff,roughness:.95,side:T.DoubleSide});
  const cones=new T.InstancedMesh(cone,leaf,firs.length*TIERS),trunks=new T.InstancedMesh(new T.CylinderGeometry(.14,.3,1,7),M(0x4b3a2c,{roughness:1}),firs.length);
@@ -867,7 +868,7 @@ async function pie3d(){
  const fairM=MT(fairT,{roughness:.9});
  [[0,-78,44,16],[-30,-98,34,14],[24,-112,30,13],[48,-132,36,15]].forEach(([x,z,rx,rz])=>oval(rx,rz,fairM,x,z+GZ,-.035));
  oval(13,10,M(0x84b552,{roughness:.8}),52,-136+GZ,-.03);
- if(SIT&&SIT.pond){const [px,pz,prx,prz]=SIT.pond;oval(prx+1.2,prz+1.2,M(0xcdbf94,{roughness:1}),px,pz+GZ,-.028);oval(prx,prz,M(0x4f7f8a,{roughness:.15,metalness:.2}),px,pz+GZ,-.022)}
+ if(SIT&&SIT.pond){const [px,pz,prx,prz]=SIT.pond,cz=SIT.back+pz-prz;oval(prx+1.2,prz+1.2,M(0xcdbf94,{roughness:1}),px,cz,-.028);oval(prx,prz,M(0x4f7f8a,{roughness:.15,metalness:.2}),px,cz,-.022)}
  const sandM=M(0xe3d3a8,{roughness:1});[[-12,-88,6,3.2],[34,-120,5,2.6],[64,-128,4,2.2],[-44,-104,5,2.4]].forEach(([x,z,rx,rz])=>oval(rx,rz,sandM,x,z+GZ,-.02));
  {const pole=new T.Mesh(new T.CylinderGeometry(.04,.04,2.6,6),M(0xf2f2f2));pole.position.set(54,1.3,-137+GZ);pole.castShadow=true;site.add(pole);
   const fl=new T.Mesh(new T.PlaneGeometry(.9,.55),new T.MeshStandardMaterial({color:0xc8202a,side:T.DoubleSide}));fl.position.set(54.45,2.3,-137+GZ);site.add(fl);
