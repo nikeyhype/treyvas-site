@@ -444,7 +444,7 @@ function heroSlides(){clearInterval(HST);const b=document.querySelector(".hsl");
  document.querySelectorAll(".hnv").forEach(n=>n.onclick=()=>{go(i+ +n.dataset.d);start()});go(0);start()}
 const VID={z35:"img/vid/z35",z36:"img/vid/z36"};
 const PDF={z35:"docs/zarechnaya-35.pdf",z36:"docs/zarechnaya-36.pdf",l191:"docs/lazurnaya-19-1.pdf",l192:"docs/lazurnaya-19-2.pdf",l193:"docs/lazurnaya-19-3.pdf",r1:"docs/rechnaya-1.pdf",r2:"docs/rechnaya-2.pdf"};
-const BUILD="1795782591";
+const BUILD="1795783110";
 const HM={l11:{price:25,area:2062.7,lot:null,view:"park",ready:4,water:0},l191:{price:30,area:2303.1,lot:48,view:"golf",ready:12},l192:{price:26,area:2117.9,lot:34,view:"golf",ready:12},l193:{price:23,area:2226.8,lot:35,view:"golf",ready:12},z35:{price:14.9,area:1465,lot:30,view:"golf",ready:0},z36:{price:14.9,area:1537.1,lot:30,view:"golf",ready:0},r1:{price:26,area:1800,lot:52,view:"river",ready:8},r2:{price:28,area:2125,lot:51,view:"river",ready:8}};
 const QZ=[["budget","Бюджет",[["до $15 млн",15],["до $25 млн",25],["до $30 млн",30],["Не важно",99]]],["area","Площадь дома",[["Около 1 400 м²",1400],["Около 2 000 м²",2000],["Чем больше, тем лучше",9999]]],["view","Что за окном",[["Гольф-поле","golf"],["Река и свой пирс","river"],["Парк и тишина","park"],["Не важно","any"]]],["when","Когда въезжать",[["Сразу",0],["В течение года",12],["Не спешу",99]]]];
 function qzScore(a){return Object.keys(HM).filter(k=>!V2||(HM[k].ready<=a.when&&(a.budget>=99||HM[k].price==null||HM[k].price<=a.budget))).map(k=>{const m=HM[k];let s=0,why=[];
@@ -784,7 +784,7 @@ async function pie3d(){
  if(L191&&!G.drive){const _s=site;site=grp[10];flat(10,15,asph,5.8,20.5);flat(52,7,asph,-21,24.5);site=_s}
  if(G.drive||(!L191&&G.gdoors)){const DR=G.drive,g0=G.gdoors?G.gdoors[0]:null,g1=G.gdoors?G.gdoors[G.gdoors.length-1]:null,x0=DR?DR[0]:(g0[0]-CX)*u,x1=DR?DR[1]:(g1[0]+g1[2]-CX)*u,z0=DR?DR[2]:(g0[1]+1-CZ)*u,SI=G.site;
   const dz=SI?SI.front-z0:22;flat(x1-x0+2,dz,asph,(x0+x1)/2,z0+dz/2);
-  if(SI){if(SI.lz){const {L,R}=SI.lz,disc=(r,x,z)=>{const c=new T.Mesh(new T.CylinderGeometry(r,r,.04,48),asph);c.position.set(x,-.02,z);c.receiveShadow=true;site.add(c)};flat(R-L,8,asph,(L+R)/2,SI.road);disc(9,R,SI.road);disc(4,L,SI.road);const dx=-48,dz=-64,len=Math.hypot(dx,dz),dg=new T.Mesh(new T.BoxGeometry(len,.04,8),asph);dg.position.set(L+dx/2,-.02,SI.road+dz/2);dg.rotation.y=Math.atan2(-dz,dx);dg.receiveShadow=true;site.add(dg);disc(11,L+dx,SI.road+dz)}else flat(560,8,asph,0,SI.road);
+  if(SI){if(SI.lz){const {L,R}=SI.lz,disc=(r,x,z)=>{const c=new T.Mesh(new T.CylinderGeometry(r,r,.04,48),asph);c.position.set(x,-.02,z);c.receiveShadow=true;site.add(c)};flat(R-L,8,asph,(L+R)/2,SI.road);{const ring=new T.Mesh(new T.RingGeometry(6.5,14.5,48),asph);ring.rotation.x=-Math.PI/2;ring.position.set(R,.025,SI.road-9);ring.receiveShadow=true;site.add(ring);const isl=new T.Mesh(new T.CircleGeometry(6.5,40),M(0x6f9a4a,{roughness:1}));isl.rotation.x=-Math.PI/2;isl.position.set(R,.03,SI.road-9);site.add(isl)}if(R<x0){const gx=(x0+x1)/2;flat(gx-R-12,6,asph,(gx+R+12)/2,SI.road)}disc(4,L,SI.road);const dx=-48,dz=-64,len=Math.hypot(dx,dz),dg=new T.Mesh(new T.BoxGeometry(len,.04,8),asph);dg.position.set(L+dx/2,-.02,SI.road+dz/2);dg.rotation.y=Math.atan2(-dz,dx);dg.receiveShadow=true;site.add(dg);disc(11,L+dx,SI.road+dz)}else flat(560,8,asph,0,SI.road);
    flat(1.8,SI.front-SI.path[1],pave,SI.path[0],(SI.front+SI.path[1])/2,0,.06);
    const postM=M(0x2b2c2e,{roughness:.5,metalness:.4}),slatM=M(0x3a3b3e,{roughness:.6,metalness:.3});
    const fence=(ax,az,bx,bz)=>{const L=Math.hypot(bx-ax,bz-az),n=Math.max(1,Math.round(L/2.5)),ang=Math.atan2(bz-az,bx-ax);for(let i=0;i<=n;i++){const t=i/n,p=new T.Mesh(new T.BoxGeometry(.15,2,.15),postM);p.position.set(ax+(bx-ax)*t,1,az+(bz-az)*t);p.castShadow=true;site.add(p)}
@@ -812,9 +812,16 @@ async function pie3d(){
   if(SI.river){const RV=SI.river,bz=SI.back-1;
    const wT=ctex(x=>{const g=x.createLinearGradient(0,0,0,256);g.addColorStop(0,"#5f7f78");g.addColorStop(1,"#3f5f63");x.fillStyle=g;x.fillRect(0,0,256,256);for(let i=0;i<500;i++){x.fillStyle=`rgba(255,255,255,${Math.random()*.08})`;x.fillRect(Math.random()*256,Math.random()*256,6+Math.random()*20,1)}},12);
    const wM=new T.MeshPhysicalMaterial({map:wT,color:0xffffff,roughness:.08,metalness:.15,transparent:true,opacity:.93,envMapIntensity:1.4});
-   const wtr=new T.Mesh(new T.PlaneGeometry(420,RV.w),wM);wtr.rotation.x=-Math.PI/2;wtr.position.set(0,.03,bz-RV.w/2);wtr.receiveShadow=true;site.add(wtr);
-   const bank=new T.Mesh(new T.BoxGeometry(420,.12,1.6),M(0x6b6a3e,{roughness:1}));bank.position.set(0,.02,bz+.4);site.add(bank);
-   const far=new T.Mesh(new T.PlaneGeometry(420,60),M(0x55733a,{roughness:1}));far.rotation.x=-Math.PI/2;far.position.set(0,.025,bz-RV.w-30);site.add(far);
+   const X1=RV.x1||0,F1=33,XL=X1-F1-1,XR=X1+320,W=RV.w,BE=30,BW=58;
+   const ws_=new T.Shape(),P=(x,z)=>[x,-z];ws_.moveTo(...P(XR,bz));
+   for(let x=XR;x>XL+8;x-=24)ws_.lineTo(...P(x,bz+Math.sin(x*.07)*.8));
+   ws_.quadraticCurveTo(...P(XL,bz),...P(XL,bz+8));ws_.lineTo(...P(XL-1,BE-8));ws_.quadraticCurveTo(...P(XL-2,BE+2),...P(XL-BW*.45,BE+3));ws_.quadraticCurveTo(...P(XL-BW,BE+2),...P(XL-BW-2,BE-12));
+   ws_.lineTo(...P(XL-BW-6,bz-W*.4));ws_.quadraticCurveTo(...P(XL-BW-8,bz-W-2),...P(XL-BW+18,bz-W-1));
+   for(let x=XL-BW+40;x<XR;x+=26)ws_.lineTo(...P(x,bz-W+Math.sin(x*.05)*2.2));ws_.lineTo(...P(XR,bz-W));ws_.lineTo(...P(XR,bz));
+   const wtr=new T.Mesh(new T.ShapeGeometry(ws_,24),wM);wtr.rotation.x=-Math.PI/2;wtr.position.y=.03;{const uv=wtr.geometry.attributes.uv;for(let i=0;i<uv.count;i++)uv.setXY(i,uv.getX(i)/24,uv.getY(i)/24)}wtr.receiveShadow=true;site.add(wtr);
+   const bank=new T.Mesh(new T.BoxGeometry(XR-XL-6,.12,1.6),M(0x6b6a3e,{roughness:1}));bank.position.set((XR+XL+6)/2,.02,bz+.4);site.add(bank);
+   const bk2=new T.Mesh(new T.BoxGeometry(1.4,.12,BE-bz-10),M(0x6b6a3e,{roughness:1}));bk2.position.set(XL+.4,.02,(BE+bz)/2-1);site.add(bk2);
+   const far=new T.Mesh(new T.PlaneGeometry(700,60),M(0x55733a,{roughness:1}));far.rotation.x=-Math.PI/2;far.position.set(X1+120,.025,bz-RV.w-31);site.add(far);
    // pier: ДПК deck on piles with glass rail and steps from the lawn
    const px=RV.pier,pw=10.4,pd=6.4,pz=bz-pd/2+.6,dk=MT(ctex(x=>{for(let i=0;i<16;i++){x.fillStyle=`hsl(25,${18+Math.random()*8}%,${34+Math.random()*8}%)`;x.fillRect(0,i*16,256,15)}},1.4),{roughness:.8});
    const deck=new T.Mesh(new T.BoxGeometry(pw,.35,pd),dk);deck.position.set(px,.75,pz);deck.castShadow=deck.receiveShadow=true;site.add(deck);
@@ -832,8 +839,7 @@ async function pie3d(){
    const seat=new T.Mesh(new T.BoxGeometry(1.8,.4,1.2),M(0xe8e1d4,{roughness:.9}));seat.position.set(0,1.05,-2.2);boat.add(seat);
    const stripe=new T.Mesh(new T.BoxGeometry(2.36,.1,6.6),M(0x1f3a5a));stripe.position.set(0,.55,-.3);boat.add(stripe);
    boat.traverse(o=>{if(o.isMesh)o.castShadow=true});boat.position.set(px+pw/2+1.8,.0,pz-1.2);boat.rotation.y=Math.PI;site.add(boat);var BOATA={b:boat,x0:px+pw/2+1.8,z0:pz-1.2,zm:bz-RV.w*.4}
-   // lake on the left side of the plot, from the river up to the garage
-   {const gz=G.gdoorW?(G.gdoorW[1]+G.gdoorW[2]-CZ)*u:HZ,L0=bz-RV.w,lw=60,ll=gz-L0,lk=new T.Mesh(new T.PlaneGeometry(lw,ll),wM);lk.rotation.x=-Math.PI/2;const LXo=(SI.neighbor&&SI.neighbor.dx<0)?SI.neighbor.dx:0;lk.position.set(-F-lw/2+.6+LXo,.035,L0+ll/2);lk.receiveShadow=true;site.add(lk);const lb=new T.Mesh(new T.BoxGeometry(1.2,.12,ll),M(0x6b6a3e,{roughness:1}));lb.position.set(-F+.6+LXo,.02,L0+ll/2);site.add(lb)}}
+}
   // trees along the side fences: spruce and broadleaf alternating
   for(const sx of [-1,1])for(let z=SI.back+7,k=0;z<SI.front-6;z+=8.5,k++){const x=sx*(F-3.4);if(k%2)PF.push([x,z,7+rnd()*3]);else PB.push([x,z])}
   // front garden: sculpture on a stone plinth beside the entrance path, paved circle, boxwood balls
@@ -849,8 +855,9 @@ async function pie3d(){
   const ballG=new T.IcosahedronGeometry(1,2);[[-2.4,0],[2.4,0],[0,-2.4],[0,2.4]].forEach(([dx,dz])=>{const b=new T.Mesh(ballG,hedgeM);b.scale.setScalar(.55);b.position.set(sx0+dx,.5,sz0+dz);b.castShadow=true;site.add(b)});
   for(let z=SI.path[1]+3;z<SI.front-1;z+=4)[-1.6,1.6].forEach(dx=>{if(Math.abs(z-sz0)<1.6&&dx>0)return;const b=new T.Mesh(ballG,hedgeM);b.scale.setScalar(.45);b.position.set(SI.path[0]+dx,.4,z);b.castShadow=true;site.add(b)});}
  }
- const GZ=-(HZ-29);const SIT=G.site;const NBS=SIT?(SIT.neighbors||(SIT.neighbor?[SIT.neighbor]:[])):[];const GD=G.gdoors?[(G.gdoors[0][0]-CX)*u-2,(G.gdoors[G.gdoors.length-1][0]+G.gdoors[G.gdoors.length-1][2]-CX)*u+2,(G.gdoors[0][1]-CZ)*u]:null;const lzF=(x,z)=>{if(!(SIT&&SIT.lz))return true;const {L,R}=SIT.lz,ax=L,az=SIT.road,bx=L-48,bz=SIT.road-64,t=Math.max(0,Math.min(1,((x-ax)*(bx-ax)+(z-az)*(bz-az))/((bx-ax)**2+(bz-az)**2))),d=Math.hypot(x-ax-t*(bx-ax),z-az-t*(bz-az));return d>8&&Math.hypot(x-R,z-SIT.road)>13&&Math.hypot(x-bx,z-bz)>15};
- const free=(x,z)=>lzF(x,z)&&!(SIT&&SIT.river&&z<SIT.back+2&&z>SIT.back-SIT.river.w-4)&&!(SIT&&((Math.abs(x)<SIT.fx+3&&z>SIT.back-3&&z<SIT.road+6)||Math.abs(z-SIT.road)<6||NBS.some(NB=>x>NB.dx-SIT.fx-4&&x<NB.dx+SIT.fx+4&&z>SIT.back-3&&z<SIT.road)))&&!(GD&&x>GD[0]-4&&x<GD[1]+4&&z>GD[2]-2&&z<GD[2]+26)&&!(z<-40+GZ&&Math.abs(x)<95)&&!(L191&&x<14&&x>-50&&z>14&&z<34)&&!(L191&&Math.abs(x-EX)<8&&z>EZ-2&&z<EZ+22)&&Math.hypot(x/(HX+10),z/(HZ+10))>1;
+ const GZ=-(HZ-29);const SIT=G.site;const NBS=SIT?(SIT.neighbors||(SIT.neighbor?[SIT.neighbor]:[])):[];const GD=G.gdoors?[(G.gdoors[0][0]-CX)*u-2,(G.gdoors[G.gdoors.length-1][0]+G.gdoors[G.gdoors.length-1][2]-CX)*u+2,(G.gdoors[0][1]-CZ)*u]:null;const lzF=(x,z)=>{if(!(SIT&&SIT.lz))return true;const {L,R}=SIT.lz,ax=L,az=SIT.road,bx=L-48,bz=SIT.road-64,t=Math.max(0,Math.min(1,((x-ax)*(bx-ax)+(z-az)*(bz-az))/((bx-ax)**2+(bz-az)**2))),d=Math.hypot(x-ax-t*(bx-ax),z-az-t*(bz-az));return d>8&&Math.hypot(x-R,z-SIT.road+9)>17&&Math.hypot(x-bx,z-bz)>15&&!(x>R+2&&Math.abs(z-SIT.road)<6)};
+ const rvF=(x,z)=>{if(!(SIT&&SIT.river))return true;const XL=(SIT.river.x1||0)-34;return !(x<XL+3&&x>XL-70&&z<36&&z>SIT.back-48)};
+ const free=(x,z)=>lzF(x,z)&&rvF(x,z)&&!(SIT&&SIT.river&&z<SIT.back+2&&z>SIT.back-SIT.river.w-4)&&!(SIT&&((Math.abs(x)<SIT.fx+3&&z>SIT.back-3&&z<SIT.road+6)||Math.abs(z-SIT.road)<6||NBS.some(NB=>x>NB.dx-SIT.fx-4&&x<NB.dx+SIT.fx+4&&z>SIT.back-3&&z<SIT.road)))&&!(GD&&x>GD[0]-4&&x<GD[1]+4&&z>GD[2]-2&&z<GD[2]+26)&&!(z<-40+GZ&&Math.abs(x)<95)&&!(L191&&x<14&&x>-50&&z>14&&z<34)&&!(L191&&Math.abs(x-EX)<8&&z>EZ-2&&z<EZ+22)&&Math.hypot(x/(HX+10),z/(HZ+10))>1;
  const firs=PF.slice();for(let k=0;k<1200&&firs.length<95+PF.length;k++){const a=rnd()*6.283,r=55+Math.pow(rnd(),.7)*120,x=Math.cos(a)*r,z=Math.sin(a)*r*.9;if(!free(x,z))continue;firs.push([x,z,9+rnd()*11])}
  const TIERS=7,cone=new T.ConeGeometry(1,1,12,1,true),leaf=new T.MeshStandardMaterial({color:0xffffff,roughness:.95,side:T.DoubleSide});
  const cones=new T.InstancedMesh(cone,leaf,firs.length*TIERS),trunks=new T.InstancedMesh(new T.CylinderGeometry(.14,.3,1,7),M(0x4b3a2c,{roughness:1}),firs.length);
